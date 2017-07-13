@@ -14,6 +14,11 @@
 		542ABE041F13793500F5F161 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE021F13793500F5F161 /* Main.storyboard */; };
 		542ABE061F13793500F5F161 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE051F13793500F5F161 /* Assets.xcassets */; };
 		542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE071F13793500F5F161 /* LaunchScreen.storyboard */; };
+		CF0B77801F179BA40067229D /* 相簿.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B777F1F179BA40067229D /* 相簿.png */; };
+		CF0B77821F179DC00067229D /* 成就.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B77811F179DC00067229D /* 成就.png */; };
+		CF0B77841F179F190067229D /* 信箱.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B77831F179F190067229D /* 信箱.png */; };
+		CF0B77861F179FE50067229D /* 我.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B77851F179FE50067229D /* 我.png */; };
+		CF0B77881F17A1220067229D /* 成就2.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B77871F17A1220067229D /* 成就2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +33,11 @@
 		542ABE051F13793500F5F161 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		542ABE081F13793500F5F161 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		542ABE0A1F13793500F5F161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF0B777F1F179BA40067229D /* 相簿.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "相簿.png"; sourceTree = "<group>"; };
+		CF0B77811F179DC00067229D /* 成就.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "成就.png"; sourceTree = "<group>"; };
+		CF0B77831F179F190067229D /* 信箱.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "信箱.png"; sourceTree = "<group>"; };
+		CF0B77851F179FE50067229D /* 我.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我.png"; sourceTree = "<group>"; };
+		CF0B77871F17A1220067229D /* 成就2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "成就2.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +79,11 @@
 				542ABE051F13793500F5F161 /* Assets.xcassets */,
 				542ABE071F13793500F5F161 /* LaunchScreen.storyboard */,
 				542ABE0A1F13793500F5F161 /* Info.plist */,
+				CF0B77851F179FE50067229D /* 我.png */,
+				CF0B77831F179F190067229D /* 信箱.png */,
+				CF0B77811F179DC00067229D /* 成就.png */,
+				CF0B77871F17A1220067229D /* 成就2.png */,
+				CF0B777F1F179BA40067229D /* 相簿.png */,
 				542ABDF91F13793500F5F161 /* Supporting Files */,
 			);
 			path = TheTimeAlbum;
@@ -113,8 +128,7 @@
 				TargetAttributes = {
 					542ABDF51F13793500F5F161 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = PESLW4RSBN;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -141,9 +155,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF0B77841F179F190067229D /* 信箱.png in Resources */,
+				CF0B77861F179FE50067229D /* 我.png in Resources */,
+				CF0B77801F179BA40067229D /* 相簿.png in Resources */,
+				CF0B77881F17A1220067229D /* 成就2.png in Resources */,
 				542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */,
 				5428BD731F160494003361AC /* loginPage.storyboard in Resources */,
 				542ABE061F13793500F5F161 /* Assets.xcassets in Resources */,
+				CF0B77821F179DC00067229D /* 成就.png in Resources */,
 				542ABE041F13793500F5F161 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,11 +306,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PESLW4RSBN;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TheTimeAlbum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Greathard.TheTimeAlbum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -299,11 +320,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PESLW4RSBN;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TheTimeAlbum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Greathard.TheTimeAlbum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
