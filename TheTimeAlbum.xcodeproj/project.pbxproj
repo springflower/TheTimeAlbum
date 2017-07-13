@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5428BD731F160494003361AC /* loginPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5428BD711F160494003361AC /* loginPage.storyboard */; };
 		542ABDFB1F13793500F5F161 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABDFA1F13793500F5F161 /* main.m */; };
 		542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABDFD1F13793500F5F161 /* AppDelegate.m */; };
 		542ABE011F13793500F5F161 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABE001F13793500F5F161 /* ViewController.m */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5428BD721F160494003361AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/loginPage.storyboard; sourceTree = "<group>"; };
 		542ABDF61F13793500F5F161 /* TheTimeAlbum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheTimeAlbum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		542ABDFA1F13793500F5F161 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		542ABDFC1F13793500F5F161 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				542ABDFF1F13793500F5F161 /* ViewController.h */,
 				542ABE001F13793500F5F161 /* ViewController.m */,
 				542ABE021F13793500F5F161 /* Main.storyboard */,
+				5428BD711F160494003361AC /* loginPage.storyboard */,
 				542ABE051F13793500F5F161 /* Assets.xcassets */,
 				542ABE071F13793500F5F161 /* LaunchScreen.storyboard */,
 				542ABE0A1F13793500F5F161 /* Info.plist */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */,
+				5428BD731F160494003361AC /* loginPage.storyboard in Resources */,
 				542ABE061F13793500F5F161 /* Assets.xcassets in Resources */,
 				542ABE041F13793500F5F161 /* Main.storyboard in Resources */,
 			);
@@ -160,6 +164,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		5428BD711F160494003361AC /* loginPage.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5428BD721F160494003361AC /* Base */,
+			);
+			name = loginPage.storyboard;
+			sourceTree = "<group>";
+		};
 		542ABE021F13793500F5F161 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -314,6 +326,7 @@
 				542ABE0F1F13793500F5F161 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
