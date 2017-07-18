@@ -44,6 +44,9 @@
         [self addSubview:titleLabel];
         
         
+//        UILabel * Mychild = [[UILabel alloc] init]
+        
+        
         //        收Menu 的 Button
         UIButton *MenuButton=[UIButton buttonWithType:UIButtonTypeCustom];
         MenuButton.frame=CGRectMake(0,0, 44, 42);
@@ -51,6 +54,8 @@
         [MenuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];//按下去時呼叫 callMenu 方法來收起 Menu
         [self addSubview:MenuButton];
         [self addMenu];
+        
+        
         
         
     }
