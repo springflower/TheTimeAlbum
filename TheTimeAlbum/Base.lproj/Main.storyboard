@@ -21,25 +21,122 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Is3-8g-0pt">
-                                <rect key="frame" x="144" y="230" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="登入" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ua9-Fz-2i8">
+                                <rect key="frame" x="98" y="242" width="179" height="183"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VXj-HJ-7UW">
-                                <rect key="frame" x="164" y="415" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ug-00-2rN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1169" y="-1374"/>
+            <point key="canvasLocation" x="-2026" y="-1363"/>
+        </scene>
+        <!--時光簿-->
+        <scene sceneID="n6g-ap-ntw">
+            <objects>
+                <viewController id="Dmr-AG-fmO" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ziu-2C-g63"/>
+                        <viewControllerLayoutGuide type="bottom" id="yX0-5Y-p6E"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5pF-Jk-Qgb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="時光簿" image="相簿.png" id="fjm-yW-eJt"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lOW-0I-e8o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2025" y="-519"/>
+        </scene>
+        <!--信箱-->
+        <scene sceneID="cOR-Ad-UQl">
+            <objects>
+                <viewController id="TsM-Mu-M4A" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4aD-zP-VLp"/>
+                        <viewControllerLayoutGuide type="bottom" id="soT-Wb-eOO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QgW-9H-w2j">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="信箱" image="信箱.png" id="Vii-1r-uAd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TOL-4o-F9U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-279" y="-519"/>
+        </scene>
+        <!--成就-->
+        <scene sceneID="e9j-OE-DSQ">
+            <objects>
+                <viewController id="j8K-cR-8Rf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zcZ-29-lPN"/>
+                        <viewControllerLayoutGuide type="bottom" id="I1X-PA-AKu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tx6-Ol-gcG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="成就" image="成就2.png" id="aTh-xr-icR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mse-z8-kQH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1170" y="-519"/>
+        </scene>
+        <!--我-->
+        <scene sceneID="6LG-ct-MW2">
+            <objects>
+                <viewController id="mSy-Kb-3Ac" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bdH-sP-RGc"/>
+                        <viewControllerLayoutGuide type="bottom" id="ePk-5c-JwY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xDb-mx-cf0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="我" image="我.png" id="B1T-qL-wiE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="brP-Ot-Uv6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="582" y="-519"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="LPO-Dn-xDi">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="DkZ-HU-7Vx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="XqI-BO-Ha7">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Dmr-AG-fmO" kind="relationship" relationship="viewControllers" id="Fm5-9t-Il9"/>
+                        <segue destination="j8K-cR-8Rf" kind="relationship" relationship="viewControllers" id="rGL-7X-XwJ"/>
+                        <segue destination="TsM-Mu-M4A" kind="relationship" relationship="viewControllers" id="znC-pd-zFN"/>
+                        <segue destination="mSy-Kb-3Ac" kind="relationship" relationship="viewControllers" id="qZw-Oa-Fsj"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yDh-HB-Gvb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-750" y="-1363"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="信箱.png" width="28" height="28"/>
+        <image name="成就2.png" width="26" height="27"/>
+        <image name="我.png" width="28" height="27"/>
+        <image name="相簿.png" width="26" height="26"/>
+    </resources>
 </document>

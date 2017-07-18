@@ -202,10 +202,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF0B77841F179F190067229D /* 信箱.png in Resources */,
+				CF0B77861F179FE50067229D /* 我.png in Resources */,
+				CF0B77801F179BA40067229D /* 相簿.png in Resources */,
+				CF0B77881F17A1220067229D /* 成就2.png in Resources */,
 				542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */,
 				5452CC921F1DE2B9008F5C25 /* newBaby.storyboard in Resources */,
 				5428BD731F160494003361AC /* loginPage.storyboard in Resources */,
 				542ABE061F13793500F5F161 /* Assets.xcassets in Resources */,
+				CF0B77821F179DC00067229D /* 成就.png in Resources */,
 				542ABE041F13793500F5F161 /* Main.storyboard in Resources */,
 				5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */,
 				5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */,
