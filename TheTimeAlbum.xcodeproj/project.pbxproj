@@ -14,9 +14,16 @@
 		542ABE041F13793500F5F161 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE021F13793500F5F161 /* Main.storyboard */; };
 		542ABE061F13793500F5F161 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE051F13793500F5F161 /* Assets.xcassets */; };
 		542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE071F13793500F5F161 /* LaunchScreen.storyboard */; };
+		5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC871F1C7A54008F5C25 /* loginViewController.m */; };
+		5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */; };
+		5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8C1F1CB3D6008F5C25 /* 1.png */; };
+		5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */; };
+		5452CC921F1DE2B9008F5C25 /* newBaby.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC911F1DE2B9008F5C25 /* newBaby.storyboard */; };
+		FDB0C1AA2AA8BC3040667FBD /* libPods-TheTimeAlbum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D647CFAB8CB5EAA3F2237E57 /* libPods-TheTimeAlbum.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A339EA35F197EDD566DEFB7 /* Pods-TheTimeAlbum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheTimeAlbum.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum.release.xcconfig"; sourceTree = "<group>"; };
 		5428BD721F160494003361AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/loginPage.storyboard; sourceTree = "<group>"; };
 		542ABDF61F13793500F5F161 /* TheTimeAlbum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheTimeAlbum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		542ABDFA1F13793500F5F161 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -28,6 +35,16 @@
 		542ABE051F13793500F5F161 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		542ABE081F13793500F5F161 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		542ABE0A1F13793500F5F161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5452CC861F1C7A54008F5C25 /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
+		5452CC871F1C7A54008F5C25 /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
+		5452CC891F1C9AC2008F5C25 /* MyAccountData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountData.h; sourceTree = "<group>"; };
+		5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAccountData.m; sourceTree = "<group>"; };
+		5452CC8C1F1CB3D6008F5C25 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = ../../../1.png; sourceTree = "<group>"; };
+		5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5452CC901F1D8D43008F5C25 /* TheTimeAlbum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheTimeAlbum.entitlements; sourceTree = "<group>"; };
+		5452CC911F1DE2B9008F5C25 /* newBaby.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = newBaby.storyboard; sourceTree = "<group>"; };
+		7E254EE1580F00C9AF996E45 /* Pods-TheTimeAlbum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheTimeAlbum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum.debug.xcconfig"; sourceTree = "<group>"; };
+		D647CFAB8CB5EAA3F2237E57 /* libPods-TheTimeAlbum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheTimeAlbum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +52,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDB0C1AA2AA8BC3040667FBD /* libPods-TheTimeAlbum.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31B98EB2FB896C8A631BF7E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D647CFAB8CB5EAA3F2237E57 /* libPods-TheTimeAlbum.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		542ABDED1F13793500F5F161 = {
 			isa = PBXGroup;
 			children = (
 				542ABDF81F13793500F5F161 /* TheTimeAlbum */,
 				542ABDF71F13793500F5F161 /* Products */,
+				AE09515D791297A1F890D49F /* Pods */,
+				31B98EB2FB896C8A631BF7E7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,15 +88,22 @@
 		542ABDF81F13793500F5F161 /* TheTimeAlbum */ = {
 			isa = PBXGroup;
 			children = (
+				5452CC901F1D8D43008F5C25 /* TheTimeAlbum.entitlements */,
 				542ABDFC1F13793500F5F161 /* AppDelegate.h */,
 				542ABDFD1F13793500F5F161 /* AppDelegate.m */,
 				542ABDFF1F13793500F5F161 /* ViewController.h */,
 				542ABE001F13793500F5F161 /* ViewController.m */,
 				542ABE021F13793500F5F161 /* Main.storyboard */,
+				5452CC931F1DE92C008F5C25 /* C */,
 				5428BD711F160494003361AC /* loginPage.storyboard */,
+				5452CC911F1DE2B9008F5C25 /* newBaby.storyboard */,
+				5452CC891F1C9AC2008F5C25 /* MyAccountData.h */,
+				5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */,
 				542ABE051F13793500F5F161 /* Assets.xcassets */,
 				542ABE071F13793500F5F161 /* LaunchScreen.storyboard */,
 				542ABE0A1F13793500F5F161 /* Info.plist */,
+				5452CC8C1F1CB3D6008F5C25 /* 1.png */,
+				5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */,
 				542ABDF91F13793500F5F161 /* Supporting Files */,
 			);
 			path = TheTimeAlbum;
@@ -82,6 +117,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5452CC931F1DE92C008F5C25 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				5452CC861F1C7A54008F5C25 /* loginViewController.h */,
+				5452CC871F1C7A54008F5C25 /* loginViewController.m */,
+			);
+			name = C;
+			sourceTree = "<group>";
+		};
+		AE09515D791297A1F890D49F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7E254EE1580F00C9AF996E45 /* Pods-TheTimeAlbum.debug.xcconfig */,
+				3A339EA35F197EDD566DEFB7 /* Pods-TheTimeAlbum.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,9 +142,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 542ABE0D1F13793500F5F161 /* Build configuration list for PBXNativeTarget "TheTimeAlbum" */;
 			buildPhases = (
+				5C8B4C8C26221063DD1436E6 /* [CP] Check Pods Manifest.lock */,
 				542ABDF21F13793500F5F161 /* Sources */,
 				542ABDF31F13793500F5F161 /* Frameworks */,
 				542ABDF41F13793500F5F161 /* Resources */,
+				6376E70E5D8784FCFC0F18A0 /* [CP] Embed Pods Frameworks */,
+				49D23553DBA2FE25CCF08FED /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -113,8 +169,13 @@
 				TargetAttributes = {
 					542ABDF51F13793500F5F161 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = PESLW4RSBN;
+						DevelopmentTeam = KW677WP5HP;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -142,21 +203,74 @@
 			buildActionMask = 2147483647;
 			files = (
 				542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */,
+				5452CC921F1DE2B9008F5C25 /* newBaby.storyboard in Resources */,
 				5428BD731F160494003361AC /* loginPage.storyboard in Resources */,
 				542ABE061F13793500F5F161 /* Assets.xcassets in Resources */,
 				542ABE041F13793500F5F161 /* Main.storyboard in Resources */,
+				5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */,
+				5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		49D23553DBA2FE25CCF08FED /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C8B4C8C26221063DD1436E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6376E70E5D8784FCFC0F18A0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		542ABDF21F13793500F5F161 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */,
 				542ABE011F13793500F5F161 /* ViewController.m in Sources */,
 				542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */,
+				5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */,
 				542ABDFB1F13793500F5F161 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,25 +399,31 @@
 		};
 		542ABE0E1F13793500F5F161 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E254EE1580F00C9AF996E45 /* Pods-TheTimeAlbum.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PESLW4RSBN;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = KW677WP5HP;
 				INFOPLIST_FILE = TheTimeAlbum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Greathard.TheTimeAlbum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		542ABE0F1F13793500F5F161 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A339EA35F197EDD566DEFB7 /* Pods-TheTimeAlbum.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PESLW4RSBN;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = KW677WP5HP;
 				INFOPLIST_FILE = TheTimeAlbum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Greathard.TheTimeAlbum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
