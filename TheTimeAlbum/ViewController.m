@@ -28,6 +28,7 @@
     [self.view addSubview:self.MenuRight];
     
     self.navigationItem.title = @"Bryan";
+    ////
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:nil];
     [addButton setAction:@selector(callMenuRight)];
