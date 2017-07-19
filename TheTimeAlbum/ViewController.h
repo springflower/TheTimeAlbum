@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SliderMenuViewLeft.h"
+#import "SliderMenuViewRight.h"
+#import "AppDelegate.h"
 
 @interface ViewController : UIViewController
 
+@property  SliderMenuViewLeft *MenuLeft;
+
+@property  SliderMenuViewRight *MenuRight;
 
 @end
 
