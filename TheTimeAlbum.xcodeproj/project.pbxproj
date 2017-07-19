@@ -14,14 +14,11 @@
 		542ABE041F13793500F5F161 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE021F13793500F5F161 /* Main.storyboard */; };
 		542ABE061F13793500F5F161 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE051F13793500F5F161 /* Assets.xcassets */; };
 		542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE071F13793500F5F161 /* LaunchScreen.storyboard */; };
-<<<<<<< HEAD
 		5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC871F1C7A54008F5C25 /* loginViewController.m */; };
 		5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */; };
 		5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8C1F1CB3D6008F5C25 /* 1.png */; };
 		5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */; };
 		5452CC921F1DE2B9008F5C25 /* newBaby.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC911F1DE2B9008F5C25 /* newBaby.storyboard */; };
-		FDB0C1AA2AA8BC3040667FBD /* libPods-TheTimeAlbum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D647CFAB8CB5EAA3F2237E57 /* libPods-TheTimeAlbum.a */; };
-=======
 		CF0B778A1F1859DC0067229D /* Fox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF0B77891F1859DC0067229D /* Fox.jpg */; };
 		CF0B78281F1B5FD70067229D /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0B78271F1B5FD70067229D /* MainTableViewController.m */; };
 		CF0B782D1F1C88150067229D /* SliderMenuViewLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0B782C1F1C88150067229D /* SliderMenuViewLeft.m */; };
@@ -41,7 +38,7 @@
 		CF0B785E1F1DE9A70067229D /* 清單75x75@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B785D1F1DE9A70067229D /* 清單75x75@2x.png */; };
 		CF0B78601F1DEA380067229D /* 清單48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B785F1F1DEA380067229D /* 清單48x48@2x.png */; };
 		CF0B78621F1DEBB70067229D /* 清單30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B78611F1DEBB70067229D /* 清單30x30@2x.png */; };
->>>>>>> Hello
+		FDB0C1AA2AA8BC3040667FBD /* libPods-TheTimeAlbum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D647CFAB8CB5EAA3F2237E57 /* libPods-TheTimeAlbum.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,7 +54,6 @@
 		542ABE051F13793500F5F161 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		542ABE081F13793500F5F161 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		542ABE0A1F13793500F5F161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		5452CC861F1C7A54008F5C25 /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
 		5452CC871F1C7A54008F5C25 /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
 		5452CC891F1C9AC2008F5C25 /* MyAccountData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountData.h; sourceTree = "<group>"; };
@@ -67,8 +63,6 @@
 		5452CC901F1D8D43008F5C25 /* TheTimeAlbum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheTimeAlbum.entitlements; sourceTree = "<group>"; };
 		5452CC911F1DE2B9008F5C25 /* newBaby.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = newBaby.storyboard; sourceTree = "<group>"; };
 		7E254EE1580F00C9AF996E45 /* Pods-TheTimeAlbum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheTimeAlbum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum.debug.xcconfig"; sourceTree = "<group>"; };
-		D647CFAB8CB5EAA3F2237E57 /* libPods-TheTimeAlbum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheTimeAlbum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-=======
 		CF0B77891F1859DC0067229D /* Fox.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fox.jpg; sourceTree = "<group>"; };
 		CF0B78261F1B5FD70067229D /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		CF0B78271F1B5FD70067229D /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
@@ -93,7 +87,7 @@
 		CF0B785D1F1DE9A70067229D /* 清單75x75@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "清單75x75@2x.png"; sourceTree = "<group>"; };
 		CF0B785F1F1DEA380067229D /* 清單48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "清單48x48@2x.png"; sourceTree = "<group>"; };
 		CF0B78611F1DEBB70067229D /* 清單30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "清單30x30@2x.png"; sourceTree = "<group>"; };
->>>>>>> Hello
+		D647CFAB8CB5EAA3F2237E57 /* libPods-TheTimeAlbum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheTimeAlbum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +143,6 @@
 				CF0B78391F1D9CDF0067229D /* SliderMenuViewRight.h */,
 				CF0B783A1F1D9CDF0067229D /* SliderMenuViewRight.m */,
 				542ABE021F13793500F5F161 /* Main.storyboard */,
-<<<<<<< HEAD
 				5452CC931F1DE92C008F5C25 /* C */,
 				5428BD711F160494003361AC /* loginPage.storyboard */,
 				5452CC911F1DE2B9008F5C25 /* newBaby.storyboard */,
@@ -160,14 +153,9 @@
 				542ABE0A1F13793500F5F161 /* Info.plist */,
 				5452CC8C1F1CB3D6008F5C25 /* 1.png */,
 				5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */,
-=======
 				CF0B78411F1DAD780067229D /* achievement.storyboard */,
 				CF0B783F1F1DAD5B0067229D /* futureMail.storyboard */,
-				5428BD711F160494003361AC /* loginPage.storyboard */,
 				CF0B784C1F1DD90C0067229D /* AboutMeViewController */,
-				542ABE051F13793500F5F161 /* Assets.xcassets */,
-				542ABE071F13793500F5F161 /* LaunchScreen.storyboard */,
-				542ABE0A1F13793500F5F161 /* Info.plist */,
 				CF0B77891F1859DC0067229D /* Fox.jpg */,
 				CF0B78591F1DE8040067229D /* 我75x75@2x.png */,
 				CF0B78571F1DE4DA0067229D /* 信箱75x75@2x.png */,
@@ -179,7 +167,6 @@
 				CF0B78301F1C94CA0067229D /* icon_menu20x20.png */,
 				CF0B785B1F1DE8F80067229D /* icon_menu20x20@2x.png */,
 				CF0B78341F1C9DB60067229D /* icon_message48x48.png */,
->>>>>>> Hello
 				542ABDF91F13793500F5F161 /* Supporting Files */,
 			);
 			path = TheTimeAlbum;
@@ -193,7 +180,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
 		5452CC931F1DE92C008F5C25 /* C */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,7 +196,8 @@
 				3A339EA35F197EDD566DEFB7 /* Pods-TheTimeAlbum.release.xcconfig */,
 			);
 			name = Pods;
-=======
+			sourceTree = "<group>";
+		};
 		CF0B784C1F1DD90C0067229D /* AboutMeViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,7 +209,6 @@
 			);
 			name = AboutMeViewController;
 			path = ..;
->>>>>>> Hello
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +245,6 @@
 				TargetAttributes = {
 					542ABDF51F13793500F5F161 = {
 						CreatedOnToolsVersion = 8.3.3;
-<<<<<<< HEAD
 						DevelopmentTeam = KW677WP5HP;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -267,10 +252,6 @@
 								enabled = 0;
 							};
 						};
-=======
-						DevelopmentTeam = FEBUVZMYW4;
-						ProvisioningStyle = Automatic;
->>>>>>> Hello
 					};
 				};
 			};
@@ -310,17 +291,14 @@
 				CF0B78401F1DAD5B0067229D /* futureMail.storyboard in Resources */,
 				CF0B78311F1C94CA0067229D /* icon_menu20x20.png in Resources */,
 				542ABE041F13793500F5F161 /* Main.storyboard in Resources */,
-<<<<<<< HEAD
 				5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */,
 				5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */,
-=======
 				CF0B78621F1DEBB70067229D /* 清單30x30@2x.png in Resources */,
 				CF0B78601F1DEA380067229D /* 清單48x48@2x.png in Resources */,
 				CF0B778A1F1859DC0067229D /* Fox.jpg in Resources */,
 				CF0B783E1F1DACE50067229D /* aboutme.storyboard in Resources */,
 				CF0B785E1F1DE9A70067229D /* 清單75x75@2x.png in Resources */,
 				CF0B785A1F1DE8040067229D /* 我75x75@2x.png in Resources */,
->>>>>>> Hello
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,21 +357,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */,
-=======
 				CF0B78281F1B5FD70067229D /* MainTableViewController.m in Sources */,
->>>>>>> Hello
 				542ABE011F13793500F5F161 /* ViewController.m in Sources */,
 				CF0B784B1F1DBAF60067229D /* AboutMeViewcontrollerCell.m in Sources */,
 				CF0B783B1F1D9CDF0067229D /* SliderMenuViewRight.m in Sources */,
 				542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */,
-<<<<<<< HEAD
 				5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */,
-=======
 				CF0B78481F1DB2C20067229D /* AboutMeViewcontroller.m in Sources */,
 				CF0B782D1F1C88150067229D /* SliderMenuViewLeft.m in Sources */,
->>>>>>> Hello
 				542ABDFB1F13793500F5F161 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,11 +515,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
 				DEVELOPMENT_TEAM = KW677WP5HP;
-=======
-				DEVELOPMENT_TEAM = FEBUVZMYW4;
->>>>>>> Hello
 				INFOPLIST_FILE = TheTimeAlbum/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -563,11 +531,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
 				DEVELOPMENT_TEAM = KW677WP5HP;
-=======
-				DEVELOPMENT_TEAM = FEBUVZMYW4;
->>>>>>> Hello
 				INFOPLIST_FILE = TheTimeAlbum/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
