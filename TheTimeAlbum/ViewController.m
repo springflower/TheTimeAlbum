@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+
+#import <ChameleonFramework/Chameleon.h>
 #import "SliderMenuViewLeft.h"
 #import "AddChildSettingViewController.h"
 @interface ViewController()
@@ -20,7 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = [UIColor flatGreenColorDark];
+//    self.edgesForExtendedLayout = UIRectEdgeNone;    
     self.navigationItem.title = @"相簿";
     [self SettingSilderMenuViewAndButtonItemToNavigationBar];
     

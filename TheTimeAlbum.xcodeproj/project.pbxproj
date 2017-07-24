@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5402673F1F24A3A6005967DE /* timeLineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5402673E1F24A3A6005967DE /* timeLineVC.m */; };
+		540267421F24A3DE005967DE /* HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 540267411F24A3DE005967DE /* HeadView.m */; };
+		540267451F24A652005967DE /* c.png in Resources */ = {isa = PBXBuildFile; fileRef = 540267441F24A652005967DE /* c.png */; };
+		540267491F2537E9005967DE /* MyCollectionViewCellWithText.m in Sources */ = {isa = PBXBuildFile; fileRef = 540267471F2537E9005967DE /* MyCollectionViewCellWithText.m */; };
+		5402674A1F2537E9005967DE /* MyCollectionViewCellWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 540267481F2537E9005967DE /* MyCollectionViewCellWithText.xib */; };
+		5402674E1F2544FF005967DE /* textLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5402674D1F2544FF005967DE /* textLayout.m */; };
+		540267511F256A11005967DE /* addNewMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 540267501F256A11005967DE /* addNewMessageVC.m */; };
+		540267531F256A78005967DE /* addNewMessage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 540267521F256A78005967DE /* addNewMessage.storyboard */; };
 		5428BD731F160494003361AC /* loginPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5428BD711F160494003361AC /* loginPage.storyboard */; };
 		542ABDFB1F13793500F5F161 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABDFA1F13793500F5F161 /* main.m */; };
 		542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABDFD1F13793500F5F161 /* AppDelegate.m */; };
@@ -14,6 +22,10 @@
 		542ABE041F13793500F5F161 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE021F13793500F5F161 /* Main.storyboard */; };
 		542ABE061F13793500F5F161 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE051F13793500F5F161 /* Assets.xcassets */; };
 		542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE071F13793500F5F161 /* LaunchScreen.storyboard */; };
+		5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC871F1C7A54008F5C25 /* loginViewController.m */; };
+		5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */; };
+		5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8C1F1CB3D6008F5C25 /* 1.png */; };
+		5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */; };
 		CF0B778A1F1859DC0067229D /* Fox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF0B77891F1859DC0067229D /* Fox.jpg */; };
 		CF0B782D1F1C88150067229D /* SliderMenuViewLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0B782C1F1C88150067229D /* SliderMenuViewLeft.m */; };
 		CF0B78311F1C94CA0067229D /* icon_menu20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B78301F1C94CA0067229D /* icon_menu20x20.png */; };
@@ -44,9 +56,25 @@
 		CFFFC79F1F258B260097284F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFFC79E1F258B260097284F /* Photos.framework */; };
 		CFFFC7A11F259C690097284F /* BabyUser100x100@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC7A01F259C690097284F /* BabyUser100x100@2x.png */; };
 		CFFFC7A31F259D430097284F /* BabyUser@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC7A21F259D430097284F /* BabyUser@2x.png */; };
+		FDB0C1AA2AA8BC3040667FBD /* libPods-TheTimeAlbum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D647CFAB8CB5EAA3F2237E57 /* libPods-TheTimeAlbum.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A339EA35F197EDD566DEFB7 /* Pods-TheTimeAlbum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheTimeAlbum.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum.release.xcconfig"; sourceTree = "<group>"; };
+		5402673D1F24A3A6005967DE /* timeLineVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timeLineVC.h; sourceTree = "<group>"; };
+		5402673E1F24A3A6005967DE /* timeLineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timeLineVC.m; sourceTree = "<group>"; };
+		540267401F24A3DE005967DE /* HeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadView.h; sourceTree = "<group>"; };
+		540267411F24A3DE005967DE /* HeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadView.m; sourceTree = "<group>"; };
+		540267431F24A468005967DE /* myDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myDefines.h; sourceTree = "<group>"; };
+		540267441F24A652005967DE /* c.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c.png; sourceTree = "<group>"; };
+		540267461F2537E9005967DE /* MyCollectionViewCellWithText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewCellWithText.h; sourceTree = "<group>"; };
+		540267471F2537E9005967DE /* MyCollectionViewCellWithText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewCellWithText.m; sourceTree = "<group>"; };
+		540267481F2537E9005967DE /* MyCollectionViewCellWithText.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewCellWithText.xib; sourceTree = "<group>"; };
+		5402674C1F2544FF005967DE /* textLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = textLayout.h; sourceTree = "<group>"; };
+		5402674D1F2544FF005967DE /* textLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = textLayout.m; sourceTree = "<group>"; };
+		5402674F1F256A11005967DE /* addNewMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addNewMessageVC.h; sourceTree = "<group>"; };
+		540267501F256A11005967DE /* addNewMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addNewMessageVC.m; sourceTree = "<group>"; };
+		540267521F256A78005967DE /* addNewMessage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = addNewMessage.storyboard; sourceTree = "<group>"; };
 		5428BD721F160494003361AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/loginPage.storyboard; sourceTree = "<group>"; };
 		542ABDF61F13793500F5F161 /* TheTimeAlbum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheTimeAlbum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		542ABDFA1F13793500F5F161 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -58,6 +86,14 @@
 		542ABE051F13793500F5F161 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		542ABE081F13793500F5F161 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		542ABE0A1F13793500F5F161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5452CC861F1C7A54008F5C25 /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
+		5452CC871F1C7A54008F5C25 /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
+		5452CC891F1C9AC2008F5C25 /* MyAccountData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountData.h; sourceTree = "<group>"; };
+		5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAccountData.m; sourceTree = "<group>"; };
+		5452CC8C1F1CB3D6008F5C25 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = ../../../1.png; sourceTree = "<group>"; };
+		5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5452CC901F1D8D43008F5C25 /* TheTimeAlbum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheTimeAlbum.entitlements; sourceTree = "<group>"; };
+		7E254EE1580F00C9AF996E45 /* Pods-TheTimeAlbum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheTimeAlbum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum.debug.xcconfig"; sourceTree = "<group>"; };
 		CF0B77891F1859DC0067229D /* Fox.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fox.jpg; sourceTree = "<group>"; };
 		CF0B782B1F1C88150067229D /* SliderMenuViewLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SliderMenuViewLeft.h; path = TheTimeAlbum/SliderMenuViewLeft.h; sourceTree = "<group>"; };
 		CF0B782C1F1C88150067229D /* SliderMenuViewLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SliderMenuViewLeft.m; path = TheTimeAlbum/SliderMenuViewLeft.m; sourceTree = "<group>"; };
@@ -94,6 +130,7 @@
 		CFFFC79E1F258B260097284F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		CFFFC7A01F259C690097284F /* BabyUser100x100@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BabyUser100x100@2x.png"; sourceTree = "<group>"; };
 		CFFFC7A21F259D430097284F /* BabyUser@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BabyUser@2x.png"; sourceTree = "<group>"; };
+		D647CFAB8CB5EAA3F2237E57 /* libPods-TheTimeAlbum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheTimeAlbum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDB0C1AA2AA8BC3040667FBD /* libPods-TheTimeAlbum.a in Frameworks */,
 				CFFFC79F1F258B260097284F /* Photos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,45 +146,84 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		542ABDED1F13793500F5F161 = {
+		31B98EB2FB896C8A631BF7E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				542ABDF81F13793500F5F161 /* TheTimeAlbum */,
-				542ABDF71F13793500F5F161 /* Products */,
-				CFFFC79D1F258B260097284F /* Frameworks */,
+				D647CFAB8CB5EAA3F2237E57 /* libPods-TheTimeAlbum.a */,
 			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		542ABDF71F13793500F5F161 /* Products */ = {
+		5402674B1F25380A005967DE /* mainTimeLine */ = {
 			isa = PBXGroup;
 			children = (
-				542ABDF61F13793500F5F161 /* TheTimeAlbum.app */,
+				540267541F25D481005967DE /* M */,
+				540267551F25D48A005967DE /* V */,
+				540267561F25D48E005967DE /* C */,
 			);
-			name = Products;
+			name = mainTimeLine;
 			sourceTree = "<group>";
 		};
-		542ABDF81F13793500F5F161 /* TheTimeAlbum */ = {
+		540267541F25D481005967DE /* M */ = {
 			isa = PBXGroup;
 			children = (
-				542ABDFC1F13793500F5F161 /* AppDelegate.h */,
-				542ABDFD1F13793500F5F161 /* AppDelegate.m */,
-				542ABDFF1F13793500F5F161 /* ViewController.h */,
-				542ABE001F13793500F5F161 /* ViewController.m */,
+				540267401F24A3DE005967DE /* HeadView.h */,
+				540267411F24A3DE005967DE /* HeadView.m */,
+			);
+			name = M;
+			sourceTree = "<group>";
+		};
+		540267551F25D48A005967DE /* V */ = {
+			isa = PBXGroup;
+			children = (
+				5402674C1F2544FF005967DE /* textLayout.h */,
+				5402674D1F2544FF005967DE /* textLayout.m */,
+				540267461F2537E9005967DE /* MyCollectionViewCellWithText.h */,
+				540267471F2537E9005967DE /* MyCollectionViewCellWithText.m */,
+				540267481F2537E9005967DE /* MyCollectionViewCellWithText.xib */,
+				540267521F256A78005967DE /* addNewMessage.storyboard */,
+			);
+			name = V;
+			sourceTree = "<group>";
+		};
+		540267561F25D48E005967DE /* C */ = {
+			isa = PBXGroup;
+			children = (
+				5402673D1F24A3A6005967DE /* timeLineVC.h */,
+				5402673E1F24A3A6005967DE /* timeLineVC.m */,
+				5402674F1F256A11005967DE /* addNewMessageVC.h */,
+				540267501F256A11005967DE /* addNewMessageVC.m */,
+			);
+			name = C;
+			sourceTree = "<group>";
+		};
+		540267571F25D4E4005967DE /* Common Model */ = {
+			isa = PBXGroup;
+			children = (
+				CF0B78631F1E3B7A0067229D /* SliderMenuViewLeft */,
+				CF7DA4D41F1F86B500E282C9 /* SliderMenuViewRight */,
+				5452CC891F1C9AC2008F5C25 /* MyAccountData.h */,
+				5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */,
+			);
+			name = "Common Model";
+			sourceTree = "<group>";
+		};
+		540267581F25D800005967DE /* AddChild+BigStrckerViewController */ = {
+			isa = PBXGroup;
+			children = (
 				CF0B78641F1E3D290067229D /* AddChildSettingViewController.h */,
 				CF0B78651F1E3D290067229D /* AddChildSettingViewController.m */,
-				542ABE021F13793500F5F161 /* Main.storyboard */,
 				CFFFC79A1F25823A0097284F /* BigStickerSettingViewController.h */,
 				CFFFC79B1F25823A0097284F /* BigStickerSettingViewController.m */,
-				CF0B78411F1DAD780067229D /* achievement.storyboard */,
-				CF0B783F1F1DAD5B0067229D /* futureMail.storyboard */,
-				5428BD711F160494003361AC /* loginPage.storyboard */,
-				CF7DA4D41F1F86B500E282C9 /* SliderMenuViewRight */,
-				CF0B78631F1E3B7A0067229D /* SliderMenuViewLeft */,
-				CF0B784C1F1DD90C0067229D /* AboutMeViewController */,
-				542ABE051F13793500F5F161 /* Assets.xcassets */,
-				542ABE071F13793500F5F161 /* LaunchScreen.storyboard */,
-				542ABE0A1F13793500F5F161 /* Info.plist */,
+			);
+			name = "AddChild+BigStrckerViewController";
+			sourceTree = "<group>";
+		};
+		540267591F25D94C005967DE /* Pictures */ = {
+			isa = PBXGroup;
+			children = (
 				CF0B77891F1859DC0067229D /* Fox.jpg */,
+				540267441F24A652005967DE /* c.png */,
 				CF0B78591F1DE8040067229D /* 我75x75@2x.png */,
 				CF0B78571F1DE4DA0067229D /* 信箱75x75@2x.png */,
 				CF0B78511F1DE2990067229D /* 成就75x75@2x.png */,
@@ -166,6 +243,51 @@
 				CFFFC7981F24E1110097284F /* Another32x38@2x.png */,
 				CFFFC7A01F259C690097284F /* BabyUser100x100@2x.png */,
 				CFFFC7A21F259D430097284F /* BabyUser@2x.png */,
+			);
+			name = Pictures;
+			sourceTree = "<group>";
+		};
+		542ABDED1F13793500F5F161 = {
+			isa = PBXGroup;
+			children = (
+				542ABDF81F13793500F5F161 /* TheTimeAlbum */,
+				542ABDF71F13793500F5F161 /* Products */,
+				AE09515D791297A1F890D49F /* Pods */,
+				31B98EB2FB896C8A631BF7E7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		542ABDF71F13793500F5F161 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				542ABDF61F13793500F5F161 /* TheTimeAlbum.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		542ABDF81F13793500F5F161 /* TheTimeAlbum */ = {
+			isa = PBXGroup;
+			children = (
+				5452CC901F1D8D43008F5C25 /* TheTimeAlbum.entitlements */,
+				542ABDFC1F13793500F5F161 /* AppDelegate.h */,
+				542ABDFD1F13793500F5F161 /* AppDelegate.m */,
+				542ABDFF1F13793500F5F161 /* ViewController.h */,
+				542ABE001F13793500F5F161 /* ViewController.m */,
+				542ABE021F13793500F5F161 /* Main.storyboard */,
+				5402674B1F25380A005967DE /* mainTimeLine */,
+				5452CC931F1DE92C008F5C25 /* LoginViewController */,
+				540267571F25D4E4005967DE /* Common Model */,
+				CF0B784C1F1DD90C0067229D /* AboutMeViewController */,
+				540267581F25D800005967DE /* AddChild+BigStrckerViewController */,
+				542ABE051F13793500F5F161 /* Assets.xcassets */,
+				542ABE071F13793500F5F161 /* LaunchScreen.storyboard */,
+				542ABE0A1F13793500F5F161 /* Info.plist */,
+				5452CC8C1F1CB3D6008F5C25 /* 1.png */,
+				5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */,
+				CF0B78411F1DAD780067229D /* achievement.storyboard */,
+				CF0B783F1F1DAD5B0067229D /* futureMail.storyboard */,
+				540267431F24A468005967DE /* myDefines.h */,
+				540267591F25D94C005967DE /* Pictures */,
 				542ABDF91F13793500F5F161 /* Supporting Files */,
 			);
 			path = TheTimeAlbum;
@@ -177,6 +299,25 @@
 				542ABDFA1F13793500F5F161 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5452CC931F1DE92C008F5C25 /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5452CC861F1C7A54008F5C25 /* loginViewController.h */,
+				5452CC871F1C7A54008F5C25 /* loginViewController.m */,
+				5428BD711F160494003361AC /* loginPage.storyboard */,
+			);
+			name = LoginViewController;
+			sourceTree = "<group>";
+		};
+		AE09515D791297A1F890D49F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7E254EE1580F00C9AF996E45 /* Pods-TheTimeAlbum.debug.xcconfig */,
+				3A339EA35F197EDD566DEFB7 /* Pods-TheTimeAlbum.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		CF0B784C1F1DD90C0067229D /* AboutMeViewController */ = {
@@ -212,14 +353,6 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		CFFFC79D1F258B260097284F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CFFFC79E1F258B260097284F /* Photos.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -227,9 +360,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 542ABE0D1F13793500F5F161 /* Build configuration list for PBXNativeTarget "TheTimeAlbum" */;
 			buildPhases = (
+				5C8B4C8C26221063DD1436E6 /* [CP] Check Pods Manifest.lock */,
 				542ABDF21F13793500F5F161 /* Sources */,
 				542ABDF31F13793500F5F161 /* Frameworks */,
 				542ABDF41F13793500F5F161 /* Resources */,
+				6376E70E5D8784FCFC0F18A0 /* [CP] Embed Pods Frameworks */,
+				49D23553DBA2FE25CCF08FED /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -251,8 +387,13 @@
 				TargetAttributes = {
 					542ABDF51F13793500F5F161 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = FEBUVZMYW4;
+						DevelopmentTeam = KW677WP5HP;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -284,6 +425,7 @@
 				CF0B78431F1DAD780067229D /* achievement.storyboard in Resources */,
 				CF0B78351F1C9DB60067229D /* icon_message48x48.png in Resources */,
 				542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */,
+				5402674A1F2537E9005967DE /* MyCollectionViewCellWithText.xib in Resources */,
 				CFFFC7911F24D10C0097284F /* Female38x38@2x.png in Resources */,
 				5428BD731F160494003361AC /* loginPage.storyboard in Resources */,
 				CF0B785C1F1DE8F80067229D /* icon_menu20x20@2x.png in Resources */,
@@ -293,12 +435,15 @@
 				542ABE061F13793500F5F161 /* Assets.xcassets in Resources */,
 				CF0B78561F1DE40D0067229D /* 相簿75x75@2x.png in Resources */,
 				CF0B78401F1DAD5B0067229D /* futureMail.storyboard in Resources */,
+				540267451F24A652005967DE /* c.png in Resources */,
 				CFFFC7991F24E1110097284F /* Another32x38@2x.png in Resources */,
 				CFFFC78F1F24CBFA0097284F /* Female30x30@2x.png in Resources */,
 				CFFFC7A11F259C690097284F /* BabyUser100x100@2x.png in Resources */,
 				CFFFC7931F24D1A00097284F /* Female34x34@2x.png in Resources */,
 				CF0B78311F1C94CA0067229D /* icon_menu20x20.png in Resources */,
 				542ABE041F13793500F5F161 /* Main.storyboard in Resources */,
+				5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */,
+				5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */,
 				CF0B78621F1DEBB70067229D /* 清單30x30@2x.png in Resources */,
 				CF0B78601F1DEA380067229D /* 清單48x48@2x.png in Resources */,
 				CF0B778A1F1859DC0067229D /* Fox.jpg in Resources */,
@@ -306,21 +451,77 @@
 				CFFFC7A31F259D430097284F /* BabyUser@2x.png in Resources */,
 				CF0B785E1F1DE9A70067229D /* 清單75x75@2x.png in Resources */,
 				CF0B785A1F1DE8040067229D /* 我75x75@2x.png in Resources */,
+				540267531F256A78005967DE /* addNewMessage.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		49D23553DBA2FE25CCF08FED /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C8B4C8C26221063DD1436E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6376E70E5D8784FCFC0F18A0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		542ABDF21F13793500F5F161 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				540267511F256A11005967DE /* addNewMessageVC.m in Sources */,
+				5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */,
+				540267421F24A3DE005967DE /* HeadView.m in Sources */,
 				542ABE011F13793500F5F161 /* ViewController.m in Sources */,
+				5402674E1F2544FF005967DE /* textLayout.m in Sources */,
 				CF0B784B1F1DBAF60067229D /* AboutMeViewcontrollerCell.m in Sources */,
 				CF0B783B1F1D9CDF0067229D /* SliderMenuViewRight.m in Sources */,
+				540267491F2537E9005967DE /* MyCollectionViewCellWithText.m in Sources */,
+				5402673F1F24A3A6005967DE /* timeLineVC.m in Sources */,
 				CFFFC79C1F25823A0097284F /* BigStickerSettingViewController.m in Sources */,
 				542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */,
+				5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */,
 				CF0B78481F1DB2C20067229D /* AboutMeViewcontroller.m in Sources */,
 				CF0B782D1F1C88150067229D /* SliderMenuViewLeft.m in Sources */,
 				542ABDFB1F13793500F5F161 /* main.m in Sources */,
@@ -469,10 +670,11 @@
 		};
 		542ABE0E1F13793500F5F161 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E254EE1580F00C9AF996E45 /* Pods-TheTimeAlbum.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = FEBUVZMYW4;
+				DEVELOPMENT_TEAM = KW677WP5HP;
 				INFOPLIST_FILE = TheTimeAlbum/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -484,10 +686,11 @@
 		};
 		542ABE0F1F13793500F5F161 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A339EA35F197EDD566DEFB7 /* Pods-TheTimeAlbum.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = FEBUVZMYW4;
+				DEVELOPMENT_TEAM = KW677WP5HP;
 				INFOPLIST_FILE = TheTimeAlbum/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

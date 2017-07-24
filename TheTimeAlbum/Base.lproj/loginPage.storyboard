@@ -6,13 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginViewController" id="BYZ-38-t0r" customClass="loginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,26 +22,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOJ-D7-8tg">
-                                <rect key="frame" x="151" y="346" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5vJ-ty-4KI">
+                                <rect key="frame" x="135" y="451" width="104" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="GoogleLogout"/>
                                 <connections>
-                                    <segue destination="g4m-d3-GoF" kind="show" id="n1N-EG-dl2"/>
+                                    <action selector="didTapSignOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XHI-Yf-Eyi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5vJ-ty-4KI">
-                                <rect key="frame" x="151" y="413" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="peV-ea-3BB">
+                                <rect key="frame" x="54" y="87" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="7Tn-qI-juF"/>
+                                    <constraint firstAttribute="height" constant="128" id="Ick-Wi-VxV"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vBC-ik-tdz" customClass="GIDSignInButton">
+                                <rect key="frame" x="62.5" y="406" width="250" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOJ-D7-8tg" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="62.5" y="332" width="250" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="0du-9w-Ac0"/>
+                                    <constraint firstAttribute="width" constant="250" id="nqA-Qf-agl"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="peV-ea-3BB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="67" id="02S-b3-IIc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="peV-ea-3BB" secondAttribute="trailing" constant="65" id="3Rr-7S-2Jy"/>
+                            <constraint firstItem="vBC-ik-tdz" firstAttribute="width" secondItem="YOJ-D7-8tg" secondAttribute="width" id="4U1-Yy-1vv"/>
+                            <constraint firstItem="YOJ-D7-8tg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="91C-MH-kdp"/>
+                            <constraint firstItem="vBC-ik-tdz" firstAttribute="height" secondItem="YOJ-D7-8tg" secondAttribute="height" id="Nj0-kk-weK"/>
+                            <constraint firstItem="peV-ea-3BB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="38" id="Tib-3F-qGg"/>
+                            <constraint firstItem="YOJ-D7-8tg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="312" id="bTR-yy-arV"/>
+                            <constraint firstItem="vBC-ik-tdz" firstAttribute="top" secondItem="YOJ-D7-8tg" secondAttribute="bottom" constant="24" id="kfH-2b-GPf"/>
+                            <constraint firstItem="vBC-ik-tdz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pLC-l9-Gac"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loginButton" destination="YOJ-D7-8tg" id="wWX-1i-kB5"/>
+                        <outlet property="userPic" destination="peV-ea-3BB" id="JSK-sC-hXt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-73" y="44"/>
+            <point key="canvasLocation" x="24.800000000000001" y="36.431784107946029"/>
         </scene>
         <!--Main-->
         <scene sceneID="4rK-hK-V5Z">
