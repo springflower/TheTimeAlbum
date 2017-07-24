@@ -9,7 +9,9 @@
 #import "AddChildSettingViewController.h"
 #import "BigStickerSettingViewController.h"
 
-@interface AddChildSettingViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface AddChildSettingViewController ()<UITableViewDelegate,
+                                            UITableViewDataSource,
+                                            UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *BoySelected;
 @property (weak, nonatomic) IBOutlet UIButton *GirlSelected;
 @property (weak, nonatomic) IBOutlet UIButton *AnotherSelected;
@@ -90,7 +92,6 @@
 //    yourpicker.showsSelectionIndicator = YES;
 //    self.yourtextfield.inputView = yourpicker;
     
-    
 }
 
 - (IBAction)BoySelected:(id)sender {
@@ -165,7 +166,17 @@
 }
 - (IBAction)AnotherRelationship:(id)sender {
     
+    UIActionSheet *myActionSheet = [[UIActionSheet alloc]
+                                    initWithTitle:@"actionSheet"
+                                    delegate:self
+                                    cancelButtonTitle:@"Cancel"
+                                    destructiveButtonTitle:@"Delete"
+                                    otherButtonTitles:@"Save", @"Share", nil];
+    
+    [myActionSheet showInView:self.view];
+    
 }
+
 
 
 -(void)chooseDate:(UIDatePicker*)datePickerView {
@@ -199,7 +210,7 @@
     //BirthdayTextField.layer.masksToBounds = YES;
     
     // Prepare DatePicker to BirthdayTextField.
-    BirthdayTextField.placeholder = @"YYYY/MM/DD";
+    //BirthdayTextField.placeholder = @"YYYY/MM/DD";
     datePicker = [UIDatePicker new];
     NSLocale *datelocale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_TW"];
     datePicker.locale = datelocale;
@@ -262,21 +273,37 @@
 
 -(void)NextStepToSettingBigStickers {
     
-    CATransition* transition = [CATransition animation];
-    transition.duration = 0.3;
-    transition.type = kCATransitionMoveIn;
-    transition.subtype = kCATransitionFromRight;
-    //[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
-    
-    [self.view.window.layer addAnimation:transition forKey:kCATransition];
-    
-    BigStickerSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"BigStickerSettingViewController"];
-    //[self presentViewController:nextPage animated:YES completion:nil];
-    [self presentViewController:nextPage animated:NO completion:nil];
+    if(![MyName.text  isEqualToString:@""] && ![BirthdayTextField.text  isEqualToString:@""]){
+        
+        CATransition* transition = [CATransition animation];
+        transition.duration = 0.3;
+        transition.type = kCATransitionMoveIn;
+        transition.subtype = kCATransitionFromRight;
+        //[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+        
+        [self.view.window.layer addAnimation:transition forKey:kCATransition];
+        
+        BigStickerSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"BigStickerSettingViewController"];
+        //[self presentViewController:nextPage animated:YES completion:nil];
+        [self presentViewController:nextPage animated:NO completion:nil];
+
+    } else {
+        if([MyName.text isEqualToString:@""]) {
+            [self showAlert:@"稱號必須填"];
+        } else
+            [self showAlert:@"出生年月日必須填"];
+    }
 }
 
 -(void)CancelAddChildSettingViewController {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void) showAlert:(NSString*) messsage {
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:messsage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * OK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:OK];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 /*
