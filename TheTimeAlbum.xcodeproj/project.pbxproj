@@ -26,9 +26,7 @@
 		5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */; };
 		5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8C1F1CB3D6008F5C25 /* 1.png */; };
 		5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */; };
-		5452CC921F1DE2B9008F5C25 /* newBaby.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC911F1DE2B9008F5C25 /* newBaby.storyboard */; };
 		CF0B778A1F1859DC0067229D /* Fox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF0B77891F1859DC0067229D /* Fox.jpg */; };
-		CF0B78281F1B5FD70067229D /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0B78271F1B5FD70067229D /* MainTableViewController.m */; };
 		CF0B782D1F1C88150067229D /* SliderMenuViewLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0B782C1F1C88150067229D /* SliderMenuViewLeft.m */; };
 		CF0B78311F1C94CA0067229D /* icon_menu20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B78301F1C94CA0067229D /* icon_menu20x20.png */; };
 		CF0B78351F1C9DB60067229D /* icon_message48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B78341F1C9DB60067229D /* icon_message48x48.png */; };
@@ -46,6 +44,18 @@
 		CF0B785E1F1DE9A70067229D /* 清單75x75@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B785D1F1DE9A70067229D /* 清單75x75@2x.png */; };
 		CF0B78601F1DEA380067229D /* 清單48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B785F1F1DEA380067229D /* 清單48x48@2x.png */; };
 		CF0B78621F1DEBB70067229D /* 清單30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B78611F1DEBB70067229D /* 清單30x30@2x.png */; };
+		CF0B78661F1E3D290067229D /* AddChildSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0B78651F1E3D290067229D /* AddChildSettingViewController.m */; };
+		CFFFC78D1F24CADD0097284F /* Male30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC78C1F24CADD0097284F /* Male30x30@2x.png */; };
+		CFFFC78F1F24CBFA0097284F /* Female30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC78E1F24CBFA0097284F /* Female30x30@2x.png */; };
+		CFFFC7911F24D10C0097284F /* Female38x38@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC7901F24D10C0097284F /* Female38x38@2x.png */; };
+		CFFFC7931F24D1A00097284F /* Female34x34@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC7921F24D1A00097284F /* Female34x34@2x.png */; };
+		CFFFC7951F24DF630097284F /* Another30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC7941F24DF630097284F /* Another30x30@2x.png */; };
+		CFFFC7971F24DFE30097284F /* Another48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC7961F24DFE30097284F /* Another48x48@2x.png */; };
+		CFFFC7991F24E1110097284F /* Another32x38@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC7981F24E1110097284F /* Another32x38@2x.png */; };
+		CFFFC79C1F25823A0097284F /* BigStickerSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFFFC79B1F25823A0097284F /* BigStickerSettingViewController.m */; };
+		CFFFC79F1F258B260097284F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFFC79E1F258B260097284F /* Photos.framework */; };
+		CFFFC7A11F259C690097284F /* BabyUser100x100@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC7A01F259C690097284F /* BabyUser100x100@2x.png */; };
+		CFFFC7A31F259D430097284F /* BabyUser@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC7A21F259D430097284F /* BabyUser@2x.png */; };
 		FDB0C1AA2AA8BC3040667FBD /* libPods-TheTimeAlbum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D647CFAB8CB5EAA3F2237E57 /* libPods-TheTimeAlbum.a */; };
 /* End PBXBuildFile section */
 
@@ -83,17 +93,14 @@
 		5452CC8C1F1CB3D6008F5C25 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = ../../../1.png; sourceTree = "<group>"; };
 		5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5452CC901F1D8D43008F5C25 /* TheTimeAlbum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheTimeAlbum.entitlements; sourceTree = "<group>"; };
-		5452CC911F1DE2B9008F5C25 /* newBaby.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = newBaby.storyboard; sourceTree = "<group>"; };
 		7E254EE1580F00C9AF996E45 /* Pods-TheTimeAlbum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheTimeAlbum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum.debug.xcconfig"; sourceTree = "<group>"; };
 		CF0B77891F1859DC0067229D /* Fox.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fox.jpg; sourceTree = "<group>"; };
-		CF0B78261F1B5FD70067229D /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
-		CF0B78271F1B5FD70067229D /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
-		CF0B782B1F1C88150067229D /* SliderMenuViewLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderMenuViewLeft.h; sourceTree = "<group>"; };
-		CF0B782C1F1C88150067229D /* SliderMenuViewLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderMenuViewLeft.m; sourceTree = "<group>"; };
+		CF0B782B1F1C88150067229D /* SliderMenuViewLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SliderMenuViewLeft.h; path = TheTimeAlbum/SliderMenuViewLeft.h; sourceTree = "<group>"; };
+		CF0B782C1F1C88150067229D /* SliderMenuViewLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SliderMenuViewLeft.m; path = TheTimeAlbum/SliderMenuViewLeft.m; sourceTree = "<group>"; };
 		CF0B78301F1C94CA0067229D /* icon_menu20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_menu20x20.png; sourceTree = "<group>"; };
 		CF0B78341F1C9DB60067229D /* icon_message48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_message48x48.png; sourceTree = "<group>"; };
-		CF0B78391F1D9CDF0067229D /* SliderMenuViewRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderMenuViewRight.h; sourceTree = "<group>"; };
-		CF0B783A1F1D9CDF0067229D /* SliderMenuViewRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderMenuViewRight.m; sourceTree = "<group>"; };
+		CF0B78391F1D9CDF0067229D /* SliderMenuViewRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SliderMenuViewRight.h; path = TheTimeAlbum/SliderMenuViewRight.h; sourceTree = "<group>"; };
+		CF0B783A1F1D9CDF0067229D /* SliderMenuViewRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SliderMenuViewRight.m; path = TheTimeAlbum/SliderMenuViewRight.m; sourceTree = "<group>"; };
 		CF0B783D1F1DACE50067229D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/aboutme.storyboard; sourceTree = "<group>"; };
 		CF0B783F1F1DAD5B0067229D /* futureMail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = futureMail.storyboard; sourceTree = "<group>"; };
 		CF0B78421F1DAD780067229D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/achievement.storyboard; sourceTree = "<group>"; };
@@ -109,6 +116,20 @@
 		CF0B785D1F1DE9A70067229D /* 清單75x75@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "清單75x75@2x.png"; sourceTree = "<group>"; };
 		CF0B785F1F1DEA380067229D /* 清單48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "清單48x48@2x.png"; sourceTree = "<group>"; };
 		CF0B78611F1DEBB70067229D /* 清單30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "清單30x30@2x.png"; sourceTree = "<group>"; };
+		CF0B78641F1E3D290067229D /* AddChildSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddChildSettingViewController.h; sourceTree = "<group>"; };
+		CF0B78651F1E3D290067229D /* AddChildSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddChildSettingViewController.m; sourceTree = "<group>"; };
+		CFFFC78C1F24CADD0097284F /* Male30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Male30x30@2x.png"; sourceTree = "<group>"; };
+		CFFFC78E1F24CBFA0097284F /* Female30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Female30x30@2x.png"; sourceTree = "<group>"; };
+		CFFFC7901F24D10C0097284F /* Female38x38@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Female38x38@2x.png"; sourceTree = "<group>"; };
+		CFFFC7921F24D1A00097284F /* Female34x34@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Female34x34@2x.png"; sourceTree = "<group>"; };
+		CFFFC7941F24DF630097284F /* Another30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Another30x30@2x.png"; sourceTree = "<group>"; };
+		CFFFC7961F24DFE30097284F /* Another48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Another48x48@2x.png"; sourceTree = "<group>"; };
+		CFFFC7981F24E1110097284F /* Another32x38@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Another32x38@2x.png"; sourceTree = "<group>"; };
+		CFFFC79A1F25823A0097284F /* BigStickerSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigStickerSettingViewController.h; sourceTree = "<group>"; };
+		CFFFC79B1F25823A0097284F /* BigStickerSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigStickerSettingViewController.m; sourceTree = "<group>"; };
+		CFFFC79E1F258B260097284F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		CFFFC7A01F259C690097284F /* BabyUser100x100@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BabyUser100x100@2x.png"; sourceTree = "<group>"; };
+		CFFFC7A21F259D430097284F /* BabyUser@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BabyUser@2x.png"; sourceTree = "<group>"; };
 		D647CFAB8CB5EAA3F2237E57 /* libPods-TheTimeAlbum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheTimeAlbum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -118,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDB0C1AA2AA8BC3040667FBD /* libPods-TheTimeAlbum.a in Frameworks */,
+				CFFFC79F1F258B260097284F /* Photos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,20 +157,94 @@
 		5402674B1F25380A005967DE /* mainTimeLine */ = {
 			isa = PBXGroup;
 			children = (
-				5402673D1F24A3A6005967DE /* timeLineVC.h */,
-				5402673E1F24A3A6005967DE /* timeLineVC.m */,
+				540267541F25D481005967DE /* M */,
+				540267551F25D48A005967DE /* V */,
+				540267561F25D48E005967DE /* C */,
+			);
+			name = mainTimeLine;
+			sourceTree = "<group>";
+		};
+		540267541F25D481005967DE /* M */ = {
+			isa = PBXGroup;
+			children = (
+				540267401F24A3DE005967DE /* HeadView.h */,
+				540267411F24A3DE005967DE /* HeadView.m */,
+			);
+			name = M;
+			sourceTree = "<group>";
+		};
+		540267551F25D48A005967DE /* V */ = {
+			isa = PBXGroup;
+			children = (
 				5402674C1F2544FF005967DE /* textLayout.h */,
 				5402674D1F2544FF005967DE /* textLayout.m */,
 				540267461F2537E9005967DE /* MyCollectionViewCellWithText.h */,
 				540267471F2537E9005967DE /* MyCollectionViewCellWithText.m */,
 				540267481F2537E9005967DE /* MyCollectionViewCellWithText.xib */,
-				540267401F24A3DE005967DE /* HeadView.h */,
-				540267411F24A3DE005967DE /* HeadView.m */,
-				5402674F1F256A11005967DE /* addNewMessageVC.h */,
-				540267501F256A11005967DE /* addNewMessageVC.m */,
 				540267521F256A78005967DE /* addNewMessage.storyboard */,
 			);
-			name = mainTimeLine;
+			name = V;
+			sourceTree = "<group>";
+		};
+		540267561F25D48E005967DE /* C */ = {
+			isa = PBXGroup;
+			children = (
+				5402673D1F24A3A6005967DE /* timeLineVC.h */,
+				5402673E1F24A3A6005967DE /* timeLineVC.m */,
+				5402674F1F256A11005967DE /* addNewMessageVC.h */,
+				540267501F256A11005967DE /* addNewMessageVC.m */,
+			);
+			name = C;
+			sourceTree = "<group>";
+		};
+		540267571F25D4E4005967DE /* Common Model */ = {
+			isa = PBXGroup;
+			children = (
+				CF0B78631F1E3B7A0067229D /* SliderMenuViewLeft */,
+				CF7DA4D41F1F86B500E282C9 /* SliderMenuViewRight */,
+				5452CC891F1C9AC2008F5C25 /* MyAccountData.h */,
+				5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */,
+			);
+			name = "Common Model";
+			sourceTree = "<group>";
+		};
+		540267581F25D800005967DE /* AddChild+BigStrckerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CF0B78641F1E3D290067229D /* AddChildSettingViewController.h */,
+				CF0B78651F1E3D290067229D /* AddChildSettingViewController.m */,
+				CFFFC79A1F25823A0097284F /* BigStickerSettingViewController.h */,
+				CFFFC79B1F25823A0097284F /* BigStickerSettingViewController.m */,
+			);
+			name = "AddChild+BigStrckerViewController";
+			sourceTree = "<group>";
+		};
+		540267591F25D94C005967DE /* Pictures */ = {
+			isa = PBXGroup;
+			children = (
+				CF0B77891F1859DC0067229D /* Fox.jpg */,
+				540267441F24A652005967DE /* c.png */,
+				CF0B78591F1DE8040067229D /* 我75x75@2x.png */,
+				CF0B78571F1DE4DA0067229D /* 信箱75x75@2x.png */,
+				CF0B78511F1DE2990067229D /* 成就75x75@2x.png */,
+				CF0B78551F1DE40D0067229D /* 相簿75x75@2x.png */,
+				CF0B78611F1DEBB70067229D /* 清單30x30@2x.png */,
+				CF0B785F1F1DEA380067229D /* 清單48x48@2x.png */,
+				CF0B785D1F1DE9A70067229D /* 清單75x75@2x.png */,
+				CF0B78301F1C94CA0067229D /* icon_menu20x20.png */,
+				CF0B785B1F1DE8F80067229D /* icon_menu20x20@2x.png */,
+				CF0B78341F1C9DB60067229D /* icon_message48x48.png */,
+				CFFFC78C1F24CADD0097284F /* Male30x30@2x.png */,
+				CFFFC78E1F24CBFA0097284F /* Female30x30@2x.png */,
+				CFFFC7921F24D1A00097284F /* Female34x34@2x.png */,
+				CFFFC7901F24D10C0097284F /* Female38x38@2x.png */,
+				CFFFC7941F24DF630097284F /* Another30x30@2x.png */,
+				CFFFC7961F24DFE30097284F /* Another48x48@2x.png */,
+				CFFFC7981F24E1110097284F /* Another32x38@2x.png */,
+				CFFFC7A01F259C690097284F /* BabyUser100x100@2x.png */,
+				CFFFC7A21F259D430097284F /* BabyUser@2x.png */,
+			);
+			name = Pictures;
 			sourceTree = "<group>";
 		};
 		542ABDED1F13793500F5F161 = {
@@ -175,22 +271,14 @@
 				5452CC901F1D8D43008F5C25 /* TheTimeAlbum.entitlements */,
 				542ABDFC1F13793500F5F161 /* AppDelegate.h */,
 				542ABDFD1F13793500F5F161 /* AppDelegate.m */,
-				CF0B78261F1B5FD70067229D /* MainTableViewController.h */,
-				CF0B78271F1B5FD70067229D /* MainTableViewController.m */,
 				542ABDFF1F13793500F5F161 /* ViewController.h */,
 				542ABE001F13793500F5F161 /* ViewController.m */,
-				CF0B782B1F1C88150067229D /* SliderMenuViewLeft.h */,
-				CF0B782C1F1C88150067229D /* SliderMenuViewLeft.m */,
-				CF0B78391F1D9CDF0067229D /* SliderMenuViewRight.h */,
-				CF0B783A1F1D9CDF0067229D /* SliderMenuViewRight.m */,
 				542ABE021F13793500F5F161 /* Main.storyboard */,
 				5402674B1F25380A005967DE /* mainTimeLine */,
-				540267431F24A468005967DE /* myDefines.h */,
-				5452CC931F1DE92C008F5C25 /* C */,
-				5428BD711F160494003361AC /* loginPage.storyboard */,
-				5452CC911F1DE2B9008F5C25 /* newBaby.storyboard */,
-				5452CC891F1C9AC2008F5C25 /* MyAccountData.h */,
-				5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */,
+				5452CC931F1DE92C008F5C25 /* LoginViewController */,
+				540267571F25D4E4005967DE /* Common Model */,
+				CF0B784C1F1DD90C0067229D /* AboutMeViewController */,
+				540267581F25D800005967DE /* AddChild+BigStrckerViewController */,
 				542ABE051F13793500F5F161 /* Assets.xcassets */,
 				542ABE071F13793500F5F161 /* LaunchScreen.storyboard */,
 				542ABE0A1F13793500F5F161 /* Info.plist */,
@@ -198,19 +286,8 @@
 				5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */,
 				CF0B78411F1DAD780067229D /* achievement.storyboard */,
 				CF0B783F1F1DAD5B0067229D /* futureMail.storyboard */,
-				CF0B784C1F1DD90C0067229D /* AboutMeViewController */,
-				CF0B77891F1859DC0067229D /* Fox.jpg */,
-				540267441F24A652005967DE /* c.png */,
-				CF0B78591F1DE8040067229D /* 我75x75@2x.png */,
-				CF0B78571F1DE4DA0067229D /* 信箱75x75@2x.png */,
-				CF0B78511F1DE2990067229D /* 成就75x75@2x.png */,
-				CF0B78551F1DE40D0067229D /* 相簿75x75@2x.png */,
-				CF0B78611F1DEBB70067229D /* 清單30x30@2x.png */,
-				CF0B785F1F1DEA380067229D /* 清單48x48@2x.png */,
-				CF0B785D1F1DE9A70067229D /* 清單75x75@2x.png */,
-				CF0B78301F1C94CA0067229D /* icon_menu20x20.png */,
-				CF0B785B1F1DE8F80067229D /* icon_menu20x20@2x.png */,
-				CF0B78341F1C9DB60067229D /* icon_message48x48.png */,
+				540267431F24A468005967DE /* myDefines.h */,
+				540267591F25D94C005967DE /* Pictures */,
 				542ABDF91F13793500F5F161 /* Supporting Files */,
 			);
 			path = TheTimeAlbum;
@@ -224,13 +301,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5452CC931F1DE92C008F5C25 /* C */ = {
+		5452CC931F1DE92C008F5C25 /* LoginViewController */ = {
 			isa = PBXGroup;
 			children = (
 				5452CC861F1C7A54008F5C25 /* loginViewController.h */,
 				5452CC871F1C7A54008F5C25 /* loginViewController.m */,
+				5428BD711F160494003361AC /* loginPage.storyboard */,
 			);
-			name = C;
+			name = LoginViewController;
 			sourceTree = "<group>";
 		};
 		AE09515D791297A1F890D49F /* Pods */ = {
@@ -252,6 +330,26 @@
 				CF0B784A1F1DBAF60067229D /* AboutMeViewcontrollerCell.m */,
 			);
 			name = AboutMeViewController;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		CF0B78631F1E3B7A0067229D /* SliderMenuViewLeft */ = {
+			isa = PBXGroup;
+			children = (
+				CF0B782B1F1C88150067229D /* SliderMenuViewLeft.h */,
+				CF0B782C1F1C88150067229D /* SliderMenuViewLeft.m */,
+			);
+			name = SliderMenuViewLeft;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		CF7DA4D41F1F86B500E282C9 /* SliderMenuViewRight */ = {
+			isa = PBXGroup;
+			children = (
+				CF0B78391F1D9CDF0067229D /* SliderMenuViewRight.h */,
+				CF0B783A1F1D9CDF0067229D /* SliderMenuViewRight.m */,
+			);
+			name = SliderMenuViewRight;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -322,19 +420,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFFFC7951F24DF630097284F /* Another30x30@2x.png in Resources */,
 				CF0B78581F1DE4DA0067229D /* 信箱75x75@2x.png in Resources */,
 				CF0B78431F1DAD780067229D /* achievement.storyboard in Resources */,
 				CF0B78351F1C9DB60067229D /* icon_message48x48.png in Resources */,
 				542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */,
 				5402674A1F2537E9005967DE /* MyCollectionViewCellWithText.xib in Resources */,
-				5452CC921F1DE2B9008F5C25 /* newBaby.storyboard in Resources */,
+				CFFFC7911F24D10C0097284F /* Female38x38@2x.png in Resources */,
 				5428BD731F160494003361AC /* loginPage.storyboard in Resources */,
 				CF0B785C1F1DE8F80067229D /* icon_menu20x20@2x.png in Resources */,
 				CF0B78521F1DE2990067229D /* 成就75x75@2x.png in Resources */,
+				CFFFC7971F24DFE30097284F /* Another48x48@2x.png in Resources */,
+				CFFFC78D1F24CADD0097284F /* Male30x30@2x.png in Resources */,
 				542ABE061F13793500F5F161 /* Assets.xcassets in Resources */,
 				CF0B78561F1DE40D0067229D /* 相簿75x75@2x.png in Resources */,
 				CF0B78401F1DAD5B0067229D /* futureMail.storyboard in Resources */,
 				540267451F24A652005967DE /* c.png in Resources */,
+				CFFFC7991F24E1110097284F /* Another32x38@2x.png in Resources */,
+				CFFFC78F1F24CBFA0097284F /* Female30x30@2x.png in Resources */,
+				CFFFC7A11F259C690097284F /* BabyUser100x100@2x.png in Resources */,
+				CFFFC7931F24D1A00097284F /* Female34x34@2x.png in Resources */,
 				CF0B78311F1C94CA0067229D /* icon_menu20x20.png in Resources */,
 				542ABE041F13793500F5F161 /* Main.storyboard in Resources */,
 				5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */,
@@ -343,6 +448,7 @@
 				CF0B78601F1DEA380067229D /* 清單48x48@2x.png in Resources */,
 				CF0B778A1F1859DC0067229D /* Fox.jpg in Resources */,
 				CF0B783E1F1DACE50067229D /* aboutme.storyboard in Resources */,
+				CFFFC7A31F259D430097284F /* BabyUser@2x.png in Resources */,
 				CF0B785E1F1DE9A70067229D /* 清單75x75@2x.png in Resources */,
 				CF0B785A1F1DE8040067229D /* 我75x75@2x.png in Resources */,
 				540267531F256A78005967DE /* addNewMessage.storyboard in Resources */,
@@ -406,7 +512,6 @@
 			files = (
 				540267511F256A11005967DE /* addNewMessageVC.m in Sources */,
 				5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */,
-				CF0B78281F1B5FD70067229D /* MainTableViewController.m in Sources */,
 				540267421F24A3DE005967DE /* HeadView.m in Sources */,
 				542ABE011F13793500F5F161 /* ViewController.m in Sources */,
 				5402674E1F2544FF005967DE /* textLayout.m in Sources */,
@@ -414,11 +519,13 @@
 				CF0B783B1F1D9CDF0067229D /* SliderMenuViewRight.m in Sources */,
 				540267491F2537E9005967DE /* MyCollectionViewCellWithText.m in Sources */,
 				5402673F1F24A3A6005967DE /* timeLineVC.m in Sources */,
+				CFFFC79C1F25823A0097284F /* BigStickerSettingViewController.m in Sources */,
 				542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */,
 				5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */,
 				CF0B78481F1DB2C20067229D /* AboutMeViewcontroller.m in Sources */,
 				CF0B782D1F1C88150067229D /* SliderMenuViewLeft.m in Sources */,
 				542ABDFB1F13793500F5F161 /* main.m in Sources */,
+				CF0B78661F1E3D290067229D /* AddChildSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

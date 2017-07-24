@@ -18,6 +18,7 @@
     self=[super init];
     if (self) {
         
+        self.hidden = true;
         //        設定Menu 資料來源
         MenuArray=[[NSMutableArray alloc] initWithCapacity:50];
         [MenuArray addObject:@"一"];
@@ -70,6 +71,7 @@
 }
 
 -(void)callMenu{
+    self.hidden = false;
     CGRect fullScreenBounds=[[UIScreen mainScreen] bounds];
     [UIView beginAnimations:@"inMenu" context:nil];
     [UIView setAnimationDuration:self.SwichingPageSpeed];

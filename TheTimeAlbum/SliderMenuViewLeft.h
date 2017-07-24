@@ -11,13 +11,12 @@
 
 @interface SliderMenuViewLeft : UIView<UITableViewDelegate,UITableViewDataSource>
 
-
-
 @property float MenuScreenScale;
 
 @property float SwichingPageSpeed;
 
 -(void)callMenu;
+
 
 
 @end

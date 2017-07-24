@@ -53,6 +53,12 @@
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>喔喔要借一下你的相簿喔</string>
+	<key>NSCameraUsageDescription</key>
+	<string>啟用相機</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>啟用麥克風</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>從相簿中存取相片</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -61,6 +67,10 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<false/>
+	<key>UIStatusBarHidden</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
