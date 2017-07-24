@@ -7,15 +7,22 @@
 //
 
 #import "SliderMenuViewLeft.h"
+#import "ViewController.h"
+#import "AddChildSettingViewController.h"
+
+#define MYCHILDNAME @"我的孩子"
 
 @implementation SliderMenuViewLeft
 {
+    CGRect fullScreenBounds;
+    ViewController *settingPage;
     NSMutableArray *MenuArray;
     UITableView *MenuTableView;
     int targetPageID;
 }
 -(id)init{
     self=[super init];
+    fullScreenBounds=[[UIScreen mainScreen] bounds];
     if (self) {
         
         //        設定Menu 資料來源
@@ -24,58 +31,73 @@
         [MenuArray addObject:@"二"];
         [MenuArray addObject:@"三"];
         [MenuArray addObject:@"四"];
-        
         //        預設畫面比例
         self.MenuScreenScale=0.5;
         //        預設頁面切換時間
         self.SwichingPageSpeed=0.25;
         //        預設下次畫面切換為不切換
         targetPageID=999;
-        
         //        設定基本大小
-        CGRect fullScreenBounds=[[UIScreen mainScreen] bounds];//取得收機畫面大小
-        self.frame=CGRectMake(-fullScreenBounds.size.width*self.MenuScreenScale,0 , fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
+        //CGRect fullScreenBounds=[[UIScreen mainScreen] bounds];//取得收機畫面大小
+        self.frame=CGRectMake(-fullScreenBounds.size.width*self.MenuScreenScale,20, fullScreenBounds.size.width*self.MenuScreenScale,fullScreenBounds.size.height);
         
         self.backgroundColor=[UIColor lightGrayColor];
-        UILabel *titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(44, 0, self.frame.size.width-44, 42)];
-//        titleLabel.text=@"選單項目";
-        [titleLabel setTextAlignment:NSTextAlignmentCenter];
-        titleLabel.backgroundColor=[UIColor clearColor];
-        [self addSubview:titleLabel];
-        
-        
-//        UILabel * Mychild = [[UILabel alloc] init]
-        
-        
-        //        收Menu 的 Button
+
+        //收Menu 的 Button
         UIButton *MenuButton=[UIButton buttonWithType:UIButtonTypeCustom];
         MenuButton.frame=CGRectMake(0,0, 44, 42);
-        [MenuButton setImage:[UIImage imageNamed:@"icon_menu.png"] forState:UIControlStateNormal];
+        [MenuButton setImage:[UIImage imageNamed:@"清單48x48@2x.png"] forState:UIControlStateNormal];
         [MenuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];//按下去時呼叫 callMenu 方法來收起 Menu
         [self addSubview:MenuButton];
         [self addMenu];
         
         
+        //建立孩子的 label
+        UILabel * MyChildName=[UILabel new];
+        MyChildName.text = MYCHILDNAME;
+        MyChildName.frame=CGRectMake(10, 8, 100,100);
+        MyChildName.textColor = [UIColor whiteColor];
+        [self addSubview:MyChildName];
         
+        
+        //建立孩子的 button
+        UIButton *AddChild = [UIButton new];
+//        settingPage = [ViewController new];
+        AddChild.frame=CGRectMake(140,38, 40, 40);
+        [AddChild setTitle:@"添加" forState:UIControlStateNormal];
+        [AddChild addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:AddChild];
         
     }
     return self;
     
 }
+
+
+-(IBAction)next:(id)sender {
+    NSLog(@"被按下去了 1.");
+    [UIView beginAnimations:@"inMenu" context:nil];
+    [UIView setAnimationDelegate:self];
+    self.frame=CGRectMake(-fullScreenBounds.size.width*self.MenuScreenScale,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
+    [UIView commitAnimations];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"settingChild" object:nil];
+}
+
 -(void)addMenu{
-    
     //        設定Table 代理人
     MenuTableView=[[UITableView alloc] init];
     MenuTableView.dataSource=self;
     MenuTableView.delegate=self;
-    MenuTableView.frame=CGRectMake(0, 44, self.frame.size.width, self.frame.size.height-44);
+    MenuTableView.frame=CGRectMake(0,70, self.frame.size.width, self.frame.size.height-44);
     MenuTableView.allowsSelection=YES;
     [self addSubview:MenuTableView];
     
 }
 
 -(void)callMenu{
-    CGRect fullScreenBounds=[[UIScreen mainScreen] bounds];
+    self.hidden = false;
+//    CGRect fullScreenBounds=[[UIScreen mainScreen] bounds];
     [UIView beginAnimations:@"inMenu" context:nil];
     [UIView setAnimationDuration:self.SwichingPageSpeed];
     [UIView setAnimationDelegate:self];
@@ -83,11 +105,11 @@
     
     
     
-    if (self.frame.origin.x==0) {
-        self.frame=CGRectMake(-fullScreenBounds.size.width*self.MenuScreenScale, 0, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
+    if (self.frame.origin.x==-fullScreenBounds.size.width*self.MenuScreenScale) {
+        self.frame=CGRectMake(0,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
     }else{
         targetPageID=999;//出現選單時重設目標
-        self.frame=CGRectMake(0, 0, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
+        self.frame=CGRectMake(-fullScreenBounds.size.width*self.MenuScreenScale,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
     }
     [UIView commitAnimations];
 }
