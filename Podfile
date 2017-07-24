@@ -13,4 +13,6 @@ target 'TheTimeAlbum' do
   pod 'Google'
   pod 'GoogleSignIn'
   pod 'Google/SignIn'
+  pod 'ChameleonFramework'
+  pod 'BFPaperButton'
 end

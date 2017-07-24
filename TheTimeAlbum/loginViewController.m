@@ -30,6 +30,7 @@
     
     if ([FBSDKAccessToken currentAccessToken]) {
         // if facebook is logging in go next page       如果用戶已登入，執行前往下一個檢視控制器之類的操作。
+        NSLog(@"===============================");
     }
     
     _loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends", @"user_photos"];

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IMK-Rm-qwj">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--新增日記-->
+        <scene sceneID="qXX-uT-x4Q">
+            <objects>
+                <viewController storyboardIdentifier="addNewMessageVC" id="drb-x9-LRM" customClass="addNewMessageVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vOb-o9-NxU"/>
+                        <viewControllerLayoutGuide type="bottom" id="kuZ-JJ-btY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ReA-zx-yww">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發送日記" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="akX-fF-WGD">
+                                <rect key="frame" x="36" y="94" width="303" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WB4-dM-JHf">
+                                <rect key="frame" x="16" y="130" width="343" height="537"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="akX-fF-WGD" secondAttribute="trailing" constant="20" id="8qA-ty-n9W"/>
+                            <constraint firstItem="akX-fF-WGD" firstAttribute="top" secondItem="vOb-o9-NxU" secondAttribute="bottom" constant="30" id="Ss8-ld-DFp"/>
+                            <constraint firstItem="WB4-dM-JHf" firstAttribute="leading" secondItem="ReA-zx-yww" secondAttribute="leadingMargin" id="TS3-Nz-x8J"/>
+                            <constraint firstItem="kuZ-JJ-btY" firstAttribute="top" secondItem="WB4-dM-JHf" secondAttribute="bottom" id="ZJW-Sx-Sqb"/>
+                            <constraint firstItem="akX-fF-WGD" firstAttribute="leading" secondItem="ReA-zx-yww" secondAttribute="leadingMargin" constant="20" id="gDC-mM-jWU"/>
+                            <constraint firstItem="WB4-dM-JHf" firstAttribute="top" secondItem="akX-fF-WGD" secondAttribute="bottom" constant="15" id="gFM-E9-eAF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WB4-dM-JHf" secondAttribute="trailing" id="qPN-xZ-Q2O"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="新增日記" id="xQq-vx-xVf">
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="nqo-BN-5l1">
+                            <connections>
+                                <action selector="saveBtnPressed:" destination="drb-x9-LRM" id="nwe-lE-N8P"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="contentText" destination="WB4-dM-JHf" id="kNT-ca-gfh"/>
+                        <outlet property="saveMessage" destination="nqo-BN-5l1" id="0zn-Pf-GCv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qHg-Vu-Ds6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="293.60000000000002" y="-113.79310344827587"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="W2E-q5-cZs">
+            <objects>
+                <navigationController id="IMK-Rm-qwj" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eLz-Pt-AG8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="drb-x9-LRM" kind="relationship" relationship="rootViewController" id="eVd-ux-3yq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jhg-cV-AgF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-746" y="-126"/>
+        </scene>
+    </scenes>
+</document>

@@ -14,12 +14,16 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - BFPaperButton (2.1.2)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - ChameleonFramework (2.1.0):
+    - ChameleonFramework/Default (= 2.1.0)
+  - ChameleonFramework/Default (2.1.0)
   - Facebook-iOS-SDK (4.1.0):
     - Bolts (~> 1.1)
     - Facebook-iOS-SDK/CoreKit (= 4.1.0)
@@ -76,6 +80,8 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - BFPaperButton
+  - ChameleonFramework
   - Facebook-iOS-SDK
   - Google
   - Google/SignIn
@@ -83,7 +89,9 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  BFPaperButton: a25fdd3ff6898bdbd5cc9b1334ca36adb0296b9f
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Facebook-iOS-SDK: f42dfb27283bf5f05e3a9edc88459a75b9892d99
   FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
@@ -94,6 +102,6 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
 
-PODFILE CHECKSUM: 2a6fc9051d8c0c888fdfb0567a074885849421a0
+PODFILE CHECKSUM: 56427ff0f74a93407caaf9305d8062229adc2a8f
 
 COCOAPODS: 1.2.0

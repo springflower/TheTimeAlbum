@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <ChameleonFramework/Chameleon.h>
 
 @interface ViewController ()
 {
@@ -19,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = [UIColor flatGreenColorDark];
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.MenuLeft=[[SliderMenuViewLeft alloc] init];
     [self.view addSubview:self.MenuLeft];

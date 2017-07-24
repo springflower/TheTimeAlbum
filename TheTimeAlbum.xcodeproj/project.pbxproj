@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5402673F1F24A3A6005967DE /* timeLineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5402673E1F24A3A6005967DE /* timeLineVC.m */; };
+		540267421F24A3DE005967DE /* HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 540267411F24A3DE005967DE /* HeadView.m */; };
+		540267451F24A652005967DE /* c.png in Resources */ = {isa = PBXBuildFile; fileRef = 540267441F24A652005967DE /* c.png */; };
+		540267491F2537E9005967DE /* MyCollectionViewCellWithText.m in Sources */ = {isa = PBXBuildFile; fileRef = 540267471F2537E9005967DE /* MyCollectionViewCellWithText.m */; };
+		5402674A1F2537E9005967DE /* MyCollectionViewCellWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 540267481F2537E9005967DE /* MyCollectionViewCellWithText.xib */; };
+		5402674E1F2544FF005967DE /* textLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5402674D1F2544FF005967DE /* textLayout.m */; };
+		540267511F256A11005967DE /* addNewMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 540267501F256A11005967DE /* addNewMessageVC.m */; };
+		540267531F256A78005967DE /* addNewMessage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 540267521F256A78005967DE /* addNewMessage.storyboard */; };
 		5428BD731F160494003361AC /* loginPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5428BD711F160494003361AC /* loginPage.storyboard */; };
 		542ABDFB1F13793500F5F161 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABDFA1F13793500F5F161 /* main.m */; };
 		542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABDFD1F13793500F5F161 /* AppDelegate.m */; };
@@ -43,6 +51,20 @@
 
 /* Begin PBXFileReference section */
 		3A339EA35F197EDD566DEFB7 /* Pods-TheTimeAlbum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheTimeAlbum.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum.release.xcconfig"; sourceTree = "<group>"; };
+		5402673D1F24A3A6005967DE /* timeLineVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timeLineVC.h; sourceTree = "<group>"; };
+		5402673E1F24A3A6005967DE /* timeLineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timeLineVC.m; sourceTree = "<group>"; };
+		540267401F24A3DE005967DE /* HeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadView.h; sourceTree = "<group>"; };
+		540267411F24A3DE005967DE /* HeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadView.m; sourceTree = "<group>"; };
+		540267431F24A468005967DE /* myDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myDefines.h; sourceTree = "<group>"; };
+		540267441F24A652005967DE /* c.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c.png; sourceTree = "<group>"; };
+		540267461F2537E9005967DE /* MyCollectionViewCellWithText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewCellWithText.h; sourceTree = "<group>"; };
+		540267471F2537E9005967DE /* MyCollectionViewCellWithText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewCellWithText.m; sourceTree = "<group>"; };
+		540267481F2537E9005967DE /* MyCollectionViewCellWithText.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewCellWithText.xib; sourceTree = "<group>"; };
+		5402674C1F2544FF005967DE /* textLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = textLayout.h; sourceTree = "<group>"; };
+		5402674D1F2544FF005967DE /* textLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = textLayout.m; sourceTree = "<group>"; };
+		5402674F1F256A11005967DE /* addNewMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addNewMessageVC.h; sourceTree = "<group>"; };
+		540267501F256A11005967DE /* addNewMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addNewMessageVC.m; sourceTree = "<group>"; };
+		540267521F256A78005967DE /* addNewMessage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = addNewMessage.storyboard; sourceTree = "<group>"; };
 		5428BD721F160494003361AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/loginPage.storyboard; sourceTree = "<group>"; };
 		542ABDF61F13793500F5F161 /* TheTimeAlbum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheTimeAlbum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		542ABDFA1F13793500F5F161 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -110,6 +132,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5402674B1F25380A005967DE /* mainTimeLine */ = {
+			isa = PBXGroup;
+			children = (
+				5402673D1F24A3A6005967DE /* timeLineVC.h */,
+				5402673E1F24A3A6005967DE /* timeLineVC.m */,
+				5402674C1F2544FF005967DE /* textLayout.h */,
+				5402674D1F2544FF005967DE /* textLayout.m */,
+				540267461F2537E9005967DE /* MyCollectionViewCellWithText.h */,
+				540267471F2537E9005967DE /* MyCollectionViewCellWithText.m */,
+				540267481F2537E9005967DE /* MyCollectionViewCellWithText.xib */,
+				540267401F24A3DE005967DE /* HeadView.h */,
+				540267411F24A3DE005967DE /* HeadView.m */,
+				5402674F1F256A11005967DE /* addNewMessageVC.h */,
+				540267501F256A11005967DE /* addNewMessageVC.m */,
+				540267521F256A78005967DE /* addNewMessage.storyboard */,
+			);
+			name = mainTimeLine;
+			sourceTree = "<group>";
+		};
 		542ABDED1F13793500F5F161 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +184,8 @@
 				CF0B78391F1D9CDF0067229D /* SliderMenuViewRight.h */,
 				CF0B783A1F1D9CDF0067229D /* SliderMenuViewRight.m */,
 				542ABE021F13793500F5F161 /* Main.storyboard */,
+				5402674B1F25380A005967DE /* mainTimeLine */,
+				540267431F24A468005967DE /* myDefines.h */,
 				5452CC931F1DE92C008F5C25 /* C */,
 				5428BD711F160494003361AC /* loginPage.storyboard */,
 				5452CC911F1DE2B9008F5C25 /* newBaby.storyboard */,
@@ -157,6 +200,7 @@
 				CF0B783F1F1DAD5B0067229D /* futureMail.storyboard */,
 				CF0B784C1F1DD90C0067229D /* AboutMeViewController */,
 				CF0B77891F1859DC0067229D /* Fox.jpg */,
+				540267441F24A652005967DE /* c.png */,
 				CF0B78591F1DE8040067229D /* 我75x75@2x.png */,
 				CF0B78571F1DE4DA0067229D /* 信箱75x75@2x.png */,
 				CF0B78511F1DE2990067229D /* 成就75x75@2x.png */,
@@ -282,6 +326,7 @@
 				CF0B78431F1DAD780067229D /* achievement.storyboard in Resources */,
 				CF0B78351F1C9DB60067229D /* icon_message48x48.png in Resources */,
 				542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */,
+				5402674A1F2537E9005967DE /* MyCollectionViewCellWithText.xib in Resources */,
 				5452CC921F1DE2B9008F5C25 /* newBaby.storyboard in Resources */,
 				5428BD731F160494003361AC /* loginPage.storyboard in Resources */,
 				CF0B785C1F1DE8F80067229D /* icon_menu20x20@2x.png in Resources */,
@@ -289,6 +334,7 @@
 				542ABE061F13793500F5F161 /* Assets.xcassets in Resources */,
 				CF0B78561F1DE40D0067229D /* 相簿75x75@2x.png in Resources */,
 				CF0B78401F1DAD5B0067229D /* futureMail.storyboard in Resources */,
+				540267451F24A652005967DE /* c.png in Resources */,
 				CF0B78311F1C94CA0067229D /* icon_menu20x20.png in Resources */,
 				542ABE041F13793500F5F161 /* Main.storyboard in Resources */,
 				5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */,
@@ -299,6 +345,7 @@
 				CF0B783E1F1DACE50067229D /* aboutme.storyboard in Resources */,
 				CF0B785E1F1DE9A70067229D /* 清單75x75@2x.png in Resources */,
 				CF0B785A1F1DE8040067229D /* 我75x75@2x.png in Resources */,
+				540267531F256A78005967DE /* addNewMessage.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,11 +404,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				540267511F256A11005967DE /* addNewMessageVC.m in Sources */,
 				5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */,
 				CF0B78281F1B5FD70067229D /* MainTableViewController.m in Sources */,
+				540267421F24A3DE005967DE /* HeadView.m in Sources */,
 				542ABE011F13793500F5F161 /* ViewController.m in Sources */,
+				5402674E1F2544FF005967DE /* textLayout.m in Sources */,
 				CF0B784B1F1DBAF60067229D /* AboutMeViewcontrollerCell.m in Sources */,
 				CF0B783B1F1D9CDF0067229D /* SliderMenuViewRight.m in Sources */,
+				540267491F2537E9005967DE /* MyCollectionViewCellWithText.m in Sources */,
+				5402673F1F24A3A6005967DE /* timeLineVC.m in Sources */,
 				542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */,
 				5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */,
 				CF0B78481F1DB2C20067229D /* AboutMeViewcontroller.m in Sources */,
