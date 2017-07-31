@@ -24,14 +24,16 @@
         [self addSubview:backgroundView];
         _backgroundView = backgroundView;
         
-        UIImageView * headView = [[UIImageView alloc]initWithFrame:(CGRect){(frame.size.width - width) * 0.5,0.5 * (frame.size.height - width)- navHeight ,width,width}];
+        //UIImageView * headView = [[UIImageView alloc]initWithFrame:(CGRect){(frame.size.width - width) * 0.1, 0.5 * (frame.size.height - width)+50, width, width}]; 靠左
+        UIImageView * headView = [[UIImageView alloc]initWithFrame:(CGRect){(frame.size.width - width) * 0.5,0.5 * (frame.size.height - width),width,width}];
         headView.layer.cornerRadius = width*0.5;
         headView.layer.masksToBounds = YES;
         headView.image = [UIImage imageNamed:headImgName];
         [self addSubview:headView];
         _headView = headView;
         
-        UILabel * signLabel = [[UILabel alloc]initWithFrame:(CGRect){0,CGRectGetMaxY(headView.frame) ,self.bounds.size.width,120}];
+        //UILabel * signLabel = [[UILabel alloc]initWithFrame:(CGRect){0, 0.5 * (frame.size.height - width)+100, self.bounds.size.width, 40}];  靠左
+        UILabel * signLabel = [[UILabel alloc]initWithFrame:(CGRect){0,CGRectGetMaxY(headView.frame) ,self.bounds.size.width,40}];
         signLabel.text = signature;
         signLabel.textAlignment = NSTextAlignmentCenter;
         signLabel.textColor = [UIColor whiteColor];

@@ -27,10 +27,10 @@
 
 //#define SEND_TEXT_MESSAGE_URL   @""
 
-#define headRect CGRectMake(0,0,self.view.bounds.size.width,280)
+#define headRect CGRectMake(0,0,self.view.bounds.size.width,220)
 #define VCWidth self.view.bounds.size.width
 #define VCHeight self.view.bounds.size.height
-#define navHeight 44 //上推留下的高度
+#define navHeight 0 //上推留下的高度
 #define NAV_BAR_HEIGHT self.navigationController.navigationBar.frame.size.height
 #define SERVER_URL @"http://127.0.0.1/thetimealbum/"
 #define SEND_MESSAGE_URL @"https://jerrygood9999.000webhostapp.com/thetimealbum/create_textMessage.php"

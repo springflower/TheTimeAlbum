@@ -7,7 +7,7 @@
 //
 
 #import "textLayout.h"
-
+#import "myDefines.h"
 
 @implementation textLayout
 
@@ -55,8 +55,10 @@
     
     UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     
+    //attrs.center = CGPointMake(self.collectionView.frame.size.width * 0.5,
+    //                           (self.collectionView.frame.origin.y +179) + 260*indexPath.item);
     attrs.center = CGPointMake(self.collectionView.frame.size.width * 0.5,
-                               (self.collectionView.frame.origin.y +179) + 260*indexPath.item);
+                               (220-45) + 260*indexPath.item);
     
     attrs.size = CGSizeMake(self.collectionView.bounds.size.width-10, 250);
     attrs.zIndex = - indexPath.item;
