@@ -14,10 +14,13 @@
 #import "textLayout.h"
 #import <BFPaperButton.h>
 #import "addNewMessageVC.h"
+#import <Chameleon.h>
+#import "MyAccountData.h"
 
-
-@interface timeLineVC ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate, UICollectionViewDelegate,UICollectionViewDataSource>
-
+@interface timeLineVC ()<UIScrollViewDelegate, UICollectionViewDelegate,UICollectionViewDataSource>
+{
+    MyAccountData *currentuser;
+}
 @property (weak, nonatomic) UITableView *myTableView;
 @property (weak, nonatomic) UICollectionView *myCollectionView;
 @property (weak, nonatomic) HeadView * myView;
@@ -29,11 +32,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //毛玻璃temp
+//    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+//        self.automaticallyAdjustsScrollViewInsets = NO;
+//    }
+    //--
+    
+    currentuser = [MyAccountData sharedCurrentUserData];
+    NSLog(@"_____id: %@, mail: %@, gender: %@, name: %@", currentuser.userId, currentuser.userMail, currentuser.gender, currentuser.userName);
+    
     [self initUI];
     [self initBtn];
     
 }
-
+// 浮動按鈕
 - (void)initBtn{
     BFPaperButton *circle2 = [[BFPaperButton alloc] initWithFrame:CGRectMake(VCWidth-70, VCHeight-130, 50, 50) raised:YES];
     [circle2 setTitle:@"＋" forState:UIControlStateNormal];
@@ -55,19 +67,23 @@
     addNewMessageVC *addNewMessageController = [storyboard instantiateViewControllerWithIdentifier:@"addNewMessageVC"];
     [self.navigationController pushViewController:addNewMessageController animated:YES];
 }
-
+// Initial UI       初始化元件
 - (void)initUI {
-    // ---------
     
     UICollectionViewFlowLayout *flowLayout =[[UICollectionViewFlowLayout alloc]init];
     //flowLayout.line
     textLayout *myTextLayout = [[textLayout alloc] init];
     
+//    UICollectionView * myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, navHeight, VCWidth, VCHeight-64) collectionViewLayout:myTextLayout];
     UICollectionView * myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, navHeight-NAV_BAR_HEIGHT, VCWidth, VCHeight) collectionViewLayout:myTextLayout];
+    // collection view setting
+    //myCollectionView.backgroundColor = [UIColor flatWhiteColor];
+    
     
     [myCollectionView registerNib:[UINib nibWithNibName:@"MyCollectionViewCellWithText" bundle:nil]  forCellWithReuseIdentifier:@"message"];
     myCollectionView.delegate = self;
     myCollectionView.dataSource = self;
+    myCollectionView.backgroundColor = [UIColor whiteColor];
     myCollectionView.contentInset = UIEdgeInsetsMake(headRect.size.height-navHeight-navHeight, 0, 0, 0);
     _myCollectionView = myCollectionView;
     
@@ -85,6 +101,8 @@
     [self.view addSubview:vc];
     
 }
+//--
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -94,10 +112,14 @@
 
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillAppear:animated];
+    //毛玻璃
+    //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+    //self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    //--
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillDisappear:animated];
 }
 

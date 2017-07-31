@@ -7,7 +7,9 @@
 //
 
 #import "MyCollectionViewCellWithText.h"
+#import <Chameleon.h>
 @interface MyCollectionViewCellWithText()
+
 
 
 
@@ -18,8 +20,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.imageView.layer.borderWidth = 5;
-    self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.imageView.layer.borderWidth = 2;
+    self.imageView.layer.borderColor = [UIColor flatCoffeeColorDark].CGColor;
     self.imageView.layer.cornerRadius = 5;
     self.imageView.clipsToBounds = YES;
     // Initialization code

@@ -51,8 +51,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>喔喔要借一下你的相簿喔</string>
 	<key>NSCameraUsageDescription</key>
 	<string>啟用相機</string>
 	<key>NSMicrophoneUsageDescription</key>
@@ -62,7 +60,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>loginPage</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

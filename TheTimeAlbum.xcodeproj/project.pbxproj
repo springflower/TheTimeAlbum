@@ -15,6 +15,10 @@
 		5402674E1F2544FF005967DE /* textLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5402674D1F2544FF005967DE /* textLayout.m */; };
 		540267511F256A11005967DE /* addNewMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 540267501F256A11005967DE /* addNewMessageVC.m */; };
 		540267531F256A78005967DE /* addNewMessage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 540267521F256A78005967DE /* addNewMessage.storyboard */; };
+		5402675B1F26BCD1005967DE /* messageBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 5402675A1F26BCD1005967DE /* messageBG.png */; };
+		540829721F2F2D8800109930 /* JLNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 540829711F2F2D8800109930 /* JLNavigationViewController.m */; };
+		5422336F1F26E7CD000933BD /* ThisBabyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5422336E1F26E7CD000933BD /* ThisBabyData.m */; };
+		542233721F2738E8000933BD /* MyCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 542233711F2738E8000933BD /* MyCommunicator.m */; };
 		5428BD731F160494003361AC /* loginPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5428BD711F160494003361AC /* loginPage.storyboard */; };
 		542ABDFB1F13793500F5F161 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABDFA1F13793500F5F161 /* main.m */; };
 		542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABDFD1F13793500F5F161 /* AppDelegate.m */; };
@@ -24,7 +28,6 @@
 		542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE071F13793500F5F161 /* LaunchScreen.storyboard */; };
 		5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC871F1C7A54008F5C25 /* loginViewController.m */; };
 		5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */; };
-		5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8C1F1CB3D6008F5C25 /* 1.png */; };
 		5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */; };
 		CF0B778A1F1859DC0067229D /* Fox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF0B77891F1859DC0067229D /* Fox.jpg */; };
 		CF0B782D1F1C88150067229D /* SliderMenuViewLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0B782C1F1C88150067229D /* SliderMenuViewLeft.m */; };
@@ -75,6 +78,13 @@
 		5402674F1F256A11005967DE /* addNewMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addNewMessageVC.h; sourceTree = "<group>"; };
 		540267501F256A11005967DE /* addNewMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addNewMessageVC.m; sourceTree = "<group>"; };
 		540267521F256A78005967DE /* addNewMessage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = addNewMessage.storyboard; sourceTree = "<group>"; };
+		5402675A1F26BCD1005967DE /* messageBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messageBG.png; sourceTree = "<group>"; };
+		540829701F2F2D8800109930 /* JLNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLNavigationViewController.h; sourceTree = "<group>"; };
+		540829711F2F2D8800109930 /* JLNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLNavigationViewController.m; sourceTree = "<group>"; };
+		5422336D1F26E7CD000933BD /* ThisBabyData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThisBabyData.h; sourceTree = "<group>"; };
+		5422336E1F26E7CD000933BD /* ThisBabyData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThisBabyData.m; sourceTree = "<group>"; };
+		542233701F2738E8000933BD /* MyCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommunicator.h; sourceTree = "<group>"; };
+		542233711F2738E8000933BD /* MyCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommunicator.m; sourceTree = "<group>"; };
 		5428BD721F160494003361AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/loginPage.storyboard; sourceTree = "<group>"; };
 		542ABDF61F13793500F5F161 /* TheTimeAlbum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheTimeAlbum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		542ABDFA1F13793500F5F161 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -90,7 +100,6 @@
 		5452CC871F1C7A54008F5C25 /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
 		5452CC891F1C9AC2008F5C25 /* MyAccountData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountData.h; sourceTree = "<group>"; };
 		5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAccountData.m; sourceTree = "<group>"; };
-		5452CC8C1F1CB3D6008F5C25 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = ../../../1.png; sourceTree = "<group>"; };
 		5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5452CC901F1D8D43008F5C25 /* TheTimeAlbum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheTimeAlbum.entitlements; sourceTree = "<group>"; };
 		7E254EE1580F00C9AF996E45 /* Pods-TheTimeAlbum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheTimeAlbum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum.debug.xcconfig"; sourceTree = "<group>"; };
@@ -191,6 +200,8 @@
 			children = (
 				5402673D1F24A3A6005967DE /* timeLineVC.h */,
 				5402673E1F24A3A6005967DE /* timeLineVC.m */,
+				540829701F2F2D8800109930 /* JLNavigationViewController.h */,
+				540829711F2F2D8800109930 /* JLNavigationViewController.m */,
 				5402674F1F256A11005967DE /* addNewMessageVC.h */,
 				540267501F256A11005967DE /* addNewMessageVC.m */,
 			);
@@ -204,6 +215,10 @@
 				CF7DA4D41F1F86B500E282C9 /* SliderMenuViewRight */,
 				5452CC891F1C9AC2008F5C25 /* MyAccountData.h */,
 				5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */,
+				5422336D1F26E7CD000933BD /* ThisBabyData.h */,
+				5422336E1F26E7CD000933BD /* ThisBabyData.m */,
+				542233701F2738E8000933BD /* MyCommunicator.h */,
+				542233711F2738E8000933BD /* MyCommunicator.m */,
 			);
 			name = "Common Model";
 			sourceTree = "<group>";
@@ -282,11 +297,11 @@
 				542ABE051F13793500F5F161 /* Assets.xcassets */,
 				542ABE071F13793500F5F161 /* LaunchScreen.storyboard */,
 				542ABE0A1F13793500F5F161 /* Info.plist */,
-				5452CC8C1F1CB3D6008F5C25 /* 1.png */,
 				5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */,
 				CF0B78411F1DAD780067229D /* achievement.storyboard */,
 				CF0B783F1F1DAD5B0067229D /* futureMail.storyboard */,
 				540267431F24A468005967DE /* myDefines.h */,
+				5402675A1F26BCD1005967DE /* messageBG.png */,
 				540267591F25D94C005967DE /* Pictures */,
 				542ABDF91F13793500F5F161 /* Supporting Files */,
 			);
@@ -429,6 +444,7 @@
 				CFFFC7911F24D10C0097284F /* Female38x38@2x.png in Resources */,
 				5428BD731F160494003361AC /* loginPage.storyboard in Resources */,
 				CF0B785C1F1DE8F80067229D /* icon_menu20x20@2x.png in Resources */,
+				5402675B1F26BCD1005967DE /* messageBG.png in Resources */,
 				CF0B78521F1DE2990067229D /* 成就75x75@2x.png in Resources */,
 				CFFFC7971F24DFE30097284F /* Another48x48@2x.png in Resources */,
 				CFFFC78D1F24CADD0097284F /* Male30x30@2x.png in Resources */,
@@ -442,7 +458,6 @@
 				CFFFC7931F24D1A00097284F /* Female34x34@2x.png in Resources */,
 				CF0B78311F1C94CA0067229D /* icon_menu20x20.png in Resources */,
 				542ABE041F13793500F5F161 /* Main.storyboard in Resources */,
-				5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */,
 				5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */,
 				CF0B78621F1DEBB70067229D /* 清單30x30@2x.png in Resources */,
 				CF0B78601F1DEA380067229D /* 清單48x48@2x.png in Resources */,
@@ -511,11 +526,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				540267511F256A11005967DE /* addNewMessageVC.m in Sources */,
+				5422336F1F26E7CD000933BD /* ThisBabyData.m in Sources */,
 				5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */,
 				540267421F24A3DE005967DE /* HeadView.m in Sources */,
+				542233721F2738E8000933BD /* MyCommunicator.m in Sources */,
 				542ABE011F13793500F5F161 /* ViewController.m in Sources */,
 				5402674E1F2544FF005967DE /* textLayout.m in Sources */,
 				CF0B784B1F1DBAF60067229D /* AboutMeViewcontrollerCell.m in Sources */,
+				540829721F2F2D8800109930 /* JLNavigationViewController.m in Sources */,
 				CF0B783B1F1D9CDF0067229D /* SliderMenuViewRight.m in Sources */,
 				540267491F2537E9005967DE /* MyCollectionViewCellWithText.m in Sources */,
 				5402673F1F24A3A6005967DE /* timeLineVC.m in Sources */,

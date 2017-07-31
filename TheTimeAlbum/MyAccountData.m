@@ -12,18 +12,24 @@ static MyAccountData *_currentUser=nil;
 
 @implementation MyAccountData
 
+// singleton method
 +(instancetype) sharedCurrentUserData {
     if(_currentUser == nil){
         _currentUser = [MyAccountData new];
     }
     return _currentUser;
 }
+//--
+
 -(instancetype)init{
     self = [super init];
     
     return self;
 }
--(instancetype)initWithName:(NSString*)username mail:(NSString*)usermail uid:(NSString*)userid{
+-(instancetype)initWithName:(NSString*)username
+                       mail:(NSString*)usermail
+                        uid:(NSString*)userid
+                     gender:(NSString*)gender{
     self = [super init];
     
     return self;

@@ -39,7 +39,7 @@
         <!--Time LineVC-->
         <scene sceneID="n6g-ap-ntw">
             <objects>
-                <viewController id="Dmr-AG-fmO" customClass="timeLineVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainTimeLineSB" id="Dmr-AG-fmO" customClass="timeLineVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ziu-2C-g63"/>
                         <viewControllerLayoutGuide type="bottom" id="yX0-5Y-p6E"/>
@@ -79,7 +79,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="LPO-Dn-xDi">
             <objects>
-                <tabBarController id="DkZ-HU-7Vx" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarVC" id="DkZ-HU-7Vx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="XqI-BO-Ha7">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -175,7 +175,7 @@
                                 <rect key="frame" x="131" y="318" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="女孩">
-                                    <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="GirlSelected:" destination="JI5-eo-3jw" eventType="touchUpInside" id="VBl-KD-LjQ"/>
@@ -292,7 +292,7 @@
         <!--Title-->
         <scene sceneID="cK8-Zv-M8S">
             <objects>
-                <navigationController title="Title" id="dqF-dM-1HJ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="test2" title="Title" id="dqF-dM-1HJ" customClass="JLNavigationViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="時光簿" image="相簿75x75.png" id="fjm-yW-eJt"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="IRg-IA-HcG">

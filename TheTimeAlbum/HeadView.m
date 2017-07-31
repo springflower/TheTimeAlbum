@@ -24,7 +24,7 @@
         [self addSubview:backgroundView];
         _backgroundView = backgroundView;
         
-        UIImageView * headView = [[UIImageView alloc]initWithFrame:(CGRect){(frame.size.width - width) * 0.5,0.5 * (frame.size.height - width) - navHeight,width,width}];
+        UIImageView * headView = [[UIImageView alloc]initWithFrame:(CGRect){(frame.size.width - width) * 0.5,0.5 * (frame.size.height - width)- navHeight ,width,width}];
         headView.layer.cornerRadius = width*0.5;
         headView.layer.masksToBounds = YES;
         headView.image = [UIImage imageNamed:headImgName];
