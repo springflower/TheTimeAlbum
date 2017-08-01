@@ -9,9 +9,13 @@
 #import "addNewMessageVC.h"
 #import <AFNetworking.h>
 #import "myDefines.h"
+#import "MyCommunicator.h"
 
 
 @interface addNewMessageVC ()
+{
+    MyCommunicator *comm;
+}
 
 @end
 
@@ -20,41 +24,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    comm = [MyCommunicator sharedInstance];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+// FIXME: add uid to post
 - (IBAction)saveBtnPressed:(id)sender {
     NSString *babyID = @"1";
     NSString *content = self.contentText.text;
     NSString *postType = @"1";
     
-    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    session.requestSerializer = [AFJSONRequestSerializer serializer];
-    session.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
-    session.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    NSDictionary *param2 = @{@"content": content, @"type": postType, @"babyID": babyID};
-    params[@"content"] = content;
-    params[@"type"] = postType;
-    params[@"babyID"] = babyID;
-    NSLog(@"%@.......%@........%@",params[@"content"],params[@"type"],params[@"babyID"]);
-    
-    [session POST:SEND_MESSAGE_URL parameters:param2 progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
-    {
-        NSLog(@"AFN success.......");
-        
-        [self.navigationController popViewControllerAnimated:YES];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"AFN fail.......... %@", error);
-        //NSLog(@"%@", );
-        [self.navigationController popViewControllerAnimated:YES];
+    [comm sendTextMessage:content
+                forbabyID:babyID
+                 postType:postType
+               completion:^(NSError *error, id result) {
+                   if(error){
+                       NSLog(@"Do sendTextMessage fail: %@", error);
+                                          return;
+                   }
+                   NSLog(@"==--%@", result);
+                   // 伺服器php指令是否成功
+                   if([result[RESULT_KEY] boolValue] == false){
+                       NSLog(@"Update textMessage to sql failed: %@", result[ERROR_CODE_KEY]);
+                       return;
+                   }
     }];
-    //[self dismissViewControllerAnimated:YES completion:nil];
-    
     
 }
 

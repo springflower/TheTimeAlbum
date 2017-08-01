@@ -17,12 +17,15 @@ typedef enum {
 
 @interface MyAccountData : NSObject
 
-@property(nonatomic,weak) NSString *firstName;
-@property(nonatomic,weak) NSString *lastName;
-@property(nonatomic,weak) NSString *userName;
-@property(nonatomic,weak) NSString *userId;
-@property(nonatomic,weak) UIImage  *userPic;
-@property(nonatomic,weak) NSString *userMail;
+@property(nonatomic,weak) NSString      *firstName;
+@property(nonatomic,weak) NSString      *lastName;
+@property(nonatomic,weak) NSString      *userName;
+@property(nonatomic,weak) NSString      *userId;
+@property(nonatomic,weak) NSString      *userFBId;
+@property(nonatomic,weak) NSString      *userGoogleId;
+@property(nonatomic,weak) NSString      *userPic;
+@property(nonatomic,weak) NSString      *gender;
+@property(nonatomic,weak) NSString      *userMail;
 
 +(instancetype) sharedCurrentUserData;
 @end

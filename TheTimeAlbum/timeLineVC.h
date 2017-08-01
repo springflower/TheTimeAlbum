@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^AlphaBlock)(CGFloat alpha);
 
 @interface timeLineVC : UIViewController
+
+@property (nonatomic, copy) AlphaBlock alphaBlock;
 
 @end

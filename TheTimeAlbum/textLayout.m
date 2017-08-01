@@ -7,7 +7,7 @@
 //
 
 #import "textLayout.h"
-
+#import "myDefines.h"
 
 @implementation textLayout
 
@@ -21,7 +21,7 @@
     
     // 设置cell的大小
     //CGFloat itemWH = self.collectionView.frame.size.height * 0.8;
-    self.itemSize = CGSizeMake(self.collectionView.bounds.size.width-10, 150);
+    self.itemSize = CGSizeMake(self.collectionView.bounds.size.width-10, 250);
     
     // 设置内边距
     //CGFloat inset = (self.collectionView.frame.size.width - itemWH) * 0.5;
@@ -55,8 +55,12 @@
     
     UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     
-    attrs.center = CGPointMake(self.collectionView.frame.size.width * 0.5, (self.collectionView.frame.size.height * 0.19) + 150*indexPath.item);
-    attrs.size = CGSizeMake(self.collectionView.bounds.size.width-10, 150);
+    //attrs.center = CGPointMake(self.collectionView.frame.size.width * 0.5,
+    //                           (self.collectionView.frame.origin.y +179) + 260*indexPath.item);
+    attrs.center = CGPointMake(self.collectionView.frame.size.width * 0.5,
+                               (220-45) + 260*indexPath.item);
+    
+    attrs.size = CGSizeMake(self.collectionView.bounds.size.width-10, 250);
     attrs.zIndex = - indexPath.item;
     
     

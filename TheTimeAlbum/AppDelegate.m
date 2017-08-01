@@ -9,15 +9,44 @@
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "SliderMenuViewLeft.h"
-
+#import "MyAccountData.h"
 @interface AppDelegate ()
-
+{
+    MyAccountData *appCurrentUser;
+    NSUserDefaults *localUserData;
+}
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    appCurrentUser = [MyAccountData sharedCurrentUserData];
+    localUserData = [NSUserDefaults standardUserDefaults];
+    
+    
+    
+    
+    // set default viewcontroller by login status
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    NSLog(@"appdele : %@", [localUserData objectForKey:@"uid"]);
+    if([localUserData objectForKey:@"uid"] == nil){
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"loginPage" bundle:nil];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        
+    } else {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarVC"];
+    
+    }
+    [self.window makeKeyAndVisible];
+    
+    
+    
+    
+    
+    
     
     // FB Signin
     [[FBSDKApplicationDelegate sharedInstance] application:application
@@ -110,6 +139,7 @@ didSignInForUser:(GIDGoogleUser *)user
     NSString *givenName = user.profile.givenName;
     NSString *familyName = user.profile.familyName;
     NSString *email = user.profile.email;
+    appCurrentUser.userGoogleId = userId;
     NSLog(@"=========email :%@",userId);
     // ...
 }
@@ -118,7 +148,7 @@ didSignInForUser:(GIDGoogleUser *)user
             openURL:(NSURL *)url
             options:(NSDictionary *)options {
     if( [[GIDSignIn sharedInstance] handleURL:url
-                               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                            sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
                                    annotation:options[UIApplicationOpenURLOptionsAnnotationKey]]){
         return YES;
     }else if([[FBSDKApplicationDelegate sharedInstance] application:app
