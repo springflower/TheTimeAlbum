@@ -7,13 +7,13 @@
 //
 
 #import "ViewController.h"
-
 #import <ChameleonFramework/Chameleon.h>
 #import "SliderMenuViewLeft.h"
 #import "AddChildSettingViewController.h"
-@interface ViewController()
+
+@interface ViewController()<UIGestureRecognizerDelegate>
 {
-    
+
 }
 
 @end
@@ -23,14 +23,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor flatGreenColorDark];
-//    self.edgesForExtendedLayout = UIRectEdgeNone;    
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationItem.title = @"相簿";
+    
     [self SettingSilderMenuViewAndButtonItemToNavigationBar];
+
     
     // Prepare the NorificationCenter change ViewConroller to AddChildSettingViewController.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeViewContrllerToAddChildSettingViewController) name:@"settingChild" object:nil];
     
-    
+}
+
+-(void)handlePan:(id)sender{
+    [self.MenuLeft callMenu];
 }
 
 -(void)callMenuLeft{

@@ -17,14 +17,11 @@
 -(id)init{
     self=[super init];
     if (self) {
-        
         self.hidden = true;
         //        設定Menu 資料來源
         MenuArray=[[NSMutableArray alloc] initWithCapacity:50];
         [MenuArray addObject:@"一"];
-        [MenuArray addObject:@"二"];
-        [MenuArray addObject:@"三"];
-        [MenuArray addObject:@"四"];
+
         
         //        預設畫面比例
         self.MenuScreenScale=0.5;
@@ -35,9 +32,12 @@
         
         //        設定基本大小
         CGRect fullScreenBounds=[[UIScreen mainScreen] bounds];//取得收機畫面大小
-        self.frame=CGRectMake((fullScreenBounds.size.width*self.MenuScreenScale)*2,0 , fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
+        self.frame=CGRectMake((fullScreenBounds.size.width*self.MenuScreenScale)*2,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
         
         self.backgroundColor=[UIColor lightGrayColor];
+        
+        self.alpha = 0.8;
+        
         UILabel *titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(44, 0, self.frame.size.width-44, 42)];
         //        titleLabel.text=@"選單項目";
         [titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -60,11 +60,11 @@
 }
 -(void)addMenu{
     
-    //        設定Table 代理人
+    //設定Table 代理人
     MenuTableView=[[UITableView alloc] init];
     MenuTableView.dataSource=self;
     MenuTableView.delegate=self;
-    MenuTableView.frame=CGRectMake(0, 44, self.frame.size.width, self.frame.size.height-44);
+    MenuTableView.frame=CGRectMake(0, 70, self.frame.size.width, self.frame.size.height-44);
     MenuTableView.allowsSelection=YES;
     [self addSubview:MenuTableView];
     
@@ -78,15 +78,14 @@
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(SwichingPage)];
     
-    
-    
     if (self.frame.origin.x==(fullScreenBounds.size.width*self.MenuScreenScale)*2) {
-        self.frame=CGRectMake(fullScreenBounds.size.width*self.MenuScreenScale, 0, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
+        self.frame=CGRectMake(fullScreenBounds.size.width*self.MenuScreenScale,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
     }else{
         targetPageID=999;//出現選單時重設目標
-        self.frame=CGRectMake((fullScreenBounds.size.width*self.MenuScreenScale)*2, 0, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
+        self.frame=CGRectMake((fullScreenBounds.size.width*self.MenuScreenScale)*2,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
     }
     [UIView commitAnimations];
+    
 }
 
 
