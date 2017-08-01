@@ -169,7 +169,7 @@
 - (void) goNextPage {
     
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    timeLineVC *tlvc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"test1"];
+    timeLineVC *tlvc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MainTabBarVC"];
 
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
     [viewControllers removeLastObject];
