@@ -14,23 +14,43 @@
 
 @implementation SliderMenuViewLeft
 {
+    CGPoint lastLocation;
     CGRect fullScreenBounds;
-    ViewController *settingPage;
     NSMutableArray *MenuArray;
+    NSMutableArray <UIImage*>*ImageMenuArray;
     UITableView *MenuTableView;
     int targetPageID;
+    NSUserDefaults *defaults;
+    UIPanGestureRecognizer *MoveView;
+
 }
 -(id)init{
     self=[super init];
     fullScreenBounds=[[UIScreen mainScreen] bounds];
+    
+    defaults = [NSUserDefaults standardUserDefaults];
+    
+    lastLocation.x = 0;
+    
+//    UIScreenEdgePanGestureRecognizer *pan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(detectPan2:)];
+//    [pan setEdges:UIRectEdgeRight];
+//    [pan setDelegate:self];
+//    [self addGestureRecognizer:pan];
+
+    MoveView= [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(detectPan:)];
+    [self addGestureRecognizer:MoveView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hidden) name:@"hiddenLeftMenu" object:nil];
+    
     if (self) {
-        
         //        設定Menu 資料來源
         MenuArray=[[NSMutableArray alloc] initWithCapacity:50];
+        ImageMenuArray=[NSMutableArray new];
+        
         [MenuArray addObject:@"一"];
-        [MenuArray addObject:@"二"];
-        [MenuArray addObject:@"三"];
-        [MenuArray addObject:@"四"];
+        
+
+        
         //        預設畫面比例
         self.MenuScreenScale=0.5;
         //        預設頁面切換時間
@@ -39,9 +59,12 @@
         targetPageID=999;
         //        設定基本大小
         //CGRect fullScreenBounds=[[UIScreen mainScreen] bounds];//取得收機畫面大小
-        self.frame=CGRectMake(-fullScreenBounds.size.width*self.MenuScreenScale,20, fullScreenBounds.size.width*self.MenuScreenScale,fullScreenBounds.size.height);
+        self.frame=CGRectMake((-fullScreenBounds.size.width*self.MenuScreenScale),20, fullScreenBounds.size.width*self.MenuScreenScale,fullScreenBounds.size.height);
         
         self.backgroundColor=[UIColor lightGrayColor];
+        
+        //self.alpha = 0.8;
+
 
         //收Menu 的 Button
         UIButton *MenuButton=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -49,6 +72,7 @@
         [MenuButton setImage:[UIImage imageNamed:@"清單48x48@2x.png"] forState:UIControlStateNormal];
         [MenuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];//按下去時呼叫 callMenu 方法來收起 Menu
         [self addSubview:MenuButton];
+        
         [self addMenu];
         
         
@@ -62,7 +86,6 @@
         
         //建立孩子的 button
         UIButton *AddChild = [UIButton new];
-//        settingPage = [ViewController new];
         AddChild.frame=CGRectMake(140,38, 40, 40);
         [AddChild setTitle:@"添加" forState:UIControlStateNormal];
         [AddChild addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];
@@ -73,14 +96,46 @@
     
 }
 
+-(void)hidden {
+    self.hidden = true;
+}
+
+-(void)detectPan:(UIPanGestureRecognizer*)recognizer {
+   CGPoint translation =  [recognizer translationInView:self.superview];
+    
+    if(self.frame.origin.x > 0) {
+        self.frame=CGRectMake(0,20,fullScreenBounds.size.width*self.MenuScreenScale,fullScreenBounds.size.height);
+        
+    }else if(self.frame.origin.x+translation.x < 0){
+       self.frame=CGRectMake(lastLocation.x+translation.x,20,
+                             fullScreenBounds.size.width*self.MenuScreenScale,
+                             fullScreenBounds.size.height);
+    }
+    if(recognizer.state == UIGestureRecognizerStateEnded) {
+        
+        if(self.frame.origin.x < -100 ) {
+            [UIView beginAnimations:@"inMenu" context:nil];
+            [UIView setAnimationDelegate:self];
+            self.frame=CGRectMake(-fullScreenBounds.size.width*self.MenuScreenScale,20,
+                                  fullScreenBounds.size.width*self.MenuScreenScale,
+                                  fullScreenBounds.size.height);
+            [UIView commitAnimations];
+        } else {
+            [UIView beginAnimations:@"inMenu" context:nil];
+            [UIView setAnimationDelegate:self];
+            self.frame=CGRectMake(0,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
+            [UIView commitAnimations];
+        }
+    }
+    
+}
 
 -(IBAction)next:(id)sender {
-    NSLog(@"被按下去了 1.");
     [UIView beginAnimations:@"inMenu" context:nil];
     [UIView setAnimationDelegate:self];
     self.frame=CGRectMake(-fullScreenBounds.size.width*self.MenuScreenScale,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
     [UIView commitAnimations];
-
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"settingChild" object:nil];
 }
 
@@ -96,6 +151,15 @@
 }
 
 -(void)callMenu{
+    
+    NSData* imageData = [[NSUserDefaults standardUserDefaults] objectForKey:@"image1"];
+    UIImage *image = [UIImage imageWithData:imageData];
+    if(image != nil){
+        [ImageMenuArray addObject:image];
+    }
+    
+    [MenuTableView reloadData];
+    
     self.hidden = false;
 //    CGRect fullScreenBounds=[[UIScreen mainScreen] bounds];
     [UIView beginAnimations:@"inMenu" context:nil];
@@ -103,15 +167,14 @@
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(SwichingPage)];
     
-    
-    
     if (self.frame.origin.x==-fullScreenBounds.size.width*self.MenuScreenScale) {
         self.frame=CGRectMake(0,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
-    }else{
+    } else{
         targetPageID=999;//出現選單時重設目標
         self.frame=CGRectMake(-fullScreenBounds.size.width*self.MenuScreenScale,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
     }
     [UIView commitAnimations];
+    
 }
 
 
@@ -137,10 +200,18 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell *myCell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Menu"];
-    myCell.textLabel.text=[MenuArray objectAtIndex:indexPath.row];
-    [myCell.textLabel setTextAlignment:NSTextAlignmentLeft];
-    myCell.imageView.image=[UIImage imageNamed:@"icon_menu.png"];
     
+    myCell.textLabel.text=[MenuArray objectAtIndex:indexPath.row];
+    [myCell.textLabel setTextAlignment:NSTextAlignmentRight];
+    
+    if(ImageMenuArray.count != 0){
+    myCell.imageView.image = [ImageMenuArray objectAtIndex:indexPath.row];
+    myCell.imageView.layer.cornerRadius = 22;
+    myCell.imageView.clipsToBounds = YES;
+    myCell.imageView.layer.borderWidth = 2.0;
+    myCell.imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    myCell.imageView.layer.masksToBounds = YES;
+    }
     return myCell;
 }
 
@@ -149,6 +220,7 @@
     [self callMenu];
     targetPageID=indexPath.row;//設定目標 tab ID
 }
+
 
 
 

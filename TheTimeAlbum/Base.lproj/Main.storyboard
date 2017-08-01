@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DkZ-HU-7Vx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DkZ-HU-7Vx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -36,10 +36,10 @@
             </objects>
             <point key="canvasLocation" x="-2026" y="-1363"/>
         </scene>
-        <!--Time LineVC-->
+        <!--View Controller-->
         <scene sceneID="n6g-ap-ntw">
             <objects>
-                <viewController id="Dmr-AG-fmO" customClass="timeLineVC" sceneMemberID="viewController">
+                <viewController id="Dmr-AG-fmO" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ziu-2C-g63"/>
                         <viewControllerLayoutGuide type="bottom" id="yX0-5Y-p6E"/>
@@ -69,6 +69,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                     </view>
                     <navigationItem key="navigationItem" id="Rfi-R0-xmq"/>
                 </viewController>
@@ -164,9 +165,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahr-dP-x1j">
                                 <rect key="frame" x="16" y="318" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="男孩">
-                                    <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                                <state key="normal" title="男孩"/>
                                 <connections>
                                     <action selector="BoySelected:" destination="JI5-eo-3jw" eventType="touchUpInside" id="YZo-Sy-njW"/>
                                 </connections>
@@ -295,11 +294,15 @@
                 <navigationController title="Title" id="dqF-dM-1HJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="時光簿" image="相簿75x75.png" id="fjm-yW-eJt"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="IRg-IA-HcG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IRg-IA-HcG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="knB-A2-GhP">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Dmr-AG-fmO" kind="relationship" relationship="rootViewController" id="LGT-8G-ddn"/>
                     </connections>
@@ -343,7 +346,7 @@
             <objects>
                 <navigationController storyboardIdentifier="AddChildSettingViewController" automaticallyAdjustsScrollViewInsets="NO" id="nt7-wy-ef2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="owr-7C-AJf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="owr-7C-AJf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -362,7 +365,7 @@
                 <navigationController storyboardIdentifier="BigStickerSettingViewController" automaticallyAdjustsScrollViewInsets="NO" id="N6i-Hg-eRA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="eU1-y2-XB2"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HFS-j2-x6y">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HFS-j2-x6y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

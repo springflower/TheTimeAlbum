@@ -12,7 +12,7 @@
         <!--成就-->
         <scene sceneID="e9j-OE-DSQ">
             <objects>
-                <viewController id="j8K-cR-8Rf" sceneMemberID="viewController">
+                <viewController id="j8K-cR-8Rf" customClass="AchievementViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zcZ-29-lPN"/>
                         <viewControllerLayoutGuide type="bottom" id="I1X-PA-AKu"/>

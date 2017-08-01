@@ -18,43 +18,38 @@
 
 @implementation BigStickerSettingViewController
 {
-//    CommManager *comm;
+    NSUserDefaults *defaults;
+    NSMutableArray <UIImage*>*ImageArray;
 }
+
+@synthesize MyBigSticker = MyBigSticker;
+@synthesize PlusBigSticker = PlusBigSticker;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    ImageArray = [NSMutableArray new];
+    
+    defaults = [NSUserDefaults standardUserDefaults];
+    
     self.view.backgroundColor = [UIColor lightGrayColor];
     self.navigationItem.title = @"大頭貼";
     
-    UIBarButtonItem *Cancel = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:
-                               UIBarButtonItemStyleDone target:self action:@selector(BackToSetting)];
-    self.navigationItem.leftBarButtonItem = Cancel;
+    [self SettingButton];
     
-    UIBarButtonItem *Finish = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:
-                               UIBarButtonItemStyleDone target:self action:@selector(BackToSetting)];
-    self.navigationItem.rightBarButtonItem = Finish;
-    
-    _MyBigSticker.layer.cornerRadius=50.0;
-    _MyBigSticker.clipsToBounds = YES;
-    _MyBigSticker.layer.borderWidth = 3.0;
-    _MyBigSticker.layer.borderColor = [UIColor whiteColor].CGColor;
-    _MyBigSticker.layer.masksToBounds = YES;
-    
-    _PlusBigSticker.layer.cornerRadius=15.0;
-    _PlusBigSticker.clipsToBounds = YES;
-    _PlusBigSticker.layer.borderWidth = 3.0;
-    _PlusBigSticker.layer.borderColor = [UIColor whiteColor].CGColor;
-    _PlusBigSticker.layer.masksToBounds = YES;
+    [self SettingMyBigStickerAndPlusBigSticker];
+  
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+// When Button Press Go to PhotoLibrary.
 - (IBAction)PlusBigSticker:(id)sender {
     [self launchImagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 }
-
+// Start to Pick Photo and Save.
 -(void) launchImagePickerWithSourceType:(UIImagePickerControllerSourceType) sourceType {
     
     //Check if source type avaulable.
@@ -82,13 +77,12 @@
     } else {
         picker.allowsEditing = true;
     }
-    
-    
     picker.allowsEditing = true;
     
     [self presentViewController:picker animated:true completion:nil];
 }
 
+// When Photo Picked Editing Photo
 -(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     NSLog(@"Info: %@",info);
     NSString *type = info[UIImagePickerControllerMediaType];
@@ -128,7 +122,8 @@
         NSLog(@"JPG Data: %lu",jpgData.length);
         NSLog(@"PNG Data: %lu",pngData.length);
         
-        _MyBigSticker.image = editImage;
+         MyBigSticker.image = editImage;
+        
         
     } else if([type isEqualToString:(NSString*)kUTTypeMovie]) {
         
@@ -178,11 +173,53 @@
 }
 
 
-
+// Go Back the Last Page.
 -(void)BackToSetting {
+    
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.3;
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromLeft;
+    //[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+   
+    [self.view.window.layer addAnimation:transition forKey:kCATransition];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void)FinishButton {
+    [ImageArray addObject:MyBigSticker.image];
+    //[defaults setValue:ImageArray forKey:@"image"];
+    [defaults setObject:UIImagePNGRepresentation(MyBigSticker.image) forKey:@"image"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dimssAddChildSettingViewController" object:nil];
+}
+// Set BigStickerPlusSticker
+-(void) SettingMyBigStickerAndPlusBigSticker {
+    MyBigSticker.layer.cornerRadius=50.0;
+    MyBigSticker.clipsToBounds = YES;
+    MyBigSticker.layer.borderWidth = 3.0;
+    MyBigSticker.layer.borderColor = [UIColor whiteColor].CGColor;
+    MyBigSticker.layer.masksToBounds = YES;
+    
+    PlusBigSticker.layer.cornerRadius=15.0;
+    PlusBigSticker.clipsToBounds = YES;
+    PlusBigSticker.layer.borderWidth = 3.0;
+    PlusBigSticker.layer.borderColor = [UIColor whiteColor].CGColor;
+    PlusBigSticker.layer.masksToBounds = YES;
+}
+
+-(void) SettingButton {
+    UIBarButtonItem *Cancel = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:
+                               UIBarButtonItemStyleDone target:self action:@selector(BackToSetting)];
+    self.navigationItem.leftBarButtonItem = Cancel;
+    
+    UIBarButtonItem *Finish = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:
+                               UIBarButtonItemStyleDone target:self action:@selector(FinishButton)];
+    self.navigationItem.rightBarButtonItem = Finish;
+}
 /*
 #pragma mark - Navigation
 

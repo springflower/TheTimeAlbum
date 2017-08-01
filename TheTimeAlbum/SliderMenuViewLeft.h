@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
-@interface SliderMenuViewLeft : UIView<UITableViewDelegate,UITableViewDataSource>
+@interface SliderMenuViewLeft : UIView<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 @property float MenuScreenScale;
 
@@ -17,6 +17,6 @@
 
 -(void)callMenu;
 
-
+-(void)detectPan:(UIPanGestureRecognizer*)recognizer;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "AddChildSettingViewController.h"
 #import "BigStickerSettingViewController.h"
+#import "SliderMenuViewLeft.h"
 
 @interface AddChildSettingViewController ()<UITableViewDelegate,
                                             UITableViewDataSource,
@@ -24,9 +25,11 @@
 
 @implementation AddChildSettingViewController
 {
+    
     CGRect fullScreenBounds;
     UIDatePicker *datePicker;
     UITableView * testtable;
+    BOOL Dismiss;
 }
 @synthesize MyName = MyName;
 @synthesize BirthdayTextField = BirthdayTextField;
@@ -39,8 +42,20 @@
     
 }
 
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    if (Dismiss == true) {
+        Dismiss = false;
+        [self dismissViewControllerAnimated:NO completion:nil];
+        return;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+
     
     fullScreenBounds=[[UIScreen mainScreen] bounds];
     
@@ -92,6 +107,12 @@
 //    yourpicker.showsSelectionIndicator = YES;
 //    self.yourtextfield.inputView = yourpicker;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dissMissViewController) name:@"dimssAddChildSettingViewController" object:nil];
+
+}
+
+-(void)dissMissViewController {
+    Dismiss = true;
 }
 
 - (IBAction)BoySelected:(id)sender {
@@ -166,18 +187,51 @@
 }
 - (IBAction)AnotherRelationship:(id)sender {
     
-    UIActionSheet *myActionSheet = [[UIActionSheet alloc]
-                                    initWithTitle:@"actionSheet"
+    UIActionSheet *myActionSheet =  [[UIActionSheet alloc]
+                                    initWithTitle:@"您與孩子的關係"
                                     delegate:self
-                                    cancelButtonTitle:@"Cancel"
-                                    destructiveButtonTitle:@"Delete"
-                                    otherButtonTitles:@"Save", @"Share", nil];
+                                    cancelButtonTitle:@"取消"
+                                    destructiveButtonTitle:nil
+                                    otherButtonTitles:@"爺爺", @"奶奶",@"外公",@"外婆",@"自訂", nil];
     
     [myActionSheet showInView:self.view];
     
+    _AnotherRelationship.layer.borderColor = [UIColor blueColor].CGColor;
+    _AnotherRelationship.tintColor = [UIColor blueColor];
+    [_AnotherRelationship setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    
+    _FatherSelected.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _FatherSelected.tintColor = [UIColor grayColor];
+    [_FatherSelected setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    
+    _MotherSelected.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _MotherSelected.tintColor = [UIColor grayColor];
+    [_MotherSelected setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    
 }
 
-
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:
+                   (NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [_AnotherRelationship setTitle:@"爺爺" forState:UIControlStateNormal];
+            break;
+        case 1:
+            [_AnotherRelationship setTitle:@"奶奶" forState:UIControlStateNormal];
+            break;
+        case 2:
+            [_AnotherRelationship setTitle:@"外公" forState:UIControlStateNormal];
+            break;
+        case 3:
+            [_AnotherRelationship setTitle:@"外婆" forState:UIControlStateNormal];
+            break;
+        case 4:
+            [self showAnotherRelationship];
+            break;
+        default:
+            break;
+    }
+}
 
 -(void)chooseDate:(UIDatePicker*)datePickerView {
     NSDate *date = datePickerView.date;
@@ -271,13 +325,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)CancelAddChildSettingViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 -(void)NextStepToSettingBigStickers {
-    
-    if(![MyName.text  isEqualToString:@""] && ![BirthdayTextField.text  isEqualToString:@""]){
+    if(!(MyName.text.length == 0) && !(BirthdayTextField.text.length == 0)){
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"hiddenLeftMenu" object:nil];
         
         CATransition* transition = [CATransition animation];
-        transition.duration = 0.3;
-        transition.type = kCATransitionMoveIn;
+        transition.duration = 0.2;
+        transition.type = kCATransitionPush;
         transition.subtype = kCATransitionFromRight;
         //[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
         
@@ -295,13 +354,23 @@
     }
 }
 
--(void)CancelAddChildSettingViewController {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 -(void) showAlert:(NSString*) messsage {
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:messsage preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * OK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction * OK = [UIAlertAction actionWithTitle:@"確定" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:OK];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+-(void) showAnotherRelationship {
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"稱呼";
+    }];
+    UIAlertAction * OK = [UIAlertAction actionWithTitle:@"確定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [_AnotherRelationship setTitle:alert.textFields[0].text forState:UIControlStateNormal];
+    }];
+    
+    UIAlertAction * Cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:Cancel];
     [alert addAction:OK];
     [self presentViewController:alert animated:YES completion:nil];
 }

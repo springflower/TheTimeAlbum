@@ -24,7 +24,6 @@
 		542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE071F13793500F5F161 /* LaunchScreen.storyboard */; };
 		5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC871F1C7A54008F5C25 /* loginViewController.m */; };
 		5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */; };
-		5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8C1F1CB3D6008F5C25 /* 1.png */; };
 		5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */; };
 		CF0B778A1F1859DC0067229D /* Fox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF0B77891F1859DC0067229D /* Fox.jpg */; };
 		CF0B782D1F1C88150067229D /* SliderMenuViewLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0B782C1F1C88150067229D /* SliderMenuViewLeft.m */; };
@@ -45,6 +44,16 @@
 		CF0B78601F1DEA380067229D /* 清單48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B785F1F1DEA380067229D /* 清單48x48@2x.png */; };
 		CF0B78621F1DEBB70067229D /* 清單30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0B78611F1DEBB70067229D /* 清單30x30@2x.png */; };
 		CF0B78661F1E3D290067229D /* AddChildSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0B78651F1E3D290067229D /* AddChildSettingViewController.m */; };
+		CF1395881F2F533500D3C0FD /* Arrow38x38@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF1395871F2F533500D3C0FD /* Arrow38x38@2x.png */; };
+		CF13958E1F2F6F7600D3C0FD /* Camera65x65@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF13958D1F2F6F7600D3C0FD /* Camera65x65@2x.png */; };
+		CF1395901F2F700F00D3C0FD /* Video75x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF13958F1F2F700F00D3C0FD /* Video75x50@2x.png */; };
+		CF5A8D2C1F2DEAF800E0FEA6 /* AchievementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8D2B1F2DEAF800E0FEA6 /* AchievementViewController.m */; };
+		CF5A8D321F2EF7C400E0FEA6 /* WriteMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8D311F2EF7C400E0FEA6 /* WriteMailViewController.m */; };
+		CF5A8D361F2F06C900E0FEA6 /* SaveMyFutureMail.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8D351F2F06C900E0FEA6 /* SaveMyFutureMail.m */; };
+		CFC6DB621F2ACF8600669187 /* FutureMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC6DB611F2ACF8600669187 /* FutureMailViewController.m */; };
+		CFC6DB671F2AFB9000669187 /* Man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFC6DB661F2AFB9000669187 /* Man@2x.png */; };
+		CFC6DB6A1F2B01DC00669187 /* FutureMaliViewControllerCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC6DB691F2B01DC00669187 /* FutureMaliViewControllerCellTableViewCell.m */; };
+		CFC6DB6C1F2B1BCF00669187 /* BeautyView@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CFC6DB6B1F2B1BCF00669187 /* BeautyView@2x.jpg */; };
 		CFFFC78D1F24CADD0097284F /* Male30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC78C1F24CADD0097284F /* Male30x30@2x.png */; };
 		CFFFC78F1F24CBFA0097284F /* Female30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC78E1F24CBFA0097284F /* Female30x30@2x.png */; };
 		CFFFC7911F24D10C0097284F /* Female38x38@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFFFC7901F24D10C0097284F /* Female38x38@2x.png */; };
@@ -90,7 +99,6 @@
 		5452CC871F1C7A54008F5C25 /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
 		5452CC891F1C9AC2008F5C25 /* MyAccountData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountData.h; sourceTree = "<group>"; };
 		5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAccountData.m; sourceTree = "<group>"; };
-		5452CC8C1F1CB3D6008F5C25 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = ../../../1.png; sourceTree = "<group>"; };
 		5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5452CC901F1D8D43008F5C25 /* TheTimeAlbum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheTimeAlbum.entitlements; sourceTree = "<group>"; };
 		7E254EE1580F00C9AF996E45 /* Pods-TheTimeAlbum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheTimeAlbum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheTimeAlbum/Pods-TheTimeAlbum.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +126,21 @@
 		CF0B78611F1DEBB70067229D /* 清單30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "清單30x30@2x.png"; sourceTree = "<group>"; };
 		CF0B78641F1E3D290067229D /* AddChildSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddChildSettingViewController.h; sourceTree = "<group>"; };
 		CF0B78651F1E3D290067229D /* AddChildSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddChildSettingViewController.m; sourceTree = "<group>"; };
+		CF1395871F2F533500D3C0FD /* Arrow38x38@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow38x38@2x.png"; sourceTree = "<group>"; };
+		CF13958D1F2F6F7600D3C0FD /* Camera65x65@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera65x65@2x.png"; sourceTree = "<group>"; };
+		CF13958F1F2F700F00D3C0FD /* Video75x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Video75x50@2x.png"; sourceTree = "<group>"; };
+		CF5A8D2A1F2DEAF800E0FEA6 /* AchievementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementViewController.h; sourceTree = "<group>"; };
+		CF5A8D2B1F2DEAF800E0FEA6 /* AchievementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchievementViewController.m; sourceTree = "<group>"; };
+		CF5A8D301F2EF7C400E0FEA6 /* WriteMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteMailViewController.h; sourceTree = "<group>"; };
+		CF5A8D311F2EF7C400E0FEA6 /* WriteMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteMailViewController.m; sourceTree = "<group>"; };
+		CF5A8D341F2F06C900E0FEA6 /* SaveMyFutureMail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveMyFutureMail.h; sourceTree = "<group>"; };
+		CF5A8D351F2F06C900E0FEA6 /* SaveMyFutureMail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveMyFutureMail.m; sourceTree = "<group>"; };
+		CFC6DB601F2ACF8600669187 /* FutureMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FutureMailViewController.h; sourceTree = "<group>"; };
+		CFC6DB611F2ACF8600669187 /* FutureMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FutureMailViewController.m; sourceTree = "<group>"; };
+		CFC6DB661F2AFB9000669187 /* Man@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Man@2x.png"; sourceTree = "<group>"; };
+		CFC6DB681F2B01DC00669187 /* FutureMaliViewControllerCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FutureMaliViewControllerCellTableViewCell.h; sourceTree = "<group>"; };
+		CFC6DB691F2B01DC00669187 /* FutureMaliViewControllerCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FutureMaliViewControllerCellTableViewCell.m; sourceTree = "<group>"; };
+		CFC6DB6B1F2B1BCF00669187 /* BeautyView@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BeautyView@2x.jpg"; sourceTree = "<group>"; };
 		CFFFC78C1F24CADD0097284F /* Male30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Male30x30@2x.png"; sourceTree = "<group>"; };
 		CFFFC78E1F24CBFA0097284F /* Female30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Female30x30@2x.png"; sourceTree = "<group>"; };
 		CFFFC7901F24D10C0097284F /* Female38x38@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Female38x38@2x.png"; sourceTree = "<group>"; };
@@ -222,8 +245,10 @@
 		540267591F25D94C005967DE /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				CFC6DB6B1F2B1BCF00669187 /* BeautyView@2x.jpg */,
 				CF0B77891F1859DC0067229D /* Fox.jpg */,
 				540267441F24A652005967DE /* c.png */,
+				CFC6DB661F2AFB9000669187 /* Man@2x.png */,
 				CF0B78591F1DE8040067229D /* 我75x75@2x.png */,
 				CF0B78571F1DE4DA0067229D /* 信箱75x75@2x.png */,
 				CF0B78511F1DE2990067229D /* 成就75x75@2x.png */,
@@ -242,7 +267,10 @@
 				CFFFC7961F24DFE30097284F /* Another48x48@2x.png */,
 				CFFFC7981F24E1110097284F /* Another32x38@2x.png */,
 				CFFFC7A01F259C690097284F /* BabyUser100x100@2x.png */,
+				CF13958F1F2F700F00D3C0FD /* Video75x50@2x.png */,
 				CFFFC7A21F259D430097284F /* BabyUser@2x.png */,
+				CF1395871F2F533500D3C0FD /* Arrow38x38@2x.png */,
+				CF13958D1F2F6F7600D3C0FD /* Camera65x65@2x.png */,
 			);
 			name = Pictures;
 			sourceTree = "<group>";
@@ -279,13 +307,14 @@
 				540267571F25D4E4005967DE /* Common Model */,
 				CF0B784C1F1DD90C0067229D /* AboutMeViewController */,
 				540267581F25D800005967DE /* AddChild+BigStrckerViewController */,
+				CF5A8D331F2EFA4D00E0FEA6 /* FutureMailViewController */,
 				542ABE051F13793500F5F161 /* Assets.xcassets */,
 				542ABE071F13793500F5F161 /* LaunchScreen.storyboard */,
 				542ABE0A1F13793500F5F161 /* Info.plist */,
-				5452CC8C1F1CB3D6008F5C25 /* 1.png */,
 				5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */,
 				CF0B78411F1DAD780067229D /* achievement.storyboard */,
-				CF0B783F1F1DAD5B0067229D /* futureMail.storyboard */,
+				CF5A8D2A1F2DEAF800E0FEA6 /* AchievementViewController.h */,
+				CF5A8D2B1F2DEAF800E0FEA6 /* AchievementViewController.m */,
 				540267431F24A468005967DE /* myDefines.h */,
 				540267591F25D94C005967DE /* Pictures */,
 				542ABDF91F13793500F5F161 /* Supporting Files */,
@@ -343,6 +372,22 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		CF5A8D331F2EFA4D00E0FEA6 /* FutureMailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CF0B783F1F1DAD5B0067229D /* futureMail.storyboard */,
+				CF5A8D341F2F06C900E0FEA6 /* SaveMyFutureMail.h */,
+				CF5A8D351F2F06C900E0FEA6 /* SaveMyFutureMail.m */,
+				CFC6DB601F2ACF8600669187 /* FutureMailViewController.h */,
+				CFC6DB611F2ACF8600669187 /* FutureMailViewController.m */,
+				CFC6DB681F2B01DC00669187 /* FutureMaliViewControllerCellTableViewCell.h */,
+				CFC6DB691F2B01DC00669187 /* FutureMaliViewControllerCellTableViewCell.m */,
+				CF5A8D301F2EF7C400E0FEA6 /* WriteMailViewController.h */,
+				CF5A8D311F2EF7C400E0FEA6 /* WriteMailViewController.m */,
+			);
+			name = FutureMailViewController;
+			sourceTree = "<group>";
+		};
 		CF7DA4D41F1F86B500E282C9 /* SliderMenuViewRight */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,7 +432,7 @@
 				TargetAttributes = {
 					542ABDF51F13793500F5F161 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = KW677WP5HP;
+						DevelopmentTeam = FEBUVZMYW4;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -423,7 +468,9 @@
 				CFFFC7951F24DF630097284F /* Another30x30@2x.png in Resources */,
 				CF0B78581F1DE4DA0067229D /* 信箱75x75@2x.png in Resources */,
 				CF0B78431F1DAD780067229D /* achievement.storyboard in Resources */,
+				CFC6DB671F2AFB9000669187 /* Man@2x.png in Resources */,
 				CF0B78351F1C9DB60067229D /* icon_message48x48.png in Resources */,
+				CF1395881F2F533500D3C0FD /* Arrow38x38@2x.png in Resources */,
 				542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */,
 				5402674A1F2537E9005967DE /* MyCollectionViewCellWithText.xib in Resources */,
 				CFFFC7911F24D10C0097284F /* Female38x38@2x.png in Resources */,
@@ -435,14 +482,16 @@
 				542ABE061F13793500F5F161 /* Assets.xcassets in Resources */,
 				CF0B78561F1DE40D0067229D /* 相簿75x75@2x.png in Resources */,
 				CF0B78401F1DAD5B0067229D /* futureMail.storyboard in Resources */,
+				CF13958E1F2F6F7600D3C0FD /* Camera65x65@2x.png in Resources */,
 				540267451F24A652005967DE /* c.png in Resources */,
 				CFFFC7991F24E1110097284F /* Another32x38@2x.png in Resources */,
+				CFC6DB6C1F2B1BCF00669187 /* BeautyView@2x.jpg in Resources */,
 				CFFFC78F1F24CBFA0097284F /* Female30x30@2x.png in Resources */,
 				CFFFC7A11F259C690097284F /* BabyUser100x100@2x.png in Resources */,
 				CFFFC7931F24D1A00097284F /* Female34x34@2x.png in Resources */,
 				CF0B78311F1C94CA0067229D /* icon_menu20x20.png in Resources */,
 				542ABE041F13793500F5F161 /* Main.storyboard in Resources */,
-				5452CC8D1F1CB3D6008F5C25 /* 1.png in Resources */,
+				CF1395901F2F700F00D3C0FD /* Video75x50@2x.png in Resources */,
 				5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */,
 				CF0B78621F1DEBB70067229D /* 清單30x30@2x.png in Resources */,
 				CF0B78601F1DEA380067229D /* 清單48x48@2x.png in Resources */,
@@ -515,9 +564,11 @@
 				540267421F24A3DE005967DE /* HeadView.m in Sources */,
 				542ABE011F13793500F5F161 /* ViewController.m in Sources */,
 				5402674E1F2544FF005967DE /* textLayout.m in Sources */,
+				CF5A8D361F2F06C900E0FEA6 /* SaveMyFutureMail.m in Sources */,
 				CF0B784B1F1DBAF60067229D /* AboutMeViewcontrollerCell.m in Sources */,
 				CF0B783B1F1D9CDF0067229D /* SliderMenuViewRight.m in Sources */,
 				540267491F2537E9005967DE /* MyCollectionViewCellWithText.m in Sources */,
+				CFC6DB6A1F2B01DC00669187 /* FutureMaliViewControllerCellTableViewCell.m in Sources */,
 				5402673F1F24A3A6005967DE /* timeLineVC.m in Sources */,
 				CFFFC79C1F25823A0097284F /* BigStickerSettingViewController.m in Sources */,
 				542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */,
@@ -526,6 +577,9 @@
 				CF0B782D1F1C88150067229D /* SliderMenuViewLeft.m in Sources */,
 				542ABDFB1F13793500F5F161 /* main.m in Sources */,
 				CF0B78661F1E3D290067229D /* AddChildSettingViewController.m in Sources */,
+				CF5A8D321F2EF7C400E0FEA6 /* WriteMailViewController.m in Sources */,
+				CF5A8D2C1F2DEAF800E0FEA6 /* AchievementViewController.m in Sources */,
+				CFC6DB621F2ACF8600669187 /* FutureMailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,7 +728,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = KW677WP5HP;
+				DEVELOPMENT_TEAM = FEBUVZMYW4;
 				INFOPLIST_FILE = TheTimeAlbum/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -690,7 +744,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = KW677WP5HP;
+				DEVELOPMENT_TEAM = FEBUVZMYW4;
 				INFOPLIST_FILE = TheTimeAlbum/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
