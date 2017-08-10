@@ -90,19 +90,44 @@ static MyCommunicator *_singletonCommunicator = nil;
 
 #pragma mark - retriveMessages from server by babyid  用babybid從伺服器抓訊息
 
--(void) retriveMessagesWithLastMessageID:(NSInteger)lastMessageID completion:(DoneHandler)done{
-    NSDictionary *parameters = @{ BABYID_KEY: BABYID };
+-(void) retrivePostsWithLastPostID:(NSString*)lastPostID babyid:(NSString*)babyID completion:(DoneHandler)done{
+    
+    NSDictionary *parameters = @{ BABYID2: babyID };
     // @{}--> NSDictionary
     // @[]--> NSArray
     // @()--> NSNumber
-    //[self doPostWithURLString:RETRIVEMESSAGES_URL
-                   //parameters:parameters
-                    //     data:nil
-                  // completion:done];
+    NSLog(@"--do in retrive PostsWithLastPostId");
+    [self doPostWithURLString:RETRIVE_POSTS_URL
+                   parameters:parameters
+                         data:nil
+                   completion:done];
 }
 
+-(void) retriveAchievementsByBabyID:(NSString*)babyID completion:(DoneHandler)done {
 
+    NSDictionary *parameters = @{ BABYID2: babyID };
+    NSLog(@"--do in retrive Achievement by babyid");
+    [self doPostWithURLString:RETRIVE_ACHIEVEMENTS_URL
+                   parameters:parameters
+                         data:nil
+                   completion:done];
+    
+}
 
+#pragma mark - updatePosts to server        修改文章
+-(void) updatePostsToServerWithPostID:(NSInteger)postID
+                              content:(NSString*)content
+                           completion:(DoneHandler)done {
+    //...
+    NSDictionary *params = @{ @"postId": @(postID),
+                              @"content": content   };
+    
+    [self doPostWithURLString:UPDATE_POST_URL
+                   parameters:params
+                         data:nil
+                   completion:done];
+
+}
 
 
 #pragma mark - Private Method to handle POST job.
