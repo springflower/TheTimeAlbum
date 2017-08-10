@@ -14,7 +14,12 @@
 
 @interface AboutMeViewcontroller ()
 {
+    NSUserDefaults *defaults;
+    
     NSArray * information;
+    NSMutableArray *userArray;
+    NSMutableArray *packegUserArray;
+    NSMutableArray *putinformationArray;
     UILabel *label;
 }
 
@@ -24,8 +29,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    defaults = [NSUserDefaults standardUserDefaults];
+
+    NSData *localUserImage = [defaults dataForKey:@"userImage"];
+    UIImage *userImage = [[UIImage alloc] initWithData:localUserImage];
+    userArray = [[NSMutableArray alloc]
+                 initWithObjects:userImage,
+                 [defaults objectForKey:@"userName"],
+                 [defaults objectForKey:@"userMail"], nil];
+    packegUserArray = [[NSMutableArray alloc] initWithObjects:userArray, nil];
     information = @[@"設定",@"個人資料",@"通知",@"孩子密碼"];
+    
+    putinformationArray = [[NSMutableArray alloc] initWithObjects:packegUserArray,information, nil];
+    
+    
     self.navigationItem.title = PERSONALINFORMATION;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,24 +56,67 @@
 
 #pragma mark - Table view data source
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return information.count;
+    return [[putinformationArray objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    AboutMeViewcontrollerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myTextView" forIndexPath:indexPath];
+//    UITableViewCell *myCell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Menu"];
+//    myCell.imageView.image = [UIImage imageNamed:@"BabyUser@2x.png"];
+//    NSMutableArray * array = [[NSMutableArray alloc] initWithObjects:myCell, nil];
     
-    cell.myTextView.text = [information objectAtIndex:[indexPath row]];
     
     
-    return cell;
+//    AboutMeViewcontrollerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myTextView" forIndexPath:indexPath];
+    //cell.myTextView.text = [information objectAtIndex:[indexPath row]];
+    
+    AboutMeViewcontrollerCell *myCell=[[AboutMeViewcontrollerCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Menu"];
+    if(indexPath.section == 0) {
+        myCell.imageView.layer.cornerRadius = 32;
+        myCell.imageView.clipsToBounds = YES;
+        myCell.imageView.layer.borderWidth = 1.0;
+        myCell.imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        myCell.imageView.layer.masksToBounds = YES;
+        myCell.imageView.image = [userArray objectAtIndex:0];
+        myCell.textLabel.text = [userArray objectAtIndex:1];
+        myCell.detailTextLabel.text = [userArray objectAtIndex:2];
+        return myCell;
+    } else {
+        myCell.textLabel.text = [[putinformationArray objectAtIndex:1] objectAtIndex:indexPath.row];
+        myCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        return myCell;
+
+    }
+
+}
+
+//設定分類開頭標題
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if(section == 0) {
+        return @"";
+
+    }else {
+        return @" ";
+    }
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 0) {
+        return 80;
+
+    }
+        return 50;
+
 }
 
 

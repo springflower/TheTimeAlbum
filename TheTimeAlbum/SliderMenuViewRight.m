@@ -7,22 +7,34 @@
 //
 
 #import "SliderMenuViewRight.h"
+#import <ChameleonFramework/Chameleon.h>
 
 @implementation SliderMenuViewRight
 {
+    CGPoint lastLocation;
+    CGRect fullScreenBounds;
+    UIPanGestureRecognizer *putWayRightMenu;
     NSMutableArray *MenuArray;
     UITableView *MenuTableView;
     int targetPageID;
 }
 -(id)init{
     self=[super init];
+    fullScreenBounds=[[UIScreen mainScreen] bounds];
+    
+    putWayRightMenu= [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(detectPan:)];
+    [self addGestureRecognizer:putWayRightMenu];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(putAwayRightMenu) name:@"putAwayRightMenu" object:nil];
+
+    
     if (self) {
         self.hidden = true;
         //        設定Menu 資料來源
         MenuArray=[[NSMutableArray alloc] initWithCapacity:50];
         [MenuArray addObject:@"一"];
 
-        
         //        預設畫面比例
         self.MenuScreenScale=0.5;
         //        預設頁面切換時間
@@ -31,12 +43,15 @@
         targetPageID=999;
         
         //        設定基本大小
-        CGRect fullScreenBounds=[[UIScreen mainScreen] bounds];//取得收機畫面大小
-        self.frame=CGRectMake((fullScreenBounds.size.width*self.MenuScreenScale)*2,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
+        self.frame=CGRectMake((fullScreenBounds.size.width*self.MenuScreenScale)*2,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height-22);
+        self.backgroundColor=[UIColor flatSkyBlueColor];
+        self.layer.cornerRadius=25.0;
+        self.clipsToBounds = YES;
+        self.layer.borderWidth = 1.0;
+        self.layer.borderColor = [UIColor flatBlackColor].CGColor;
+        self.layer.masksToBounds = YES;
+        //self.alpha = 0.8;
         
-        self.backgroundColor=[UIColor lightGrayColor];
-        
-        self.alpha = 0.8;
         
         UILabel *titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(44, 0, self.frame.size.width-44, 42)];
         //        titleLabel.text=@"選單項目";
@@ -58,6 +73,49 @@
     return self;
     
 }
+
+-(void) putAwayRightMenu {
+    [UIView beginAnimations:@"inMenu" context:nil];
+    [UIView setAnimationDelegate:self];
+    self.frame=CGRectMake((fullScreenBounds.size.width*self.MenuScreenScale)*2,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height-22);
+    [UIView commitAnimations];
+}
+
+// Set fingerTouch event. 設定手指觸發事件來移動清單.
+-(void)detectPan:(UIPanGestureRecognizer*)recognizer {
+    CGPoint translation =  [recognizer translationInView:self.superview];
+    
+    // Set ViewListPosition not move out settiing position. 設定左側清單被移動時不能超過設定的位置.
+    if(self.frame.origin.x < fullScreenBounds.size.width*self.MenuScreenScale) {
+        self.frame=CGRectMake(fullScreenBounds.size.width*self.MenuScreenScale,20,fullScreenBounds.size.width*self.MenuScreenScale,fullScreenBounds.size.height-22);
+        NSLog(@"%f",self.frame.origin.x);
+        
+    }else if(fullScreenBounds.size.width*self.MenuScreenScale+translation.x > fullScreenBounds.size.width*self.MenuScreenScale){
+        self.frame=CGRectMake(fullScreenBounds.size.width*self.MenuScreenScale+translation.x,20,
+                              fullScreenBounds.size.width*self.MenuScreenScale,
+                              fullScreenBounds.size.height-22);
+    }
+    // Set ViewListPosition if smaller or bigger the setting Value, carried out the animated. 設定左側選單觸發事件結束時，執行所設定的數值執行動畫.
+    if(recognizer.state == UIGestureRecognizerStateEnded) {
+        
+        if(self.frame.origin.x >  fullScreenBounds.size.width*self.MenuScreenScale +100) {
+            [UIView beginAnimations:@"inMenu" context:nil];
+            [UIView setAnimationDelegate:self];
+
+            self.frame=CGRectMake((fullScreenBounds.size.width*self.MenuScreenScale)*2,20,
+                                  fullScreenBounds.size.width*self.MenuScreenScale,
+                                  fullScreenBounds.size.height-22);
+            [UIView commitAnimations];
+        } else {
+            [UIView beginAnimations:@"inMenu" context:nil];
+            [UIView setAnimationDelegate:self];
+            self.frame=CGRectMake(fullScreenBounds.size.width*self.MenuScreenScale,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height-22);
+            [UIView commitAnimations];
+        }
+    }
+    
+}
+
 -(void)addMenu{
     
     //設定Table 代理人
@@ -72,17 +130,17 @@
 
 -(void)callMenu{
     self.hidden = false;
-    CGRect fullScreenBounds=[[UIScreen mainScreen] bounds];
     [UIView beginAnimations:@"inMenu" context:nil];
     [UIView setAnimationDuration:self.SwichingPageSpeed];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(SwichingPage)];
     
     if (self.frame.origin.x==(fullScreenBounds.size.width*self.MenuScreenScale)*2) {
-        self.frame=CGRectMake(fullScreenBounds.size.width*self.MenuScreenScale,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
+        self.frame=CGRectMake(fullScreenBounds.size.width*self.MenuScreenScale,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height-22);
+        NSLog(@"%f",fullScreenBounds.size.width*self.MenuScreenScale);
     }else{
         targetPageID=999;//出現選單時重設目標
-        self.frame=CGRectMake((fullScreenBounds.size.width*self.MenuScreenScale)*2,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
+        self.frame=CGRectMake((fullScreenBounds.size.width*self.MenuScreenScale)*2,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height-22);
     }
     [UIView commitAnimations];
     

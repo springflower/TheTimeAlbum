@@ -19,31 +19,44 @@
 @property (weak, nonatomic) IBOutlet UIButton *FatherSelected;
 @property (weak, nonatomic) IBOutlet UIButton *MotherSelected;
 @property (weak, nonatomic) IBOutlet UIButton *AnotherRelationship;
-@property (weak, nonatomic) IBOutlet UITextField *MyName;
+@property (weak, nonatomic) IBOutlet UITextField *ChildNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *BirthdayTextField;
 @end
 
 @implementation AddChildSettingViewController
 {
-    
+    NSMutableArray *putChildTextFieldnameArray;
+    NSMutableArray *putChildBirthdayFieldArray;
+
+    NSInteger ChildSex;
+    NSInteger WithRelationship;
+    NSUserDefaults *defaults;
     CGRect fullScreenBounds;
     UIDatePicker *datePicker;
     UITableView * testtable;
     BOOL Dismiss;
 }
-@synthesize MyName = MyName;
+@synthesize ChildNameTextField = ChildNameTextField;
 @synthesize BirthdayTextField = BirthdayTextField;
 @synthesize BoySelected = BoySelected;
 @synthesize GirlSelected = GirlSelected;
 @synthesize AnotherSelected = AnotherSelected;
 
-
-- (IBAction)NameTextField:(id)sender {
-    
-}
-
-
 -(void)viewWillAppear:(BOOL)animated {
+    
+    NSArray *readChildTextFieldnameArray = [defaults objectForKey:@"ChildName"];
+    if(readChildTextFieldnameArray) {
+        putChildTextFieldnameArray  = [readChildTextFieldnameArray mutableCopy];
+    } else {
+        putChildTextFieldnameArray = [NSMutableArray new];
+    }
+    
+    NSArray *readChildBirthdayFieldArray = [defaults objectForKey:@"ChildBirthday"];
+    if(readChildBirthdayFieldArray) {
+        putChildBirthdayFieldArray  = [readChildBirthdayFieldArray mutableCopy];
+    } else {
+        putChildBirthdayFieldArray = [NSMutableArray new];
+    }
     
     if (Dismiss == true) {
         Dismiss = false;
@@ -55,7 +68,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
+    defaults = [NSUserDefaults standardUserDefaults];
     
     fullScreenBounds=[[UIScreen mainScreen] bounds];
     
@@ -108,6 +121,8 @@
 //    self.yourtextfield.inputView = yourpicker;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dissMissViewController) name:@"dimssAddChildSettingViewController" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveChildNameAndBirthday) name:@"saveChildNameAndBirthday" object:nil];
 
 }
 
@@ -116,6 +131,7 @@
 }
 
 - (IBAction)BoySelected:(id)sender {
+    ChildSex = 1;
     BoySelected.layer.borderColor = [UIColor blueColor].CGColor;
     BoySelected.tintColor = [UIColor blueColor];
     [BoySelected setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -130,6 +146,7 @@
 }
 
 - (IBAction)GirlSelected:(id)sender {
+    ChildSex = 2;
     GirlSelected.layer.borderColor = [UIColor blueColor].CGColor;
     GirlSelected.tintColor = [UIColor blueColor];
     [GirlSelected setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -144,6 +161,7 @@
 }
 
 - (IBAction)AnotherSelected:(id)sender {
+    ChildSex = 3;
     AnotherSelected.layer.borderColor = [UIColor blueColor].CGColor;
     AnotherSelected.tintColor = [UIColor blueColor];
     [AnotherSelected setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -158,7 +176,7 @@
 }
 
 - (IBAction)FatherSelected:(id)sender {
-    
+    WithRelationship = 1;
     _FatherSelected.layer.borderColor = [UIColor blueColor].CGColor;
     _FatherSelected.tintColor = [UIColor blueColor];
     [_FatherSelected setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -172,7 +190,7 @@
     [_AnotherRelationship setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
 }
 - (IBAction)MotherSelected:(id)sender {
-    
+    WithRelationship = 2;
     _MotherSelected.layer.borderColor = [UIColor blueColor].CGColor;
     _MotherSelected.tintColor = [UIColor blueColor];
     [_MotherSelected setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -186,7 +204,7 @@
     [_AnotherRelationship setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
 }
 - (IBAction)AnotherRelationship:(id)sender {
-    
+    WithRelationship = 3;
     UIActionSheet *myActionSheet =  [[UIActionSheet alloc]
                                     initWithTitle:@"您與孩子的關係"
                                     delegate:self
@@ -248,12 +266,12 @@
 
 -(void)SettingChildNameAndBirthday {
     
-    MyName.layer.cornerRadius=15.0;
+    ChildNameTextField.layer.cornerRadius=15.0;
     //MyName.layer.borderWidth = 2.0;
     //MyName.layer.borderColor = [UIColor lightGrayColor].CGColor;
     //MyName.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
-    MyName.backgroundColor = [UIColor lightGrayColor];
-    MyName.alpha = 0.5;
+    ChildNameTextField.backgroundColor = [UIColor lightGrayColor];
+    ChildNameTextField.alpha = 0.5;
     //MyName.layer.masksToBounds = YES;
     
     BirthdayTextField.layer.cornerRadius=15.0;
@@ -330,8 +348,11 @@
 }
 
 -(void)NextStepToSettingBigStickers {
-    if(!(MyName.text.length == 0) && !(BirthdayTextField.text.length == 0)){
-        
+    if(!(ChildNameTextField.text.length == 0) &&
+       !(BirthdayTextField.text.length == 0) &&
+       !(ChildSex == 0) &&
+       !(WithRelationship == 0)){
+
         [[NSNotificationCenter defaultCenter] postNotificationName:@"hiddenLeftMenu" object:nil];
         
         CATransition* transition = [CATransition animation];
@@ -347,10 +368,15 @@
         [self presentViewController:nextPage animated:NO completion:nil];
 
     } else {
-        if([MyName.text isEqualToString:@""]) {
+        if([ChildNameTextField.text isEqualToString:@""]) {
             [self showAlert:@"稱號必須填"];
-        } else
+        } else if([BirthdayTextField.text isEqualToString:@""]){
             [self showAlert:@"出生年月日必須填"];
+        } else if(ChildSex == 0) {
+            [self showAlert:@"性別必須填"];
+        } else {
+            [self showAlert:@"關係必須填"];
+        }
     }
 }
 
@@ -373,6 +399,31 @@
     [alert addAction:Cancel];
     [alert addAction:OK];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+-(void) saveChildNameAndBirthday {
+    
+    [putChildTextFieldnameArray addObject:ChildNameTextField.text];
+    [putChildBirthdayFieldArray addObject:BirthdayTextField.text];
+    
+    [defaults setObject:putChildTextFieldnameArray forKey:@"ChildName"];
+    [defaults setObject:putChildBirthdayFieldArray forKey:@"ChildBirthday"];
+    
+    if(ChildSex == 1) {
+        [defaults setObject:BoySelected.titleLabel.text forKey:@"ChildSex"];
+    } else if(ChildSex == 2) {
+        [defaults setObject:GirlSelected.titleLabel.text forKey:@"ChildSex"];
+    } else {
+        [defaults setObject:AnotherSelected.titleLabel.text forKey:@"ChildSex"];
+    }
+    
+    if(WithRelationship == 1) {
+        [defaults setObject:_FatherSelected.titleLabel.text forKey:@"WithRelationShip"];
+    } else if(WithRelationship == 2) {
+        [defaults setObject:_MotherSelected.titleLabel.text forKey:@"WithRelationShip"];
+    } else {
+        [defaults setObject:_AnotherRelationship.titleLabel.text forKey:@"WithRelationShip"];
+    }
 }
 
 /*
