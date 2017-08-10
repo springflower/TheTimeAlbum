@@ -11,14 +11,20 @@
 #import "SliderMenuViewLeft.h"
 #import "AddChildSettingViewController.h"
 
-@interface ViewController()<UIGestureRecognizerDelegate>
+@interface ViewController()<UIGestureRecognizerDelegate,UIGestureRecognizerDelegate>
 {
-
+    UITapGestureRecognizer *putWayMenu;
 }
 
 @end
 
 @implementation ViewController
+
+-(void)viewDidAppear:(BOOL)animated {
+    
+    
+       
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,11 +33,21 @@
     self.navigationItem.title = @"相簿";
     
     [self SettingSilderMenuViewAndButtonItemToNavigationBar];
-
+    
+    
+    putWayMenu = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(putWayMenu)];
+    [self.view addGestureRecognizer:putWayMenu];
+    
+  
     
     // Prepare the NorificationCenter change ViewConroller to AddChildSettingViewController.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeViewContrllerToAddChildSettingViewController) name:@"settingChild" object:nil];
     
+}
+
+-(void)putWayMenu {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"putAWayLeftMenu" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"putAwayRightMenu" object:nil];
 }
 
 -(void)handlePan:(id)sender{

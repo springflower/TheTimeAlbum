@@ -61,7 +61,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="LPO-Dn-xDi">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabBarVC" id="DkZ-HU-7Vx" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarVC" id="DkZ-HU-7Vx" customClass="TabBarController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="XqI-BO-Ha7">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -125,9 +125,6 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="NameTextField:" destination="JI5-eo-3jw" eventType="editingDidEnd" id="H2x-rh-v82"/>
-                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="稱號" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPD-zv-0hD">
                                 <rect key="frame" x="24" y="131" width="49" height="29"/>
@@ -143,7 +140,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahr-dP-x1j">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahr-dP-x1j">
                                 <rect key="frame" x="16" y="318" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="男孩"/>
@@ -151,7 +148,7 @@
                                     <action selector="BoySelected:" destination="JI5-eo-3jw" eventType="touchUpInside" id="YZo-Sy-njW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0i9-ll-eo2">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0i9-ll-eo2">
                                 <rect key="frame" x="131" y="318" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="女孩">
@@ -161,7 +158,7 @@
                                     <action selector="GirlSelected:" destination="JI5-eo-3jw" eventType="touchUpInside" id="VBl-KD-LjQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfy-mU-U2G">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfy-mU-U2G">
                                 <rect key="frame" x="246" y="318" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="其他">
@@ -171,7 +168,7 @@
                                     <action selector="AnotherSelected:" destination="JI5-eo-3jw" eventType="touchUpInside" id="fZ9-XR-RJc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0j-mB-lvm">
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0j-mB-lvm">
                                 <rect key="frame" x="16" y="463" width="70" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="爸爸">
@@ -181,7 +178,7 @@
                                     <action selector="FatherSelected:" destination="JI5-eo-3jw" eventType="touchUpInside" id="rby-O0-OyA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXC-qw-vtb">
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXC-qw-vtb">
                                 <rect key="frame" x="131" y="463" width="70" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="媽媽">
@@ -191,7 +188,7 @@
                                     <action selector="MotherSelected:" destination="JI5-eo-3jw" eventType="touchUpInside" id="NvZ-3A-eoT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYc-O1-n1K">
+                            <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYc-O1-n1K">
                                 <rect key="frame" x="246" y="463" width="70" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="其他">
@@ -210,10 +207,10 @@
                         <outlet property="AnotherSelected" destination="sfy-mU-U2G" id="t4x-vS-HKg"/>
                         <outlet property="BirthdayTextField" destination="jYh-Gw-Blv" id="boU-0h-SLR"/>
                         <outlet property="BoySelected" destination="ahr-dP-x1j" id="yqs-SO-bcp"/>
+                        <outlet property="ChildNameTextField" destination="krK-bG-aFj" id="FFX-PF-xzh"/>
                         <outlet property="FatherSelected" destination="z0j-mB-lvm" id="Jw4-es-C7j"/>
                         <outlet property="GirlSelected" destination="0i9-ll-eo2" id="lrB-T2-Fiq"/>
                         <outlet property="MotherSelected" destination="dXC-qw-vtb" id="Zp8-0G-dqN"/>
-                        <outlet property="MyName" destination="krK-bG-aFj" id="mF5-8q-f5Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X4j-S0-nQU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -275,7 +272,7 @@
                 <navigationController storyboardIdentifier="test2" title="Title" id="dqF-dM-1HJ" customClass="JLNavigationViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="時光簿" image="相簿75x75.png" id="fjm-yW-eJt"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IRg-IA-HcG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="IRg-IA-HcG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -327,7 +324,7 @@
             <objects>
                 <navigationController storyboardIdentifier="AddChildSettingViewController" automaticallyAdjustsScrollViewInsets="NO" id="nt7-wy-ef2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="owr-7C-AJf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="owr-7C-AJf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -346,7 +343,7 @@
                 <navigationController storyboardIdentifier="BigStickerSettingViewController" automaticallyAdjustsScrollViewInsets="NO" id="N6i-Hg-eRA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="eU1-y2-XB2"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HFS-j2-x6y">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HFS-j2-x6y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

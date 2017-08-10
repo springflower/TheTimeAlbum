@@ -21,4 +21,12 @@
     // Configure the view for the selected state
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.imageView.frame = CGRectMake(40,5,65,65);
+}
+
+
+
 @end

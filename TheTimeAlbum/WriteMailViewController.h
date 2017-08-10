@@ -10,4 +10,6 @@
 
 @interface WriteMailViewController : UIViewController
 
+@property (nonatomic) int SelectRow;
+
 @end

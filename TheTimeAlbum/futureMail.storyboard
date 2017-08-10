@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +14,7 @@
         <!--信箱-->
         <scene sceneID="cOR-Ad-UQl">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="TsM-Mu-M4A" customClass="FutureMailViewController" sceneMemberID="viewController">
+                <viewController id="TsM-Mu-M4A" customClass="FutureMailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4aD-zP-VLp"/>
                         <viewControllerLayoutGuide type="bottom" id="soT-Wb-eOO"/>
@@ -22,26 +23,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="185" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="z3C-Kd-Zb3">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="229" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="z3C-Kd-Zb3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mycell" rowHeight="185" id="MND-tN-6p1" customClass="FutureMaliViewControllerCellTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="185"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mycell" rowHeight="229" id="MND-tN-6p1" customClass="FutureMaliViewControllerCellTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="229"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MND-tN-6p1" id="saj-xp-W9f">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="184.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="229"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hlr-Ij-abP">
-                                                    <rect key="frame" x="8" y="8" width="360" height="165"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Postcard.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hlr-Ij-abP">
+                                                    <rect key="frame" x="8" y="8" width="360" height="205"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="寄件時間：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WM8-sI-Zgc">
+                                                    <rect key="frame" x="191" y="180" width="63" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="寄件人：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7U-a5-N1G">
+                                                    <rect key="frame" x="191" y="158" width="50" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lt1-Th-Yby">
+                                                    <rect key="frame" x="249" y="159" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00K-hu-Ets">
+                                                    <rect key="frame" x="249" y="185" width="87" height="12"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3V-PU-vPL">
+                                                    <rect key="frame" x="192" y="107" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="寫信給：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIN-rU-Jpi">
+                                                    <rect key="frame" x="190" y="81" width="63" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hlr-Ij-abP" firstAttribute="centerX" secondItem="saj-xp-W9f" secondAttribute="centerX" id="HnP-qR-yJG"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="hlr-Ij-abP" secondAttribute="bottom" constant="7.5" id="QPz-Hz-SYl"/>
+                                                <constraint firstItem="hlr-Ij-abP" firstAttribute="top" secondItem="saj-xp-W9f" secondAttribute="topMargin" id="Vcd-Ul-A9C"/>
+                                                <constraint firstItem="hlr-Ij-abP" firstAttribute="leading" secondItem="saj-xp-W9f" secondAttribute="leadingMargin" id="Zso-ip-0gE"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="ChildName" destination="N3V-PU-vPL" id="aW9-k7-xfJ"/>
+                                            <outlet property="DateAndTime" destination="00K-hu-Ets" id="vIP-eC-5M0"/>
+                                            <outlet property="MyCell" destination="saj-xp-W9f" id="AjN-nG-ZPm"/>
                                             <outlet property="MyImageView" destination="hlr-Ij-abP" id="nEJ-Qs-ScF"/>
+                                            <outlet property="UserName" destination="lt1-Th-Yby" id="70M-Ty-QyU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -79,27 +131,14 @@
                                 <rect key="frame" x="16" y="72" width="343" height="575"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <textView key="tableFooterView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="123" textAlignment="natural" id="Y2D-NL-ucx">
+                                <textView key="tableFooterView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="Y2D-NL-ucx">
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="575"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q0K-Yo-mrb">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem image="Video75x50.png" style="plain" id="u40-Q9-sa1"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="HLm-Kj-akA"/>
-                                    <barButtonItem image="Camera65x65.png" style="plain" id="IhA-GW-4pi">
-                                        <connections>
-                                            <action selector="photoselect:" destination="9y0-48-QcI" id="zTA-Dq-waA"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -116,37 +155,22 @@
                             </button>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem style="plain" id="bX0-Op-Mrq">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CjS-CC-YDh">
-                                    <rect key="frame" x="276" y="7" width="83" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <state key="normal" title="發送"/>
-                                    <connections>
-                                        <action selector="SendMessage:" destination="9y0-48-QcI" eventType="touchUpInside" id="4Io-X8-hFf"/>
-                                    </connections>
-                                </button>
+                            <barButtonItem style="plain" systemItem="done" id="bX0-Op-Mrq">
+                                <connections>
+                                    <action selector="SendMessage:" destination="9y0-48-QcI" id="ETr-RN-XEG"/>
+                                </connections>
                             </barButtonItem>
-                            <barButtonItem style="plain" id="T08-4T-y6J">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9PE-yJ-NKp">
-                                    <rect key="frame" x="185" y="7" width="83" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <state key="normal" title="保存草稿"/>
-                                    <connections>
-                                        <action selector="KeepMail:" destination="9y0-48-QcI" eventType="touchUpInside" id="Y48-R7-Hg8"/>
-                                    </connections>
-                                </button>
+                            <barButtonItem style="plain" systemItem="action" id="T08-4T-y6J">
+                                <connections>
+                                    <action selector="SendByMail:" destination="9y0-48-QcI" id="GN3-h6-Osk"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="BackBtn" destination="tn5-DQ-tbX" id="sh8-6X-b1p"/>
-                        <outlet property="KeepMessage" destination="9PE-yJ-NKp" id="WbN-Sd-kJ1"/>
                         <outlet property="MyWriteMailTableView" destination="W0S-Gz-HIl" id="xeg-Pu-MgR"/>
-                        <outlet property="SendMessage" destination="CjS-CC-YDh" id="YeW-C2-gMC"/>
                         <outlet property="TextView" destination="Y2D-NL-ucx" id="MkM-BM-h9v"/>
-                        <outlet property="ToolBar" destination="Q0K-Yo-mrb" id="E3h-VN-6aG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FO8-ni-8H1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -173,8 +197,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Camera65x65.png" width="33" height="32"/>
-        <image name="Video75x50.png" width="38" height="25"/>
+        <image name="Postcard.jpg" width="340" height="200"/>
         <image name="信箱75x75.png" width="38" height="37"/>
     </resources>
 </document>

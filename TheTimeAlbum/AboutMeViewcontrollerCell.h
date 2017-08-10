@@ -10,6 +10,4 @@
 
 @interface AboutMeViewcontrollerCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *myTextView;
-
 @end

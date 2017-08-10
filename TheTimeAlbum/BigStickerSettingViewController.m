@@ -18,17 +18,29 @@
 
 @implementation BigStickerSettingViewController
 {
+
     NSUserDefaults *defaults;
-    NSMutableArray <UIImage*>*ImageArray;
+    NSMutableArray *putMyBigStickerArray;
 }
 
 @synthesize MyBigSticker = MyBigSticker;
 @synthesize PlusBigSticker = PlusBigSticker;
 
+-(void)viewDidAppear:(BOOL)animated {
+    
+    //NSData *data = [defaults objectForKey:@"MyBigSticker"];
+    //NSArray *readMyBigStickerArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSArray *readMyBigStickerArray = [defaults objectForKey:@"MyBigSticker"];
+    if(readMyBigStickerArray) {
+        putMyBigStickerArray  = [readMyBigStickerArray mutableCopy];
+    } else {
+        putMyBigStickerArray = [NSMutableArray new];
+    }
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    ImageArray = [NSMutableArray new];
     
     defaults = [NSUserDefaults standardUserDefaults];
     
@@ -39,6 +51,7 @@
     
     [self SettingMyBigStickerAndPlusBigSticker];
   
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -188,12 +201,22 @@
 }
 
 -(void)FinishButton {
-    [ImageArray addObject:MyBigSticker.image];
-    //[defaults setValue:ImageArray forKey:@"image"];
-    [defaults setObject:UIImagePNGRepresentation(MyBigSticker.image) forKey:@"image"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [self dismissViewControllerAnimated:NO completion:nil];
     
+    NSData* pictureData = [NSData dataWithData:UIImagePNGRepresentation(MyBigSticker.image)];
+    
+    [putMyBigStickerArray addObject:pictureData];
+    
+    //NSData *MyBigStickerData = [NSKeyedArchiver archivedDataWithRootObject:putMyBigStickerArray];
+    //array = [NSKeyedUnarchiver unarchiveObjectWithData:MyBigStickerData];
+    
+    [defaults setObject:putMyBigStickerArray forKey:@"MyBigSticker"];
+    NSLog(@"儲存的圖片檔案為： %@",putMyBigStickerArray);
+    
+    [defaults synchronize];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"saveChildNameAndBirthday" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dimssAddChildSettingViewController" object:nil];
 }
 // Set BigStickerPlusSticker

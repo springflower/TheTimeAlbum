@@ -10,8 +10,15 @@
 
 @interface FutureMaliViewControllerCellTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *MyImageView;
+@property (weak, nonatomic) IBOutlet UIView *MyCell;
 
+@property (weak, nonatomic) IBOutlet UIImageView*MyImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *DateAndTime;
+
+@property (weak, nonatomic) IBOutlet UILabel *UserName;
+
+@property (weak, nonatomic) IBOutlet UILabel *ChildName;
 
 
 @end

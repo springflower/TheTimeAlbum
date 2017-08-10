@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-@interface SliderMenuViewRight : UIView<UITableViewDelegate,UITableViewDataSource>
+@interface SliderMenuViewRight : UIView<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 
 @property float MenuScreenScale;
