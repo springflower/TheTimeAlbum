@@ -18,10 +18,10 @@
 
 +(instancetype) object;
 
--(void)SendSelectedRow:(int)selected Bool:(BOOL)value;
+-(void)SendSelectedRowAboutMail:(int)selected Bool:(BOOL)value;
 
-- (int)didSelectedRow;
+- (int)didSelectedRowAboutMail;
 
-- (BOOL)didSelectedNewOrOld;
+- (BOOL)didSelectedNewOrOldAboutMail;
 
 @end

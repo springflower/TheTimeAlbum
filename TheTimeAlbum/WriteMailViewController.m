@@ -25,54 +25,67 @@
 @implementation WriteMailViewController
 {
     CGRect fullScreenBounds;
+    //準備讀取目前選擇的小孩ID.
+    NSInteger ChildID;
+    //準備使用相簿與相機功能
     UIImagePickerController *picker;
-
+    //準備顯示目前時間與日期
     UILabel *dateLabel;
-
+    //準備讀取儲存的信件日期陣列
     NSMutableArray *putDateArray;
-    
+    //準備讀取信件陣列的資料，依照所選的孩子ID
+    NSMutableArray *putDateAddArray;
+    //準備讀取信件內容陣列的資料，依照所選的孩子ID
+    NSMutableArray *putTextViewAddArray;
+    //準備讀取儲存的內容數量
     NSMutableArray *putTextViewArray;
-    
+    //準備讀取儲存的檔案
     NSUserDefaults *defaults;
+    //準備一個字串來顯示日期並儲存
     NSString *dateString;
-    
+    //準備讀取所儲存的內容，因為是儲存成Data，所以要先用 NSData
     NSData *content;
+    
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+    //讀取目前所選擇的小孩ID
+    ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
     
-    NSLog(@"%d",[[SelectedRow object]didSelectedRow]);
-    
+    NSLog(@"%d",[[SelectedRow object]didSelectedRowAboutMail]);
     // Read DateArrayContent 讀取存取的日期陣列.
     NSArray *readDateArray = [defaults objectForKey:@"Mailibformation"];
-    
-    if(readDateArray) {
+    if(readDateArray.count != 0) {
         putDateArray  = [readDateArray mutableCopy];
+        putDateAddArray = [[putDateArray objectAtIndex:ChildID] mutableCopy];
     } else {
         putDateArray = [NSMutableArray new];
+        putDateAddArray = [NSMutableArray new];
     }
     
     // Read TextViewArrayContent 讀取存取的信箱內容.
     NSArray *readTextViewArray = [defaults objectForKey:@"textViewcontent"];
-    
     if(readTextViewArray) {
         putTextViewArray = [readTextViewArray mutableCopy];
+        putTextViewAddArray = [[putTextViewArray objectAtIndex:ChildID] mutableCopy];
     } else {
         putTextViewArray = [NSMutableArray new];
+        putTextViewAddArray = [NSMutableArray new];
     }
     
     // Read is new Mail or Old Mail. 讀取是否為新郵件或舊郵件.
-    if([[SelectedRow object] didSelectedRow] >=0 && [[SelectedRow object] didSelectedNewOrOld]) {
+    if([[SelectedRow object] didSelectedRowAboutMail] >=0 && [[SelectedRow object] didSelectedNewOrOldAboutMail]) {
         
         content = [NSData new];
-        content = readTextViewArray[[[SelectedRow object] didSelectedRow]];
+        content = putTextViewAddArray[[[SelectedRow object] didSelectedRowAboutMail]];
         
         NSMutableAttributedString *textViewcontent = [NSMutableAttributedString new];
         textViewcontent = (NSMutableAttributedString*)[NSKeyedUnarchiver unarchiveObjectWithData:content];
         
         _TextView.attributedText = textViewcontent;
         
-        [[SelectedRow object]SendSelectedRow:[[SelectedRow object] didSelectedRow] Bool:false];
+        [[SelectedRow object]SendSelectedRowAboutMail:[[SelectedRow object] didSelectedRowAboutMail] Bool:false];
     }
     
 }
@@ -125,32 +138,35 @@
     content = [NSKeyedArchiver archivedDataWithRootObject:textViewcontent];
     
     // If didSeletedRow is bigger 0 or equal 0, save the content to specify putTextViewArray position. 選擇的如果選擇舊信箱的話，修改信箱內容並儲存。
-    if([[SelectedRow object] didSelectedRow] >=0) {
-        putTextViewArray[[[SelectedRow object] didSelectedRow]] = content;
+    if([[SelectedRow object] didSelectedRowAboutMail] >=0) {
+        putTextViewAddArray[[[SelectedRow object] didSelectedRowAboutMail]] = content;
         
-        NSLog(@"儲存的內容為： %@",putTextViewArray);
+        NSLog(@"儲存的內容為： %@",putTextViewAddArray);
         
+        putTextViewArray[ChildID] = putTextViewAddArray;
         [defaults setValue:putTextViewArray forKey:@"textViewcontent"];
         [defaults synchronize];
         
     // if didSelectedRow is smaller 0, create a new Mail and save. 如果是選擇新信箱的話，創造一個新的資料並儲存。
-    } else if([[SelectedRow object] didSelectedRow] ==-1){
+    } else if([[SelectedRow object] didSelectedRowAboutMail] ==-1){
         
         NSMutableAttributedString *textViewcontent = [[NSMutableAttributedString alloc] initWithAttributedString:_TextView.attributedText];
         
         content = [NSKeyedArchiver archivedDataWithRootObject:textViewcontent];
-        
         NSLog(@"文章的內容為：%@",content);
         
-        [putTextViewArray addObject:content];
+        [putTextViewAddArray addObject:content];
+        NSLog(@"儲存的內容為： %@",putTextViewAddArray);
         
-        NSLog(@"儲存的內容為： %@",putTextViewArray);
-        
+        putTextViewArray[ChildID] = putTextViewAddArray;
         [defaults setValue:putTextViewArray forKey:@"textViewcontent"];
         
-        [putDateArray addObject:dateString];
+        [putDateAddArray addObject:dateString];
         
-        [defaults setValue:putDateArray forKey:@"Mailibformation"];
+        putDateArray[ChildID] = putDateAddArray;
+        NSLog(@"putDateAddArray的內容為： %@",putDateArray);
+        
+       [defaults setValue:putDateArray forKey:@"Mailibformation"];
         
         [defaults synchronize];
     }
@@ -363,9 +379,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-
-
 -(void)resgisterKeyborad {
     [_TextView resignFirstResponder];
 }
@@ -415,20 +428,43 @@
     dateLabel.textColor = [UIColor flatGrayColor];
     dateLabel.font = [UIFont fontWithName:@"Arial" size:15];
     dateLabel.backgroundColor = [UIColor flatSandColor];
+//    dateLabel.alpha = 1 ;
     dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
     dateString = [dateFormatterToPostCard stringFromDate:[NSDate date]];
     _MyWriteMailTableView.tableHeaderView = dateLabel;
     
-    _MyWriteMailTableView.backgroundColor = [UIColor flatSandColor];
+    _MyWriteMailTableView.backgroundColor = [UIColor flatBlackColor];
+//    _MyWriteMailTableView.layer.cornerRadius=15.0;
+//    _MyWriteMailTableView.clipsToBounds = YES;
+//    _MyWriteMailTableView.layer.borderWidth = 2.0;
+//    _MyWriteMailTableView.layer.borderColor = [UIColor flatBlackColor].CGColor;
+//    _MyWriteMailTableView.layer.masksToBounds = YES;
+    
+    _MyWriteMailTableView.layer.shadowOffset = CGSizeMake(5,5);
+    _MyWriteMailTableView.layer.shadowRadius = 3.5;
+    _MyWriteMailTableView.layer.shadowOpacity = 0.8;
+    _MyWriteMailTableView.layer.masksToBounds = false;
+
+    
 }
 
+// 為 TextView 做準備
 -(void)TextViewPrepare{
     _TextView.delegate = self;
     
     // Prepare a TextView to type word for user. 準備一個 TextView 給使用者輸入文字.
-    _TextView.backgroundColor=[UIColor flatSandColor];
     _TextView.font = [UIFont fontWithName:@"Arial" size:18.0];
     _TextView.textColor = [UIColor flatBlackColor];
+    _TextView.backgroundColor = [UIColor flatSandColor];
+//    _TextView.alpha = 0.1 ;
+//    _TextView.backgroundColor=[UIColor flatSandColor];
+//    _TextView.layer.cornerRadius=30.0;
+//    _TextView.clipsToBounds = YES;
+//    _TextView.layer.borderWidth = 2.0;
+//    _TextView.layer.borderColor = [UIColor flatBlackColor].CGColor;
+//    _TextView.layer.masksToBounds = YES;
+    
+
 }
 
 // Call this method somewhere in your view controller setup code.
@@ -469,25 +505,6 @@
     _TextView.contentInset = contentInsets;
     _TextView.scrollIndicatorInsets = contentInsets;
 }
-
-
-
-//-(void)textViewDidChange:(UITextView *)textView {
-//
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//    
-//    paragraphStyle.lineSpacing = 20;
-//    
-//    NSDictionary *attributes = @{
-//                                 
-//                                 NSFontAttributeName:[UIFont systemFontOfSize:15],
-//                                 
-//                                 NSParagraphStyleAttributeName:paragraphStyle
-//                                 
-//                                 };
-//    
-//    textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:attributes];
-//}
 
 
 - (void)didReceiveMemoryWarning {

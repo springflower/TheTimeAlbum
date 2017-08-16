@@ -44,10 +44,10 @@
         
         //        設定基本大小
         self.frame=CGRectMake((fullScreenBounds.size.width*self.MenuScreenScale)*2,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height-22);
-        self.backgroundColor=[UIColor flatSkyBlueColor];
+        self.backgroundColor=[UIColor flatRedColor];
         self.layer.cornerRadius=25.0;
         self.clipsToBounds = YES;
-        self.layer.borderWidth = 1.0;
+//        self.layer.borderWidth = 1.0;
         self.layer.borderColor = [UIColor flatBlackColor].CGColor;
         self.layer.masksToBounds = YES;
         //self.alpha = 0.8;

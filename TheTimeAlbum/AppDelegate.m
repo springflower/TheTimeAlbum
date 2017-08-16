@@ -29,18 +29,18 @@
     
     
     // set default viewcontroller by login status
-//    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-//    NSLog(@"appdele : %@", [localUserData objectForKey:@"uid"]);
-//    if([localUserData objectForKey:@"uid"] == nil){
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"loginPage" bundle:nil];
-//        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-//        
-//    } else {
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarVC"];
-//    
-//    }
-//    [self.window makeKeyAndVisible];
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    NSLog(@"appdele : %@", [localUserData objectForKey:@"uid"]);
+    if([localUserData objectForKey:@"uid"] == nil){
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"loginPage" bundle:nil];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        
+    } else {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarVC"];
+    
+    }
+    [self.window makeKeyAndVisible];
     
     
     

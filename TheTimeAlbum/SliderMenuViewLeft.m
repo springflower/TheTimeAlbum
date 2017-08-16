@@ -17,13 +17,14 @@
 
 @implementation SliderMenuViewLeft
 {
+    
     CGPoint lastLocation;
     CGRect fullScreenBounds;
     UITableView *MenuTableView;
     int targetPageID;
     NSUserDefaults *defaults;
     UIPanGestureRecognizer *putWayLeftMenu;
-    NSArray *readMyBigStickerArray;
+    NSArray *readChildBigStickerArray;
     NSArray *readChildTextFieldnameArray;
     NSArray *readChildBirthdayFieldArray;
 
@@ -61,7 +62,7 @@
         self.backgroundColor=[UIColor flatSkyBlueColor];
         self.layer.cornerRadius=25.0;
         self.clipsToBounds = YES;
-        self.layer.borderWidth = 1.0;
+//        self.layer.borderWidth = 1.0;
         self.layer.borderColor = [UIColor flatBlackColor].CGColor;
         self.layer.masksToBounds = YES;
         //self.alpha = 0.8;
@@ -165,28 +166,17 @@
 }
 
 -(void)callMenu{
-    
+    //準備讀取存取的孩子姓名陣列
     readChildTextFieldnameArray = [defaults objectForKey:@"ChildName"];
+    //準備讀取存取的孩子生日陣列
     readChildBirthdayFieldArray = [defaults objectForKey:@"ChildBirthday"];
-    readMyBigStickerArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"MyBigSticker"];
-    
-
- //      NSData* MyBigStickerImageData = [[NSUserDefaults standardUserDefaults] objectForKey:@"MyBigSticker"];
-//      UIImage *image = [UIImage imageWithData:imageData];
-//    if(image != nil){
-//        [ImageMenuArray addObject:image];
-//        NSData *data = [NSData new];
-//        data = [NSKeyedArchiver archivedDataWithRootObject:ImageMenuArray];
-//        [defaults setValue:data forKey:@"MyBigStickerArray"];
-//        imageData = nil;
-
-//    }
-    
-    
+    //準備讀取存取的孩子大頭貼陣列
+    readChildBigStickerArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"MyBigSticker"];
+    //準備 MenuTableView 重新更新一次
     [MenuTableView reloadData];
-    
+    //解除 SliderMenuViewLeft 本身的隱藏
     self.hidden = false;
-//    CGRect fullScreenBounds=[[UIScreen mainScreen] bounds];
+    //準備 SliderMenuViewLeft 的動畫
     [UIView beginAnimations:@"inMenu" context:nil];
     [UIView setAnimationDuration:self.SwichingPageSpeed];
     [UIView setAnimationDelegate:self];
@@ -231,7 +221,7 @@
         myCell.textLabel.text=[readChildTextFieldnameArray objectAtIndex:x];
         myCell.detailTextLabel.text = [NSString
                                        stringWithFormat:@"生日:%@",[readChildBirthdayFieldArray objectAtIndex:x]];
-        NSData *readMyBigStickerData = [readMyBigStickerArray objectAtIndex:x];
+        NSData *readMyBigStickerData = [readChildBigStickerArray objectAtIndex:x];
         UIImage*BigStickerImage = [UIImage imageWithData:readMyBigStickerData];
         myCell.imageView.image = BigStickerImage;
     }
@@ -246,8 +236,16 @@
 
 #pragma mark -UITableDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self callMenu];
-//    targetPageID=indexPath.row;//設定目標 tab ID
+    
+    NSInteger ChildID = indexPath.section;
+    [defaults setInteger:ChildID forKey:@"ChildID"];
+    [defaults synchronize];
+    
+    [UIView beginAnimations:@"inMenu" context:nil];
+    [UIView setAnimationDelegate:self];
+    self.frame=CGRectMake(-fullScreenBounds.size.width*self.MenuScreenScale,20, fullScreenBounds.size.width*self.MenuScreenScale, fullScreenBounds.size.height);
+    [UIView commitAnimations];
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

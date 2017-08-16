@@ -25,6 +25,8 @@
 
 @interface timeLineVC ()<UIScrollViewDelegate, UICollectionViewDelegate,UICollectionViewDataSource>
 {
+    UITapGestureRecognizer *putWayMenu;     // 觸控事件 : 任意點擊縮回側邊選單
+    
     MyAccountData *currentuser;
     NSUserDefaults *localUserData;
     MyCommunicator *comm;
@@ -34,6 +36,21 @@
     NSData *saveData;
     NSInteger lastPostID;
     //BOOL isSuccess;
+    
+    
+    // Boen
+    //準備讀取目前當下所選取的孩子ID
+    NSInteger ChildID;
+    //準備讀取儲存的孩子大頭貼陣列
+    NSArray *readChildBigStickerArray;
+    //準備放置讀取儲存的孩子大頭貼圖片
+    UIImage *ChildStickerImage;
+    //準備放置讀取儲存的孩子背景圖片
+    UIImage *MyChildBackgroundImage;
+    //準備讀取所選取的孩子ID來讀取孩子名字陣列
+    NSArray *readChildTextFieldnameArray;
+    //-- Boen
+    
 }
 -(NSMutableArray*) myStaticArray;
 @property (weak, nonatomic) UITableView *myTableView;
@@ -60,8 +77,15 @@
 }
 
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 加入觸控事件 : 任意點擊縮回側邊選單
+    putWayMenu = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(putWayMenu)];
+    [self.view addGestureRecognizer:putWayMenu];
+    //--
     
     //isSuccess = false;
     
@@ -117,6 +141,28 @@
     
     //改在viewwill appear
     //[self doReloadJob];
+    
+    
+    
+    // Boen
+    //準備讀取所選取的孩子ID來讀取孩子大頭貼陣列
+    readChildBigStickerArray = [localUserData objectForKey:@"MyBigSticker"];
+    ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
+    NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
+    if(ChildBigStickerImageData){
+        ChildStickerImage = [UIImage imageWithData:ChildBigStickerImageData];
+        NSLog(@"照片為： %@",ChildStickerImage);
+    }
+    //讀取孩子背景圖片陣列
+    NSArray *readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
+    NSData *readMyChildBackImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
+    if(readMyChildBackImageData) {
+        MyChildBackgroundImage  = [UIImage imageWithData:readMyChildBackImageData];
+    }
+    // Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子ID來決定孩子的名字。
+    readChildTextFieldnameArray = [localUserData objectForKey:@"ChildName"];
+    //-- Boen
+    
 }
 
 #pragma mark - 初始化ＵＩ相關物件
@@ -149,7 +195,14 @@
 // Initial HeadView      初始化標頭view元件
 - (void) initHeadView {
     
-    HeadView * vc = [[HeadView alloc]initWithFrame:headRect backgroundView:@"Fox.jpg" headView:@"head.png" headViewWidth:(CGFloat)(VCWidth / 4) signLabel:@"王小明"];
+    
+    HeadView * vc = [[HeadView alloc]initWithFrame:headRect backgroundView:@"Fox.jpg"
+                                          headView:@"head.png"
+                                     headViewWidth:(CGFloat)(VCWidth / 4) signLabel:@"王小明"];
+    
+//    HeadView * vc = [[HeadView alloc]initWithFrameByBryan:headRect backgroundView:MyChildBackgroundImage
+//                                          headView:ChildStickerImage
+//                                     headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
     
     _myView = vc;
     _myView.backgroundColor = [UIColor clearColor];
@@ -191,6 +244,18 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated{
+    
+    // Boen
+    //讀取是否已有建立第一個孩子.
+    NSUserDefaults *readChildNameDefaults;
+    readChildNameDefaults = [NSUserDefaults standardUserDefaults];
+    //如果讀出的陣列數量為零的話，就執行 AddChildSettingViewController 來創造第一個孩子。
+    NSArray *readChildTextFieldnameArray = [readChildNameDefaults objectForKey:@"ChildName"];
+    if(readChildTextFieldnameArray.count == 0) {
+        AddChildSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"AddChildSettingViewController"];
+        [self presentViewController:nextPage animated:YES completion:nil];
+    }
+    //-- Boen
 
     //[self.navigationController setNavigationBarHidden:YES animated:animated];
     [self doReloadJob];
@@ -359,10 +424,6 @@
         // 存檔
         //saveData = [NSKeyedArchiver archivedDataWithRootObject:postItems];
         //[localUserData setObject:saveData forKey:@"postItems"];
-        
-        
-        
-        
         
         [self.myCollectionView reloadData];
         return;
@@ -554,15 +615,19 @@
         _alphaMemory = 1;
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     }
-    
-    
-    
+}
+
+// 收起左側 or 右側 選單
+-(void)putWayMenu {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"putAWayLeftMenu" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"putAwayRightMenu" object:nil];
 }
 //------------------------------------------------------------------
 
 // 暫時
 - (IBAction)reload:(id)sender {
     [self doReloadJob];
+    //[self initHeadView];
 }
 
 /*
@@ -576,20 +641,18 @@
 */
 
 #pragma mark- navigation drawer method    側邊選單的東西
-// navi drawer
 -(void)handlePan:(id)sender{
     [self.MenuLeft callMenu];
 }
-
+//呼叫左側目錄選單出現
 -(void)callMenuLeft{
-    //    呼叫目錄選單出現
     [self.MenuLeft callMenu];
 }
-
+//呼叫右側目錄選單出現
 -(void)callMenuRight{
-    //    呼叫目錄選單出現
     [self.MenuRight callMenu];
 }
+
 -(void)changeViewContrllerToAddChildSettingViewController {
     AddChildSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"AddChildSettingViewController"];
     [self presentViewController:nextPage animated:YES completion:nil];

@@ -23,6 +23,15 @@
     NSMutableArray *getAchievementItems;       //存成就物件的陣列
     NSMutableArray *savedAchievementItems;     //從userdefault讀出的成就物件陣列
     NSInteger lastAchievementID;
+    
+    //準備讀取目前當下所選取的孩子ID
+    NSInteger ChildID;
+    //準備放置讀取儲存的孩子大頭貼圖片
+    UIImage *ChildStickerImage;
+    //準備放置讀取儲存的孩子背景圖片
+    UIImage *MyChildBackgroundImage;
+    //準備讀取所選取的孩子ID來讀取孩子名字陣列
+    NSArray *readChildTextFieldnameArray;
 }
 
 @property (weak, nonatomic) UITableView *myTableView;
@@ -48,6 +57,25 @@
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    
+    //準備讀取所選取的孩子ID來讀取孩子大頭貼陣列
+    //準備讀取儲存的孩子大頭貼陣列
+    NSArray *readChildBigStickerArray = [localUserData objectForKey:@"MyBigSticker"];
+    ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
+    NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
+    if(ChildBigStickerImageData){
+        ChildStickerImage = [UIImage imageWithData:ChildBigStickerImageData];
+        NSLog(@"照片為： %@",ChildStickerImage);
+    }
+    //讀取孩子背景圖片陣列
+    NSArray *readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
+    NSData *readMyChildBackImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
+    if(readMyChildBackImageData) {
+        MyChildBackgroundImage  = [UIImage imageWithData:readMyChildBackImageData];
+    }
+    // Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子ID來決定孩子的名字。
+    readChildTextFieldnameArray = [localUserData objectForKey:@"ChildName"];
+    
     
     
     
@@ -75,7 +103,11 @@
     
     [self.view addSubview:myTableView];
     
-    HeadView * vc = [[HeadView alloc]initWithFrame:headRect backgroundView:@"Fox.jpg" headView:@"head.png" headViewWidth:(CGFloat)(VCWidth / 4) signLabel:@"紀錄寶寶成長的每個重要時刻"];
+//    HeadView * vc = [[HeadView alloc]initWithFrame:headRect backgroundView:@"Fox.jpg" headView:@"head.png" headViewWidth:(CGFloat)(VCWidth / 4) signLabel:@"紀錄寶寶成長的每個重要時刻"];
+    
+    HeadView * vc = [[HeadView alloc]initWithFrameByBryan:headRect backgroundView:MyChildBackgroundImage
+                                                 headView:ChildStickerImage
+                                            headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
     
     _myView = vc;
     _myView.backgroundColor = [UIColor clearColor];
@@ -246,7 +278,7 @@
 // 從網路載入貼文內容
 - (void) doReloadJob {
     NSLog(@"1afjkj;lfj=======");
-    [getAchievementItems removeAllObjects];
+    
     
     NSString *babyID = [localUserData objectForKey:@"babyid"];
     [comm retriveAchievementsByBabyID:babyID
@@ -272,7 +304,9 @@
             NSLog(@"No new achievement, do nothing and return.");
             return;
         }
-        
+        [getAchievementItems removeAllObjects];
+                               
+                               
         // Keep and update latest lastMessageID
         NSDictionary *lastItem = items.lastObject;
         lastAchievementID = [lastItem[LAST_ACHIEVEMENT_ID_KEY] integerValue];

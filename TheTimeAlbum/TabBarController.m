@@ -13,7 +13,7 @@
 #define SELF_WIDTH CGRectGetWidth(self.bounds)
 #define SELF_HEIGHT CGRectGetHeight(self.bounds)
 
-@interface TabBarController ()<UIGestureRecognizerDelegate>
+@interface TabBarController ()<UIGestureRecognizerDelegate,UITabBarDelegate>
 
 @end
 
@@ -27,51 +27,26 @@
     UITabBar *ColorTabBarView;
 }
 
-
-+(instancetype)object
-{
-    static TabBarController *testObject = nil;
-    if(testObject == nil)
-    {
-        testObject = [[TabBarController alloc]init];
-    }
-    return testObject;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    itemCout = 4;
     
-    // Do any additional setup after loading the view.
+    ColorTabBarView *tabBar = [[ColorTabBarView alloc] initWithFrame:self.tabBar.frame];
     
-//    ColorTabBarView *ColorTabBarView = [[ColorTabBarView alloc] initWithFrame:self.tabBar.frame];
-//    [self setValue:tabBar forKey:@"tabBar"];
-    
-//    itemCout = 4;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TabBarControlerAnimated) name:@"TabBarControlerAnimated" object:nil];
     
 //    [self setupColorView];
 //    
 //    [self setupMaskLayer];
 //    
 //    [self layoutSubviews];
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    [self setValue:tabBar forKey:@"tabBar"];
+    
 }
 
 -(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"putAWayLeftMenu" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"putAwayRightMenu" object:nil];
-    
-    CATransition *transition = [CATransition animation];
-    [transition setDuration:0.2];
-    [transition setType:kCATransitionFade];
-    [self.view.layer addAnimation:transition forKey:nil];
-    
     
 //    NSInteger index = [self.tabBarController.tabBar.items indexOfObject:item];
 //    fromeIndex = toIndex;
@@ -80,6 +55,14 @@
     
 }
 
+-(void)TabBarControlerAnimated {
+    
+    CATransition *transition = [CATransition animation];
+    [transition setDuration:0.2];
+    [transition setType:kCATransitionFade];
+    [self.view.layer addAnimation:transition forKey:nil];
+}
+//
 //- (void)setupMaskLayer {
 //    
 //    CGFloat itemWidth = self.tabBarController.tabBar.frame.size.width/itemCout;
@@ -93,10 +76,13 @@
 //
 //-(void)setupColorView {
 //    NSArray *itemColor = @[[UIColor blueColor],[UIColor redColor],[UIColor greenColor],[UIColor blackColor]];
+//    
 //    itemCout = 4;
 //    
 //    UIView *colorView = [[UIView alloc] initWithFrame:self.tabBar.bounds];
+//    
 //    [ColorTabBarView addSubview:colorView];
+//    
 //    colorfulView = colorView;
 //    
 //    CGFloat itemWidth = self.tabBarController.tabBar.frame.size.width / itemCout;
@@ -164,6 +150,10 @@
 //}
 
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 /*
 #pragma mark - Navigation
