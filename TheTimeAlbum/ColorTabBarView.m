@@ -116,11 +116,9 @@
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     
-    CATransition *transition = [CATransition animation];
-    [transition setDuration:0.2];
-    [transition setType:kCATransitionFade];
-    [[TabBarController object].view.layer
- addAnimation:transition forKey:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"putAWayLeftMenu" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"putAwayRightMenu" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TabBarControlerAnimated" object:nil];
     
     NSInteger index = [self.items indexOfObject:item];
     self.fromeIndex = self.toIndex;
@@ -139,8 +137,6 @@
 - (void)layoutSubviews {
     
     [super layoutSubviews];
-    
-
     
     CGFloat itemWidth = SELF_WIDTH / itemCount;
     NSArray *subviews = self.colorfulView.subviews;

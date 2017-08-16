@@ -34,5 +34,16 @@ typedef void (^DoneHandler)(NSError *error, id result);
                        data:(NSData*) data
                  completion:(DoneHandler) done;
 
+-(void) retrivePostsWithLastPostID:(NSString*)lastPostID
+                            babyid:(NSString*)babyID
+                        completion:(DoneHandler)done;
+-(void) retriveAchievementsByBabyID:(NSString*)babyID
+                         completion:(DoneHandler)done;
+
+-(void) updatePostsToServerWithPostID:(NSInteger)postID
+                              content:(NSString*)content
+                           completion:(DoneHandler)done;
+
+
 +(instancetype) sharedInstance;
 @end

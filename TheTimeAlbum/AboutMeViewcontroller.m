@@ -5,7 +5,7 @@
 //  Created by 黃柏恩 on 2017/7/18.
 //  Copyright © 2017年 Greathard. All rights reserved.
 //
-
+#import "SelectedRow.h"
 #import "AboutMeViewcontroller.h"
 #import "AboutMeViewcontrollerCell.h"
 
@@ -39,7 +39,7 @@
                  [defaults objectForKey:@"userName"],
                  [defaults objectForKey:@"userMail"], nil];
     packegUserArray = [[NSMutableArray alloc] initWithObjects:userArray, nil];
-    information = @[@"設定",@"個人資料",@"通知",@"孩子密碼"];
+    information = @[@"孩子設定",@"個人資料",@"通知",@"孩子密碼"];
     
     putinformationArray = [[NSMutableArray alloc] initWithObjects:packegUserArray,information, nil];
     
@@ -119,6 +119,15 @@
 
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES]; //為table Cell 加上選取後的動畫。
+    
+    if(indexPath.section > 0) {
+        NSLog(@"我是第 %ld 個",(long)indexPath.row);
+        NSLog(@"%ld",indexPath.section);
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.

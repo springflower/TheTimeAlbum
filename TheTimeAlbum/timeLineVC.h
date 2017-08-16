@@ -7,10 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SliderMenuViewLeft.h"
+#import "SliderMenuViewRight.h"
+
 typedef void(^AlphaBlock)(CGFloat alpha);
 
 @interface timeLineVC : UIViewController
 
 @property (nonatomic, copy) AlphaBlock alphaBlock;
 
+
+
+// navi drawer
+@property  SliderMenuViewLeft *MenuLeft;
+@property  SliderMenuViewRight *MenuRight;
+//--
 @end

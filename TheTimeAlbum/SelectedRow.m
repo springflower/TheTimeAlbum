@@ -32,17 +32,17 @@
     return testObject;
 }
 
--(void)SendSelectedRow:(int)selected Bool:(BOOL)value {
+-(void)SendSelectedRowAboutMail:(int)selected Bool:(BOOL)value {
     SelectRow = selected;
     Value = value;
 }
 
-- (int)didSelectedRow; {
+- (int)didSelectedRowAboutMail; {
 
     return SelectRow;
 }
 
-- (BOOL)didSelectedNewOrOld {
+- (BOOL)didSelectedNewOrOldAboutMail {
     
     return Value;
 }

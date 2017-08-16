@@ -35,6 +35,13 @@
     UIDatePicker *datePicker;
     UITableView * testtable;
     BOOL Dismiss;
+    
+    UIBarButtonItem *CancelBtn;
+    //準備讀取儲存的個人信件數量
+    NSMutableArray *putDateArray;
+    //準備讀取儲存的個人信件內容數量
+    NSMutableArray *putTextViewArray;
+    
 }
 @synthesize ChildNameTextField = ChildNameTextField;
 @synthesize BirthdayTextField = BirthdayTextField;
@@ -44,23 +51,48 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     
+    //讀取是否已有建立第一個孩子 ID.
+    NSUserDefaults *readChildIdDefaults;
+    readChildIdDefaults = [NSUserDefaults standardUserDefaults];
+    //如果讀出的陣列數量為零的話，就執行 AddChildSettingViewController 來創造第一個孩子。
+    NSArray *readChildNameArray = [readChildIdDefaults objectForKey:@"ChildName"];
+    if(readChildNameArray.count == 0) {
+        CancelBtn.enabled = false;
+    } else {
+        CancelBtn.enabled = true;
+    }
+    //讀取孩子的名稱陣列
     NSArray *readChildTextFieldnameArray = [defaults objectForKey:@"ChildName"];
     if(readChildTextFieldnameArray) {
         putChildTextFieldnameArray  = [readChildTextFieldnameArray mutableCopy];
     } else {
         putChildTextFieldnameArray = [NSMutableArray new];
     }
-    
+    //讀取孩子的生日陣列
     NSArray *readChildBirthdayFieldArray = [defaults objectForKey:@"ChildBirthday"];
     if(readChildBirthdayFieldArray) {
         putChildBirthdayFieldArray  = [readChildBirthdayFieldArray mutableCopy];
     } else {
         putChildBirthdayFieldArray = [NSMutableArray new];
     }
+    //讀取孩子的個人信件陣列
+    NSArray *readDateArray = [defaults objectForKey:@"Mailibformation"];
+    if(readDateArray.count != 0) {
+        putDateArray  = [readDateArray mutableCopy];
+    } else {
+        putDateArray = [NSMutableArray new];
+    }
+    //讀取孩子的個人信件內容陣列
+    NSArray *readTextViewArray = [defaults objectForKey:@"textViewcontent"];
+    if(readTextViewArray.count != 0) {
+        putTextViewArray  = [readTextViewArray mutableCopy];
+    } else {
+        putTextViewArray = [NSMutableArray new];
+    }
     
     if (Dismiss == true) {
         Dismiss = false;
-        [self dismissViewControllerAnimated:NO completion:nil];
+        [self dismissViewControllerAnimated:YES completion:nil];
         return;
     }
 }
@@ -82,9 +114,9 @@
     UIBarButtonItem *NextStep = [[UIBarButtonItem alloc] initWithTitle:@"下一步" style:
                                  UIBarButtonItemStyleDone target:self action:@selector(NextStepToSettingBigStickers)];
     self.navigationItem.rightBarButtonItem = NextStep;
-    UIBarButtonItem *Cancel = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:
+    CancelBtn = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:
                                 UIBarButtonItemStyleDone target:self action:@selector(CancelAddChildSettingViewController)];
-    self.navigationItem.leftBarButtonItem = Cancel;
+    self.navigationItem.leftBarButtonItem = CancelBtn;
     
     
     _FatherSelected.layer.cornerRadius=15.0;
@@ -122,7 +154,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dissMissViewController) name:@"dimssAddChildSettingViewController" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveChildNameAndBirthday) name:@"saveChildNameAndBirthday" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveChildNameAndBirthday) name:@"saveChildInformation" object:nil];
 
 }
 
@@ -355,17 +387,21 @@
 
         [[NSNotificationCenter defaultCenter] postNotificationName:@"hiddenLeftMenu" object:nil];
         
-        CATransition* transition = [CATransition animation];
-        transition.duration = 0.2;
+//        CATransition* transition = [CATransition animation];
+//        transition.duration = 3;
+//        transition.type = kCATransitionPush;
+//        transition.subtype = kCATransitionFromRight;
+        
+        CATransition *transition = [[CATransition alloc] init];
+        transition.duration = 0.5;
         transition.type = kCATransitionPush;
         transition.subtype = kCATransitionFromRight;
-        //[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
-        
         [self.view.window.layer addAnimation:transition forKey:kCATransition];
-        
-        BigStickerSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"BigStickerSettingViewController"];
-        //[self presentViewController:nextPage animated:YES completion:nil];
-        [self presentViewController:nextPage animated:NO completion:nil];
+
+       BigStickerSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"BigStickerSettingViewController"];
+        [self presentViewController:nextPage animated:false completion:nil];
+
+        //[self.navigationController presentViewController:nextPage animated:NO completion:nil];
 
     } else {
         if([ChildNameTextField.text isEqualToString:@""]) {
@@ -402,13 +438,29 @@
 }
 
 -(void) saveChildNameAndBirthday {
-    
+    //增加小孩名字到陣列中
     [putChildTextFieldnameArray addObject:ChildNameTextField.text];
+    //增加小孩生日到陣列中
     [putChildBirthdayFieldArray addObject:BirthdayTextField.text];
-    
+    //增加信件陣列數量給存放孩子個人信件的陣列
+    NSArray *emptyArray = [NSArray new];
+    [putDateArray addObject:emptyArray];
+    //增加信件內容數量給存放孩子個人信件內容陣列
+    [putTextViewArray addObject:emptyArray];
+    //記錄當下所增加的小孩ID
+    NSInteger ChildID = putChildTextFieldnameArray.count-1;
+    NSLog(@"小孩的ID為： %ld",(long)ChildID);
+    //儲存信件陣列給存放孩子個人信件的陣列
+    [defaults setObject:putDateArray forKey:@"Mailibformation"];
+    //儲存信件內容陣列給存放孩子個人信件內容的陣列
+    [defaults setObject:putTextViewArray forKey:@"textViewcontent"];
+    //儲存當下的小孩ID
+    [defaults setInteger:ChildID forKey:@"ChildID"];
+    //儲存小孩名字
     [defaults setObject:putChildTextFieldnameArray forKey:@"ChildName"];
+    //儲存小孩生日
     [defaults setObject:putChildBirthdayFieldArray forKey:@"ChildBirthday"];
-    
+    //儲存小孩性別
     if(ChildSex == 1) {
         [defaults setObject:BoySelected.titleLabel.text forKey:@"ChildSex"];
     } else if(ChildSex == 2) {
@@ -416,7 +468,7 @@
     } else {
         [defaults setObject:AnotherSelected.titleLabel.text forKey:@"ChildSex"];
     }
-    
+    //儲存你與孩子的關係
     if(WithRelationship == 1) {
         [defaults setObject:_FatherSelected.titleLabel.text forKey:@"WithRelationShip"];
     } else if(WithRelationship == 2) {
@@ -424,6 +476,8 @@
     } else {
         [defaults setObject:_AnotherRelationship.titleLabel.text forKey:@"WithRelationShip"];
     }
+    [defaults synchronize];
+
 }
 
 /*

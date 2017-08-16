@@ -14,6 +14,41 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - AWSAutoScaling (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSCloudWatch (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSCognito (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSCognitoIdentityProvider (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSCore (2.5.8)
+  - AWSDynamoDB (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSEC2 (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSElasticLoadBalancing (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSIoT (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSKinesis (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSLambda (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSMachineLearning (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSMobileAnalytics (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSS3 (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSSES (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSSimpleDB (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSSNS (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSSQS (2.5.8):
+    - AWSCore (= 2.5.8)
   - BFPaperButton (2.1.2)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
@@ -77,18 +112,55 @@ PODS:
   - GTMSessionFetcher/Core (1.1.10)
   - GTMSessionFetcher/Full (1.1.10):
     - GTMSessionFetcher/Core (= 1.1.10)
+  - KVNProgress (2.3.1)
 
 DEPENDENCIES:
   - AFNetworking
+  - AWSAutoScaling
+  - AWSCloudWatch
+  - AWSCognito
+  - AWSCognitoIdentityProvider
+  - AWSDynamoDB
+  - AWSEC2
+  - AWSElasticLoadBalancing
+  - AWSIoT
+  - AWSKinesis
+  - AWSLambda
+  - AWSMachineLearning
+  - AWSMobileAnalytics
+  - AWSS3
+  - AWSSES
+  - AWSSimpleDB
+  - AWSSNS
+  - AWSSQS
   - BFPaperButton
   - ChameleonFramework
   - Facebook-iOS-SDK
   - Google
   - Google/SignIn
   - GoogleSignIn
+  - KVNProgress
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AWSAutoScaling: b0ca14740f9f26282d6ccd00a7b2f5a499506c28
+  AWSCloudWatch: 9813ebc6104bc61599b12fa448047c69d4a0115c
+  AWSCognito: 8eb74039f4dc5f2d929999c4f531eeb4bd83e6cb
+  AWSCognitoIdentityProvider: 6c0c276a16b622914563350c64d723bcecaa9e75
+  AWSCore: cf101c44d2cc5da32abc27d5529cddc63c010415
+  AWSDynamoDB: 53ead656801e1a40b415fc0bebd85f1dc0dc0ead
+  AWSEC2: d2817357186d4cc18c23ec0b9deb136bfea88b3a
+  AWSElasticLoadBalancing: 9fd9f162b87bded22a5d0406173d8b128eabc379
+  AWSIoT: 209ae36ea1e48a9b8bcb65a94e8267265b4ff2b3
+  AWSKinesis: d4badcaa538424fad79aa86bc35626aa0b7019c9
+  AWSLambda: d83a31bca72ce8e6a6b81a5a3a03e7ea2a44ec3d
+  AWSMachineLearning: bc8860ad5c2651616f6482e7d70842ba89eaf7a8
+  AWSMobileAnalytics: d0eefb1dbcab87cb97f78961bb847f61396380bb
+  AWSS3: addf558f9cf2368e7fb520440867fea5596db0fb
+  AWSSES: 4b81522e24a8e4095d8d6c0511397ab1d51fc06f
+  AWSSimpleDB: d25964f8ec8e5d20af3755667fe0c2924e28925c
+  AWSSNS: 812baa3f5dd5e53da69c37fb8b451e52d0735821
+  AWSSQS: bea4c7b93c011c7765a071b01ad74949d62c1d76
   BFPaperButton: a25fdd3ff6898bdbd5cc9b1334ca36adb0296b9f
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
@@ -101,7 +173,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  KVNProgress: 8167b1f19e2758290c0b6143020ed9dcbb0477a1
 
-PODFILE CHECKSUM: 56427ff0f74a93407caaf9305d8062229adc2a8f
+PODFILE CHECKSUM: 515a723bed1a7dd805ec3355cf477ff2dd3526bc
 
 COCOAPODS: 1.2.0

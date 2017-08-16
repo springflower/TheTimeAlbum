@@ -18,9 +18,12 @@
 
 @implementation BigStickerSettingViewController
 {
-
+    //準備讀取所儲存的資料
     NSUserDefaults *defaults;
+    //準備讀取儲存的孩子大頭貼陣列
     NSMutableArray *putMyBigStickerArray;
+    //準備讀取孩子的背景陣列
+    NSMutableArray *putMyChildBackImageArray;
 }
 
 @synthesize MyBigSticker = MyBigSticker;
@@ -36,7 +39,12 @@
     } else {
         putMyBigStickerArray = [NSMutableArray new];
     }
-    
+    NSArray *readMyChildBackImageArray = [defaults objectForKey:@"readMyChildBackImageArray"];
+    if(readMyChildBackImageArray) {
+        putMyChildBackImageArray  = [readMyChildBackImageArray mutableCopy];
+    } else {
+        putMyChildBackImageArray = [NSMutableArray new];
+    }
 }
 
 - (void)viewDidLoad {
@@ -197,26 +205,39 @@
    
     [self.view.window.layer addAnimation:transition forKey:kCATransition];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 -(void)FinishButton {
     
-    NSData* pictureData = [NSData dataWithData:UIImagePNGRepresentation(MyBigSticker.image)];
-    
-    [putMyBigStickerArray addObject:pictureData];
-    
+    //將孩子的大頭貼照片轉成 Data 後，再進行儲存資料的動作
+    NSData* MyChildBigStickerData = [NSData dataWithData:UIImagePNGRepresentation(MyBigSticker.image)];
+    [putMyBigStickerArray addObject:MyChildBigStickerData];
     //NSData *MyBigStickerData = [NSKeyedArchiver archivedDataWithRootObject:putMyBigStickerArray];
     //array = [NSKeyedUnarchiver unarchiveObjectWithData:MyBigStickerData];
-    
     [defaults setObject:putMyBigStickerArray forKey:@"MyBigSticker"];
     NSLog(@"儲存的圖片檔案為： %@",putMyBigStickerArray);
     
+    //將孩子的背景圖片隨機產生，儲存在孩子的背景陣列中
+    int x = arc4random() % 4;
+    NSArray *randomBackgroundImageArray = @[@"background1@2x.jpg",
+                                            @"background2@2x.jpg",
+                                            @"background3@2x.jpg",
+                                            @"background4@2x.jpg",
+                                            @"background5@2x.jpg"];
+    UIImage *MyChildBackImage = [UIImage imageNamed:randomBackgroundImageArray[x]];
+    NSData *MyChildBackImageData = [NSData dataWithData:UIImageJPEGRepresentation(MyChildBackImage,1.0)];
+    [putMyChildBackImageArray addObject:MyChildBackImageData];
+    [defaults setObject:putMyChildBackImageArray forKey:@"readMyChildBackImageArray"];
+    NSLog(@"  數量為： %lu ",(unsigned long)putMyChildBackImageArray.count);
+    
+    //將儲存的資料進行同步
     [defaults synchronize];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"saveChildNameAndBirthday" object:nil];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"saveChildInformation" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dimssAddChildSettingViewController" object:nil];
 }
 // Set BigStickerPlusSticker

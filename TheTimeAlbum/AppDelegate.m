@@ -140,7 +140,10 @@ didSignInForUser:(GIDGoogleUser *)user
     NSString *familyName = user.profile.familyName;
     NSString *email = user.profile.email;
     appCurrentUser.userGoogleId = userId;
-    NSLog(@"=========email :%@",userId);
+    NSLog(@"=========UserGoogleID :%@",userId);
+    NSLog(@"=========email :%@",email);
+    NSLog(@"=========FullName :%@",fullName);
+    //NSLog(@"=========Token :%@",idToken);
     // ...
 }
 

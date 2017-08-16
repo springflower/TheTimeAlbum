@@ -10,6 +10,5 @@
 
 @interface TabBarController : UITabBarController
 
-+(instancetype) object;
 
 @end

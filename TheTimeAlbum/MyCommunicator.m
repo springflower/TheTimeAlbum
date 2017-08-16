@@ -36,28 +36,6 @@ static MyCommunicator *_singletonCommunicator = nil;
                          data:nil
                    completion:done];
     
-//    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-//    // session.requestSerializer = [AFJSONRequestSerializer serializer];
-//    session.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
-//    session.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    NSDictionary *param2 = @{@"content": content, @"type": postType, @"babyID": babyID};
-//    params[@"content"] = content;
-//    params[@"type"] = postType;
-//    params[@"babyID"] = babyID;
-//    NSLog(@"%@.......%@........%@",params[@"content"],params[@"type"],params[@"babyID"]);
-//    
-//    [session POST:SEND_MESSAGE_URL parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
-//     {
-//         NSLog(@"AFN success.......");
-//         
-//         [self.navigationController popViewControllerAnimated:YES];
-//     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//         NSLog(@"AFN fail.......... %@", error);
-//         [self.navigationController popViewControllerAnimated:YES];
-//     }];
-    
 }
 
 -(void) registerUserToSQL:(MyAccountData*) userData
@@ -109,6 +87,48 @@ static MyCommunicator *_singletonCommunicator = nil;
     
     //return nil;
 }
+
+#pragma mark - retriveMessages from server by babyid  用babybid從伺服器抓訊息
+
+-(void) retrivePostsWithLastPostID:(NSString*)lastPostID babyid:(NSString*)babyID completion:(DoneHandler)done{
+    
+    NSDictionary *parameters = @{ BABYID2: babyID };
+    // @{}--> NSDictionary
+    // @[]--> NSArray
+    // @()--> NSNumber
+    NSLog(@"--do in retrive PostsWithLastPostId");
+    [self doPostWithURLString:RETRIVE_POSTS_URL
+                   parameters:parameters
+                         data:nil
+                   completion:done];
+}
+
+-(void) retriveAchievementsByBabyID:(NSString*)babyID completion:(DoneHandler)done {
+
+    NSDictionary *parameters = @{ BABYID2: babyID };
+    NSLog(@"--do in retrive Achievement by babyid");
+    [self doPostWithURLString:RETRIVE_ACHIEVEMENTS_URL
+                   parameters:parameters
+                         data:nil
+                   completion:done];
+    
+}
+
+#pragma mark - updatePosts to server        修改文章
+-(void) updatePostsToServerWithPostID:(NSInteger)postID
+                              content:(NSString*)content
+                           completion:(DoneHandler)done {
+    //...
+    NSDictionary *params = @{ @"postId": @(postID),
+                              @"content": content   };
+    
+    [self doPostWithURLString:UPDATE_POST_URL
+                   parameters:params
+                         data:nil
+                   completion:done];
+
+}
+
 
 #pragma mark - Private Method to handle POST job.
 // 設計通用API 來送出url request

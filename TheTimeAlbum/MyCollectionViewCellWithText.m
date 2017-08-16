@@ -25,6 +25,12 @@
     self.imageView.layer.cornerRadius = 5;
     self.imageView.clipsToBounds = YES;
     // Initialization code
+    
+    self.layer.masksToBounds = NO;
+    self.layer.shadowOpacity = 0.75f;
+    self.layer.shadowRadius = 2.0f;
+    self.layer.shouldRasterize = NO;
+    //self.layer.shadowPath = [UIBezierPath be]
 }
 
 @end
