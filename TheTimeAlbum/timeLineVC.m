@@ -22,7 +22,9 @@
 #import "AddChildSettingViewController.h"
 #import "PostItem.h"
 #import "EditTextPostViewController.h"
-
+#import "UseDownloadDataClass.h"
+#import "UpdateDataView.h"
+#import "StartCreateFirstChildViewController.h"
 @interface timeLineVC ()<UIScrollViewDelegate, UICollectionViewDelegate,UICollectionViewDataSource>
 {
     UITapGestureRecognizer *putWayMenu;
@@ -43,10 +45,15 @@
     NSArray *readChildBigStickerArray;
     //準備放置讀取儲存的孩子大頭貼圖片
     UIImage *ChildStickerImage;
-    //準備放置讀取儲存的孩子背景圖片
-    UIImage *MyChildBackgroundImage;
+
     //準備讀取所選取的孩子ID來讀取孩子名字陣列
     NSArray *readChildTextFieldnameArray;
+    
+    NSArray *readMyChildBackImageArray;
+    
+    UIImage *MyChildBackGroundImage;
+    
+    HeadView * vc;
     
 }
 -(NSMutableArray*) myStaticArray;
@@ -79,7 +86,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 加入觸控事件
+    // 加入觸控事件來收起左右側選單
     putWayMenu = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(putWayMenu)];
     [self.view addGestureRecognizer:putWayMenu];
     
@@ -136,6 +143,11 @@
     //改在viewwill appear
     //[self doReloadJob];
     
+    //準備接收通知如果下載失敗通知重新下載資料
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(downloadDataFromServe) name:@"downloadDataFromServe" object:nil];
+    
+    
     //準備讀取所選取的孩子ID來讀取孩子大頭貼陣列
     readChildBigStickerArray = [localUserData objectForKey:@"MyBigSticker"];
     ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
@@ -145,10 +157,10 @@
         NSLog(@"照片為： %@",ChildStickerImage);
     }
     //讀取孩子背景圖片陣列
-    NSArray *readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
-    NSData *readMyChildBackImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
-    if(readMyChildBackImageData) {
-        MyChildBackgroundImage  = [UIImage imageWithData:readMyChildBackImageData];
+    readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
+    if(![readMyChildBackImageArray[ChildID] isKindOfClass:[NSString class]]) {
+        NSData *readMyChildBackImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
+        MyChildBackGroundImage = [UIImage imageWithData:readMyChildBackImageData];
     }
     // Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子ID來決定孩子的名字。
     readChildTextFieldnameArray = [localUserData objectForKey:@"ChildName"];
@@ -191,9 +203,18 @@
 //    HeadView * vc = [[HeadView alloc]initWithFrame:headRect backgroundView:@"Fox.jpg"
 //                                          headView:@"head.png"
 //                                     headViewWidth:(CGFloat)(VCWidth / 4) signLabel:@"王小明"];
-    HeadView * vc = [[HeadView alloc]initWithFrameByBryan:headRect backgroundView:MyChildBackgroundImage
-                                          headView:ChildStickerImage
-                                     headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
+    if(MyChildBackGroundImage) {
+        vc = [[HeadView alloc]initWithFrameByBryanImageBackground:headRect
+                                               backgroundView:MyChildBackGroundImage
+                                                     headView:ChildStickerImage
+                                                headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
+    }else {
+        vc = [[HeadView alloc]initWithFrameByBryan:headRect
+                                               backgroundView:readMyChildBackImageArray[ChildID]
+                                                     headView:ChildStickerImage
+                                                headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
+    }
+
     
     _myView = vc;
     _myView.backgroundColor = [UIColor clearColor];
@@ -234,7 +255,37 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)downloadDataFromServe {
+
+    if([[UseDownloadDataClass object] ReadSuccessUpdateBool]) {
+        NSLog(@"下載資料開始");
+        //        downloadChildBigSticker.hidden = false;
+        //開始下載網路上儲存的資料
+        UpdateDataView *downloadChildBigSticker = [UpdateDataView new];
+        [downloadChildBigSticker DowloadChildBigSticker:^(NSArray *array) {
+            readChildBigStickerArray  = array;
+            NSLog(@"Block 所讀取到的資料為： %@",readChildBigStickerArray);
+            //將成功下載的孩子大頭貼陣列資料傳到全域變數來使用
+            [[UseDownloadDataClass object] PutChildBigStickerArray:readChildBigStickerArray];
+            //設定通知結束 SetInfoTableViewControler 進行更新
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"SetInfoTableViewControler" object:nil];
+            //通知執行 SliderMenuViewLeft 進行更新
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"updateTableViewContrler" object:nil];
+            //設定通知結束 FutureMailViewController 進行更新
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"FutureMailViewController" object:nil];
+            //下載成功後傳送 BOOL 值結束結束重複下載，如果要在執行下載必須有更新資料才會執行下載。
+            [[UseDownloadDataClass object] PutSuccessUpdateBool:false];
+        }];
+        
+    }
+}
+
 -(void) viewWillAppear:(BOOL)animated{
+    
+    [self downloadDataFromServe];
     
     //讀取是否已有建立第一個孩子.
     NSUserDefaults *readChildNameDefaults;
@@ -242,7 +293,7 @@
     //如果讀出的陣列數量為零的話，就執行 AddChildSettingViewController 來創造第一個孩子。
     NSArray *readChildTextFieldnameArray = [readChildNameDefaults objectForKey:@"ChildName"];
     if(readChildTextFieldnameArray.count == 0) {
-        AddChildSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"AddChildSettingViewController"];
+        StartCreateFirstChildViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"StartCreateFirstChildViewController"];
         [self presentViewController:nextPage animated:YES completion:nil];
     }
 

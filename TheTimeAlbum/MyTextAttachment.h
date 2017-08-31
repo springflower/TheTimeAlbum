@@ -11,5 +11,6 @@
 @interface MyTextAttachment : NSTextAttachment
 
 
+- (CGRect)attachmentBoundsForTextContainer:(NSTextContainer *)textContainer proposedLineFragment:(CGRect)lineFrag glyphPosition:(CGPoint)position characterIndex:(NSUInteger)charIndex ;
 
 @end

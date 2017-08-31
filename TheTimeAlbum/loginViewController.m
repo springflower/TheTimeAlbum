@@ -104,8 +104,9 @@
          [localUserData setObject:currentuser.userName forKey:@"userName"];
          [localUserData setObject:currentuser.userMail forKey:@"userMail"];
          [localUserData setObject:data forKey:@"userImage"];
+         [localUserData synchronize];
+
          //--
-         
          // get uid from SQL server         用fb登入資訊從SQL資料庫抓uid
          [comm getUIDFromSQLByFBID:currentuser.userFBId completion:^(NSError *error, id result1) {
              
@@ -140,9 +141,10 @@
          }];
          
         
-         
+
          //[self goNextPage];
-         
+         [localUserData synchronize];
+
      }];
 }
 //--

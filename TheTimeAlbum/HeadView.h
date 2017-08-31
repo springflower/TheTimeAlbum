@@ -14,5 +14,7 @@
 @property (weak, nonatomic) UILabel * signLabel;
 - (instancetype)initWithFrame:(CGRect)frame backgroundView:(NSString *)name headView:(NSString *)headImgName headViewWidth:(CGFloat)width signLabel:(NSString *)signature;
 
-- (instancetype)initWithFrameByBryan:(CGRect)frame backgroundView:(UIImage *)name headView:(UIImage *)headImgName headViewWidth:(CGFloat)width signLabel:(NSString *)signature;
+- (instancetype)initWithFrameByBryan:(CGRect)frame backgroundView:(NSString *)name headView:(UIImage *)headImgName headViewWidth:(CGFloat)width signLabel:(NSString *)signature;
+
+- (instancetype)initWithFrameByBryanImageBackground:(CGRect)frame backgroundView:(UIImage *)name headView:(UIImage *)headImgName headViewWidth:(CGFloat)width signLabel:(NSString *)signature;
 @end

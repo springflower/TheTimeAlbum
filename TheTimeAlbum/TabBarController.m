@@ -36,8 +36,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TabBarControlerAnimated) name:@"TabBarControlerAnimated" object:nil];
     
+
+    
 //    [self setupColorView];
-//    
+//
 //    [self setupMaskLayer];
 //    
 //    [self layoutSubviews];
@@ -48,10 +50,6 @@
 
 -(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     
-//    NSInteger index = [self.tabBarController.tabBar.items indexOfObject:item];
-//    fromeIndex = toIndex;
-//    toIndex = index;
-//    [self animation];
     
 }
 

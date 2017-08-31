@@ -5,12 +5,16 @@
 //  Created by 黃柏恩 on 2017/7/24.
 //  Copyright © 2017年 Greathard. All rights reserved.
 //
-
-#import "BigStickerSettingViewController.h"
+#import <AFNetworking.h>
 #import <Photos/Photos.h>
+#import "UpdateDataView.h"
+#import "UseDownloadDataClass.h"
+#import <ChameleonFramework/Chameleon.h>
+#import "BigStickerSettingViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface BigStickerSettingViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *MyBigSticker;
 @property (weak, nonatomic) IBOutlet UIButton *PlusBigSticker;
 
@@ -22,8 +26,8 @@
     NSUserDefaults *defaults;
     //準備讀取儲存的孩子大頭貼陣列
     NSMutableArray *putMyBigStickerArray;
-    //準備讀取孩子的背景陣列
-    NSMutableArray *putMyChildBackImageArray;
+    //準備上傳資料使用
+    UpdateDataView *updateChildBigstickerArray;
 }
 
 @synthesize MyBigSticker = MyBigSticker;
@@ -31,46 +35,36 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     
-    //NSData *data = [defaults objectForKey:@"MyBigSticker"];
-    //NSArray *readMyBigStickerArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    NSArray *readMyBigStickerArray = [defaults objectForKey:@"MyBigSticker"];
-    if(readMyBigStickerArray) {
-        putMyBigStickerArray  = [readMyBigStickerArray mutableCopy];
-    } else {
-        putMyBigStickerArray = [NSMutableArray new];
-    }
-    NSArray *readMyChildBackImageArray = [defaults objectForKey:@"readMyChildBackImageArray"];
-    if(readMyChildBackImageArray) {
-        putMyChildBackImageArray  = [readMyChildBackImageArray mutableCopy];
-    } else {
-        putMyChildBackImageArray = [NSMutableArray new];
-    }
+    updateChildBigstickerArray = [[UpdateDataView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [[UIApplication sharedApplication].delegate.window addSubview:updateChildBigstickerArray];
+    updateChildBigstickerArray.hidden = true;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    defaults = [NSUserDefaults standardUserDefaults];
-    
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    //設定 NavigationBar 的標題
     self.navigationItem.title = @"大頭貼";
-    
+    //準備讀取已儲存的資料
+    defaults = [NSUserDefaults standardUserDefaults];
+    //設定 View 本身的背景顏色
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    //準備 NavigationBar 上的按鈕
     [self SettingButton];
-    
+    //準備顯示在 View 上的 UIImageView 給孩子大頭貼
     [self SettingMyBigStickerAndPlusBigSticker];
-  
     
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(EndingThisPageAndLastPage)
+                                                 name:@"BigStickerSettingViewController" object:nil];
 }
 
-// When Button Press Go to PhotoLibrary.
+#pragma mark - Preare to use PhotoLobibrary 準備使用相簿功能或相機功能
+
+// When Button Press Go to PhotoLibrary. 準備當按鈕按下時，執行相簿選擇
 - (IBAction)PlusBigSticker:(id)sender {
     [self launchImagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 }
-// Start to Pick Photo and Save.
+// Start to Pick Photo and Save. //準備當按下時，執行的類型是啟動相簿功能還是相機
 -(void) launchImagePickerWithSourceType:(UIImagePickerControllerSourceType) sourceType {
     
     //Check if source type avaulable.
@@ -103,7 +97,7 @@
     [self presentViewController:picker animated:true completion:nil];
 }
 
-// When Photo Picked Editing Photo
+// When Photo Picked Editing Photo 準備編輯所選取的照片並存取
 -(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     NSLog(@"Info: %@",info);
     NSString *type = info[UIImagePickerControllerMediaType];
@@ -119,23 +113,6 @@
         
         NSLog(@"originalImage: %fx%f",origineImage.size.width,origineImage.size.height);
         NSLog(@"resizeImage: %fx%f",resizeImage.size.width,resizeImage.size.height);
-        
-        //Save resizeImage into Photo Library.
-        PHPhotoLibrary *library = [PHPhotoLibrary sharedPhotoLibrary];
-        [library performChanges:^{
-            
-            [PHAssetChangeRequest creationRequestForAssetFromImage:resizeImage];
-            
-        } completionHandler:^(BOOL success, NSError * _Nullable error) {
-            
-            if(success) {
-                NSLog(@"Save Image OK.");
-            } else {
-                NSLog(@"Save Image Fail: %@",error);
-            }
-            
-        }];
-        
         
         NSData *jpgData = UIImageJPEGRepresentation(resizeImage, 0.8);
         NSData *pngData = UIImagePNGRepresentation(resizeImage);
@@ -193,67 +170,64 @@
     return finalImage;
 }
 
+#pragma mark - Setting to back last page 設定準備回到上一頁功能
 
 // Go Back the Last Page.
 -(void)BackToSetting {
-    
-    CATransition* transition = [CATransition animation];
-    transition.duration = 0.3;
-    transition.type = kCATransitionPush;
-    transition.subtype = kCATransitionFromLeft;
-    //[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
-   
-    [self.view.window.layer addAnimation:transition forKey:kCATransition];
-    
-    [self dismissViewControllerAnimated:NO completion:nil];
+
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)FinishButton {
-    
-    //將孩子的大頭貼照片轉成 Data 後，再進行儲存資料的動作
-    NSData* MyChildBigStickerData = [NSData dataWithData:UIImagePNGRepresentation(MyBigSticker.image)];
-    [putMyBigStickerArray addObject:MyChildBigStickerData];
-    //NSData *MyBigStickerData = [NSKeyedArchiver archivedDataWithRootObject:putMyBigStickerArray];
-    //array = [NSKeyedUnarchiver unarchiveObjectWithData:MyBigStickerData];
-    [defaults setObject:putMyBigStickerArray forKey:@"MyBigSticker"];
-    NSLog(@"儲存的圖片檔案為： %@",putMyBigStickerArray);
-    
-    //將孩子的背景圖片隨機產生，儲存在孩子的背景陣列中
-    int x = arc4random() % 4;
-    NSArray *randomBackgroundImageArray = @[@"background1@2x.jpg",
-                                            @"background2@2x.jpg",
-                                            @"background3@2x.jpg",
-                                            @"background4@2x.jpg",
-                                            @"background5@2x.jpg"];
-    UIImage *MyChildBackImage = [UIImage imageNamed:randomBackgroundImageArray[x]];
-    NSData *MyChildBackImageData = [NSData dataWithData:UIImageJPEGRepresentation(MyChildBackImage,1.0)];
-    [putMyChildBackImageArray addObject:MyChildBackImageData];
-    [defaults setObject:putMyChildBackImageArray forKey:@"readMyChildBackImageArray"];
-    NSLog(@"  數量為： %lu ",(unsigned long)putMyChildBackImageArray.count);
-    
-    //將儲存的資料進行同步
-    [defaults synchronize];
-    
-    
-    
+#pragma mark - Setting dismiss this View and use NSNotificationCenter Save data 設定完成後結束 BigStickerSettingViewController 並使用通知來出存資料
+
+-(void)EndingThisPageAndLastPage {
+    //設定結束這一頁
     [self dismissViewControllerAnimated:YES completion:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"saveChildInformation" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dimssAddChildSettingViewController" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DimissStartCreateFirstChildViewController" object:nil];
 }
+
+#pragma mark - Setting if findished save data and update 設定完成後儲存資料並上傳
+
+-(void)FinishButton {
+    //通知儲存要上傳的孩子資訊資料
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"saveUpdateChildInformation" object:nil];
+    //準備讀取下載的孩子大頭貼陣列
+    if([[UseDownloadDataClass object] ReadChildBigStickerArray].count != 0) {
+        putMyBigStickerArray  = [[NSMutableArray alloc]
+                                 initWithArray:[[UseDownloadDataClass object] ReadChildBigStickerArray]];
+    } else {
+        putMyBigStickerArray = [NSMutableArray new];
+    }
+    
+    updateChildBigstickerArray.hidden = false;
+    //將孩子的大頭貼照片轉成 Data 後，再進行儲存資料的動作
+    NSData* MyChildBigStickerData = [NSData dataWithData:UIImagePNGRepresentation(MyBigSticker.image)];
+    [putMyBigStickerArray addObject:MyChildBigStickerData];
+    //將儲存的的孩子大頭貼陣列資料上傳進行更新
+    [updateChildBigstickerArray UpdataChildBigsticker:putMyBigStickerArray];
+    
+}
+
+#pragma mark - Setting UIimageView add self view 設定 ImageView 並加到 View 上面
+
 // Set BigStickerPlusSticker
 -(void) SettingMyBigStickerAndPlusBigSticker {
-    MyBigSticker.layer.cornerRadius=50.0;
+    MyBigSticker.layer.cornerRadius=MyBigSticker.frame.size.width/2;
     MyBigSticker.clipsToBounds = YES;
     MyBigSticker.layer.borderWidth = 3.0;
     MyBigSticker.layer.borderColor = [UIColor whiteColor].CGColor;
     MyBigSticker.layer.masksToBounds = YES;
     
-    PlusBigSticker.layer.cornerRadius=15.0;
+    PlusBigSticker.layer.cornerRadius=PlusBigSticker.frame.size.width/2;
     PlusBigSticker.clipsToBounds = YES;
     PlusBigSticker.layer.borderWidth = 3.0;
     PlusBigSticker.layer.borderColor = [UIColor whiteColor].CGColor;
     PlusBigSticker.layer.masksToBounds = YES;
 }
+
+#pragma mark - Setting Button add NavigationBar 設定按鈕到 NavigationBar 上面
 
 -(void) SettingButton {
     UIBarButtonItem *Cancel = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:
@@ -263,6 +237,11 @@
     UIBarButtonItem *Finish = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:
                                UIBarButtonItemStyleDone target:self action:@selector(FinishButton)];
     self.navigationItem.rightBarButtonItem = Finish;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 /*
 #pragma mark - Navigation

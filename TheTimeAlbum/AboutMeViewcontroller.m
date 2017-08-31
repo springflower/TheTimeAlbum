@@ -8,7 +8,8 @@
 #import "SelectedRow.h"
 #import "AboutMeViewcontroller.h"
 #import "AboutMeViewcontrollerCell.h"
-
+#import "SetInfoTableViewControler.h"
+#import "AddChildSettingViewController.h"
 
 #define PERSONALINFORMATION @"個人帳號資料"
 
@@ -35,11 +36,11 @@
     NSData *localUserImage = [defaults dataForKey:@"userImage"];
     UIImage *userImage = [[UIImage alloc] initWithData:localUserImage];
     userArray = [[NSMutableArray alloc]
-                 initWithObjects:userImage,
+                 initWithObjects:[UIImage imageNamed:@"BabyUser@2x.png"],
                  [defaults objectForKey:@"userName"],
                  [defaults objectForKey:@"userMail"], nil];
     packegUserArray = [[NSMutableArray alloc] initWithObjects:userArray, nil];
-    information = @[@"孩子設定",@"個人資料",@"通知",@"孩子密碼"];
+    information = @[@"孩子設定",@"個人資料",@"關於我們"];
     
     putinformationArray = [[NSMutableArray alloc] initWithObjects:packegUserArray,information, nil];
     
@@ -52,6 +53,24 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    //讀取是否已有建立第一個孩子.
+    NSUserDefaults *readChildNameDefaults;
+    readChildNameDefaults = [NSUserDefaults standardUserDefaults];
+    //如果讀出的陣列數量為零的話，就執行 AddChildSettingViewController 來創造第一個孩子。
+    NSArray *readChildTextFieldnameArray = [readChildNameDefaults objectForKey:@"ChildName"];
+    if(readChildTextFieldnameArray.count == 0) {
+//        AddChildSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"AddChildSettingViewController"];
+//        [self presentViewController:nextPage animated:YES completion:nil];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *vc =
+        [storyboard instantiateViewControllerWithIdentifier:@"StartCreateFirstChildViewController"];
+        //[self.navigationController pushViewController:vc animated:YES];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Table view data source
@@ -123,9 +142,11 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES]; //為table Cell 加上選取後的動畫。
     
-    if(indexPath.section > 0) {
-        NSLog(@"我是第 %ld 個",(long)indexPath.row);
-        NSLog(@"%ld",indexPath.section);
+    if(indexPath.section == 1) {
+        if(indexPath.row == 0) {
+            SetInfoTableViewControler *editController = [self.storyboard instantiateViewControllerWithIdentifier:@"SetInfoTableViewControler"];
+            [self.navigationController pushViewController:editController animated:YES];
+        }
     }
 }
 

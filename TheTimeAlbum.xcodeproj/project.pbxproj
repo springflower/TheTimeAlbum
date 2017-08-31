@@ -64,6 +64,10 @@
 		CF1395901F2F700F00D3C0FD /* Video75x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF13958F1F2F700F00D3C0FD /* Video75x50@2x.png */; };
 		CF1395921F30300800D3C0FD /* Camera200x200@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF1395911F30300700D3C0FD /* Camera200x200@2x.png */; };
 		CF1395941F3030DC00D3C0FD /* Camera150x150@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF1395931F3030DC00D3C0FD /* Camera150x150@2x.png */; };
+		CF16BA241F51C77200C0A216 /* StartCreateFirstChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF16BA231F51C77200C0A216 /* StartCreateFirstChildViewController.m */; };
+		CF195F2E1F4725840064FDF0 /* UseDownloadDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CF195F2D1F4725840064FDF0 /* UseDownloadDataClass.m */; };
+		CF195F341F48A1050064FDF0 /* UpdateDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF195F331F48A1050064FDF0 /* UpdateDataView.m */; };
+		CF195F371F4A8ADF0064FDF0 /* SetInfoTableViewControler.m in Sources */ = {isa = PBXBuildFile; fileRef = CF195F361F4A8ADF0064FDF0 /* SetInfoTableViewControler.m */; };
 		CF1B65411F39645A00673520 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF1B65401F39645A00673520 /* TabBarController.m */; };
 		CF1B65441F3A321E00673520 /* ColorTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF1B65431F3A321E00673520 /* ColorTabBarView.m */; };
 		CF1B654A1F3C0CEF00673520 /* SliderMenuLeftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF1B65491F3C0CEF00673520 /* SliderMenuLeftTableViewCell.m */; };
@@ -188,6 +192,14 @@
 		CF13958F1F2F700F00D3C0FD /* Video75x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Video75x50@2x.png"; sourceTree = "<group>"; };
 		CF1395911F30300700D3C0FD /* Camera200x200@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera200x200@2x.png"; sourceTree = "<group>"; };
 		CF1395931F3030DC00D3C0FD /* Camera150x150@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera150x150@2x.png"; sourceTree = "<group>"; };
+		CF16BA221F51C77200C0A216 /* StartCreateFirstChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartCreateFirstChildViewController.h; sourceTree = "<group>"; };
+		CF16BA231F51C77200C0A216 /* StartCreateFirstChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartCreateFirstChildViewController.m; sourceTree = "<group>"; };
+		CF195F2C1F4725840064FDF0 /* UseDownloadDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseDownloadDataClass.h; sourceTree = "<group>"; };
+		CF195F2D1F4725840064FDF0 /* UseDownloadDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseDownloadDataClass.m; sourceTree = "<group>"; };
+		CF195F321F48A1050064FDF0 /* UpdateDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateDataView.h; sourceTree = "<group>"; };
+		CF195F331F48A1050064FDF0 /* UpdateDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateDataView.m; sourceTree = "<group>"; };
+		CF195F351F4A8ADF0064FDF0 /* SetInfoTableViewControler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetInfoTableViewControler.h; sourceTree = "<group>"; };
+		CF195F361F4A8ADF0064FDF0 /* SetInfoTableViewControler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetInfoTableViewControler.m; sourceTree = "<group>"; };
 		CF1B653F1F39645A00673520 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		CF1B65401F39645A00673520 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		CF1B65421F3A321E00673520 /* ColorTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorTabBarView.h; sourceTree = "<group>"; };
@@ -328,6 +340,8 @@
 		540267581F25D800005967DE /* AddChild+BigStrckerViewController */ = {
 			isa = PBXGroup;
 			children = (
+				CF16BA221F51C77200C0A216 /* StartCreateFirstChildViewController.h */,
+				CF16BA231F51C77200C0A216 /* StartCreateFirstChildViewController.m */,
 				CF0B78641F1E3D290067229D /* AddChildSettingViewController.h */,
 				CF0B78651F1E3D290067229D /* AddChildSettingViewController.m */,
 				CFFFC79A1F25823A0097284F /* BigStickerSettingViewController.h */,
@@ -487,6 +501,8 @@
 				CF0B78471F1DB2C20067229D /* AboutMeViewcontroller.m */,
 				CF0B78491F1DBAF60067229D /* AboutMeViewcontrollerCell.h */,
 				CF0B784A1F1DBAF60067229D /* AboutMeViewcontrollerCell.m */,
+				CF195F351F4A8ADF0064FDF0 /* SetInfoTableViewControler.h */,
+				CF195F361F4A8ADF0064FDF0 /* SetInfoTableViewControler.m */,
 			);
 			name = AboutMeViewController;
 			path = ..;
@@ -499,6 +515,10 @@
 				CF0B782C1F1C88150067229D /* SliderMenuViewLeft.m */,
 				CF1B65481F3C0CEF00673520 /* SliderMenuLeftTableViewCell.h */,
 				CF1B65491F3C0CEF00673520 /* SliderMenuLeftTableViewCell.m */,
+				CF195F2C1F4725840064FDF0 /* UseDownloadDataClass.h */,
+				CF195F2D1F4725840064FDF0 /* UseDownloadDataClass.m */,
+				CF195F321F48A1050064FDF0 /* UpdateDataView.h */,
+				CF195F331F48A1050064FDF0 /* UpdateDataView.m */,
 			);
 			name = SliderMenuViewLeft;
 			path = ..;
@@ -569,6 +589,9 @@
 						DevelopmentTeam = FEBUVZMYW4;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 0;
 							};
@@ -723,6 +746,7 @@
 				54A82D481F37C91E0032996D /* AchievementTableViewCell.m in Sources */,
 				54296C9E1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.m in Sources */,
 				542233721F2738E8000933BD /* MyCommunicator.m in Sources */,
+				CF195F2E1F4725840064FDF0 /* UseDownloadDataClass.m in Sources */,
 				542ABE011F13793500F5F161 /* ViewController.m in Sources */,
 				CF783CF51F35DB7F0083948D /* SelectedRow.m in Sources */,
 				5402674E1F2544FF005967DE /* textLayout.m in Sources */,
@@ -732,9 +756,11 @@
 				CF0B783B1F1D9CDF0067229D /* SliderMenuViewRight.m in Sources */,
 				CF6150781F3075B50090433A /* MyTextAttachment.m in Sources */,
 				540267491F2537E9005967DE /* MyCollectionViewCellWithText.m in Sources */,
+				CF16BA241F51C77200C0A216 /* StartCreateFirstChildViewController.m in Sources */,
 				CFC6DB6A1F2B01DC00669187 /* FutureMaliViewControllerCellTableViewCell.m in Sources */,
 				54A82D441F37BABA0032996D /* achievementItem.m in Sources */,
 				5402673F1F24A3A6005967DE /* timeLineVC.m in Sources */,
+				CF195F371F4A8ADF0064FDF0 /* SetInfoTableViewControler.m in Sources */,
 				CF1B65411F39645A00673520 /* TabBarController.m in Sources */,
 				CFFFC79C1F25823A0097284F /* BigStickerSettingViewController.m in Sources */,
 				542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */,
@@ -746,6 +772,7 @@
 				CF5A8D321F2EF7C400E0FEA6 /* WriteMailViewController.m in Sources */,
 				CF5A8D2C1F2DEAF800E0FEA6 /* AchievementViewController.m in Sources */,
 				CFC6DB621F2ACF8600669187 /* FutureMailViewController.m in Sources */,
+				CF195F341F48A1050064FDF0 /* UpdateDataView.m in Sources */,
 				CF1B654A1F3C0CEF00673520 /* SliderMenuLeftTableViewCell.m in Sources */,
 				CF1B65441F3A321E00673520 /* ColorTabBarView.m in Sources */,
 			);

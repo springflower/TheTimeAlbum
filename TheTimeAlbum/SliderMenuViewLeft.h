@@ -13,7 +13,6 @@
 
 @property float MenuScreenScale;
 
-@property float SwichingPageSpeed;
 
 -(void)callMenu;
 

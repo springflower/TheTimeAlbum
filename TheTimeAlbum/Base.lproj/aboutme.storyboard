@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jLn-YY-kqT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jLn-YY-kqT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,7 +12,7 @@
         <!--About Me Viewcontroller-->
         <scene sceneID="gDz-Ze-QxT">
             <objects>
-                <tableViewController id="I63-eF-rKB" customClass="AboutMeViewcontroller" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MainStoryboard" id="I63-eF-rKB" customClass="AboutMeViewcontroller" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="iUu-gk-FEs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -38,10 +38,10 @@
             </objects>
             <point key="canvasLocation" x="2320.8000000000002" y="-520.38980509745136"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Set Info Table View Controler-->
         <scene sceneID="lwE-nK-ZvU">
             <objects>
-                <tableViewController id="lNp-2j-eIP" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SetInfoTableViewControler" id="lNp-2j-eIP" customClass="SetInfoTableViewControler" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="c54-Hd-6qe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,10 +61,34 @@
                             <outlet property="delegate" destination="lNp-2j-eIP" id="SvO-Qw-3Mh"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="fG9-E5-RWH">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="rX1-B6-3DM">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="856-sN-GJ2">
+                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="返回"/>
+                                <connections>
+                                    <action selector="backLatPage:" destination="lNp-2j-eIP" eventType="touchUpInside" id="a9Q-YX-XV9"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="z8D-yI-q7m">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dCz-AM-8OL">
+                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="完成"/>
+                                <connections>
+                                    <action selector="Finished:" destination="lNp-2j-eIP" eventType="touchUpInside" id="M9k-xj-4cC"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ksr-Oa-Gup" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3089" y="-520"/>
+            <point key="canvasLocation" x="4142" y="-520"/>
         </scene>
         <!--我-->
         <scene sceneID="T8y-sP-JPQ">
@@ -85,6 +109,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MEe-wo-HXs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1503" y="-520"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="uf6-LS-DjC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PEk-5G-27d" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4yD-Jk-rzf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lNp-2j-eIP" kind="relationship" relationship="rootViewController" id="oB0-cp-JNh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0bW-RC-moS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3222" y="-520"/>
         </scene>
     </scenes>
     <resources>

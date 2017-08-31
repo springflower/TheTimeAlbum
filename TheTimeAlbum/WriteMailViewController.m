@@ -5,6 +5,7 @@
 //  Created by 黃柏恩 on 2017/7/31.
 //  Copyright © 2017年 Greathard. All rights reserved.
 //
+#import <AFNetworking.h>
 #import "SelectedRow.h"
 #import <Photos/Photos.h>
 #import <QuartzCore/QuartzCore.h>
@@ -46,10 +47,11 @@
     //準備讀取所儲存的內容，因為是儲存成Data，所以要先用 NSData
     NSData *content;
     
-    
+    int popViewOrdimissViewfunc;
 }
 
--(void)viewDidAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated {
+    
     //讀取目前所選擇的小孩ID
     ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
     
@@ -74,66 +76,85 @@
         putTextViewAddArray = [NSMutableArray new];
     }
     
+    [self MyWriteMailTableViewPrepare];
+    
     // Read is new Mail or Old Mail. 讀取是否為新郵件或舊郵件.
     if([[SelectedRow object] didSelectedRowAboutMail] >=0 && [[SelectedRow object] didSelectedNewOrOldAboutMail]) {
-        
+        //準備將讀取的文章內容取出
         content = [NSData new];
         content = putTextViewAddArray[[[SelectedRow object] didSelectedRowAboutMail]];
-        
+        //準備將讀取的文章日期給文章內容
+        dateLabel.text = putDateAddArray[[[SelectedRow object] didSelectedRowAboutMail]];
+        //準備將文章內容放置 TextView
         NSMutableAttributedString *textViewcontent = [NSMutableAttributedString new];
         textViewcontent = (NSMutableAttributedString*)[NSKeyedUnarchiver unarchiveObjectWithData:content];
-        
         _TextView.attributedText = textViewcontent;
-        
+        //準備將設定的文章內容 BOOL 值 設定成 True
         [[SelectedRow object]SendSelectedRowAboutMail:[[SelectedRow object] didSelectedRowAboutMail] Bool:false];
+        
+        popViewOrdimissViewfunc = 1;
     }
-    
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     
     // Setting the NaviagtionBar BackGroundColor to CleanColor. 設定NaviagtionBar 為透明.
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
-    
+    //準備讀取儲存的資料
     defaults = [NSUserDefaults standardUserDefaults];
-
+    //準備設定 Frame
     fullScreenBounds=[[UIScreen mainScreen] bounds];
-    
+    //準備設定 View 的背景顏色
     self.view.backgroundColor =[UIColor flatWhiteColorDark];
-    
+    //準備設定鍵盤位置通知
     [self registerForKeyboardNotifications];
-    
+    //準備設定日期給 TextView
     [self MyWriteMailTableViewPrepare];
-    
+    //準備設定鍵盤上的 ToolBar
     [self SetToolbarToAboveKeyboard];
-    
+    //準備設定 TextView 設定
     [self TextViewPrepare];
     
 }
 
+#pragma mark - Prepare set SendContent by mail 準備傳送內容分享上傳
 
 - (IBAction)SendByMail:(id)sender {
+    //準備讀取 _TextView.attributedText 裏的照片
+    NSMutableArray *catchImage;
+    NSRange range = NSMakeRange(0,_TextView.text.length);
+    //準備取出 _TextView.attributedText 裏的照片
+    catchImage = [NSMutableArray new];
+    [_TextView.attributedText enumerateAttribute:@"NSAttachment" inRange:range
+                                         options:0 usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+                                             if(value != nil) {
+                                                 NSTextAttachment *imageAttachment = value;
+                                                 [catchImage addObject:imageAttachment.image];
+                                             }
+                                         }];
+    //準備將 objectsToShare 給 UIActivityViewController 值
+    NSMutableArray *objectsToShare = [NSMutableArray arrayWithObjects:_TextView.text,nil];
+    for (UIImage *image in catchImage) {
+        [objectsToShare addObject:image];
+    }
     
-    NSMutableAttributedString *textViewcontent = [[NSMutableAttributedString alloc]
-                                                  initWithAttributedString:_TextView.attributedText];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:textViewcontent];
-    UIImage *myimage = [[UIImage alloc] initWithData:data];
-    
-    NSArray *objectsToShare = [NSArray arrayWithObjects:_TextView.attributedText, nil];
     UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
     [self presentViewController:controller animated:YES completion:nil];
 }
 
+#pragma mark - Prepare save Content from Mail 準備儲存文章內容
 
 - (IBAction)SendMessage:(id)sender {
     
     // Ready to all textViewContent give textViewcontent. 準備將 TextView 上的內容給包裝好.
     NSMutableAttributedString *textViewcontent = [[NSMutableAttributedString alloc]
                                                   initWithAttributedString:_TextView.attributedText];
-    
     content = [NSData new];
     content = [NSKeyedArchiver archivedDataWithRootObject:textViewcontent];
     
@@ -168,18 +189,17 @@
         
        [defaults setValue:putDateArray forKey:@"Mailibformation"];
         
-        [defaults synchronize];
+       [defaults synchronize];
+        
     }
-
-      //Set Animation to self ViewController
-      //CATransition* transition = [CATransition animation];
-      //transition.duration = 0.2;
-      //transition.type = kCATransitionPush;
-      //transition.subtype = kCATransitionFromLeft;
-      //[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
-      //[self.view.window.layer addAnimation:transition forKey:kCATransition];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if(popViewOrdimissViewfunc == 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
+
+#pragma mark - Prepare Set PhotoSelect from UIActionSheet 準備 UIActionSheet 選擇相機或相簿功能
 
 - (IBAction)photoselect:(id)sender {
     UIActionSheet *myActionSheet =  [[UIActionSheet alloc]
@@ -192,9 +212,13 @@
     [myActionSheet showInView:self.view];
 }
 
+#pragma mark - Prepare Set Cancel UIImagePickerController 準備取消 UIImagePickerController 功能
+
 -(void) CancelPicture {
     [picker dismissViewControllerAnimated:YES completion: NULL];
 }
+
+#pragma mark - Prepare Set launchImagePickerWithSourceType 準備啟動相機或相簿功能
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:
 (NSInteger)buttonIndex {
@@ -209,7 +233,10 @@
             break;
     }
 }
-// Start to Pick Photo and Save.
+
+#pragma mark - Prepare Start to Pick Photo 準備啟動所選擇的相機或相簿功能
+
+
 -(void) launchImagePickerWithSourceType:(UIImagePickerControllerSourceType) sourceType {
     
     //Check if source type avaulable.
@@ -254,7 +281,9 @@
     
 }
 
-// When Photo Picked Editing Photo
+#pragma mark - Prepare When Photo Picked Editing Photo 準備邊幾所選取的相機或相簿
+
+
 -(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     NSLog(@"Info: %@",info);
     NSString *type = info[UIImagePickerControllerMediaType];
@@ -271,32 +300,15 @@
         NSLog(@"originalImage: %fx%f",origineImage.size.width,origineImage.size.height);
         NSLog(@"resizeImage: %fx%f",resizeImage.size.width,resizeImage.size.height);
         
-        //Save resizeImage into Photo Library.
-        
-        PHPhotoLibrary *library = [PHPhotoLibrary sharedPhotoLibrary];
-        [library performChanges:^{
-            
-            [PHAssetChangeRequest creationRequestForAssetFromImage:resizeImage];
-            
-        } completionHandler:^(BOOL success, NSError * _Nullable error) {
-            
-            if(success) {
-                NSLog(@"Save Image OK.");
-            } else {
-                NSLog(@"Save Image Fail: %@",error);
-            }
-            
-        }];
-        
-        
         NSData *jpgData = UIImageJPEGRepresentation(resizeImage, 0.8);
         NSData *pngData = UIImagePNGRepresentation(resizeImage);
         
         NSLog(@"JPG Data: %lu",jpgData.length);
         NSLog(@"PNG Data: %lu",pngData.length);
         
-        
+        //準備 MyTextAttachment 放置選取的照片
         MyTextAttachment *attachment = [MyTextAttachment new];
+        
         if(editImage) {
             attachment.image = editImage;
         } else {
@@ -313,13 +325,11 @@
         [textViewcontent insertAttributedString:attStr atIndex:selectedRange.location];
         
         [textViewcontent addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(0,textViewcontent.length)];
-        NSRange newSelctedRange = NSMakeRange(selectedRange.location+10,0);
         
+        NSRange newSelctedRange = NSMakeRange(selectedRange.location+10,0);
+
         _TextView.attributedText = textViewcontent;
         _TextView.selectedRange = newSelctedRange;
-        
-        //[_TextView.textStorage appendAttributedString:attachmentString];
-        //[_TextView setFont:[UIFont fontWithName:@"Arial" size:22]];
         
     } else if([type isEqualToString:(NSString*)kUTTypeMovie]) {
         
@@ -368,20 +378,24 @@
     return finalImage;
 }
 
+#pragma mark - Prepare to back last page 準備回到上一頁按鍵
+
 - (IBAction)backLastPage:(id)sender {
-//        CATransition* transition = [CATransition animation];
-//        transition.duration = 0.3;
-//        transition.type = kCATransitionPush;
-//        transition.subtype = kCATransitionFromLeft;
-//        //[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
-//        [self.view.window.layer addAnimation:transition forKey:kCATransition];
-//    NSLog(@"haha");
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if(popViewOrdimissViewfunc == 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
+
+#pragma mark - Prepare to resignFirstResponder 準備收起鍵盤
 
 -(void)resgisterKeyborad {
     [_TextView resignFirstResponder];
 }
+
+#pragma mark - Prepare to set Toobar and PhotoImage add Keyboard. 準備 Toobar 和 照相圖片加入鍵盤
 
 -(void)SetToolbarToAboveKeyboard {
     
@@ -405,10 +419,12 @@
                                                 target:nil
                                                 action:nil];
     test.items = [NSArray arrayWithObjects:
-                  Video,flexibleSpaceBarButton1,Camera,flexibleSpaceBarButton2,Done, nil];
+                  flexibleSpaceBarButton1,Camera,flexibleSpaceBarButton2,Done, nil];
     [test sizeToFit];
     _TextView.inputAccessoryView = test;
 }
+
+#pragma mark - Prepare to set Time add TextView 準備時間顯示加入 TextView
 
 -(void)MyWriteMailTableViewPrepare{
     // Prepare a Time to Print. 準備一個時間顯示給 Label.
@@ -428,46 +444,57 @@
     dateLabel.textColor = [UIColor flatGrayColor];
     dateLabel.font = [UIFont fontWithName:@"Arial" size:15];
     dateLabel.backgroundColor = [UIColor flatSandColor];
-//    dateLabel.alpha = 1 ;
+    //dateLabel.alpha = 1 ;
     dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
     dateString = [dateFormatterToPostCard stringFromDate:[NSDate date]];
     _MyWriteMailTableView.tableHeaderView = dateLabel;
     
     _MyWriteMailTableView.backgroundColor = [UIColor flatBlackColor];
-//    _MyWriteMailTableView.layer.cornerRadius=15.0;
-//    _MyWriteMailTableView.clipsToBounds = YES;
-//    _MyWriteMailTableView.layer.borderWidth = 2.0;
-//    _MyWriteMailTableView.layer.borderColor = [UIColor flatBlackColor].CGColor;
-//    _MyWriteMailTableView.layer.masksToBounds = YES;
+    //_MyWriteMailTableView.layer.cornerRadius=15.0;
+    //_MyWriteMailTableView.clipsToBounds = YES;
+    //_MyWriteMailTableView.layer.borderWidth = 2.0;
+    //_MyWriteMailTableView.layer.borderColor = [UIColor flatBlackColor].CGColor;
+    //_MyWriteMailTableView.layer.masksToBounds = YES;
     
     _MyWriteMailTableView.layer.shadowOffset = CGSizeMake(5,5);
     _MyWriteMailTableView.layer.shadowRadius = 3.5;
     _MyWriteMailTableView.layer.shadowOpacity = 0.8;
     _MyWriteMailTableView.layer.masksToBounds = false;
+    
+    _MyWriteMailTableView.scrollEnabled = false;
 
     
 }
+
+
+#pragma mark - Prepare set TextView 準備設定 TextView 屬性
 
 // 為 TextView 做準備
 -(void)TextViewPrepare{
     _TextView.delegate = self;
-    
     // Prepare a TextView to type word for user. 準備一個 TextView 給使用者輸入文字.
     _TextView.font = [UIFont fontWithName:@"Arial" size:18.0];
     _TextView.textColor = [UIColor flatBlackColor];
     _TextView.backgroundColor = [UIColor flatSandColor];
-//    _TextView.alpha = 0.1 ;
-//    _TextView.backgroundColor=[UIColor flatSandColor];
-//    _TextView.layer.cornerRadius=30.0;
-//    _TextView.clipsToBounds = YES;
-//    _TextView.layer.borderWidth = 2.0;
-//    _TextView.layer.borderColor = [UIColor flatBlackColor].CGColor;
-//    _TextView.layer.masksToBounds = YES;
+    //_TextView.alpha = 0.1 ;
+    //_TextView.backgroundColor=[UIColor flatSandColor];
+    //_TextView.layer.cornerRadius=30.0;
+    //_TextView.clipsToBounds = YES;
+    //_TextView.layer.borderWidth = 2.0;
+    //_TextView.layer.borderColor = [UIColor flatBlackColor].CGColor;
+    //_TextView.layer.masksToBounds = YES;
     
 
 }
 
-// Call this method somewhere in your view controller setup code.
+
+-(BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+    return YES;
+}
+
+
+#pragma mark - Prepare set KeyBoard position 準備設定鍵盤位置根據浮標移動
+
 - (void)registerForKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self

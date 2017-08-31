@@ -32,6 +32,9 @@
     UIImage *MyChildBackgroundImage;
     //準備讀取所選取的孩子ID來讀取孩子名字陣列
     NSArray *readChildTextFieldnameArray;
+    
+    
+    NSArray *readMyChildBackImageArray;
 }
 
 @property (weak, nonatomic) UITableView *myTableView;
@@ -68,12 +71,9 @@
         NSLog(@"照片為： %@",ChildStickerImage);
     }
     //讀取孩子背景圖片陣列
-    NSArray *readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
-    NSData *readMyChildBackImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
-    if(readMyChildBackImageData) {
-        MyChildBackgroundImage  = [UIImage imageWithData:readMyChildBackImageData];
-    }
-    // Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子ID來決定孩子的名字。
+    readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
+    
+    //Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子ID來決定孩子的名字。
     readChildTextFieldnameArray = [localUserData objectForKey:@"ChildName"];
     
     
@@ -105,7 +105,7 @@
     
 //    HeadView * vc = [[HeadView alloc]initWithFrame:headRect backgroundView:@"Fox.jpg" headView:@"head.png" headViewWidth:(CGFloat)(VCWidth / 4) signLabel:@"紀錄寶寶成長的每個重要時刻"];
     
-    HeadView * vc = [[HeadView alloc]initWithFrameByBryan:headRect backgroundView:MyChildBackgroundImage
+    HeadView * vc = [[HeadView alloc]initWithFrameByBryan:headRect backgroundView:readMyChildBackImageArray[ChildID]
                                                  headView:ChildStickerImage
                                             headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
     

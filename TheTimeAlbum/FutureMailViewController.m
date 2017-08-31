@@ -10,6 +10,7 @@
 #import <ChameleonFramework/Chameleon.h>
 #import "WriteMailViewController.h"
 #import "FutureMaliViewControllerCellTableViewCell.h"
+#import "UseDownloadDataClass.h"
 @interface FutureMailViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
@@ -27,16 +28,15 @@
     NSUserDefaults *defaults;
     //準備讀取孩子的大頭貼
     UIImageView *ChidlBigStickerImageView;
-    
+    //準備讀取孩子的背景圖片
     UIImageView *MyChildBackgroundImageView;
-    
     //準備讀取所創造的信件數量，來產生信件圖片
     NSMutableArray *putImageArray;
     //準備讀取信件的內容，當信件刪除時，內容也跟著刪除
     NSMutableArray *putTextViewArray;
     //準備讀取信件內容陣列的資料，依照所選的孩子ID
     NSMutableArray *putTextViewAddArray;
-    //準備讀取孩子的名字，用來顯示在信件圖片上
+    //準備讀取孩子的名字陣列，用來顯示在信件圖片上
     NSMutableArray *putChildTextFieldnameArray;
     //準備如果沒有任何信件的話，顯示這個 View.
     UIView *DescriptionView;
@@ -47,105 +47,115 @@
     //準備讀取信件陣列，依所選擇的小孩ID來決定
     NSMutableArray *putDateAddArray;
 }
-
--(void)viewDidAppear:(BOOL)animated {
-    //讀取目前所選擇的小孩ID
-    ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
-    // Prepare the MyBigSticker Image. 準備讀取孩子的大頭貼
-    NSArray *readChildBigStickerArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"MyBigSticker"];
-    NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
-    UIImage *ChildStickerImage;
-    if(ChildBigStickerImageData) {
-        ChildStickerImage = [UIImage imageWithData:ChildBigStickerImageData];
-        ChidlBigStickerImageView.image = ChildStickerImage;
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [self updateDate];
+    
     }
-    //讀取孩子背景圖片陣列
-    NSArray *readMyChildBackImageArray = [defaults objectForKey:@"readMyChildBackImageArray"];
-    NSData *readMyChildBackImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
-    UIImage *MyChildBackgroundImage;
-    if(readMyChildBackImageData) {
-        MyChildBackgroundImage  = [UIImage imageWithData:readMyChildBackImageData];
-        MyChildBackgroundImageView.image = MyChildBackgroundImage;
-    }
+//準備更新資料
+-(void)updateDate {
     
-    // Prepare the WriteDateArray. 準備讀取使用者信件的創建日期.
-    NSArray *readDateArray = [defaults objectForKey:@"Mailibformation"];
-    if(readDateArray) {
-        putDateArray  = [readDateArray mutableCopy];
-        putDateAddArray = [[putDateArray objectAtIndex:ChildID] mutableCopy];
-    } else {
-        putDateArray = [NSMutableArray new];
-        putDateAddArray = [NSMutableArray new];
-    }
-    
-    
-    // Prepare the judgt the putDateArray is empty or have value. 準備讀取使用者使否有創建信件，如果沒有就顯示有就不顯示.
-    if(putDateAddArray.count == 0) {
-        DescriptionView.hidden = NO;
-    } else
-        DescriptionView.hidden = YES;
-    
-    
-    // Prepare the readTextViewArray. 準備讀取使用者信件的內容，用來連動當要刪除信件時，內容也跟著刪除。
-    NSArray *readTextViewArray = [defaults objectForKey:@"textViewcontent"];
-    if(readTextViewArray) {
-        putTextViewArray = [readTextViewArray mutableCopy];
-        putTextViewAddArray = [[putTextViewArray objectAtIndex:ChildID] mutableCopy];
-    } else {
-        putTextViewArray = [NSMutableArray new];
-        putTextViewAddArray = [NSMutableArray new];
-    }
-    
-    
-    // Prepare the putImageArray. 準備讀取日期陣列是否有存值，來產生信件圖片的數量。
-    putImageArray = [NSMutableArray new];
-    for (int i=0; i<putDateAddArray.count; i++) {
-        [putImageArray addObject:[UIImage imageNamed:@"PostCardVer4@2x.png"]];
-    }
-    
-    
-    // Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子名稱來決定信件上孩子的名字。
-    NSArray *readChildTextFieldnameArray = [defaults objectForKey:@"ChildName"];
-    if(readChildTextFieldnameArray) {
-        putChildTextFieldnameArray = [readChildTextFieldnameArray mutableCopy];
-    } else {
-        putChildTextFieldnameArray = [NSMutableArray new];
-    }
-    
-    
-    
-    //當要顯示時，進行 tableView 的更新
-    [_myTableView reloadData];
-//  [refreshControl endRefreshing];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        //讀取目前所選擇的小孩ID
+        ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
+        
+        // Prepare the MyBigSticker Image. 準備讀取孩子的大頭貼
+        if([[UseDownloadDataClass object] ReadChildBigStickerArray].count != 0) {
+            NSArray *readChildBigStickerArray = [[UseDownloadDataClass object] ReadChildBigStickerArray];
+            NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
+            if(readChildBigStickerArray.count != 0) {
+                ChidlBigStickerImageView.image = [UIImage imageWithData:ChildBigStickerImageData];
+            }
+        }
+        //讀取孩子背景圖片陣列
+        NSArray *readMyChildBackImageArray = [defaults objectForKey:@"readMyChildBackImageArray"];
+        if(![readMyChildBackImageArray[ChildID] isKindOfClass:[NSString class]]) {
+            NSData* ChildBackgroundImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
+            MyChildBackgroundImageView.image = [UIImage imageWithData:ChildBackgroundImageData];
+        } else {
+            MyChildBackgroundImageView.image = [UIImage imageNamed:readMyChildBackImageArray[ChildID]];
+        }
+        
+        // Prepare the WriteDateArray. 準備讀取使用者信件的創建日期.
+        NSArray *readDateArray = [defaults objectForKey:@"Mailibformation"];
+        if(readDateArray) {
+            putDateArray  = [readDateArray mutableCopy];
+            putDateAddArray = [[putDateArray objectAtIndex:ChildID] mutableCopy];
+        } else {
+            putDateArray = [NSMutableArray new];
+            putDateAddArray = [NSMutableArray new];
+        }
+        
+        // Prepare the judgt the putDateArray is empty or have value. 準備讀取使用者使否有創建信件，如果沒有就顯示有就不顯示.
+        if(putDateAddArray.count == 0) {
+            DescriptionView.hidden = NO;
+        } else
+            DescriptionView.hidden = YES;
+        
+        // Prepare the readTextViewArray. 準備讀取使用者信件的內容，用來連動當要刪除信件時，內容也跟著刪除。
+        NSArray *readTextViewArray = [defaults objectForKey:@"textViewcontent"];
+        if(readTextViewArray) {
+            putTextViewArray = [readTextViewArray mutableCopy];
+            putTextViewAddArray = [[putTextViewArray objectAtIndex:ChildID] mutableCopy];
+        } else {
+            putTextViewArray = [NSMutableArray new];
+            putTextViewAddArray = [NSMutableArray new];
+        }
+        
+        // Prepare the putImageArray. 準備讀取日期陣列是否有存值，來產生信件圖片的數量。
+        putImageArray = [NSMutableArray new];
+        for (int i=0; i<putDateAddArray.count; i++) {
+            [putImageArray addObject:[UIImage imageNamed:@"PostCardVer4@2x.png"]];
+        }
+        
+        // Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子名稱來決定信件上孩子的名字。
+        NSArray *readChildTextFieldnameArray = [defaults objectForKey:@"ChildName"];
+        if(readChildTextFieldnameArray) {
+            putChildTextFieldnameArray = [readChildTextFieldnameArray mutableCopy];
+        } else {
+            putChildTextFieldnameArray = [NSMutableArray new];
+        }
+        
+        //當要顯示時，進行 tableView 的更新
+        [_myTableView reloadData];
+        //  [refreshControl endRefreshing];
+        
+        
+    });
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //設定 navigation bar 顯示
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
     fullScreenBounds=[[UIScreen mainScreen] bounds];
-    
+    //準備讀取儲存的資料
     defaults = [NSUserDefaults standardUserDefaults];
-    
+    //設定背景顏色
     self.view.backgroundColor = [UIColor flatSkyBlueColor];
     
-    //_myTableView.backgroundColor = [UIColor flatWhiteColorDark];
-
-    // To clean the tableView line Between. 去除 tableView cell 與 cell 之間的分隔線.
+    //To clean the tableView line Between. 去除 tableView cell 與 cell 之間的分隔線.
     _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-//    refreshControl = [UIRefreshControl new];
-//    [refreshControl addTarget:self action:@selector(refreshTableView) forControlEvents:UIControlEventValueChanged];
-//    //[refreshControl setFrame:CGRectMake(0, 0, 100, 100)];
-//    [_myTableView addSubview:refreshControl];
     
     [self prepareHeaderView];
+    
+    //設定當通知發生時，執行 FutureMailViewController 來更新資料
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateDate) name:@"FutureMailViewController" object:nil];
 }
+
+#pragma mark - Prepare to NextPage 準備到下一頁
 
 -(void)nextPage {
     [[SelectedRow object]SendSelectedRowAboutMail:-1 Bool:false];
     WriteMailViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"WriteMailViewController"];
     [self presentViewController:nextPage animated:YES completion:nil];
 }
+
+#pragma mark - Setting the scrollViewDidScroll function 設定 ScrollView 被滑動時設定條件
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -157,10 +167,7 @@
  
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark -Prepare TableViewSection and Cell 準備 tableView 的 Section 與 Cell
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return  1;
@@ -212,8 +219,8 @@
         
     [[SelectedRow object]SendSelectedRowAboutMail:(int)indexPath.row Bool:true];
         
-    WriteMailViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"WriteMailViewController"];
-    [self presentViewController:nextPage animated:YES completion:nil];
+    WriteMailViewController *editController = [self.storyboard instantiateViewControllerWithIdentifier:@"WriteMailViewController2"];
+        [self.navigationController pushViewController:editController animated:YES];
         
     }
 }
@@ -233,37 +240,44 @@
         [defaults synchronize];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-        [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        
+        CATransition *transition = [CATransition animation];
+        [transition setDuration:0.2];
+        [transition setType:kCATransitionFade];
+        [DescriptionView.layer addAnimation:transition forKey:nil];
             if(putDateAddArray.count == 0) {
                 DescriptionView.hidden = NO;
-            } else
+            } else {
                 DescriptionView.hidden = YES;
-        }];
-        
-        
-
+            }
     }
 }
+
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:
 (NSIndexPath *)indexPath {
     return YES;
 }
 
+
 -(void)refreshTableView {
+    
     [_myTableView reloadData];
     
-//    [refreshControl endRefreshing];
 }
+
+
+#pragma mark - Prepare the tableViewOfHeaderView 準備 tableView 的 HederView
 
 -(void) prepareHeaderView  {
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width), 270)];
-    MyChildBackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,200)];
+    //設定一個 UIView 給 myTableView 的 HeaderView
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width), 290)];
+    MyChildBackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,220)];
     [headerView addSubview:MyChildBackgroundImageView];
     
-    
-    UIButton *WriteMailBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 210, 360, 50)];
+    //設定一個 Buttton 給 headerView
+    UIButton *WriteMailBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 225,self.view.frame.size.width, 50)];
     WriteMailBtn.backgroundColor = [UIColor flatGrayColor];
     WriteMailBtn.layer.cornerRadius=5.0;
     [WriteMailBtn setImage:[UIImage imageNamed:@"WriteMailImage75x75@2x.png"] forState:UIControlStateNormal];
@@ -273,12 +287,13 @@
            forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:WriteMailBtn];
     
-    
+    //設定一個 UIView 給 headerView
     DescriptionView = [[UIView alloc] initWithFrame:CGRectMake(0, 260, (self.view.frame.size.width), 200)];
     //DescriptionView.backgroundColor = [UIColor flatSandColor];
     [headerView addSubview:DescriptionView];
     
-    UILabel *WriteFirstMailLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width/2)-70, 0,140,100)];
+    //設定一個 UIlabel 給 DescriptionView
+    UILabel *WriteFirstMailLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width/2)-70, 10,140,100)];
     //WriteFirstMailLabel.backgroundColor = [UIColor blueColor];
     [WriteFirstMailLabel setTextColor:[UIColor flatGrayColor]];
     [WriteFirstMailLabel setNumberOfLines:0];
@@ -287,39 +302,47 @@
     //[WriteFirstMailLabel sizeToFit];
     [DescriptionView addSubview:WriteFirstMailLabel];
     
+    //設定一個 ImageView 給 DescriptionView
     UIImageView *WriteMailImageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width/2)-50, 100, 100, 100)];
     WriteMailImageView.image = [UIImage imageNamed:@"WriteMailImage@2x.png"];
     WriteMailImageView.tintColor = [UIColor flatGrayColor];
     [DescriptionView addSubview:WriteMailImageView];
     
+    //將設定好的 UIView 給 mytableView 的 HeaderView
     self.myTableView.tableHeaderView = headerView;
-    //self.myTableView.tableFooterView = headerView;
-    //[self.view addSubview:headerView];
     
+    //設定放置大頭貼的 ImageView 給 MyChildBackgroundImageView
     ChidlBigStickerImageView = [[UIImageView alloc]
-                    initWithFrame:CGRectMake(10, 130, 60, 60)];
+                    initWithFrame:CGRectMake(10, 130, 80, 80)];
     ChidlBigStickerImageView.backgroundColor = [UIColor lightGrayColor];
-    ChidlBigStickerImageView.layer.cornerRadius=30.0;
+    ChidlBigStickerImageView.layer.cornerRadius=40.0;
     ChidlBigStickerImageView.clipsToBounds = YES;
     ChidlBigStickerImageView.layer.borderWidth = 3.0;
     ChidlBigStickerImageView.layer.borderColor = [UIColor whiteColor].CGColor;
     ChidlBigStickerImageView.layer.masksToBounds = YES;
     ChidlBigStickerImageView.image = [UIImage imageNamed:@"BabyUser@2x.png"];
-
     [MyChildBackgroundImageView addSubview:ChidlBigStickerImageView];
     
-    UILabel *Myname = [[UILabel alloc] initWithFrame:CGRectMake(75, 150, 100, 100)];
+    //設定一個 UILabel 給 MyChildBackgroundImageView
+    UILabel *Myname = [[UILabel alloc] initWithFrame:CGRectMake(95, 165, 100, 100)];
+    [Myname setFont:[UIFont boldSystemFontOfSize:18]];
     Myname.textColor = [UIColor whiteColor];
     Myname.text = @"未來信箱";
     [Myname sizeToFit];
     [MyChildBackgroundImageView addSubview:Myname];
     
-    UILabel *Mailintroduce = [[UILabel alloc] initWithFrame:CGRectMake(75, 170, 100, 100)];
-    [Mailintroduce setFont:[UIFont boldSystemFontOfSize:14]];
+    //設定一個 UILabel 給 MyChildBackgroundImageView
+    UILabel *Mailintroduce = [[UILabel alloc] initWithFrame:CGRectMake(95, 185, 100, 100)];
+    [Mailintroduce setFont:[UIFont boldSystemFontOfSize:16]];
     Mailintroduce.textColor = [UIColor whiteColor];
     Mailintroduce.text = @"給孩子一封未來的的信吧";
     [Mailintroduce sizeToFit];
     [MyChildBackgroundImageView addSubview:Mailintroduce];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 /*
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
