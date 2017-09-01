@@ -15,7 +15,7 @@
 #import "MyCommunicator.h"
 #import "timeLineVC.h"
 
-@interface loginViewController () <FBSDKLoginButtonDelegate>
+@interface loginViewController () <FBSDKLoginButtonDelegate, GIDSignInDelegate,GIDSignInUIDelegate>
 {
     NSString    *userName;      // Get it from facebook api.    從FB登入資訊取得
     NSString    *userMail;      // Get it from facebook api.    從FB登入資訊取得

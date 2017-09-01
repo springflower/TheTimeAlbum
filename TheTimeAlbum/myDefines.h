@@ -49,10 +49,17 @@
 #define SERVER_URL @"http://127.0.0.1/thetimealbum/"
 #define SEND_MESSAGE_URL @"https://jerrygood9999.000webhostapp.com/thetimealbum/create_textMessage.php"
 
+
+#define ADD_ACHIEVEMENT_URL @"https://jerrygood9999.000webhostapp.com/thetimealbum/addAchievement.php"
+
 #define GET_UID_URL     @"https://jerrygood9999.000webhostapp.com/thetimealbum/get_uid.php"
 #define REGISTER_URL     @"https://jerrygood9999.000webhostapp.com/thetimealbum/new_register.php"
 #define RETRIVE_POSTS_URL     @"https://jerrygood9999.000webhostapp.com/thetimealbum/retriveMessages2.php"
 #define RETRIVE_ACHIEVEMENTS_URL     @"https://jerrygood9999.000webhostapp.com/thetimealbum/retriveAchievements.php"
 #define UPDATE_POST_URL     @"https://jerrygood9999.000webhostapp.com/thetimealbum/updatePost.php"
+
+#define GET_BABY_DATA_BY_UID_URL @"https://jerrygood9999.000webhostapp.com/thetimealbum/getBabyDataByUID.php"
+
+
 
 #endif /* myDefines_h */

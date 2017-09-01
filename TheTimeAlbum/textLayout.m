@@ -25,7 +25,7 @@
     
     // 设置内边距
     //CGFloat inset = (self.collectionView.frame.size.width - itemWH) * 0.5;
-  //  self.sectionInset = UIEdgeInsetsMake(0, inset, 0, inset);
+    self.sectionInset = UIEdgeInsetsMake(0, 0, 65, 0);
 }
 
 
