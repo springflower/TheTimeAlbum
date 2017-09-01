@@ -39,7 +39,7 @@
     UILabel *updatedescription =
     [[UILabel alloc] initWithFrame:CGRectMake(0,50,
                                               frame.size.width,frame.size.height)];
-    [updatedescription setText:@"更新中."];
+    [updatedescription setText:@"更新中"];
     [updatedescription setTextColor:[UIColor flatSkyBlueColor]];
     updatedescription.backgroundColor = [UIColor clearColor];
     updatedescription.textAlignment = NSTextAlignmentCenter;

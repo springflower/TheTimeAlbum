@@ -46,8 +46,12 @@
     NSString *dateString;
     //準備讀取所儲存的內容，因為是儲存成Data，所以要先用 NSData
     NSData *content;
-    
+    //準備變數讀取決定是使用 popViewControler 還是 dimissViewControler
     int popViewOrdimissViewfunc;
+    
+    
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
