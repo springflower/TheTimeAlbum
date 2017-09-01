@@ -10,6 +10,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "SliderMenuViewLeft.h"
 #import "MyAccountData.h"
+#import <AWSS3.h>
+
 @interface AppDelegate ()
 {
     MyAccountData *appCurrentUser;
@@ -21,6 +23,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // AWS 基本設定
+    AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType:AWSRegionUSEast1 identityPoolId:@"us-east-1:e95dce68-f8c4-4c30-bd71-96d1888fefed"];
+    
+    AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSEast1 credentialsProvider:credentialsProvider];
+    
+    AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration;
+    //--
     
     appCurrentUser = [MyAccountData sharedCurrentUserData];
     localUserData = [NSUserDefaults standardUserDefaults];
@@ -60,6 +70,17 @@
     
     [GIDSignIn sharedInstance].delegate = self;
     
+    
+    
+    
+    
+    
+    //pageview
+    
+    UIPageControl * pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+    pageControl.backgroundColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:1];
     
     
     return YES;

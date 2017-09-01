@@ -47,7 +47,7 @@
 - (instancetype)initWithFrameByBryan:(CGRect)frame backgroundView:(UIImage *)name headView:(UIImage *)headImgName headViewWidth:(CGFloat)width signLabel:(NSString *)signature
 {
     if (self = [super initWithFrame:frame]) {
-        
+        // 加入背景
         UIImageView * backgroundView = [[UIImageView alloc]initWithFrame:CGRectMake(0, -navHeight, frame.size.width, frame.size.height)];
         UIImage * image = name;
         UIImage * newImg = [self image:image byScalingToSize:self.bounds.size];
@@ -55,6 +55,25 @@
         backgroundView.clipsToBounds = YES;
         [self addSubview:backgroundView];
         _backgroundView = backgroundView;
+        
+        
+        // 加入遮罩
+        
+        _maskView = [[UIView alloc] initWithFrame:self.bounds];
+        _maskView.alpha = 0.3;
+        _maskView.backgroundColor = [UIColor blackColor];
+        
+        // 如果要用漸層
+//        CAGradientLayer *layer = [CAGradientLayer layer];;
+//        layer.frame = _maskView.bounds;
+//        
+//        NSArray *colors = [NSArray arrayWithObjects: (id)[[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6] CGColor], (id)[[UIColor colorWithRed:0 green:0 blue:0 alpha:0] CGColor],nil];
+//        [layer setColors:colors];
+//        [_maskView.layer insertSublayer:layer atIndex:0];
+        
+        [self insertSubview:_maskView aboveSubview:backgroundView];
+        
+        
         
         //UIImageView * headView = [[UIImageView alloc]initWithFrame:(CGRect){(frame.size.width - width) * 0.1, 0.5 * (frame.size.height - width)+50, width, width}]; 靠左
         UIImageView * headView = [[UIImageView alloc]initWithFrame:(CGRect){(frame.size.width - width) * 0.5,0.5 * (frame.size.height - width),width,width}];
