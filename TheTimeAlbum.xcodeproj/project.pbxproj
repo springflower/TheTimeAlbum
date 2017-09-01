@@ -27,7 +27,6 @@
 		542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABDFD1F13793500F5F161 /* AppDelegate.m */; };
 		542ABE011F13793500F5F161 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABE001F13793500F5F161 /* ViewController.m */; };
 		542ABE041F13793500F5F161 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE021F13793500F5F161 /* Main.storyboard */; };
-		542ABE061F13793500F5F161 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE051F13793500F5F161 /* Assets.xcassets */; };
 		542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE071F13793500F5F161 /* LaunchScreen.storyboard */; };
 		5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC871F1C7A54008F5C25 /* loginViewController.m */; };
 		5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */; };
@@ -80,6 +79,7 @@
 		CF5A8D321F2EF7C400E0FEA6 /* WriteMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8D311F2EF7C400E0FEA6 /* WriteMailViewController.m */; };
 		CF6150781F3075B50090433A /* MyTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6150771F3075B50090433A /* MyTextAttachment.m */; };
 		CF783CF51F35DB7F0083948D /* SelectedRow.m in Sources */ = {isa = PBXBuildFile; fileRef = CF783CF41F35DB7F0083948D /* SelectedRow.m */; };
+		CF9F66C61F5846FE0099CF0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF9F66C51F5846FE0099CF0A /* Assets.xcassets */; };
 		CFB3FADA1F40AB6A00DF842C /* WriteMailImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB3FAD91F40AB6A00DF842C /* WriteMailImage@2x.png */; };
 		CFB3FADC1F40AE0000DF842C /* WriteMailImage50x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB3FADB1F40AE0000DF842C /* WriteMailImage50x50@2x.png */; };
 		CFB3FADE1F40AF0D00DF842C /* WriteMailImage100x100@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB3FADD1F40AF0D00DF842C /* WriteMailImage100x100@2x.png */; };
@@ -142,7 +142,6 @@
 		542ABDFF1F13793500F5F161 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		542ABE001F13793500F5F161 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		542ABE031F13793500F5F161 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		542ABE051F13793500F5F161 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		542ABE081F13793500F5F161 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		542ABE0A1F13793500F5F161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5452CC861F1C7A54008F5C25 /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
@@ -219,6 +218,7 @@
 		CF6150771F3075B50090433A /* MyTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTextAttachment.m; sourceTree = "<group>"; };
 		CF783CF31F35DB7F0083948D /* SelectedRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectedRow.h; sourceTree = "<group>"; };
 		CF783CF41F35DB7F0083948D /* SelectedRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectedRow.m; sourceTree = "<group>"; };
+		CF9F66C51F5846FE0099CF0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFB3FAD91F40AB6A00DF842C /* WriteMailImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WriteMailImage@2x.png"; sourceTree = "<group>"; };
 		CFB3FADB1F40AE0000DF842C /* WriteMailImage50x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WriteMailImage50x50@2x.png"; sourceTree = "<group>"; };
 		CFB3FADD1F40AF0D00DF842C /* WriteMailImage100x100@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WriteMailImage100x100@2x.png"; sourceTree = "<group>"; };
@@ -453,7 +453,6 @@
 				CF0B784C1F1DD90C0067229D /* AboutMeViewController */,
 				540267581F25D800005967DE /* AddChild+BigStrckerViewController */,
 				CF5A8D331F2EFA4D00E0FEA6 /* FutureMailViewController */,
-				542ABE051F13793500F5F161 /* Assets.xcassets */,
 				542ABE071F13793500F5F161 /* LaunchScreen.storyboard */,
 				542ABE0A1F13793500F5F161 /* Info.plist */,
 				5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */,
@@ -462,6 +461,7 @@
 				5402675A1F26BCD1005967DE /* messageBG.png */,
 				540267591F25D94C005967DE /* Pictures */,
 				542ABDF91F13793500F5F161 /* Supporting Files */,
+				CF9F66C51F5846FE0099CF0A /* Assets.xcassets */,
 			);
 			path = TheTimeAlbum;
 			sourceTree = "<group>";
@@ -647,8 +647,8 @@
 				CFB3FADE1F40AF0D00DF842C /* WriteMailImage100x100@2x.png in Resources */,
 				54A82D4B1F37CE510032996D /* cup01.jpg in Resources */,
 				CFFFC78D1F24CADD0097284F /* Male30x30@2x.png in Resources */,
-				542ABE061F13793500F5F161 /* Assets.xcassets in Resources */,
 				CF0B78561F1DE40D0067229D /* 相簿75x75@2x.png in Resources */,
+				CF9F66C61F5846FE0099CF0A /* Assets.xcassets in Resources */,
 				CF2641091F4351BF005EBFBC /* background1@2x.jpg in Resources */,
 				CF26410D1F4351BF005EBFBC /* background5@2x.jpg in Resources */,
 				CF0B78401F1DAD5B0067229D /* futureMail.storyboard in Resources */,

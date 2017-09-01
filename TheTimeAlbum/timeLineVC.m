@@ -44,14 +44,14 @@
     //準備讀取儲存的孩子大頭貼陣列
     NSArray *readChildBigStickerArray;
     //準備放置讀取儲存的孩子大頭貼圖片
-    UIImage *ChildStickerImage;
+    //UIImage *ChildStickerImage;
 
     //準備讀取所選取的孩子ID來讀取孩子名字陣列
-    NSArray *readChildTextFieldnameArray;
+    //NSArray *readChildTextFieldnameArray;
     
-    NSArray *readMyChildBackImageArray;
+    //NSArray *readMyChildBackImageArray;
     
-    UIImage *MyChildBackGroundImage;
+    //UIImage *MyChildBackGroundImage;
     
     HeadView * vc;
     
@@ -149,21 +149,21 @@
     
     
     //準備讀取所選取的孩子ID來讀取孩子大頭貼陣列
-    readChildBigStickerArray = [localUserData objectForKey:@"MyBigSticker"];
-    ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
-    NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
-    if(ChildBigStickerImageData){
-        ChildStickerImage = [UIImage imageWithData:ChildBigStickerImageData];
-        NSLog(@"照片為： %@",ChildStickerImage);
-    }
-    //讀取孩子背景圖片陣列
-    readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
-    if(![readMyChildBackImageArray[ChildID] isKindOfClass:[NSString class]]) {
-        NSData *readMyChildBackImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
-        MyChildBackGroundImage = [UIImage imageWithData:readMyChildBackImageData];
-    }
+//    readChildBigStickerArray = [localUserData objectForKey:@"MyBigSticker"];
+//    ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
+//    NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
+//    if(ChildBigStickerImageData){
+//        ChildStickerImage = [UIImage imageWithData:ChildBigStickerImageData];
+//        NSLog(@"照片為： %@",ChildStickerImage);
+//    }
+//    //讀取孩子背景圖片陣列
+//    readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
+//    if(![readMyChildBackImageArray[ChildID] isKindOfClass:[NSString class]]) {
+//        NSData *readMyChildBackImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
+//        MyChildBackGroundImage = [UIImage imageWithData:readMyChildBackImageData];
+//    }
     // Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子ID來決定孩子的名字。
-    readChildTextFieldnameArray = [localUserData objectForKey:@"ChildName"];
+    //readChildTextFieldnameArray = [localUserData objectForKey:@"ChildName"];
     
     // 初始化標頭view
     [self initHeadView];
@@ -203,17 +203,17 @@
 //    HeadView * vc = [[HeadView alloc]initWithFrame:headRect backgroundView:@"Fox.jpg"
 //                                          headView:@"head.png"
 //                                     headViewWidth:(CGFloat)(VCWidth / 4) signLabel:@"王小明"];
-    if(MyChildBackGroundImage) {
-        vc = [[HeadView alloc]initWithFrameByBryanImageBackground:headRect
-                                               backgroundView:MyChildBackGroundImage
-                                                     headView:ChildStickerImage
-                                                headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
-    }else {
-        vc = [[HeadView alloc]initWithFrameByBryan:headRect
-                                               backgroundView:readMyChildBackImageArray[ChildID]
-                                                     headView:ChildStickerImage
-                                                headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
-    }
+//    if(MyChildBackGroundImage) {
+//        vc = [[HeadView alloc]initWithFrameByBryanImageBackground:headRect
+//                                               backgroundView:MyChildBackGroundImage
+//                                                     headView:ChildStickerImage
+//                                                headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
+//    }else {
+//        vc = [[HeadView alloc]initWithFrameByBryan:headRect
+//                                               backgroundView:readMyChildBackImageArray[ChildID]
+//                                                     headView:ChildStickerImage
+//                                                headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
+//    }
 
     
     _myView = vc;
@@ -291,8 +291,8 @@
     NSUserDefaults *readChildNameDefaults;
     readChildNameDefaults = [NSUserDefaults standardUserDefaults];
     //如果讀出的陣列數量為零的話，就執行 AddChildSettingViewController 來創造第一個孩子。
-    NSArray *readChildTextFieldnameArray = [readChildNameDefaults objectForKey:@"ChildName"];
-    if(readChildTextFieldnameArray.count == 0) {
+    NSArray *readChildNameArray = [readChildNameDefaults objectForKey:@"ChildName"];
+    if(readChildNameArray.count == 0) {
         StartCreateFirstChildViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"StartCreateFirstChildViewController"];
         [self presentViewController:nextPage animated:YES completion:nil];
     }

@@ -10,6 +10,7 @@
 #import "AddChildSettingViewController.h"
 #import "BigStickerSettingViewController.h"
 #import "UseDownloadDataClass.h"
+#import <ChameleonFramework/Chameleon.h>
 
 
 @interface AddChildSettingViewController ()<UITableViewDelegate,
@@ -381,7 +382,7 @@
     
     // Prepare Toolbar to add BirthdayTextField.
     UIToolbar *toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,0,fullScreenBounds.size.width,40)];
-    toolBar.backgroundColor = [UIColor brownColor];
+    toolBar.backgroundColor = [UIColor flatSkyBlueColor];
     // Prepare Button to add Toolbar.
     UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     

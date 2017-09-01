@@ -49,13 +49,17 @@
 }
 -(void)viewWillAppear:(BOOL)animated {
     
+
+
+    }
+
+-(void)viewDidAppear:(BOOL)animated {
+    
     [self updateDate];
     
-    }
+}
 //準備更新資料
 -(void)updateDate {
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
         
         //讀取目前所選擇的小孩ID
         ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
@@ -76,7 +80,7 @@
         } else {
             MyChildBackgroundImageView.image = [UIImage imageNamed:readMyChildBackImageArray[ChildID]];
         }
-        
+
         // Prepare the WriteDateArray. 準備讀取使用者信件的創建日期.
         NSArray *readDateArray = [defaults objectForKey:@"Mailibformation"];
         if(readDateArray) {
@@ -117,12 +121,11 @@
             putChildTextFieldnameArray = [NSMutableArray new];
         }
         
-        //當要顯示時，進行 tableView 的更新
-        [_myTableView reloadData];
-        //  [refreshControl endRefreshing];
-        
-        
-    });
+
+    
+    //當要顯示時，進行 tableView 的更新
+    [_myTableView reloadData];
+    //  [refreshControl endRefreshing];
 }
 
 - (void)viewDidLoad {
@@ -271,10 +274,13 @@
 
 -(void) prepareHeaderView  {
     
+    
     //設定一個 UIView 給 myTableView 的 HeaderView
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width), 290)];
     MyChildBackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,220)];
     [headerView addSubview:MyChildBackgroundImageView];
+        
+
     
     //設定一個 Buttton 給 headerView
     UIButton *WriteMailBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 225,self.view.frame.size.width, 50)];
@@ -338,6 +344,7 @@
     Mailintroduce.text = @"給孩子一封未來的的信吧";
     [Mailintroduce sizeToFit];
     [MyChildBackgroundImageView addSubview:Mailintroduce];
+        
 }
 
 - (void)didReceiveMemoryWarning {
