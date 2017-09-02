@@ -405,7 +405,6 @@
 #pragma mark - Prepare update FutureMailContentArray 準備一個方法上傳孩子信箱陣列
 
 
-
 -(void)UpdataChildFutureMailContentFunction:(NSArray*)Array {
     
     dispatch_async(dispatch_get_main_queue(), ^{
