@@ -15,7 +15,7 @@
 #import "MyCommunicator.h"
 #import "timeLineVC.h"
 
-@interface loginViewController () <FBSDKLoginButtonDelegate>
+@interface loginViewController () <FBSDKLoginButtonDelegate, GIDSignInDelegate,GIDSignInUIDelegate>
 {
     NSString    *userName;      // Get it from facebook api.    從FB登入資訊取得
     NSString    *userMail;      // Get it from facebook api.    從FB登入資訊取得
@@ -126,6 +126,10 @@
                  currentuser.userId = result1[@"uid"];
                  NSLog(@"currentuser.uid: %@",currentuser.userId);
                  [localUserData setObject:currentuser.userId forKey:@"uid"];
+                 
+                 
+                 // 取得uid後 才去下一頁
+                 [self goNextPage];
              }
              
              if(error){
@@ -148,6 +152,9 @@
      }];
 }
 //--
+
+
+
 
 -(void)viewWillAppear:(BOOL)animated {
     // If facebook is logging in do something    如果用戶已登入且，執行前往下一個VC之類的操作。
@@ -231,7 +238,7 @@
         }
         NSLog(@"****** FB did complete with Login 2 ******");
         //[self getFBUserData];];
-        [self goNextPage];
+        //[self goNextPage];
     }
 }
 

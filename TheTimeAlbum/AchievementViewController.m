@@ -46,9 +46,18 @@
 
 @implementation AchievementViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor flatBlueColor];
+    
+    
+    
+    // 新增完成就接收廣播
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(doReloadJob)
+                                                 name:@"NewAchievementAdded"
+                                               object:nil];
     
     // communicator
     comm = [MyCommunicator sharedInstance];
@@ -68,7 +77,7 @@
     NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
     if(ChildBigStickerImageData){
         ChildStickerImage = [UIImage imageWithData:ChildBigStickerImageData];
-        NSLog(@"照片為： %@",ChildStickerImage);
+        NSLog(@"照片為： %@",ChildStickerImage);
     }
     //讀取孩子背景圖片陣列
     readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
@@ -92,7 +101,7 @@
     UITableView * myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, navHeight, VCWidth, VCHeight - navHeight)];
     myTableView.delegate = self;
     myTableView.dataSource = self;
-    myTableView.contentInset = UIEdgeInsetsMake(headRect.size.height-navHeight-navHeight + 12, 0, 0, 0);
+    myTableView.contentInset = UIEdgeInsetsMake(headRect.size.height-navHeight-navHeight + 12, 0, 45, 0);
     _myTableView = myTableView;
     //myTableView.backgroundColor = [UIColor redColor];
     // 註冊nib
@@ -131,46 +140,36 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
-    
+    achievementItem * tempitem = [getAchievementItems objectAtIndex:indexPath.item];
     //init xib
-    AchievementTableViewCell *cell01 = [tableView dequeueReusableCellWithIdentifier:@"achievementCell" forIndexPath:indexPath];
+    AchievementTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"achievementCell" forIndexPath:indexPath];
     
     
-    
-    
-    
-    
-    
-    static NSString * ID = @"StevenCell";
-    
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    
-    if(!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-    }
     
     //NSLog(@" count :%lu" , (unsigned long)getAchievementItems.count);
     if (getAchievementItems.count == 0) {
-        cell.textLabel.text = [NSString stringWithFormat:@"cell---%ld",indexPath.row + 1];
-        
+
         //
-        cell01.titleText.text = [NSString stringWithFormat:@"cell---%ld",indexPath.row + 1];
+        cell.titleText.text = [NSString stringWithFormat:@"cell---%ld",indexPath.row + 1];
+        return cell;
         
     } else {
-        achievementItem * tempitem = [getAchievementItems objectAtIndex:indexPath.item];
-        NSString *title = tempitem.achievementTitle;
-        cell.textLabel.text = title;
         
+        NSString *thisTitle = tempitem.achievementTitle;
+        NSString *thisHowManyDays = [NSString stringWithFormat:@"第: %lu 天", getAchievementItems.count-indexPath.item ];
+        NSString *thisCreateDate = tempitem.achievementCreatDate;
         
-        cell01.titleText.text = title;
-        cell01.howManyDays.text = [NSString stringWithFormat:@"第: %lu 天", getAchievementItems.count-indexPath.item ];
-        cell01.creatDate.text = tempitem.achievementCreatDate;
-        cell01.achievementPic.image = [UIImage imageNamed:@"cup01.jpg"];
+        cell.titleText.text = thisTitle;
+        cell.howManyDays.text = thisHowManyDays;
+        NSLog(@"the date: %@", thisCreateDate);
+        cell.creatDate.text = thisCreateDate;
+        cell.achievementPic.image = [UIImage imageNamed:@"cup01.jpg"];
+        return cell;
     }
     
     
 
-    return cell01;
+    return nil;
 }
 - (IBAction)reload:(id)sender {
     [self doReloadJob];
@@ -185,6 +184,8 @@
         _myView.backgroundView.contentMode = UIViewContentModeScaleToFill;
         
         _myView.backgroundView.frame = CGRectMake(offset_Y*0.5 , -navHeight, VCWidth - offset_Y, headRect.size.height - offset_Y);
+        
+        _myView.maskView.frame = CGRectMake(offset_Y*0.5 , -navHeight, VCWidth - offset_Y, headRect.size.height - offset_Y);
     }else if (offset_Y > 0 && offset_Y <= (headRect.size.height-navHeight-navHeight)) {
         
         _myView.backgroundView.contentMode = UIViewContentModeBottom;
@@ -201,6 +202,9 @@
         
         _myView.signLabel.alpha = 1 - (offset_Y*3 / (headRect.size.height-navHeight-navHeight) /2);
         _myView.headView.alpha = 1 - (offset_Y*3 / (headRect.size.height-navHeight-navHeight) /2);
+        
+        _myView.maskView.frame = CGRectMake(0 ,y , VCWidth , headRect.size.height -(navHeight + y) - offset_Y);
+        
     }else if(offset_Y > (headRect.size.height-navHeight-navHeight)) {
         _myView.backgroundView.contentMode = UIViewContentModeTop;
         
@@ -218,6 +222,9 @@
         
         _myView.signLabel.alpha = 1 - ((headRect.size.height-navHeight-navHeight)*3 / (headRect.size.height-navHeight-navHeight) /2);
         _myView.headView.alpha = 1 - ((headRect.size.height-navHeight-navHeight)*3 / (headRect.size.height-navHeight-navHeight) /2);
+        
+        _myView.maskView.frame = CGRectMake(0 ,y , VCWidth , headRect.size.height -(navHeight + y) - (headRect.size.height-navHeight-navHeight));
+        
     }
     CGFloat offsetYofheader = headRect.size.height-navHeight-navHeight - 64;
     NSLog(@"off: %f", offsetYofheader);
@@ -320,6 +327,9 @@
         NSLog(@"** do before handle messages of achievements");
         [self handleIncomingMessages];
         NSLog(@"** done with handle messages of achievements");
+                               
+                               NSLog(@" %lu, %lu, ", (unsigned long)incomingAchievements.count, (unsigned long)getAchievementItems.count);
+                               
     }];
     
     
@@ -363,6 +373,9 @@
     item.achievementTitle = title;
     item.achievementPicName = picName;
     item.achievementCreatDate = creatDate;
+    
+    
+    
     
     [getAchievementItems addObject:item];
 

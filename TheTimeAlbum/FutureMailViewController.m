@@ -47,13 +47,8 @@
     //準備讀取信件陣列，依所選擇的小孩ID來決定
     NSMutableArray *putDateAddArray;
 }
+
 -(void)viewWillAppear:(BOOL)animated {
-    
-
-
-    }
-
--(void)viewDidAppear:(BOOL)animated {
     
     [self updateDate];
     
@@ -70,6 +65,7 @@
             NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
             if(readChildBigStickerArray.count != 0) {
                 ChidlBigStickerImageView.image = [UIImage imageWithData:ChildBigStickerImageData];
+                
             }
         }
         //讀取孩子背景圖片陣列
@@ -163,7 +159,6 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat offsetY = scrollView.contentOffset.y;
-    NSLog(@"Y軸為：%f",offsetY);
     UIView *headerContentView = self.myTableView.tableHeaderView.subviews[0];
     
     headerContentView.transform = CGAffineTransformMakeTranslation(0,MIN(offsetY,0));

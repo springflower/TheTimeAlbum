@@ -12,6 +12,8 @@
 #import "MyAccountData.h"
 #import "UseDownloadDataClass.h"
 #import "UpdateDataView.h"
+#import <AWSS3.h>
+
 @interface AppDelegate ()
 {
     MyAccountData *appCurrentUser;
@@ -24,6 +26,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    // AWS 基本設定
+    AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType:AWSRegionUSEast1 identityPoolId:@"us-east-1:e95dce68-f8c4-4c30-bd71-96d1888fefed"];
+    
+    AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSEast1 credentialsProvider:credentialsProvider];
+    
+    AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration;
+    //--
+    
     appCurrentUser = [MyAccountData sharedCurrentUserData];
     localUserData = [NSUserDefaults standardUserDefaults];
     
@@ -31,18 +41,18 @@
     
     
     // set default viewcontroller by login status
-//    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-//    NSLog(@"appdele : %@", [localUserData objectForKey:@"uid"]);
-//    if([localUserData objectForKey:@"uid"] == nil){
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"loginPage" bundle:nil];
-//        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-//        
-//    } else {
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarVC"];
-//    
-//    }
-//    [self.window makeKeyAndVisible];
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    NSLog(@"appdele : %@", [localUserData objectForKey:@"uid"]);
+    if([localUserData objectForKey:@"uid"] == nil){
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"loginPage" bundle:nil];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        
+    } else {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarVC"];
+    
+    }
+    [self.window makeKeyAndVisible];
     
     
     // FB Signin
@@ -57,6 +67,17 @@
     
     [GIDSignIn sharedInstance].delegate = self;
     
+    
+    
+    
+    
+    
+    //pageview
+    
+    UIPageControl * pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+    pageControl.backgroundColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:1];
     
     
     return YES;

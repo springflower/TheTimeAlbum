@@ -37,6 +37,7 @@
 }
 // FIXME: add uid to post
 - (IBAction)saveBtnPressed:(id)sender {
+    //FIXME: fake babyID
     NSString *babyID = @"1";
     NSString *content = self.contentText.text;
     NSString *postType = @"1";

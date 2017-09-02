@@ -71,6 +71,29 @@ static MyCommunicator *_singletonCommunicator = nil;
                    completion:done];
 }
 
+// 新增成就到SQL
+-(void) addAchievementForbabyID:(NSString*) babyID
+                          title:(NSString*) title
+                        picName:(NSString*) picName
+                     createDate:(NSString*) createDate
+                     completion:(DoneHandler) done {
+    
+    NSDictionary *parameters = @{@"babyId": babyID,
+                                 @"title": title,
+                                 @"picName": picName,
+                                 @"createDate": createDate};
+    NSLog(@"parameters: %@", parameters);
+    
+    // 通用API(自製) 向server送出post指令
+    [self doPostWithURLString:ADD_ACHIEVEMENT_URL
+                   parameters:parameters
+                         data:nil
+                   completion:done];
+    
+}
+
+
+
 // 從SQL 撈uid 的功能
 -(void) getUIDFromSQLByFBID:(NSString*) fbid
                       completion:(DoneHandler) done{
@@ -112,6 +135,17 @@ static MyCommunicator *_singletonCommunicator = nil;
                          data:nil
                    completion:done];
     
+}
+
+- (void) getBabyDataByUID:(NSString*)uid completion:(DoneHandler)done {
+    
+    NSDictionary *parameters = @{ @"uid": uid};
+    NSLog(@"--do in getBabyDataByUID ");
+    [self doPostWithURLString:GET_BABY_DATA_BY_UID_URL
+                   parameters:parameters
+                         data:nil
+                   completion:done];
+
 }
 
 #pragma mark - updatePosts to server        修改文章

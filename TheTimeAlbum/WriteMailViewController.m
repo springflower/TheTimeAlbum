@@ -5,13 +5,14 @@
 //  Created by 黃柏恩 on 2017/7/31.
 //  Copyright © 2017年 Greathard. All rights reserved.
 //
-#import <AFNetworking.h>
 #import "SelectedRow.h"
+#import <AFNetworking.h>
 #import <Photos/Photos.h>
+#import "UpdateDataView.h"
+#import "MyTextAttachment.h"
 #import <QuartzCore/QuartzCore.h>
 #import "WriteMailViewController.h"
 #import <ChameleonFramework/Chameleon.h>
-#import "MyTextAttachment.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface WriteMailViewController ()<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -48,9 +49,6 @@
     NSData *content;
     //準備變數讀取決定是使用 popViewControler 還是 dimissViewControler
     int popViewOrdimissViewfunc;
-    
-    
-    
     
 }
 
@@ -156,6 +154,9 @@
 
 - (IBAction)SendMessage:(id)sender {
     
+    UpdateDataView *updateChildFutureMailContent = [UpdateDataView new];
+    [updateChildFutureMailContent UpdataChildFutureMailContentFunction:putTextViewAddArray];
+    
     // Ready to all textViewContent give textViewcontent. 準備將 TextView 上的內容給包裝好.
     NSMutableAttributedString *textViewcontent = [[NSMutableAttributedString alloc]
                                                   initWithAttributedString:_TextView.attributedText];
@@ -165,9 +166,6 @@
     // If didSeletedRow is bigger 0 or equal 0, save the content to specify putTextViewArray position. 選擇的如果選擇舊信箱的話，修改信箱內容並儲存。
     if([[SelectedRow object] didSelectedRowAboutMail] >=0) {
         putTextViewAddArray[[[SelectedRow object] didSelectedRowAboutMail]] = content;
-        
-        NSLog(@"儲存的內容為： %@",putTextViewAddArray);
-        
         putTextViewArray[ChildID] = putTextViewAddArray;
         [defaults setValue:putTextViewArray forKey:@"textViewcontent"];
         [defaults synchronize];
@@ -176,24 +174,19 @@
     } else if([[SelectedRow object] didSelectedRowAboutMail] ==-1){
         
         NSMutableAttributedString *textViewcontent = [[NSMutableAttributedString alloc] initWithAttributedString:_TextView.attributedText];
-        
         content = [NSKeyedArchiver archivedDataWithRootObject:textViewcontent];
-        NSLog(@"文章的內容為：%@",content);
-        
         [putTextViewAddArray addObject:content];
-        NSLog(@"儲存的內容為： %@",putTextViewAddArray);
-        
         putTextViewArray[ChildID] = putTextViewAddArray;
         [defaults setValue:putTextViewArray forKey:@"textViewcontent"];
         
         [putDateAddArray addObject:dateString];
-        
         putDateArray[ChildID] = putDateAddArray;
-        NSLog(@"putDateAddArray的內容為： %@",putDateArray);
+        [defaults setValue:putDateArray forKey:@"Mailibformation"];
         
-       [defaults setValue:putDateArray forKey:@"Mailibformation"];
+        [defaults synchronize];
         
-       [defaults synchronize];
+
+
         
     }
     if(popViewOrdimissViewfunc == 1) {
@@ -201,6 +194,8 @@
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+    
+    
 }
 
 #pragma mark - Prepare Set PhotoSelect from UIActionSheet 準備 UIActionSheet 選擇相機或相簿功能
@@ -516,7 +511,7 @@
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height+50, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height+100, 0.0);
     _TextView.contentInset = contentInsets;
     _TextView.scrollIndicatorInsets = contentInsets;
     

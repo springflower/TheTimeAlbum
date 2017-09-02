@@ -134,20 +134,40 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>JTSImageViewController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>28</integer>
+		</dict>
 		<key>KVNProgress.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>27</integer>
+		</dict>
+		<key>LGPlusButtonsView.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>29</integer>
 		</dict>
 		<key>Pods-TheTimeAlbum.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
+		<key>TZImagePickerController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>30</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>2755AE42901315D17AD036F6B85DA681</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>29770800F091C09B54EDBA6BA32ACB9C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -158,6 +178,16 @@
 			<true/>
 		</dict>
 		<key>3038494344FD1DB9D4384141B8AC2094</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3E4F42329B6B9617356E7A571F7942B9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>41AC733A5E44F93AB4B99C10EBFE31FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -263,6 +293,11 @@
 			<true/>
 		</dict>
 		<key>E2D0C9732678562C7E24CC903182DACB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E316EF747A2E162998CF9A7FAAAAE674</key>
 		<dict>
 			<key>primary</key>
 			<true/>

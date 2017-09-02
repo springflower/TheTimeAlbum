@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyCollectionViewCellWithImage3" id="gTV-IL-0wX" customClass="MyCollectionViewCellWithImage3">
+            <rect key="frame" x="0.0" y="0.0" width="349" height="250"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="349" height="250"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IWh-HI-rtB">
+                        <rect key="frame" x="0.0" y="0.0" width="349" height="250"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Wp-dZ-1je">
+                        <rect key="frame" x="0.0" y="10" width="349" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mop-09-iMh">
+                        <rect key="frame" x="2" y="41" width="197" height="178"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9l-BN-ZXa">
+                        <rect key="frame" x="0.0" y="229" width="349" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oaF-sd-m1a">
+                        <rect key="frame" x="201" y="41" width="146" height="88"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="88" id="dFp-ko-ICr"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NfH-W9-vih">
+                        <rect key="frame" x="201" y="131" width="146" height="88"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="88" id="I8f-4w-dh5"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="9Wp-dZ-1je" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="66o-by-OnU"/>
+                <constraint firstItem="C9l-BN-ZXa" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="6IA-XL-dZv"/>
+                <constraint firstItem="IWh-HI-rtB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="7Qq-b1-lvk"/>
+                <constraint firstItem="mop-09-iMh" firstAttribute="top" secondItem="9Wp-dZ-1je" secondAttribute="bottom" constant="10" id="ALg-WS-Fqy"/>
+                <constraint firstAttribute="trailing" secondItem="IWh-HI-rtB" secondAttribute="trailing" id="DBx-Df-mZT"/>
+                <constraint firstAttribute="trailing" secondItem="mop-09-iMh" secondAttribute="trailing" constant="150" id="Mbh-KX-B4h"/>
+                <constraint firstItem="NfH-W9-vih" firstAttribute="top" secondItem="oaF-sd-m1a" secondAttribute="bottom" constant="2" id="N7p-iY-9wC"/>
+                <constraint firstItem="IWh-HI-rtB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="QwR-UK-sdC"/>
+                <constraint firstItem="oaF-sd-m1a" firstAttribute="leading" secondItem="mop-09-iMh" secondAttribute="trailing" constant="2" id="YES-pK-Nk4"/>
+                <constraint firstAttribute="bottom" secondItem="C9l-BN-ZXa" secondAttribute="bottom" id="cYc-2Z-NUl"/>
+                <constraint firstItem="C9l-BN-ZXa" firstAttribute="top" secondItem="mop-09-iMh" secondAttribute="bottom" constant="10" id="eqe-rB-iQ8"/>
+                <constraint firstItem="NfH-W9-vih" firstAttribute="leading" secondItem="mop-09-iMh" secondAttribute="trailing" constant="2" id="fst-2Y-ycd"/>
+                <constraint firstAttribute="trailing" secondItem="9Wp-dZ-1je" secondAttribute="trailing" id="gCn-Qk-P49"/>
+                <constraint firstItem="mop-09-iMh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="ltA-5O-yGa"/>
+                <constraint firstAttribute="trailing" secondItem="C9l-BN-ZXa" secondAttribute="trailing" id="pAg-Sv-fRE"/>
+                <constraint firstItem="C9l-BN-ZXa" firstAttribute="top" secondItem="NfH-W9-vih" secondAttribute="bottom" constant="10" id="q9f-nr-SOG"/>
+                <constraint firstItem="oaF-sd-m1a" firstAttribute="top" secondItem="9Wp-dZ-1je" secondAttribute="bottom" constant="10" id="rBH-SI-2xl"/>
+                <constraint firstItem="9Wp-dZ-1je" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="rMa-qZ-uBb"/>
+                <constraint firstAttribute="trailing" secondItem="oaF-sd-m1a" secondAttribute="trailing" constant="2" id="s1m-Lv-Vea"/>
+                <constraint firstAttribute="bottom" secondItem="IWh-HI-rtB" secondAttribute="bottom" id="tVv-9t-W90"/>
+                <constraint firstAttribute="trailing" secondItem="NfH-W9-vih" secondAttribute="trailing" constant="2" id="zaY-Vl-Jbi"/>
+            </constraints>
+            <connections>
+                <outlet property="backGroundImage" destination="IWh-HI-rtB" id="wt2-fI-Evt"/>
+                <outlet property="image01" destination="mop-09-iMh" id="NKS-qR-RBH"/>
+                <outlet property="image02" destination="oaF-sd-m1a" id="nlH-EZ-uPw"/>
+                <outlet property="image03" destination="NfH-W9-vih" id="iWK-H6-Z4B"/>
+                <outlet property="labelDate" destination="9Wp-dZ-1je" id="kuN-8y-Whc"/>
+                <outlet property="labelNumOfPhotos" destination="C9l-BN-ZXa" id="zDO-1l-5Ob"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>
