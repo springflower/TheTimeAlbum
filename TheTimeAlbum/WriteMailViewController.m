@@ -16,6 +16,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface WriteMailViewController ()<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIButton *BackBtn;
 @property (weak, nonatomic) IBOutlet UIButton *KeepMessage;
 @property (weak, nonatomic) IBOutlet UIButton *SendMessage;
@@ -154,8 +155,10 @@
 
 - (IBAction)SendMessage:(id)sender {
     
+    //上傳文章內容到雲端
     UpdateDataView *updateChildFutureMailContent = [UpdateDataView new];
     [updateChildFutureMailContent UpdataChildFutureMailContentFunction:putTextViewAddArray];
+    
     
     // Ready to all textViewContent give textViewcontent. 準備將 TextView 上的內容給包裝好.
     NSMutableAttributedString *textViewcontent = [[NSMutableAttributedString alloc]

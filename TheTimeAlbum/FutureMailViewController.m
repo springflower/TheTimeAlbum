@@ -48,12 +48,6 @@
     NSMutableArray *putDateAddArray;
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    
-
-
-    }
-
 -(void)viewDidAppear:(BOOL)animated {
     
     [self updateDate];
