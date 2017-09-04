@@ -97,7 +97,7 @@
              //準備將下載到的資料解除封包
              ChildBigStickerArray = [NSKeyedUnarchiver unarchiveObjectWithData:responseObject];
              //如果 Array 存在，將值傳送給 Block
-             
+             NSLog(@"%@",responseObject);
              if(Array) {
                  Array(ChildBigStickerArray);
              }
