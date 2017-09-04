@@ -708,6 +708,7 @@
     
     [self downloadDataFromServe];
 
+    
     //[self initBtn2];
     
     //////////////-=========================================
