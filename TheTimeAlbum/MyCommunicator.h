@@ -52,6 +52,13 @@ typedef void (^DoneHandler)(NSError *error, id result);
 -(void) updatePostsToServerWithPostID:(NSInteger)postID
                               content:(NSString*)content
                            completion:(DoneHandler)done;
+-(void) updatePostsToServerWithPostID:(NSInteger)postID
+                             postType:(NSInteger)postType
+                              content:(NSString*)content
+                           completion:(DoneHandler)done;
+- (void) deletePostByPostID:(NSInteger) postID
+                 completion:(DoneHandler) done;
+
 // 用uid取得這uid所擁有的寶寶們
 - (void) getBabyDataByUID:(NSString*)uid completion:(DoneHandler)done;
 

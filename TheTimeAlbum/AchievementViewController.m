@@ -103,6 +103,7 @@
     myTableView.dataSource = self;
     myTableView.contentInset = UIEdgeInsetsMake(headRect.size.height-navHeight-navHeight + 12, 0, 45, 0);
     _myTableView = myTableView;
+    
     //myTableView.backgroundColor = [UIColor redColor];
     // 註冊nib
     self.myTableView.rowHeight = 160;
@@ -143,7 +144,7 @@
     achievementItem * tempitem = [getAchievementItems objectAtIndex:indexPath.item];
     //init xib
     AchievementTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"achievementCell" forIndexPath:indexPath];
-    
+    //cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
     
     //NSLog(@" count :%lu" , (unsigned long)getAchievementItems.count);

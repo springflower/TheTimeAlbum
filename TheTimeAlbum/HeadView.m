@@ -76,9 +76,11 @@
         
         
         //UIImageView * headView = [[UIImageView alloc]initWithFrame:(CGRect){(frame.size.width - width) * 0.1, 0.5 * (frame.size.height - width)+50, width, width}]; 靠左
-        UIImageView * headView = [[UIImageView alloc]initWithFrame:(CGRect){(frame.size.width - width) * 0.5,0.5 * (frame.size.height - width),width,width}];
-        headView.layer.cornerRadius = width*0.5;
+        UIImageView * headView = [[UIImageView alloc]initWithFrame:(CGRect){(frame.size.width - width) * 0.5,0.5 * (frame.size.height - width),width+5,width+5}];
+        headView.layer.cornerRadius = (width+5)*0.5;
         headView.layer.masksToBounds = YES;
+        headView.layer.borderColor = [UIColor whiteColor].CGColor;
+        headView.layer.borderWidth = 4;
         headView.image = headImgName;
         [self addSubview:headView];
         _headView = headView;

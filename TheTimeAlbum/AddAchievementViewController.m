@@ -116,7 +116,7 @@
     
     // 放日期label 設定
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy年MM月dd日";
+    formatter.dateFormat = @"yyyy年M月d日";
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     self.dateLabel.text = dateString;
     
@@ -230,7 +230,7 @@
     //创建一个日期格式
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     //设置日期的显示格式
-    fmt.dateFormat = @"yyyy年MM月dd日";
+    fmt.dateFormat = @"yyyy年M月d日";
     //将日期转为指定格式显示
     NSString *dateStr = [fmt stringFromDate:self.myDatePicker.date];
     _dateLabel.text = dateStr;
@@ -284,9 +284,7 @@
                            
                            NSLog(@"新增成就成功");
                            [KVNProgress showSuccessWithStatus:@"新增成就成功"];
-                           [[NSNotificationCenter defaultCenter] postNotificationName:@"NewAchievementAdded"
-                                                                               object:self
-                                                                             userInfo:nil];
+                           [[NSNotificationCenter defaultCenter] postNotificationName:@"NewAchievementAdded" object:nil];
                            
                            [self.navigationController popViewControllerAnimated:YES];
                        }];

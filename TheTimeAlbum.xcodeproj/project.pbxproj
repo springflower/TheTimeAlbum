@@ -41,6 +41,8 @@
 		5430717A1F54526B00DC2536 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 543071791F54526B00DC2536 /* ContentViewController.m */; };
 		5430717E1F55AE6000DC2536 /* AddAchievementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5430717D1F55AE6000DC2536 /* AddAchievementViewController.m */; };
 		543071801F55AE9100DC2536 /* AddAchievement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5430717F1F55AE9100DC2536 /* AddAchievement.storyboard */; };
+		544EFFF21F5B53620078F143 /* MyCollectionViewCellWithImage2.m in Sources */ = {isa = PBXBuildFile; fileRef = 544EFFF01F5B53620078F143 /* MyCollectionViewCellWithImage2.m */; };
+		544EFFF31F5B53620078F143 /* MyCollectionViewCellWithImage2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 544EFFF11F5B53620078F143 /* MyCollectionViewCellWithImage2.xib */; };
 		5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC871F1C7A54008F5C25 /* loginViewController.m */; };
 		5452CC8B1F1C9AC2008F5C25 /* MyAccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC8A1F1C9AC2008F5C25 /* MyAccountData.m */; };
 		5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */; };
@@ -172,6 +174,9 @@
 		5430717C1F55AE6000DC2536 /* AddAchievementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAchievementViewController.h; sourceTree = "<group>"; };
 		5430717D1F55AE6000DC2536 /* AddAchievementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAchievementViewController.m; sourceTree = "<group>"; };
 		5430717F1F55AE9100DC2536 /* AddAchievement.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddAchievement.storyboard; sourceTree = "<group>"; };
+		544EFFEF1F5B53620078F143 /* MyCollectionViewCellWithImage2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewCellWithImage2.h; sourceTree = "<group>"; };
+		544EFFF01F5B53620078F143 /* MyCollectionViewCellWithImage2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewCellWithImage2.m; sourceTree = "<group>"; };
+		544EFFF11F5B53620078F143 /* MyCollectionViewCellWithImage2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewCellWithImage2.xib; sourceTree = "<group>"; };
 		5452CC861F1C7A54008F5C25 /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
 		5452CC871F1C7A54008F5C25 /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
 		5452CC891F1C9AC2008F5C25 /* MyAccountData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountData.h; sourceTree = "<group>"; };
@@ -320,6 +325,9 @@
 				54296C9B1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.h */,
 				54296C9C1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.m */,
 				54296C9D1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.xib */,
+				544EFFEF1F5B53620078F143 /* MyCollectionViewCellWithImage2.h */,
+				544EFFF01F5B53620078F143 /* MyCollectionViewCellWithImage2.m */,
+				544EFFF11F5B53620078F143 /* MyCollectionViewCellWithImage2.xib */,
 				5430715B1F52383F00DC2536 /* MyCollectionViewCellWithImage3.h */,
 				5430715C1F52383F00DC2536 /* MyCollectionViewCellWithImage3.m */,
 				5430715D1F52383F00DC2536 /* MyCollectionViewCellWithImage3.xib */,
@@ -718,6 +726,7 @@
 				CFF3A0521F3310730065841F /* PostCardVer4@2x.png in Resources */,
 				CF1395901F2F700F00D3C0FD /* Video75x50@2x.png in Resources */,
 				5452CC8F1F1D41AE008F5C25 /* GoogleService-Info.plist in Resources */,
+				544EFFF31F5B53620078F143 /* MyCollectionViewCellWithImage2.xib in Resources */,
 				54A82D401F37B31A0032996D /* head@2x.png in Resources */,
 				CF0B78621F1DEBB70067229D /* 清單30x30@2x.png in Resources */,
 				CF0B78601F1DEA380067229D /* 清單48x48@2x.png in Resources */,
@@ -793,6 +802,7 @@
 				540267421F24A3DE005967DE /* HeadView.m in Sources */,
 				54A82D481F37C91E0032996D /* AchievementTableViewCell.m in Sources */,
 				54296C9E1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.m in Sources */,
+				544EFFF21F5B53620078F143 /* MyCollectionViewCellWithImage2.m in Sources */,
 				542233721F2738E8000933BD /* MyCommunicator.m in Sources */,
 				542ABE011F13793500F5F161 /* ViewController.m in Sources */,
 				CF783CF51F35DB7F0083948D /* SelectedRow.m in Sources */,

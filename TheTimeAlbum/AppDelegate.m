@@ -11,6 +11,7 @@
 #import "SliderMenuViewLeft.h"
 #import "MyAccountData.h"
 #import <AWSS3.h>
+#import <Chameleon.h>
 
 @interface AppDelegate ()
 {
@@ -23,7 +24,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    //[Chameleon setGlobalThemeUsingPrimaryColor: withContentStyle:(UIContentStyle)contentStyle];
+
+    //[Chameleon setGlobalThemeUsingPrimaryColor:[UIColor flatLimeColor] withContentStyle:UIContentStyleContrast];
     // AWS 基本設定
     AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType:AWSRegionUSEast1 identityPoolId:@"us-east-1:e95dce68-f8c4-4c30-bd71-96d1888fefed"];
     

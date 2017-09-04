@@ -66,7 +66,7 @@
                    [KVNProgress dismissWithCompletion:^{
                        // Things you want to do after the HUD is gone.
                        [KVNProgress showSuccessWithStatus:@"新增成功"];
-                       
+                       [[NSNotificationCenter defaultCenter] postNotificationName:@"doReloadJob" object:nil];
                        [self.navigationController popViewControllerAnimated:YES];
                        
                    }];

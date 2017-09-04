@@ -20,10 +20,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.imageView.layer.borderWidth = 2;
+    self.imageView.layer.borderWidth = 1;
     self.imageView.layer.borderColor = [UIColor flatCoffeeColorDark].CGColor;
     self.imageView.layer.cornerRadius = 5;
     self.imageView.clipsToBounds = YES;
+    self.detalText.userInteractionEnabled = NO;
     // Initialization code
     
 //    self.layer.masksToBounds = NO;

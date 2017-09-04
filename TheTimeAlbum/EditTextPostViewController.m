@@ -75,6 +75,20 @@
 - (void) goOptions {
     
     //...
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"選項" message:@"刪除貼文" preferredStyle: UIAlertControllerStyleActionSheet];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"刪除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
+        //[self configKVNProgress];
+        //[KVNProgress show];
+        [comm deletePostByPostID:self.postID completion:^(NSError *error, id result) {
+            //[KVNProgress showSuccessWithStatus:@"刪除成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"doReloadJob" object:nil];
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    }];
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:action];
+    [alert addAction:actionCancel];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void) configKVNProgress {
@@ -132,7 +146,7 @@
                                  [KVNProgress dismissWithCompletion:^{
                                      // Things you want to do after the HUD is gone.
                                      [KVNProgress showSuccessWithStatus:@"儲存變更成功"];
-                                     
+                                     [[NSNotificationCenter defaultCenter] postNotificationName:@"doReloadJob" object:nil];
                                      [self.navigationController popViewControllerAnimated:YES];
                             
                                  }];

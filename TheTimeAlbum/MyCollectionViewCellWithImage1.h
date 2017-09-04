@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface MyCollectionViewCellWithImage1 : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *cellPic01;
+@property (weak, nonatomic) IBOutlet UIImageView *backGroundImage;
+@property (weak, nonatomic) IBOutlet UIImageView *image01;
+@property (weak, nonatomic) IBOutlet UILabel *labelDate;
+@property (weak, nonatomic) IBOutlet UILabel *labelDate2;
+@property (weak, nonatomic) IBOutlet UILabel *labelSign;
+@property (weak, nonatomic) IBOutlet UILabel *labelNumOfPhotos;
 
 @end

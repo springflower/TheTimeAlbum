@@ -13,6 +13,7 @@
 #import "WriteMailViewController.h"
 #import "MyCollectionViewCellWithText.h"
 #import "MyCollectionViewCellWithImage1.h"
+#import "MyCollectionViewCellWithImage2.h"
 #import "MyCollectionViewCellWithImage3.h"
 #import "MyCollectionViewCellUploading.h"
 #import "ImageViewController.h"
@@ -165,21 +166,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeViewContrllerToAddChildSettingViewController) name:@"settingChild" object:nil];
     //--
     
+    // 監聽重整事件
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doReloadJob) name:@"doReloadJob" object:nil];
     
     
-   
     
-// FIXME: getbabydata  假資料
-    // get baby data from server
-   // localUserData setObject:<#(nullable id)#> forKey:<#(nonnull NSString *)#>
-    if([localUserData objectForKey:@"babyid"] == nil){
-        [self getBabyData];
-    }
-    //FIXME: 假資料
-    [localUserData setObject:@"1" forKey:@"babyid"];
-    [localUserData setObject:@"王大明" forKey:@"babyname"];
-    [localUserData setObject:@"2017-07-23 00:00:00" forKey:@"babybirthday"];
-
     
     // 載入貼文
     lastPostID = 1;
@@ -223,11 +214,12 @@
     // 底色
     //NSArray *colors = @[[UIColor flatWhiteColor], [UIColor flatRedColor]];
     //myCollectionView.backgroundColor = [UIColor colorWithGradientStyle:UIGradientStyleLeftToRight withFrame:(CGRect)myCollectionView.frame andColors: colors];
-    myCollectionView.backgroundColor = [UIColor lightGrayColor];
+    myCollectionView.backgroundColor = [UIColor flatWhiteColor];
     
     [myCollectionView registerNib:[UINib nibWithNibName:@"MyCollectionViewCellWithText" bundle:nil]  forCellWithReuseIdentifier:@"MyCollectionViewCellWithText"];
-    [myCollectionView registerNib:[UINib nibWithNibName:@"MyCollectionViewCellWithImage1" bundle:nil]  forCellWithReuseIdentifier:@"onePicCell"];
-    [myCollectionView registerNib:[UINib nibWithNibName:@"MyCollectionViewCellWithImage3" bundle:nil]  forCellWithReuseIdentifier:@"MyCollectionViewCellWithImage3"];
+    [myCollectionView registerNib:[UINib nibWithNibName:@"MyCollectionViewCellWithImage1" bundle:nil]  forCellWithReuseIdentifier:@"OnePicCell"];
+    [myCollectionView registerNib:[UINib nibWithNibName:@"MyCollectionViewCellWithImage2" bundle:nil]  forCellWithReuseIdentifier:@"TwoPicCell"];
+    [myCollectionView registerNib:[UINib nibWithNibName:@"MyCollectionViewCellWithImage3" bundle:nil]  forCellWithReuseIdentifier:@"ThreePicCell"];
     [myCollectionView registerNib:[UINib nibWithNibName:@"MyCollectionViewCellUploading" bundle:nil]  forCellWithReuseIdentifier:@"MyCollectionViewCellUploading"];
     
     
@@ -304,9 +296,10 @@
 - (void) initBlurUploadingStatus {
     // 模糊的 上傳狀態的View
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
-    effectView.layer.cornerRadius = 5.0f;
+    //effectView.layer.cornerRadius = 5.0f;
+    effectView.layer.cornerRadius = 0;
     effectView.layer.masksToBounds = YES;
-    effectView.frame = CGRectMake(4, 220, 367, 80);
+    effectView.frame = CGRectMake(4, 220, VCWidth, 80);
     _myEffectView = effectView;
     [self.myView addSubview:_myEffectView];
     //_myEffectView.alpha = 0;
@@ -351,9 +344,10 @@
                                 
                                 if(index == 1){
                                     
-                                    [self getBabyData];
-//                                    [_plusButtonsViewMain hideButtonsAnimated:YES completionHandler:nil];
-//                                    [self btnAddNewPostPressed];
+//  測試區
+                                    //[self getBabyData];
+                                    [_plusButtonsViewMain hideButtonsAnimated:YES completionHandler:nil];
+                                    [self btnAddNewPostPressed];
                                 } else if (index == 2) {
                                     
                                     [_plusButtonsViewMain hideButtonsAnimated:YES completionHandler:nil];
@@ -684,6 +678,11 @@
         }];
     }
     //--
+    
+    // 看需不需要撈孩子的資料
+    if([localUserData objectForKey:@"babyid"] == nil){
+        [self getBabyData];
+    }
 }
 
 #pragma mark: collectionview delegate       collectionview 相關
@@ -705,49 +704,88 @@
     //static NSString *textMessageID = @"texMessageCell";
     
     PostItem *pp =[postItems objectAtIndex:indexPath.row];
-    MyCollectionViewCellWithText *cell;
+    MyCollectionViewCellWithText *cell1;
+    MyCollectionViewCellWithImage1 *cell2;
+    MyCollectionViewCellWithImage2 *cell3;
     MyCollectionViewCellWithImage3 *cell4;
     MyCollectionViewCellUploading *cell5;
-    // postype = 1
-    if ( pp.postType == PostTypeText ){
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyCollectionViewCellWithText" forIndexPath:indexPath];
-    // postype = 4
-    } else if(pp.postType == PostTypeThreePic) {
+    
+    
+    
+    
+    NSString *theDateFormatStr1 = pp.finalDisplayDateStr;
+    NSString *theDateFormatStr2 = pp.postDateString;
+    NSString *theDateFormatStr3 = [NSString stringWithFormat:@"(%@)", pp.postDateString];
+    NSString *role = [localUserData objectForKey:@"WithRelationShip"];
+    
+    // 根據載入postitem決定cell
+    if ( pp.postType == PostTypeText ) {            // postype = 1
         
-        cell4 = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyCollectionViewCellWithImage3" forIndexPath:indexPath];
+        cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyCollectionViewCellWithText" forIndexPath:indexPath];
+    } else if(pp.postType == PostTypeOnePic) {      // postype = 2
         
-    // postype = 5
-    } else if(pp.postType == PostTypeUploading) {
+        cell2 = [collectionView dequeueReusableCellWithReuseIdentifier:@"OnePicCell" forIndexPath:indexPath];
+    } else if(pp.postType == PostTypeTwoPic) {      // postype = 3
+        
+        cell3 = [collectionView dequeueReusableCellWithReuseIdentifier:@"TwoPicCell" forIndexPath:indexPath];
+    } else if(pp.postType == PostTypeThreePic) {    // postype = 4
+        
+        cell4 = [collectionView dequeueReusableCellWithReuseIdentifier:@"ThreePicCell" forIndexPath:indexPath];
+    } else if(pp.postType == PostTypeUploading) {   // postype = 5
         
         cell5 = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyCollectionViewCellUploading" forIndexPath:indexPath];
-        
     }
     
     
-    
-    //MyCollectionViewCellWithImage1 *cell2 = [collectionView dequeueReusableCellWithReuseIdentifier:@"onePicCell" forIndexPath:indexPath];
-    
-    //cell.image = self.images[indexPath.item%(self.images.count)];
-    //
+    // 決定各種Type的 Cell裡面放的東西
     if(postItems.count == 0) {
-        cell.titleText.text = [NSString stringWithFormat:@"%ld",indexPath.item ];
-        cell.detalText.text = [NSString stringWithFormat:@"12134567890-09876543245678909876543234567 %ld", indexPath.item];
+        cell1.titleText.text = [NSString stringWithFormat:@"%ld",indexPath.item ];
+        cell1.detalText.text = [NSString stringWithFormat:@"12134567890-09876543245678909876543234567 %ld", indexPath.item];
     } else {
         if ( pp.postType == PostTypeText ) {
-            //cell.titleText.text = [NSString stringWithFormat:@"第 %ld 天",postItems.count -indexPath.item ];
-            cell.titleText.text = pp.postDateString;
-            cell.detalText.text = pp.content;
             
+            cell1.titleText.text = theDateFormatStr2;
+            cell1.labelDate.text = theDateFormatStr1;
+            cell1.labelSign.text = role;
+            cell1.detalText.text = pp.content;
+            return cell1;
+        } else if ( pp.postType == PostTypeOnePic) {
             
-            return cell;
+            if(pp.image1 == nil){
+    
+            } else {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell2.image01.image = pp.image1;
+                });
+            }
+            cell2.labelNumOfPhotos.text = [NSString stringWithFormat:@"%ld", pp.photoNum2];
+            cell2.labelDate.text = theDateFormatStr1;
+            cell2.labelDate2.text = theDateFormatStr3;
+            cell2.labelSign.text = role;
+            return cell2;
+        } else if ( pp.postType == PostTypeTwoPic) {
             
+            if(pp.image1 == nil){
+                
+            } else {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell3.image01.image = pp.image1;
+                    cell3.image02.image = pp.image2;
+                });
+            }
+            cell3.labelNumOfPhotos.text = [NSString stringWithFormat:@"%ld", pp.photoNum2];
+            cell3.labelDate.text = theDateFormatStr1;
+            cell3.labelDate2.text = theDateFormatStr3;
+            cell3.labelSign.text = role;
+            return cell3;
         } else if ( pp.postType == PostTypeThreePic) {
             
             if(pp.image1 == nil){
             
             } else {
-                
-                
+
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //NSLog(@"index path at cell for item : % ld", indexPath.row);
                     cell4.image01.image = pp.image1;
@@ -755,23 +793,15 @@
                     cell4.image03.image = pp.image3;
                 
                 });
-                
-                
             }
-            cell4.labelNumOfPhotos.text = [NSString stringWithFormat:@" 共 %ld 張相片", pp.photoNum2];
-            cell4.labelDate.text = pp.postDateString;
+            cell4.labelNumOfPhotos.text = [NSString stringWithFormat:@"%ld", pp.photoNum2];
+            cell4.labelDate.text = theDateFormatStr1;
+            cell4.labelDate2.text = theDateFormatStr3;
+            cell4.labelSign.text = role;
             
             return cell4;
         
         } else if ( pp.postType == PostTypeUploading) {
-            
-            //cell5.statusLabel.text = @"Uploading.. 1/5";
-            //cell5.progressView.progress = 0;
-            
-            //cell5.statusLabel.text = [NSString stringWithFormat:@"%f",(float)((double) nowBit / totalBit)];
-            //NSLog(@"%lld, %lld -", nowBit,totalBit);
-            //cell5.progressView.progress = (float)((double) nowBit / totalBit);
-            
             
             id object;
             if (self.collection.count != 0){
@@ -864,7 +894,7 @@
         editController.postID = tempItem.postID;
         
         [self.navigationController pushViewController:editController animated:YES];
-    } else if(tempItem.postType == PostTypeThreePic) {
+    } else /*if(tempItem.postType == PostTypeThreePic)*/ {
         
         //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"ImageViewController" bundle:[NSBundle mainBundle]];
         //ImageViewController *imageViewController = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
@@ -874,6 +904,8 @@
         ImagePageViewController *imagePageViewController = [storyboard instantiateViewControllerWithIdentifier:@"ImagePageViewController"];
         
         imagePageViewController.allImageNameStr = tempItem.content;
+        
+        imagePageViewController.postID = tempItem.postID;
         //FIXME: tabbar隱藏
         //imageViewController.hidesBottomBarWhenPushed = YES;
         self.tabBarController.tabBar.hidden = YES;
@@ -881,9 +913,6 @@
         [self.navigationController pushViewController:imagePageViewController animated:YES];
         
         //[self presentViewController:imageViewController animated:YES completion:nil];
-        
-        
-    } else if (tempItem.postType == PostTypeUploading) {
         
         
     }
@@ -985,7 +1014,6 @@
     // 暫存的 總共有幾個post 用來幫助postitem存indexpath
     NSInteger postNumTotal = howManyPosts;
     NSInteger reducingPostsNum = incomingPosts.count;
-    //NSIndexPath *itemIndex = [NSIndexPath indexPathWithIndex:postNumTotal-reducingPostsNum];
     NSInteger itemIndex = postNumTotal-reducingPostsNum;
     NSLog(@"= = the indexpath : %ld", itemIndex);
     
@@ -997,31 +1025,70 @@
     //[logManager addChatLog:tmp];
     
     
-    // Parse all fields of each message.
     //將NSDictionary中的NSNumber 轉成 NSInteger
     NSInteger postID = [tmp[POST_ID_KEY] integerValue];
     NSInteger postType = [tmp[TYPE_KEY] integerValue];
     NSInteger sender = [tmp[SENDER_UID_KEY] integerValue];
     NSString *message = tmp[POST_KEY];
     
-  
-    //
-    //FIXME:  存取 mysql過來的時間格式 成為 nsdate (準備將娶回來的createtime和寶寶生日相減)
+    NSDate *babyBirthday = [localUserData objectForKey:@"currentBabyBirthday"];
+    
+    // 這邊是要讀取MySQL傳來的格式
     NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
     gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     gmtDateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     
     NSString *dateString = tmp[@"creattime"];
-    NSDate  *date = [gmtDateFormatter dateFromString:dateString];
-    NSLog(@"-- date :%@", date);
+    NSDate  *postDate = [gmtDateFormatter dateFromString:dateString];
+    NSLog(@"-- postDate :%@", postDate);
     
     NSLog(@"----- %ld, %ld, %ld, %@, %@", (long)postID, (long)postType, (long)sender, message ,dateString);
     
-    //NSString *displayMessage = [NSString stringWithFormat:@"%@: %@ (%ld)", sender, message, postID ];
+    // 計算post的日期是出生地幾天
+    
+    NSDateFormatter *displayDateFormat = [[NSDateFormatter alloc] init];
+    [displayDateFormat setDateFormat:@"yyyy年M月d日"];
+    NSDate *date1 = babyBirthday;
+    NSDate *date2 = postDate;
+    NSDateComponents *components;
+    
+    NSInteger numberOfDaysBetween;
+    components = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date1 toDate:date2 options:0];
+    NSLog(@"%@" , components);
+    numberOfDaysBetween = [components day];
+    NSLog(@" 第 %ld 天", numberOfDaysBetween);
+
+
+    NSInteger yy = [components year];
+    NSInteger mm = [components month];
+    NSInteger dd = [components day];
+    NSString *finalStr;
+    if( yy==0 ){    //未滿一年
+        if(mm==0) {     //未滿一年 未滿一個月
+            finalStr = [NSString stringWithFormat:@"第%ld天", dd];
+        } else {        //未滿一年 滿月
+            finalStr = [NSString stringWithFormat:@"%ld個月%ld天", mm, dd];
+        }
+      
+    } else {                // 滿年
+        if( mm == 0 ){      // 滿年0個月
+            finalStr = [NSString stringWithFormat:@"%ld歲%ld天", yy, dd];
+        } else {            // 滿年X月X天
+            finalStr = [NSString stringWithFormat:@"%ld歲%ld個月%ld天", yy, mm, dd];
+        }
+    }
+    
+    
+    // 把dateString從本來的php時間轉成正確的中文時區顯示字串
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_Hant_TW"]];
+    [formatter setTimeZone: [NSTimeZone timeZoneWithName:@"Asia/Taipei"]];
+    [formatter setDateFormat:@"yyyy年M月d日"];
+    NSString *trueDateString = [formatter stringFromDate:postDate];
+    //--
+    
+    
     NSString *displayMessage = [NSString stringWithFormat:@"%@", message];
-    // Prepare ChatItem
-    
-    
     
     
     //  Save PostItem
@@ -1029,9 +1096,11 @@
     item.content = displayMessage;
     item.postID = postID;
     item.postTypeInt = postType;
-    item.postDateString = dateString;
-    item.postDate = date;
+    item.postDateString = trueDateString;
+    item.finalDisplayDateStr = finalStr;
+    item.postDate = postDate;
     item.itemIndex = itemIndex;
+    item.howManyDaysFromBirthday = numberOfDaysBetween;
     
    
     
@@ -1060,7 +1129,7 @@
         
         // 如果post type 是文字
         [self handleIncomingMessages: howManyPosts];
-    } else if(postType == PostTypeThreePic){
+    } else /*if(postType == PostTypeThreePic)*/{
         // 三張圖以上 下載啦！
         NSArray *picNames = [displayMessage componentsSeparatedByString:@","];
         BOOL shouldDownload = YES;
@@ -1186,49 +1255,60 @@
             }];
         }   // end of for loop
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
         [self handleIncomingMessages: howManyPosts];
     
-    } else if(postType == PostTypeUploading){
-        // 正在上傳的cell
-        
-        [self handleIncomingMessages: howManyPosts];
-        
-    } else {                //Photo Message
-        
-        // 如果是圖片
-//        // Check if need to download photo or not
-//        UIImage *cachedImage = [logManager loadImageWithName:message];
-//        if(cachedImage != nil){
-//            item.image = cachedImage;
-//            [_chatView addChatItem:item];
-//            [self handleIncomingMessages];
-//            return;
-//        }
-//        // Download Image if necessary
-//        [comm downloadPhotoWithFilename:message completion:^(NSError *error, id result) {
-//            if(error==nil){
-//                UIImage *image = [UIImage imageWithData:result];
-//                item.image=image;
-//                
-//                // Save Photo to LogManager
-//                [logManager saveImageWithName:message data:result];
-//                
-//            }
-//            //[_chatView addChatItem:item];
-//            [self handleIncomingMessages];
-//        }];
     }
 }
 //----------------------------------------------------------------------------------
+-(void) handleIncomingBabys: (NSInteger) howManyPosts{
+    //Exit when there is no more message need to be handled.
+    if(incomingPosts.count == 0){
+        [self.myCollectionView reloadData];
+        return;
+    }
+    // 暫存的 總共有幾個post 用來幫助postitem存indexpath
+    NSInteger postNumTotal = howManyPosts;
+    NSInteger reducingPostsNum = incomingPosts.count;
+    NSInteger itemIndex = postNumTotal-reducingPostsNum;
+    NSLog(@"= = = the indexpath : %ld", itemIndex);
+    
+    
+    NSDictionary *tmp = incomingPosts.firstObject;
+    
+
+    
+    // Parse all fields of each message.
+    //將NSDictionary中的NSNumber 轉成 NSInteger
+    // 如果是一開始登入時 取回的是寶寶資料
+    NSInteger babyID = [tmp[@"babyID"] integerValue];
+    NSString *babyName = tmp[@"babyName"];
+    NSString *dateString = tmp[@"birthday"];
+    
+    NSLog(@" got babyID: %ld, babyName: %@, dateString: %@", babyID, babyName, dateString);
+    
+    
+    //將取回的日期轉成NSDate
+    NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
+    gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    gmtDateFormatter.dateFormat = @"yyyy-MM-dd";
+    NSDate  *date = [gmtDateFormatter dateFromString:dateString];
+    NSLog(@"-- date :%@", date);
+    
+
+    if (howManyPosts == incomingPosts.count) {
+        //  暫存第一個baby的資料作為預設寶寶
+        [localUserData setObject: [NSString stringWithFormat:@"%ld",babyID] forKey:@"babyid"];
+        [localUserData setObject:babyName forKey:@"currentBabyName"];
+        [localUserData setObject:date forKey:@"currentBabyBirthday"];
+    }
+        
+    NSLog(@" 存default的 babyID: %@, 寶名: %@, 生日: %@", [localUserData objectForKey:@"babyid"], [localUserData objectForKey:@"currentBabyName"] , [localUserData objectForKey:@"currentBabyBirthday" ]);
+        
+    [incomingPosts removeObjectAtIndex:0];
+    [self handleIncomingBabys: howManyPosts];
+}
+
+
 //FIXME: 尚未實作從SQL撈babydata 存入Userdefaults
 - (void) getBabyData {
     NSString *localUID = [localUserData objectForKey:@"uid"];
@@ -1250,7 +1330,7 @@
                                }
                                //取回來的 成就們的 陣列
                                NSArray *items = result[@"BabysArr"];
-                               NSLog(@"Receive achievements: %lu", items.count);
+                               NSLog(@"Receive babys number: %lu", items.count);
                                
                                // 如果名下都沒有寶寶
                                if(items.count == 0){
@@ -1261,18 +1341,13 @@
                                
                                
                                // Handle new messages
-                               //[incomingAchievements addObjectsFromArray:items];
+                               [incomingPosts addObjectsFromArray:items];
                                NSLog(@"** do before getBabyData");
-                               [self handleIncomingMessages:items.count];
+                               [self handleIncomingBabys:items.count];
                                NSLog(@"** done with getBabyData");
                                
-                               //NSLog(@" %lu, %lu, ", (unsigned long)incomingAchievements.count, (unsigned long)getAchievementItems.count);
                                
                            }];
-    
-    //NSLog(@"aaa uid : %@",localUID);
-    //[comm getBabyDataByBabyID:babyID ];
-
 }
 
 
@@ -1283,11 +1358,18 @@
 // 捲動畫面時改變header大小及navbar透明度的方法
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offset_Y = scrollView.contentOffset.y + headRect.size.height;
+    
+    
     if  (offset_Y < 0) {
         
         _myView.backgroundView.contentMode = UIViewContentModeScaleToFill;
         
         _myView.backgroundView.frame = CGRectMake(offset_Y*0.5 , -navHeight, VCWidth - offset_Y, headRect.size.height - offset_Y);
+        
+        
+        //
+        //_myView.headView.center = fixCenter;
+        //--
         
         _myView.maskView.frame = CGRectMake(offset_Y*0.5 , -navHeight, VCWidth - offset_Y, headRect.size.height - offset_Y);
         
@@ -1354,11 +1436,11 @@
         if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
             [self setNeedsStatusBarAppearanceUpdate];
         }
-        self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-        self.navigationItem.leftBarButtonItem.tintColor = [UIColor blackColor];
-        self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
-        self.navigationItem.rightBarButtonItems.firstObject.tintColor = [UIColor blackColor];
-        self.navigationItem.rightBarButtonItems.lastObject.tintColor = [UIColor blackColor];
+        self.navigationController.navigationBar.tintColor = [UIColor flatMintColorDark];
+        self.navigationItem.leftBarButtonItem.tintColor = [UIColor flatMintColorDark];
+        self.navigationItem.rightBarButtonItem.tintColor = [UIColor flatMintColorDark];
+        self.navigationItem.rightBarButtonItems.firstObject.tintColor = [UIColor flatMintColorDark];
+        self.navigationItem.rightBarButtonItems.lastObject.tintColor = [UIColor flatMintColorDark];
         
         _alphaMemory = offset_Y/(offsetYofheader * 3) >= 1 ? 1 : offset_Y/(offsetYofheader * 3);
         

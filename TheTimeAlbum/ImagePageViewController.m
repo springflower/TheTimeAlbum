@@ -20,6 +20,9 @@
     BOOL optionMenuIsUp;
     MyCommunicator *comm;
     NSUserDefaults *localUserData;
+    NSInteger allPicsCount;
+    NSString * allPhotoStr;
+    
 
 }
 @property (strong, nonatomic) IBOutlet UIView *myView;
@@ -62,7 +65,7 @@
     self.viewcontrollers = [NSMutableArray new];
     optionMenuIsUp = NO;
     comm = [MyCommunicator sharedInstance];
-    
+    allPhotoStr = self.allImageNameStr;
     
     
     
@@ -85,6 +88,9 @@
     NSArray *picNames = [self.allImageNameStr componentsSeparatedByString:@","];
     //FIXME: 不知道會不會有需要下載的時候
     BOOL shouldDownload = YES;
+    
+    allPicsCount = picNames.count;
+    
     // 用迴圈取得圖的數量並生成相對數量的頁面
     for(int i=0; i<picNames.count; i++){
         NSLog(@"...%@", picNames[i]);
@@ -227,6 +233,101 @@
     }
     
 }
+- (IBAction)deletePhoto:(UIButton *)sender {
+    // 取出當前的viewcontroller並從陣列移除
+    ImageViewController *thisIVC = [self.pageViewController.viewControllers lastObject];
+    
+    BOOL isLast;
+    
+    // 看看刪掉的是不是最後一項 如果不是 都要刪掉檔名+一個逗號
+    NSInteger whitchPage = [self.viewcontrollers indexOfObject:thisIVC];
+    // 如果是
+    if(whitchPage == allPicsCount-1){
+        isLast = YES;
+    } else {
+        isLast = NO;
+    }
+    // --
+    
+    
+    NSString *thisPhotoStr = thisIVC.thisPicName;
+
+    NSLog(@"0 \n this: %@\n all: %@", thisPhotoStr, allPhotoStr);
+    
+    // 如果目前還剩很多張 直接刪掉一張 更新貼文
+    if (self.viewcontrollers.count > 1) {
+        
+        
+        if(isLast){
+            
+            if (allPicsCount == 1){
+                // 如果刪掉的圖是post中的最後一個 刪掉檔名即可
+                
+            } else {
+                // 如果要刪的圖是最後一個 但前面還有其他張, 要刪掉",檔名.jpg"
+                NSString *temp = @",";
+                thisPhotoStr = [temp stringByAppendingString:thisPhotoStr];
+                
+            }
+            allPhotoStr = [allPhotoStr stringByReplacingOccurrencesOfString:thisPhotoStr withString:@""];
+            NSLog(@"1 \n this: %@\n final: %@", thisPhotoStr, allPhotoStr);
+            
+            allPicsCount -= 1;
+            
+            
+        } else {
+            // 如果刪掉的圖不是post中的最後一個 那就要刪掉檔名+,
+            NSString *tempStr = [thisPhotoStr stringByAppendingString:@","];
+            allPhotoStr = [allPhotoStr stringByReplacingOccurrencesOfString:tempStr withString:@""];
+            NSLog(@"2 \n this: %@\n final: %@", thisPhotoStr, allPhotoStr);
+            allPicsCount -= 1;
+            
+        }
+        
+        [self.viewcontrollers removeObject:thisIVC];
+        
+        NSInteger postType=0;
+        
+        if (allPicsCount >= 3) {
+            postType = 4;
+        } else if (allPicsCount == 2) {
+            postType = 3;
+        } else if (allPicsCount == 1) {
+            postType = 2;
+        }
+        
+        
+        // 更新貼文的內容
+        [self updatePostByPostID:self.postID andPostType:postType theContentOfPost:allPhotoStr];
+
+        
+    } else if (self.viewcontrollers.count == 1) {
+        // 只剩一張還要刪除的話 刪除整個貼文, 回主畫面
+        [allPhotoStr stringByReplacingOccurrencesOfString:thisPhotoStr withString:@""];
+        //NSLog(@"3 \n this: %@\n final: %@", thisPhotoStr, allPhotoStr);
+        allPicsCount -= 1;
+        //NSLog(@" post id: %ld", self.postID);
+        [comm deletePostByPostID:self.postID completion:^(NSError *error, id result) {
+            
+            // 測試error
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"doReloadJob" object:nil];
+        }];
+        
+        // 廣播主頁重整
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    
+
+    
+     // 重新指派剩下陣列中第一個 viewcontroller 物件給 PageViewController重新載入
+    ImageViewController *first = [self.viewcontrollers objectAtIndex:0];
+    [self.pageViewController setViewControllers:@[first] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+
+    
+    
+}
 // 新增成就
 - (IBAction)addAchievement:(UIButton *)sender {
     
@@ -282,7 +383,35 @@
 #pragma mark - end of 選項相關
 
 
+#pragma mark - 網路通訊
 
+- (void) updatePostByPostID: (NSInteger)PostID andPostType:(NSInteger)PostType theContentOfPost:(NSString*)content {
+    //FIXME: 更新時要依據剩下圖片數量改變postType && 刪除aws s3的圖片？
+    [comm updatePostsToServerWithPostID:PostID
+                               postType:PostType
+                                content:content
+                             completion:^(NSError *error, id result) {
+                                 
+                                 if(error){
+                                     NSLog(@"更新貼文失敗: %@.. 重試", error);
+                                     [self updatePostByPostID:PostID andPostType:PostType theContentOfPost:content];
+                                     return;
+                                 }
+                                 NSLog(@"==--%@", result);
+                                 // 伺服器php指令是否成功
+                                 if([result[RESULT_KEY] boolValue] == false){
+                                     NSLog(@"更新貼文時伺服器端php錯誤: %@", result[ERROR_CODE_KEY]);
+                                     [self updatePostByPostID:PostID andPostType:PostType theContentOfPost:content];
+                                     return;
+                                 }
+
+                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"doReloadJob" object:nil];
+                                 // fix here...
+                                 
+                                 
+                             }];
+
+}
 
 
 

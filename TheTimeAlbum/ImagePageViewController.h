@@ -13,5 +13,6 @@
 @property (weak, nonatomic) NSMutableArray *imageNameArray;
 @property (weak, nonatomic) NSMutableArray *ivcs;
 @property (weak, nonatomic) NSString *allImageNameStr;
+@property NSInteger postID;
 
 @end

@@ -14,11 +14,14 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.cellPic01.layer.borderWidth = 2;
-    self.cellPic01.layer.borderColor = [UIColor flatCoffeeColorDark].CGColor;
-    self.cellPic01.layer.cornerRadius = 5;
-    self.cellPic01.clipsToBounds = YES;
-    // Initialization code
+    self.backGroundImage.layer.borderWidth = 1;
+    //self.backGroundImage.layer.borderColor = [UIColor flatGrayColor].CGColor;
+    self.backGroundImage.layer.borderColor = [UIColor flatCoffeeColor].CGColor;
+    self.backGroundImage.layer.cornerRadius = 5;
+    self.backGroundImage.clipsToBounds = YES;
+    
+    self.image01.contentMode = UIViewContentModeScaleAspectFill;
+    self.image01.clipsToBounds =YES;
 }
 
 @end

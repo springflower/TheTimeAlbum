@@ -23,9 +23,10 @@ typedef enum {
 
 @property  NSInteger postID;
 @property  NSInteger postTypeInt;
+@property  NSInteger howManyDaysFromBirthday;
 @property (nonatomic, strong) NSString *ofBabyID;
 @property (nonatomic, strong) NSString *postDateString;
-
+@property (nonatomic, strong) NSString *finalDisplayDateStr;
 @property (nonatomic, strong) NSDate *postDate;
 
 @property (nonatomic, strong) UIImage *image1;
