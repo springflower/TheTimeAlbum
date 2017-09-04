@@ -573,7 +573,7 @@
         [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];
     }
     //將孩子的背景圖片隨機產生，儲存在孩子的背景陣列中
-    int x = arc4random() % 4;
+    int x = arc4random() % 5;
     NSArray *randomBackgroundImageArray = @[@"background1@2x.jpg",
                                             @"background2@2x.jpg",
                                             @"background3@2x.jpg",
