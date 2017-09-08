@@ -37,8 +37,6 @@
 		543071721F54256900DC2536 /* ImageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 543071711F54256900DC2536 /* ImageViewController.storyboard */; };
 		543071751F542E6000DC2536 /* ImagePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 543071741F542E6000DC2536 /* ImagePageViewController.m */; };
 		5430717A1F54526B00DC2536 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 543071791F54526B00DC2536 /* ContentViewController.m */; };
-		5430717E1F55AE6000DC2536 /* AddAchievementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5430717D1F55AE6000DC2536 /* AddAchievementViewController.m */; };
-		543071801F55AE9100DC2536 /* AddAchievement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5430717F1F55AE9100DC2536 /* AddAchievement.storyboard */; };
 		544EFFF21F5B53620078F143 /* MyCollectionViewCellWithImage2.m in Sources */ = {isa = PBXBuildFile; fileRef = 544EFFF01F5B53620078F143 /* MyCollectionViewCellWithImage2.m */; };
 		544EFFF31F5B53620078F143 /* MyCollectionViewCellWithImage2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 544EFFF11F5B53620078F143 /* MyCollectionViewCellWithImage2.xib */; };
 		5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC871F1C7A54008F5C25 /* loginViewController.m */; };
@@ -88,6 +86,8 @@
 		CF26410B1F4351BF005EBFBC /* background3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF2641061F4351BF005EBFBC /* background3@2x.jpg */; };
 		CF26410C1F4351BF005EBFBC /* background4@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF2641071F4351BF005EBFBC /* background4@2x.jpg */; };
 		CF26410D1F4351BF005EBFBC /* background5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF2641081F4351BF005EBFBC /* background5@2x.jpg */; };
+		CF43ADDE1F62745400827F26 /* AddAchievementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF43ADDD1F62745400827F26 /* AddAchievementViewController.m */; };
+		CF43ADE01F6274B000827F26 /* AddAchievement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF43ADDF1F6274B000827F26 /* AddAchievement.storyboard */; };
 		CF5A8D2C1F2DEAF800E0FEA6 /* AchievementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8D2B1F2DEAF800E0FEA6 /* AchievementViewController.m */; };
 		CF5A8D321F2EF7C400E0FEA6 /* WriteMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8D311F2EF7C400E0FEA6 /* WriteMailViewController.m */; };
 		CF6150781F3075B50090433A /* MyTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6150771F3075B50090433A /* MyTextAttachment.m */; };
@@ -167,8 +167,6 @@
 		543071761F542E7200DC2536 /* ImagePageViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ImagePageViewController.storyboard; sourceTree = "<group>"; };
 		543071781F54526B00DC2536 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		543071791F54526B00DC2536 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
-		5430717D1F55AE6000DC2536 /* AddAchievementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAchievementViewController.m; sourceTree = "<group>"; };
-		5430717F1F55AE9100DC2536 /* AddAchievement.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddAchievement.storyboard; sourceTree = "<group>"; };
 		544EFFEF1F5B53620078F143 /* MyCollectionViewCellWithImage2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewCellWithImage2.h; sourceTree = "<group>"; };
 		544EFFF01F5B53620078F143 /* MyCollectionViewCellWithImage2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewCellWithImage2.m; sourceTree = "<group>"; };
 		544EFFF11F5B53620078F143 /* MyCollectionViewCellWithImage2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewCellWithImage2.xib; sourceTree = "<group>"; };
@@ -221,6 +219,7 @@
 		CF1395931F3030DC00D3C0FD /* Camera150x150@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera150x150@2x.png"; sourceTree = "<group>"; };
 		CF16BA221F51C77200C0A216 /* StartCreateFirstChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartCreateFirstChildViewController.h; sourceTree = "<group>"; };
 		CF16BA231F51C77200C0A216 /* StartCreateFirstChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartCreateFirstChildViewController.m; sourceTree = "<group>"; };
+		CF18A5591F6276AA003547DB /* AddAchievementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AddAchievementViewController.h; path = TheTimeAlbum/AddAchievementViewController.h; sourceTree = "<group>"; };
 		CF195F2C1F4725840064FDF0 /* UseDownloadDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseDownloadDataClass.h; sourceTree = "<group>"; };
 		CF195F2D1F4725840064FDF0 /* UseDownloadDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseDownloadDataClass.m; sourceTree = "<group>"; };
 		CF195F321F48A1050064FDF0 /* UpdateDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateDataView.h; sourceTree = "<group>"; };
@@ -238,6 +237,8 @@
 		CF2641061F4351BF005EBFBC /* background3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background3@2x.jpg"; sourceTree = "<group>"; };
 		CF2641071F4351BF005EBFBC /* background4@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background4@2x.jpg"; sourceTree = "<group>"; };
 		CF2641081F4351BF005EBFBC /* background5@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background5@2x.jpg"; sourceTree = "<group>"; };
+		CF43ADDD1F62745400827F26 /* AddAchievementViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AddAchievementViewController.m; path = TheTimeAlbum/AddAchievementViewController.m; sourceTree = "<group>"; };
+		CF43ADDF1F6274B000827F26 /* AddAchievement.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = AddAchievement.storyboard; path = TheTimeAlbum/AddAchievement.storyboard; sourceTree = "<group>"; };
 		CF5A8D2A1F2DEAF800E0FEA6 /* AchievementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementViewController.h; sourceTree = "<group>"; };
 		CF5A8D2B1F2DEAF800E0FEA6 /* AchievementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchievementViewController.m; sourceTree = "<group>"; };
 		CF5A8D301F2EF7C400E0FEA6 /* WriteMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteMailViewController.h; sourceTree = "<group>"; };
@@ -445,6 +446,9 @@
 		542ABDED1F13793500F5F161 = {
 			isa = PBXGroup;
 			children = (
+				CF43ADDF1F6274B000827F26 /* AddAchievement.storyboard */,
+				CF18A5591F6276AA003547DB /* AddAchievementViewController.h */,
+				CF43ADDD1F62745400827F26 /* AddAchievementViewController.m */,
 				542ABDF81F13793500F5F161 /* TheTimeAlbum */,
 				542ABDF71F13793500F5F161 /* Products */,
 				AE09515D791297A1F890D49F /* Pods */,
@@ -665,6 +669,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF43ADE01F6274B000827F26 /* AddAchievement.storyboard in Resources */,
 				5430715F1F52383F00DC2536 /* MyCollectionViewCellWithImage3.xib in Resources */,
 				CFFFC7951F24DF630097284F /* Another30x30@2x.png in Resources */,
 				CF0B78581F1DE4DA0067229D /* 信箱75x75@2x.png in Resources */,
@@ -700,7 +705,6 @@
 				540267451F24A652005967DE /* c.png in Resources */,
 				CF26410C1F4351BF005EBFBC /* background4@2x.jpg in Resources */,
 				CFFFC7991F24E1110097284F /* Another32x38@2x.png in Resources */,
-				543071801F55AE9100DC2536 /* AddAchievement.storyboard in Resources */,
 				CFFFC78F1F24CBFA0097284F /* Female30x30@2x.png in Resources */,
 				CFFFC7A11F259C690097284F /* BabyUser100x100@2x.png in Resources */,
 				CF1395921F30300800D3C0FD /* Camera200x200@2x.png in Resources */,
@@ -780,6 +784,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF43ADDE1F62745400827F26 /* AddAchievementViewController.m in Sources */,
 				CF5A8D2C1F2DEAF800E0FEA6 /* AchievementViewController.m in Sources */,
 				540267511F256A11005967DE /* addNewMessageVC.m in Sources */,
 				5422336F1F26E7CD000933BD /* ThisBabyData.m in Sources */,
@@ -819,7 +824,6 @@
 				CF0B782D1F1C88150067229D /* SliderMenuViewLeft.m in Sources */,
 				542ABDFB1F13793500F5F161 /* main.m in Sources */,
 				CF0B78661F1E3D290067229D /* AddChildSettingViewController.m in Sources */,
-				5430717E1F55AE6000DC2536 /* AddAchievementViewController.m in Sources */,
 				CF5A8D321F2EF7C400E0FEA6 /* WriteMailViewController.m in Sources */,
 				CFC6DB621F2ACF8600669187 /* FutureMailViewController.m in Sources */,
 				CF195F341F48A1050064FDF0 /* UpdateDataView.m in Sources */,
