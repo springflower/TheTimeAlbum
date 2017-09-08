@@ -93,9 +93,13 @@
               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
          {
              NSLog(@"  成功下載資料 ");
-             NSLog(@"下載的資料為： %@",responseObject);
+             NSDictionary *array = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+             NSLog(@"下載的資料為： %@",array[@"childData"]);
              //準備將下載到的資料解除封包
-             ChildBigStickerArray = [NSKeyedUnarchiver unarchiveObjectWithData:responseObject];
+             NSString *dataString = [NSString stringWithFormat:@"%@",array[@"childImage"]];
+             NSData *data = [[NSData alloc] initWithBase64EncodedString:dataString options:0];
+             ChildBigStickerArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+             NSLog(@"下載的照片的資料為：%@",ChildBigStickerArray);
              //如果 Array 存在，將值傳送給 Block
              if(Array) {
                  Array(ChildBigStickerArray);
@@ -405,6 +409,173 @@
     });
     
 }
+
+#pragma mark - Prepare update data 準備一個方法上傳資料
+
+-(void)UpdataFutureMailContent:(NSArray*)Array {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        AFHTTPSessionManager *manager  = [AFHTTPSessionManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        
+        NSString *urlUpdate = [NSString
+                               stringWithFormat:@"https://jerrygood9999.000webhostapp.com/sqlUpdateFuturemailContent.php"];
+        //設定準備讀取存取在 UserDefaults 的資料
+        defaults = [NSUserDefaults standardUserDefaults];
+        //準備目前所新增的孩子最新 ID
+        NSInteger ChildIDIInteger = [defaults integerForKey:@"ChildID"];
+        NSString  *ChildID = [NSString stringWithFormat:@"%ld",(long)ChildIDIInteger];
+        NSDictionary *parmas;
+            parmas = @{
+                       @"userAccount" :[defaults objectForKey:@"userMail"],
+                       @"childID"     :ChildID,
+                       @"mailDate"    :Array[0],
+                       @"mailContent" :Array[1],
+                       };
+            
+        
+        [manager POST:urlUpdate parameters:parmas constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            //..
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSLog(@"  成功上傳資料 ");
+            NSLog(@"Array 的數量為：  %lu",(unsigned long)Array.count);
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"  上傳資料失敗 ");
+            NSLog(@"原因： %@",error);
+        }];
+        
+    });
+    
+}
+
+#pragma mark - Prepare update data 準備一個方法更改資料後上傳資料
+
+-(void)UpdataFutureMailContentChanged:(NSArray*)Array {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        AFHTTPSessionManager *manager  = [AFHTTPSessionManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        
+        NSString *urlUpdate = [NSString
+                               stringWithFormat:@"https://jerrygood9999.000webhostapp.com/sqlUpdateMailContentData.php"];
+        //設定準備讀取存取在 UserDefaults 的資料
+        defaults = [NSUserDefaults standardUserDefaults];
+        //準備目前所新增的孩子最新 ID
+        NSInteger ChildIDIInteger = [defaults integerForKey:@"ChildID"];
+        NSString  *ChildID = [NSString stringWithFormat:@"%ld",(long)ChildIDIInteger];
+        NSDictionary *parmas;
+        parmas = @{
+                   @"userAccount" :[defaults objectForKey:@"userMail"],
+                   @"childID"     :ChildID,
+                   @"mailContent" :Array[0],
+                   @"mailDate"    :Array[1]
+                   };
+
+        [manager POST:urlUpdate parameters:parmas constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            //..
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSLog(@"  成功更改上傳資料 ");
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"  上傳更改資料失敗 ");
+            NSLog(@"原因： %@",error);
+        }];
+        
+    });
+    
+}
+
+-(void)DownloadFutureMailContent{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        AFHTTPSessionManager *manager  = [AFHTTPSessionManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        
+        NSString *urlUpdate = [NSString
+                               stringWithFormat:@"https://jerrygood9999.000webhostapp.com/sqlDownloadMailContent.php"];
+        //設定準備讀取存取在 UserDefaults 的資料
+        defaults = [NSUserDefaults standardUserDefaults];
+        //準備目前所新增的孩子最新 ID
+        NSInteger ChildIDIInteger = [defaults integerForKey:@"ChildID"];
+        NSString  *ChildID = [NSString stringWithFormat:@"%ld",(long)ChildIDIInteger];
+        NSDictionary *parmas;
+        parmas = @{
+                   @"userAccount" :[defaults objectForKey:@"userMail"],
+                   @"childID"     :ChildID,
+                   };
+        
+        
+        
+        [manager POST:urlUpdate parameters:parmas constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            //..
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSLog(@"  成功下載資料 ");
+            NSArray *array = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            [defaults setValue:array forKey:@"mailDateContentArray"];
+            
+            [defaults synchronize];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"  下載資料失敗 ");
+            NSLog(@"原因： %@",error);
+        }];
+        
+    });
+    
+}
+
+-(void)DeleteFutureMailContentAndUpdate:(NSString*)string{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        AFHTTPSessionManager *manager  = [AFHTTPSessionManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        
+        NSString *urlUpdate = [NSString
+                               stringWithFormat:@"https://jerrygood9999.000webhostapp.com/sqlUpdateMailContentDataDelete.php"];
+        //設定準備讀取存取在 UserDefaults 的資料
+        defaults = [NSUserDefaults standardUserDefaults];
+        //準備目前所新增的孩子最新 ID
+        NSInteger ChildIDIInteger = [defaults integerForKey:@"ChildID"];
+        NSString  *ChildID = [NSString stringWithFormat:@"%ld",(long)ChildIDIInteger];
+        NSDictionary *parmas;
+        parmas = @{
+                   @"userAccount"  :[defaults objectForKey:@"userMail"],
+                   @"childID"      :ChildID,
+                   @"mailDate"     :string
+                   };
+        NSLog(@"刪除指定的帳號為： %@",[defaults objectForKey:@"userMail"]);
+        NSLog(@"孩子的ID為 ： %@",ChildID);
+        NSLog(@"文章的 ID 為： %@",string);
+        
+        [manager POST:urlUpdate parameters:parmas constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            //..
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSLog(@"  成功刪除資料 ");
+
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"  下載資料失敗 ");
+            NSLog(@"原因： %@",error);
+        }];
+        
+    });
+    
+}
+
+
 
 
 

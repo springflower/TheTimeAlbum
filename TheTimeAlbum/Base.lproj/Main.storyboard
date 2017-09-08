@@ -59,7 +59,7 @@
                         <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bU5-wZ-Dfq">
                             <rect key="frame" x="164.5" y="7" width="46" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button"/>
+                            <state key="normal" title="時光軸"/>
                             <connections>
                                 <action selector="reload:" destination="Dmr-AG-fmO" eventType="touchUpInside" id="WDa-L1-GnY"/>
                             </connections>

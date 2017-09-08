@@ -10,7 +10,7 @@
 #import "AboutMeViewcontrollerCell.h"
 #import "SetInfoTableViewControler.h"
 #import "AddChildSettingViewController.h"
-
+#import "UpdateDataView.h"
 #define PERSONALINFORMATION @"個人帳號資料"
 
 @interface AboutMeViewcontroller ()
@@ -22,6 +22,8 @@
     NSMutableArray *packegUserArray;
     NSMutableArray *putinformationArray;
     UILabel *label;
+    
+    UpdateDataView *downloadMailContent;
 }
 
 @end
@@ -56,6 +58,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    
     //讀取是否已有建立第一個孩子.
     NSUserDefaults *readChildNameDefaults;
     readChildNameDefaults = [NSUserDefaults standardUserDefaults];

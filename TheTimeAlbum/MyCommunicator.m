@@ -71,6 +71,38 @@ static MyCommunicator *_singletonCommunicator = nil;
                    completion:done];
 }
 
+// 新增成就到SQL
+-(void) addAchievementForbabyID:(NSString*) babyID
+                          title:(NSString*) title
+                        picName:(NSString*) picName
+                     createDate:(NSString*) createDate
+                     completion:(DoneHandler) done {
+    
+    NSDictionary *parameters = @{@"babyId": babyID,
+                                 @"title": title,
+                                 @"picName": picName,
+                                 @"createDate": createDate};
+    NSLog(@"parameters: %@", parameters);
+    
+    // 通用API(自製) 向server送出post指令
+    [self doPostWithURLString:ADD_ACHIEVEMENT_URL
+                   parameters:parameters
+                         data:nil
+                   completion:done];
+    
+}
+//FIXME: 未完成
+- (void) addChildToServerWithBabyName:(NSString*) babyName
+                         babyBirthday:(NSString*) babyBirthday
+                            fatherUID:(NSInteger) fuid
+                            motheruid:(NSInteger) muid {
+
+
+
+}
+
+
+
 // 從SQL 撈uid 的功能
 -(void) getUIDFromSQLByFBID:(NSString*) fbid
                       completion:(DoneHandler) done{
@@ -114,7 +146,22 @@ static MyCommunicator *_singletonCommunicator = nil;
     
 }
 
-#pragma mark - updatePosts to server        修改文章
+- (void) getBabyDataByUID:(NSString*)uid completion:(DoneHandler)done {
+    
+    NSDictionary *parameters = @{ @"uid": uid};
+    NSLog(@"--do in getBabyDataByUID ");
+    [self doPostWithURLString:GET_BABY_DATA_BY_UID_URL
+                   parameters:parameters
+                         data:nil
+                   completion:done];
+
+}
+
+
+
+
+#pragma mark - updatePosts to server        
+// 修改貼文的內容
 -(void) updatePostsToServerWithPostID:(NSInteger)postID
                               content:(NSString*)content
                            completion:(DoneHandler)done {
@@ -127,6 +174,37 @@ static MyCommunicator *_singletonCommunicator = nil;
                          data:nil
                    completion:done];
 
+}
+
+// 修改貼文的內容
+-(void) updatePostsToServerWithPostID:(NSInteger)postID
+                             postType:(NSInteger)postType
+                              content:(NSString*)content
+                           completion:(DoneHandler)done {
+    //...
+    NSDictionary *params = @{ @"postId": @(postID),
+                              @"postType": @(postType),
+                              @"content": content   };
+    
+    [self doPostWithURLString:UPDATE_POST_URL2
+                   parameters:params
+                         data:nil
+                   completion:done];
+    
+}
+
+
+// 刪除貼文
+- (void) deletePostByPostID:(NSInteger) postID
+                 completion:(DoneHandler) done{
+
+    //...
+    NSDictionary *params = @{ @"postId": @(postID)};
+    
+    [self doPostWithURLString:DELETE_POST_URL
+                   parameters:params
+                         data:nil
+                   completion:done];
 }
 
 

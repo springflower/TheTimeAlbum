@@ -112,7 +112,10 @@ PODS:
   - GTMSessionFetcher/Core (1.1.10)
   - GTMSessionFetcher/Full (1.1.10):
     - GTMSessionFetcher/Core (= 1.1.10)
+  - JTSImageViewController (1.5.1)
   - KVNProgress (2.3.1)
+  - LGPlusButtonsView (1.1.1)
+  - TZImagePickerController (1.8.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -139,7 +142,10 @@ DEPENDENCIES:
   - Google
   - Google/SignIn
   - GoogleSignIn
+  - JTSImageViewController
   - KVNProgress
+  - LGPlusButtonsView
+  - TZImagePickerController
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -173,8 +179,11 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  JTSImageViewController: 1f8ce1cc93dab0d0af8e53badeea7528560cfec9
   KVNProgress: 8167b1f19e2758290c0b6143020ed9dcbb0477a1
+  LGPlusButtonsView: 57878cd3d461d0ee2042f5b7b25d1c017e22a084
+  TZImagePickerController: 086034156913375cb19c8e4103562f15322c3b36
 
-PODFILE CHECKSUM: 515a723bed1a7dd805ec3355cf477ff2dd3526bc
+PODFILE CHECKSUM: 4fe9fdcbf7caf197abb9ae62f114ec250b8170e0
 
 COCOAPODS: 1.2.0

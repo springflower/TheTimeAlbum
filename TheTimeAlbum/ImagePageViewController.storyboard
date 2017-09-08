@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4Ny-Hg-vfz">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Image Page View Controller-->
+        <scene sceneID="1NI-0e-WqD">
+            <objects>
+                <viewController storyboardIdentifier="ImagePageViewController" id="4Ny-Hg-vfz" customClass="ImagePageViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="o00-EO-UEV"/>
+                        <viewControllerLayoutGuide type="bottom" id="MCq-2h-pav"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Jhk-ZY-eip">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="myView" destination="Mvo-zd-FYp" id="sES-eG-q3v"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dCV-rb-3BM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Mvo-zd-FYp">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="V72-Pr-aC6">
+                            <rect key="frame" x="15" y="49" width="210" height="30"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWs-bt-hGv">
+                                    <rect key="frame" x="0.0" y="0.0" width="31" height="30"/>
+                                    <state key="normal" title="刪除"/>
+                                    <connections>
+                                        <action selector="deletePhoto:" destination="4Ny-Hg-vfz" eventType="touchUpInside" id="Qwn-TS-ws9"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7EH-b6-D2y">
+                                    <rect key="frame" x="49.5" y="0.0" width="31" height="30"/>
+                                    <state key="normal" title="儲存"/>
+                                    <connections>
+                                        <action selector="saveImageToCameraRoll:" destination="4Ny-Hg-vfz" eventType="touchUpInside" id="H8G-a2-0nS"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rG9-ij-6ST">
+                                    <rect key="frame" x="98.5" y="0.0" width="62" height="30"/>
+                                    <state key="normal" title="新增成就"/>
+                                    <connections>
+                                        <action selector="addAchievement:" destination="4Ny-Hg-vfz" eventType="touchUpInside" id="Mnr-MD-J4f"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Rf-1h-jtr">
+                                    <rect key="frame" x="179" y="0.0" width="31" height="30"/>
+                                    <state key="normal" title="取消"/>
+                                    <connections>
+                                        <action selector="onCancelBtnClicked:" destination="4Ny-Hg-vfz" eventType="touchUpInside" id="hOy-RC-7nc"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="V72-Pr-aC6" firstAttribute="centerY" secondItem="Mvo-zd-FYp" secondAttribute="centerY" id="3dK-sY-Z3L"/>
+                        <constraint firstAttribute="trailing" secondItem="V72-Pr-aC6" secondAttribute="trailing" constant="15" id="DqL-fD-egm"/>
+                        <constraint firstItem="V72-Pr-aC6" firstAttribute="leading" secondItem="Mvo-zd-FYp" secondAttribute="leading" constant="15" id="LaD-bL-PKz"/>
+                    </constraints>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="-1004" y="42"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="Pff-yP-nea">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="SGZ-Y8-Vzi" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DnY-CR-zGB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-287" y="42"/>
+        </scene>
+        <!--Content View Controller-->
+        <scene sceneID="4cE-SV-UyJ">
+            <objects>
+                <viewController storyboardIdentifier="ContentViewController" id="kYT-ZB-6mb" customClass="ContentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z0s-bN-VtR"/>
+                        <viewControllerLayoutGuide type="bottom" id="bMX-Gr-0bF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lVZ-wI-Raj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Td-Qg-1Kv">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="4Td-Qg-1Kv" firstAttribute="leading" secondItem="lVZ-wI-Raj" secondAttribute="leading" id="8BR-BC-xyY"/>
+                            <constraint firstAttribute="trailing" secondItem="4Td-Qg-1Kv" secondAttribute="trailing" id="Kl4-aY-zJd"/>
+                            <constraint firstItem="4Td-Qg-1Kv" firstAttribute="top" secondItem="lVZ-wI-Raj" secondAttribute="top" id="efn-EP-5km"/>
+                            <constraint firstItem="bMX-Gr-0bF" firstAttribute="top" secondItem="4Td-Qg-1Kv" secondAttribute="bottom" id="qN7-4c-HI5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backGroundImageView" destination="4Td-Qg-1Kv" id="vd2-Q2-cpD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YiV-y1-8qA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="655" y="17"/>
+        </scene>
+    </scenes>
+</document>

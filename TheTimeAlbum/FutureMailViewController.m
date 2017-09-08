@@ -11,6 +11,7 @@
 #import "WriteMailViewController.h"
 #import "FutureMaliViewControllerCellTableViewCell.h"
 #import "UseDownloadDataClass.h"
+#import "UpdateDataView.h"
 @interface FutureMailViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
@@ -46,16 +47,24 @@
     NSMutableArray *putDateArray;
     //準備讀取信件陣列，依所選擇的小孩ID來決定
     NSMutableArray *putDateAddArray;
+    
+    NSMutableArray *mailDateContentArray;
+    
+    
+    UpdateDataView *downloadMailContent;
 }
 -(void)viewWillAppear:(BOOL)animated {
     
     [self updateDate];
+    
     
     }
 //準備更新資料
 -(void)updateDate {
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        mailDateContentArray = [[defaults objectForKey:@"mailDateContentArray"] mutableCopy];
         
         //讀取目前所選擇的小孩ID
         ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
@@ -88,24 +97,15 @@
         }
         
         // Prepare the judgt the putDateArray is empty or have value. 準備讀取使用者使否有創建信件，如果沒有就顯示有就不顯示.
-        if(putDateAddArray.count == 0) {
+        if(mailDateContentArray.count == 0) {
             DescriptionView.hidden = NO;
+            NSLog(@"mailDateContentArray的數量為 %lu",(unsigned long)mailDateContentArray.count);
         } else
             DescriptionView.hidden = YES;
         
-        // Prepare the readTextViewArray. 準備讀取使用者信件的內容，用來連動當要刪除信件時，內容也跟著刪除。
-        NSArray *readTextViewArray = [defaults objectForKey:@"textViewcontent"];
-        if(readTextViewArray) {
-            putTextViewArray = [readTextViewArray mutableCopy];
-            putTextViewAddArray = [[putTextViewArray objectAtIndex:ChildID] mutableCopy];
-        } else {
-            putTextViewArray = [NSMutableArray new];
-            putTextViewAddArray = [NSMutableArray new];
-        }
-        
         // Prepare the putImageArray. 準備讀取日期陣列是否有存值，來產生信件圖片的數量。
         putImageArray = [NSMutableArray new];
-        for (int i=0; i<putDateAddArray.count; i++) {
+        for (int i=0; i<mailDateContentArray.count; i++) {
             [putImageArray addObject:[UIImage imageNamed:@"PostCardVer4@2x.png"]];
         }
         
@@ -116,7 +116,7 @@
         } else {
             putChildTextFieldnameArray = [NSMutableArray new];
         }
-        
+    
         //當要顯示時，進行 tableView 的更新
         [_myTableView reloadData];
         //  [refreshControl endRefreshing];
@@ -160,11 +160,9 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat offsetY = scrollView.contentOffset.y;
-    NSLog(@"Y軸為：%f",offsetY);
     UIView *headerContentView = self.myTableView.tableHeaderView.subviews[0];
-    
     headerContentView.transform = CGAffineTransformMakeTranslation(0,MIN(offsetY,0));
- 
+
 }
 
 #pragma mark -Prepare TableViewSection and Cell 準備 tableView 的 Section 與 Cell
@@ -175,7 +173,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
  
-        return putDateAddArray.count;
+        return mailDateContentArray.count;
 
 }
 
@@ -202,7 +200,8 @@
         Cell.MyImageView.layer.masksToBounds = false;
         
         Cell.MyImageView.image = [putImageArray objectAtIndex:indexPath.row];
-        Cell.DateAndTime.text = [putDateAddArray objectAtIndex:indexPath.row];
+        
+        Cell.DateAndTime.text = mailDateContentArray[indexPath.row][@"mailDate"];
         [Cell.DateAndTime sizeToFit];
         return Cell;
     }
@@ -228,24 +227,26 @@
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if(editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        downloadMailContent = [UpdateDataView new];
+        
+        NSLog(@"刪除資料指令已傳出: %@",mailDateContentArray[indexPath.row][@"mailDate"]);
+        
+        [downloadMailContent DeleteFutureMailContentAndUpdate:mailDateContentArray[indexPath.row][@"mailDate"]];
  
-        [putDateAddArray removeObjectAtIndex:indexPath.row];
-        [putTextViewAddArray removeObjectAtIndex:indexPath.row];
+        [mailDateContentArray removeObjectAtIndex:indexPath.row];
         
-        putDateArray[ChildID] = putDateAddArray;
-        putTextViewArray[ChildID] = putTextViewAddArray;
+        [defaults setValue:mailDateContentArray forKey:@"mailDateContentArray"];
         
-        [defaults setValue:putDateArray forKey:@"Mailibformation"];
-        [defaults setValue:putTextViewArray forKey:@"textViewcontent"];
         [defaults synchronize];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
         CATransition *transition = [CATransition animation];
         [transition setDuration:0.2];
         [transition setType:kCATransitionFade];
         [DescriptionView.layer addAnimation:transition forKey:nil];
-            if(putDateAddArray.count == 0) {
+            if(mailDateContentArray.count == 0) {
                 DescriptionView.hidden = NO;
             } else {
                 DescriptionView.hidden = YES;

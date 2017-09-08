@@ -15,6 +15,8 @@ target 'TheTimeAlbum' do
   pod 'Google/SignIn'
   pod 'ChameleonFramework'
   pod 'BFPaperButton'
+  pod 'JTSImageViewController'
+  pod 'LGPlusButtonsView'
   pod 'AWSAutoScaling'
   pod 'AWSCloudWatch'
      pod 'AWSCognito'
@@ -33,4 +35,5 @@ target 'TheTimeAlbum' do
      pod 'AWSSNS'
      pod 'AWSSQS'
   pod 'KVNProgress'
+  pod 'TZImagePickerController'
 end

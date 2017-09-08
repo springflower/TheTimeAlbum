@@ -5,14 +5,15 @@
 //  Created by 黃柏恩 on 2017/7/31.
 //  Copyright © 2017年 Greathard. All rights reserved.
 //
-#import <AFNetworking.h>
 #import "SelectedRow.h"
+#import <AFNetworking.h>
 #import <Photos/Photos.h>
+#import "MyTextAttachment.h"
 #import <QuartzCore/QuartzCore.h>
 #import "WriteMailViewController.h"
 #import <ChameleonFramework/Chameleon.h>
-#import "MyTextAttachment.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "UpdateDataView.h"
 
 @interface WriteMailViewController ()<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *BackBtn;
@@ -46,8 +47,11 @@
     NSString *dateString;
     //準備讀取所儲存的內容，因為是儲存成Data，所以要先用 NSData
     NSData *content;
-    
     int popViewOrdimissViewfunc;
+    UpdateDataView *updateFutureMailContent;
+    
+    NSMutableArray *mailDateContentArray;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -55,42 +59,38 @@
     //讀取目前所選擇的小孩ID
     ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
     
-    NSLog(@"%d",[[SelectedRow object]didSelectedRowAboutMail]);
-    // Read DateArrayContent 讀取存取的日期陣列.
-    NSArray *readDateArray = [defaults objectForKey:@"Mailibformation"];
-    if(readDateArray.count != 0) {
-        putDateArray  = [readDateArray mutableCopy];
-        putDateAddArray = [[putDateArray objectAtIndex:ChildID] mutableCopy];
-    } else {
-        putDateArray = [NSMutableArray new];
-        putDateAddArray = [NSMutableArray new];
-    }
-    
-    // Read TextViewArrayContent 讀取存取的信箱內容.
-    NSArray *readTextViewArray = [defaults objectForKey:@"textViewcontent"];
-    if(readTextViewArray) {
-        putTextViewArray = [readTextViewArray mutableCopy];
-        putTextViewAddArray = [[putTextViewArray objectAtIndex:ChildID] mutableCopy];
-    } else {
-        putTextViewArray = [NSMutableArray new];
-        putTextViewAddArray = [NSMutableArray new];
-    }
+    mailDateContentArray = [[defaults objectForKey:@"mailDateContentArray"] mutableCopy];
     
     [self MyWriteMailTableViewPrepare];
     
     // Read is new Mail or Old Mail. 讀取是否為新郵件或舊郵件.
     if([[SelectedRow object] didSelectedRowAboutMail] >=0 && [[SelectedRow object] didSelectedNewOrOldAboutMail]) {
-        //準備將讀取的文章內容取出
-        content = [NSData new];
-        content = putTextViewAddArray[[[SelectedRow object] didSelectedRowAboutMail]];
-        //準備將讀取的文章日期給文章內容
-        dateLabel.text = putDateAddArray[[[SelectedRow object] didSelectedRowAboutMail]];
-        //準備將文章內容放置 TextView
+        
+        
+        NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:mailDateContentArray[[[SelectedRow object]didSelectedRowAboutMail]][@"mailContent"] options:0];
+        
+        
+        NSLog(@"decodedData 的內容為： %@",decodedData);
+        
         NSMutableAttributedString *textViewcontent = [NSMutableAttributedString new];
-        textViewcontent = (NSMutableAttributedString*)[NSKeyedUnarchiver unarchiveObjectWithData:content];
+        textViewcontent = (NSMutableAttributedString*)[NSKeyedUnarchiver
+                                                       unarchiveObjectWithData:decodedData];
         _TextView.attributedText = textViewcontent;
-        //準備將設定的文章內容 BOOL 值 設定成 True
-        [[SelectedRow object]SendSelectedRowAboutMail:[[SelectedRow object] didSelectedRowAboutMail] Bool:false];
+        
+        
+        dateLabel.text = mailDateContentArray[[[SelectedRow object] didSelectedRowAboutMail]][@"mailDate"];
+
+//        //準備將讀取的文章內容取出
+//        content = [NSData new];
+//        content = putTextViewAddArray[[[SelectedRow object] didSelectedRowAboutMail]];
+//        //準備將讀取的文章日期給文章內容
+//        dateLabel.text = putDateAddArray[[[SelectedRow object] didSelectedRowAboutMail]];
+//        //準備將文章內容放置 TextView
+//        NSMutableAttributedString *textViewcontent = [NSMutableAttributedString new];
+//        textViewcontent = (NSMutableAttributedString*)[NSKeyedUnarchiver unarchiveObjectWithData:content];
+//        _TextView.attributedText = textViewcontent;
+//        //準備將設定的文章內容 BOOL 值 設定成 True
+          [[SelectedRow object]SendSelectedRowAboutMail:[[SelectedRow object] didSelectedRowAboutMail] Bool:false];
         
         popViewOrdimissViewfunc = 1;
     }
@@ -151,52 +151,58 @@
 #pragma mark - Prepare save Content from Mail 準備儲存文章內容
 
 - (IBAction)SendMessage:(id)sender {
-    
+        
     // Ready to all textViewContent give textViewcontent. 準備將 TextView 上的內容給包裝好.
     NSMutableAttributedString *textViewcontent = [[NSMutableAttributedString alloc]
                                                   initWithAttributedString:_TextView.attributedText];
     content = [NSData new];
     content = [NSKeyedArchiver archivedDataWithRootObject:textViewcontent];
+    //將文章內容轉為 Base64
+    NSString *Covert64String =
+    [content base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    //準備一個陣列放入要上傳的資料
+    NSArray *array = [NSArray new];
+    //準備上傳資料方法
+    updateFutureMailContent = [UpdateDataView new];
     
     // If didSeletedRow is bigger 0 or equal 0, save the content to specify putTextViewArray position. 選擇的如果選擇舊信箱的話，修改信箱內容並儲存。
     if([[SelectedRow object] didSelectedRowAboutMail] >=0) {
-        putTextViewAddArray[[[SelectedRow object] didSelectedRowAboutMail]] = content;
+    
+        //準備更新上傳更改後的資料資料
+        array = @[Covert64String,mailDateContentArray[[[SelectedRow object] didSelectedRowAboutMail]][@"mailDate"]];
+        [updateFutureMailContent UpdataFutureMailContentChanged:array];
         
-        NSLog(@"儲存的內容為： %@",putTextViewAddArray);
+        NSDictionary *addArray = @{@"mailDate":dateString,
+                                   @"mailContent":Covert64String};
         
-        putTextViewArray[ChildID] = putTextViewAddArray;
-        [defaults setValue:putTextViewArray forKey:@"textViewcontent"];
+        mailDateContentArray[[[SelectedRow object] didSelectedRowAboutMail]]
+        = addArray;
+        
+        [defaults setValue:mailDateContentArray forKey:@"mailDateContentArray"];
+        
         [defaults synchronize];
         
     // if didSelectedRow is smaller 0, create a new Mail and save. 如果是選擇新信箱的話，創造一個新的資料並儲存。
     } else if([[SelectedRow object] didSelectedRowAboutMail] ==-1){
         
-        NSMutableAttributedString *textViewcontent = [[NSMutableAttributedString alloc] initWithAttributedString:_TextView.attributedText];
+        //準備上傳信件日期與信件內容資料
+        array = @[dateString,Covert64String];
+        [updateFutureMailContent UpdataFutureMailContent:array];
+        NSDictionary *addArray = @{@"mailDate":dateString,
+                                   @"mailContent":Covert64String};
+        [mailDateContentArray addObject:addArray];
         
-        content = [NSKeyedArchiver archivedDataWithRootObject:textViewcontent];
-        NSLog(@"文章的內容為：%@",content);
+        [defaults setValue:mailDateContentArray forKey:@"mailDateContentArray"];
         
-        [putTextViewAddArray addObject:content];
-        NSLog(@"儲存的內容為： %@",putTextViewAddArray);
-        
-        putTextViewArray[ChildID] = putTextViewAddArray;
-        [defaults setValue:putTextViewArray forKey:@"textViewcontent"];
-        
-        [putDateAddArray addObject:dateString];
-        
-        putDateArray[ChildID] = putDateAddArray;
-        NSLog(@"putDateAddArray的內容為： %@",putDateArray);
-        
-       [defaults setValue:putDateArray forKey:@"Mailibformation"];
-        
-       [defaults synchronize];
-        
+        [defaults synchronize];
     }
+    
     if(popViewOrdimissViewfunc == 1) {
         [self.navigationController popViewControllerAnimated:YES];
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+    
 }
 
 #pragma mark - Prepare Set PhotoSelect from UIActionSheet 準備 UIActionSheet 選擇相機或相簿功能

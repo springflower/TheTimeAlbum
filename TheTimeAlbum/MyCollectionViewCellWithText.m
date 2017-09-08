@@ -20,16 +20,17 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.imageView.layer.borderWidth = 2;
+    self.imageView.layer.borderWidth = 1;
     self.imageView.layer.borderColor = [UIColor flatCoffeeColorDark].CGColor;
     self.imageView.layer.cornerRadius = 5;
     self.imageView.clipsToBounds = YES;
+    self.detalText.userInteractionEnabled = NO;
     // Initialization code
     
-    self.layer.masksToBounds = NO;
-    self.layer.shadowOpacity = 0.75f;
-    self.layer.shadowRadius = 2.0f;
-    self.layer.shouldRasterize = NO;
+//    self.layer.masksToBounds = NO;
+//    self.layer.shadowOpacity = 0.75f;
+//    self.layer.shadowRadius = 2.0f;
+//    self.layer.shouldRasterize = NO;
     //self.layer.shadowPath = [UIBezierPath be]
 }
 

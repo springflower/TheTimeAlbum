@@ -22,6 +22,15 @@ typedef void (^DoneHandler)(NSError *error, id result);
 // 將登入的FB GOOGLE用戶資訊寫入到 SQL以供查詢
 -(void) registerUserToSQL:(MyAccountData*) userData
                completion:(DoneHandler) done;
+// 加入新成就
+
+-(void) addAchievementForbabyID:(NSString*) babyID
+                          title:(NSString*) title
+                        picName:(NSString*) picName
+                     createDate:(NSString*) createDate
+                     completion:(DoneHandler) done;
+
+
 // 從SQL 撈uid 的功能
 -(void) getUIDFromSQLByFBID:(NSString*) fbid
                  completion:(DoneHandler) done;
@@ -43,7 +52,15 @@ typedef void (^DoneHandler)(NSError *error, id result);
 -(void) updatePostsToServerWithPostID:(NSInteger)postID
                               content:(NSString*)content
                            completion:(DoneHandler)done;
+-(void) updatePostsToServerWithPostID:(NSInteger)postID
+                             postType:(NSInteger)postType
+                              content:(NSString*)content
+                           completion:(DoneHandler)done;
+- (void) deletePostByPostID:(NSInteger) postID
+                 completion:(DoneHandler) done;
 
+// 用uid取得這uid所擁有的寶寶們
+- (void) getBabyDataByUID:(NSString*)uid completion:(DoneHandler)done;
 
 +(instancetype) sharedInstance;
 @end

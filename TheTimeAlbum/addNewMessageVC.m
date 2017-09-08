@@ -37,6 +37,7 @@
 }
 // FIXME: add uid to post
 - (IBAction)saveBtnPressed:(id)sender {
+    //FIXME: fake babyID
     NSString *babyID = @"1";
     NSString *content = self.contentText.text;
     NSString *postType = @"1";
@@ -65,7 +66,7 @@
                    [KVNProgress dismissWithCompletion:^{
                        // Things you want to do after the HUD is gone.
                        [KVNProgress showSuccessWithStatus:@"新增成功"];
-                       
+                       [[NSNotificationCenter defaultCenter] postNotificationName:@"doReloadJob" object:nil];
                        [self.navigationController popViewControllerAnimated:YES];
                        
                    }];

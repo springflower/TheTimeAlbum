@@ -14,8 +14,9 @@
 #import <AFNetworking.h>
 #import "MyCommunicator.h"
 #import "timeLineVC.h"
+#import "UpdateDataView.h"
 
-@interface loginViewController () <FBSDKLoginButtonDelegate>
+@interface loginViewController () <FBSDKLoginButtonDelegate, GIDSignInDelegate,GIDSignInUIDelegate>
 {
     NSString    *userName;      // Get it from facebook api.    從FB登入資訊取得
     NSString    *userMail;      // Get it from facebook api.    從FB登入資訊取得
@@ -27,6 +28,7 @@
     
     MyAccountData *currentuser;
     MyCommunicator *comm;
+    
 }
 @property (weak, nonatomic) IBOutlet UIImageView *userPic;
 
@@ -111,6 +113,11 @@
          [comm getUIDFromSQLByFBID:currentuser.userFBId completion:^(NSError *error, id result1) {
              
              
+          //準備下載信件資料
+          //UpdateDataView *downloadMailContent = [UpdateDataView new];
+          //[downloadMailContent DownloadFutureMailContent];
+        
+             
              //currentuser.userId = [self htmlEntityDecode:currentuser.userId];
              //NSLog(@"currentuser.uid: %@",currentuser.userId);
              
@@ -126,6 +133,10 @@
                  currentuser.userId = result1[@"uid"];
                  NSLog(@"currentuser.uid: %@",currentuser.userId);
                  [localUserData setObject:currentuser.userId forKey:@"uid"];
+                 
+                 
+                 // 取得uid後 才去下一頁
+                 [self goNextPage];
              }
              
              if(error){
@@ -148,6 +159,9 @@
      }];
 }
 //--
+
+
+
 
 -(void)viewWillAppear:(BOOL)animated {
     // If facebook is logging in do something    如果用戶已登入且，執行前往下一個VC之類的操作。
@@ -231,7 +245,7 @@
         }
         NSLog(@"****** FB did complete with Login 2 ******");
         //[self getFBUserData];];
-        [self goNextPage];
+        //[self goNextPage];
     }
 }
 
