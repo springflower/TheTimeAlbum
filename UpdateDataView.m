@@ -39,7 +39,7 @@
     UILabel *updatedescription =
     [[UILabel alloc] initWithFrame:CGRectMake(0,50,
                                               frame.size.width,frame.size.height)];
-    [updatedescription setText:@"更新中."];
+    [updatedescription setText:@"更新中"];
     [updatedescription setTextColor:[UIColor flatSkyBlueColor]];
     updatedescription.backgroundColor = [UIColor clearColor];
     updatedescription.textAlignment = NSTextAlignmentCenter;
@@ -101,6 +101,7 @@
              ChildBigStickerArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
              NSLog(@"下載的照片的資料為：%@",ChildBigStickerArray);
              //如果 Array 存在，將值傳送給 Block
+             NSLog(@"%@",responseObject);
              if(Array) {
                  Array(ChildBigStickerArray);
              }
@@ -269,7 +270,7 @@
             //..
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
-            NSLog(@"  成功上傳資料 ");
+            NSLog(@"  成功更新資料 ");
             NSString *json = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             NSLog(@"putMyBigStickerArray的數量為：  %@",json);
             
@@ -308,13 +309,9 @@
                 NSLog(@"已通知 PopSetInfoTableViewControler");
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"PopSetInfoTableViewControler" object:nil];
             }
-            //        AddChildSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"AddChildSettingViewController"];
-            //        [self presentViewController:nextPage animated:YES completion:nil];
-            //        AddChildSettingViewController *nextPage = [[AddChildSettingViewController alloc] initWithNibName:@"AddChildSettingViewController" bundle:nil];
-            //        [self presentModalViewController:nextPage animated:YES ];
-            //            }];
+
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"  上傳資料失敗 ");
+            NSLog(@"  資料更新失敗 ");
             NSLog(@"原因： %@",error);
             //將動畫執行 View 給隱藏
             self.hidden = true ;
@@ -358,7 +355,7 @@
         } progress:^(NSProgress * _Nonnull uploadProgress) {
             //..
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSLog(@"  成功上傳資料 ");
+            NSLog(@"  成功更新刪除資料 ");
             NSLog(@"putMyBigStickerArray的數量為：  %lu",(unsigned long)Array.count);
             //將動畫執行 View 給隱藏
             self.hidden = true ;
@@ -397,7 +394,7 @@
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"  上傳資料失敗 ");
+            NSLog(@"  資料更新刪除失敗 ");
             NSLog(@"原因： %@",error);
             //將動畫執行 View 給隱藏
             self.hidden = true ;
@@ -537,8 +534,6 @@
 
 -(void)DeleteFutureMailContentAndUpdate:(NSString*)string{
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
         AFHTTPSessionManager *manager  = [AFHTTPSessionManager manager];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         
@@ -568,13 +563,52 @@
 
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"  下載資料失敗 ");
+            
+        }];
+}
+         
+#pragma mark - Prepare update FutureMailContentArray 準備一個方法上傳孩子信箱陣列
+
+
+-(void)UpdataChildFutureMailContentFunction:(NSArray*)Array {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:Array];
+        NSString *ChildFutureMailContent = [NSString stringWithFormat:@"%@",data];
+        NSString *urlUpdate = [NSString
+                               stringWithFormat:@"https://f26681605.000webhostapp.com/sqlUpdateFutureMailContent.php"];
+        AFHTTPSessionManager *manager  = [AFHTTPSessionManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        
+        //設定準備讀取存取在 UserDefaults 的資料
+        defaults = [NSUserDefaults standardUserDefaults];
+        NSInteger ChildIDIInteger = [defaults integerForKey:@"ChildID"];
+        NSString  *ChildID = [NSString stringWithFormat:@"%ld",(long)ChildIDIInteger];
+        NSDictionary *parmas = @{
+                                 @"userChildID":ChildID,
+                                 @"userName" :[defaults objectForKey:@"userMail"],
+                                 @"ChildFutureMailContent":ChildFutureMailContent
+                                 };
+        
+        [manager POST:urlUpdate parameters:parmas constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            //準備上傳資料的 Key 名稱
+            [formData appendPartWithFormData:data name:@"updateChildBigStickerArray"];
+            
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            //..
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"  成功上傳資料孩子的信箱內容資料 ");
+            NSLog(@"putMyBigStickerArray的數量為：  %lu",(unsigned long)Array.count);
+
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"  上傳資料失敗孩子信箱內容資料 ");
             NSLog(@"原因： %@",error);
         }];
         
     });
     
 }
-
 
 
 

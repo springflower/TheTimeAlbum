@@ -36,7 +36,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TabBarControlerAnimated) name:@"TabBarControlerAnimated" object:nil];
     
-
     
 //    [self setupColorView];
 //
@@ -49,7 +48,6 @@
 }
 
 -(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
-    
     
 }
 

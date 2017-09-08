@@ -28,4 +28,6 @@ typedef void(^PassValueBlock)(NSArray*);
 
 -(void)DeleteFutureMailContentAndUpdate:(NSString*)string;
 
+-(void)UpdataChildFutureMailContentFunction:(NSArray*)Array;
+
 @end

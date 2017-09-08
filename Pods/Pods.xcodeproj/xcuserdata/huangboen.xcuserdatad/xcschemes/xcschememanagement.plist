@@ -139,6 +139,11 @@
 			<key>orderHint</key>
 			<integer>29</integer>
 		</dict>
+		<key>JTSImageViewController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>28</integer>
+		</dict>
 		<key>KVNProgress.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -149,6 +154,11 @@
 			<key>orderHint</key>
 			<integer>30</integer>
 		</dict>
+		<key>LGPlusButtonsView.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>29</integer>
+		</dict>
 		<key>Pods-TheTimeAlbum.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -158,6 +168,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>31</integer>
+		</dict>
+		<key>TZImagePickerController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>30</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>

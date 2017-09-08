@@ -8,6 +8,7 @@
 #import "SelectedRow.h"
 #import <AFNetworking.h>
 #import <Photos/Photos.h>
+#import "UpdateDataView.h"
 #import "MyTextAttachment.h"
 #import <QuartzCore/QuartzCore.h>
 #import "WriteMailViewController.h"
@@ -16,6 +17,7 @@
 #import "UpdateDataView.h"
 
 @interface WriteMailViewController ()<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIButton *BackBtn;
 @property (weak, nonatomic) IBOutlet UIButton *KeepMessage;
 @property (weak, nonatomic) IBOutlet UIButton *SendMessage;
@@ -47,10 +49,10 @@
     NSString *dateString;
     //準備讀取所儲存的內容，因為是儲存成Data，所以要先用 NSData
     NSData *content;
-    int popViewOrdimissViewfunc;
     UpdateDataView *updateFutureMailContent;
-    
     NSMutableArray *mailDateContentArray;
+    //準備變數讀取決定是使用 popViewControler 還是 dimissViewControler
+    int popViewOrdimissViewfunc;
     
 }
 
@@ -151,7 +153,7 @@
 #pragma mark - Prepare save Content from Mail 準備儲存文章內容
 
 - (IBAction)SendMessage:(id)sender {
-        
+
     // Ready to all textViewContent give textViewcontent. 準備將 TextView 上的內容給包裝好.
     NSMutableAttributedString *textViewcontent = [[NSMutableAttributedString alloc]
                                                   initWithAttributedString:_TextView.attributedText];
@@ -518,7 +520,7 @@
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height+50, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height+100, 0.0);
     _TextView.contentInset = contentInsets;
     _TextView.scrollIndicatorInsets = contentInsets;
     
