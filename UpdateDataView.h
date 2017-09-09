@@ -20,6 +20,14 @@ typedef void(^PassValueBlock)(NSArray*);
 
 -(void)UpdataChildBigstickerIfUseDeleteFunction:(NSArray*)Array;
 
+-(void)UpdataFutureMailContent:(NSArray*)Array;
+
+-(void)UpdataFutureMailContentChanged:(NSArray*)Array;
+
+-(void)DownloadFutureMailContent;
+
+-(void)DeleteFutureMailContentAndUpdate:(NSString*)string;
+
 -(void)UpdataChildFutureMailContentFunction:(NSArray*)Array;
 
 @end

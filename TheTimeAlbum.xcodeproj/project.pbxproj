@@ -81,6 +81,7 @@
 		CF1395921F30300800D3C0FD /* Camera200x200@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF1395911F30300700D3C0FD /* Camera200x200@2x.png */; };
 		CF1395941F3030DC00D3C0FD /* Camera150x150@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF1395931F3030DC00D3C0FD /* Camera150x150@2x.png */; };
 		CF16BA241F51C77200C0A216 /* StartCreateFirstChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF16BA231F51C77200C0A216 /* StartCreateFirstChildViewController.m */; };
+		CF18A55C1F6285D7003547DB /* SetUserInfoTableViewControler.m in Sources */ = {isa = PBXBuildFile; fileRef = CF18A55B1F6285D7003547DB /* SetUserInfoTableViewControler.m */; };
 		CF195F2E1F4725840064FDF0 /* UseDownloadDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CF195F2D1F4725840064FDF0 /* UseDownloadDataClass.m */; };
 		CF195F341F48A1050064FDF0 /* UpdateDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF195F331F48A1050064FDF0 /* UpdateDataView.m */; };
 		CF195F371F4A8ADF0064FDF0 /* SetInfoTableViewControler.m in Sources */ = {isa = PBXBuildFile; fileRef = CF195F361F4A8ADF0064FDF0 /* SetInfoTableViewControler.m */; };
@@ -229,6 +230,8 @@
 		CF1395931F3030DC00D3C0FD /* Camera150x150@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera150x150@2x.png"; sourceTree = "<group>"; };
 		CF16BA221F51C77200C0A216 /* StartCreateFirstChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartCreateFirstChildViewController.h; sourceTree = "<group>"; };
 		CF16BA231F51C77200C0A216 /* StartCreateFirstChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartCreateFirstChildViewController.m; sourceTree = "<group>"; };
+		CF18A55A1F6285D7003547DB /* SetUserInfoTableViewControler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetUserInfoTableViewControler.h; sourceTree = "<group>"; };
+		CF18A55B1F6285D7003547DB /* SetUserInfoTableViewControler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetUserInfoTableViewControler.m; sourceTree = "<group>"; };
 		CF195F2C1F4725840064FDF0 /* UseDownloadDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseDownloadDataClass.h; sourceTree = "<group>"; };
 		CF195F2D1F4725840064FDF0 /* UseDownloadDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseDownloadDataClass.m; sourceTree = "<group>"; };
 		CF195F321F48A1050064FDF0 /* UpdateDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateDataView.h; sourceTree = "<group>"; };
@@ -568,6 +571,8 @@
 				CF0B784A1F1DBAF60067229D /* AboutMeViewcontrollerCell.m */,
 				CF195F351F4A8ADF0064FDF0 /* SetInfoTableViewControler.h */,
 				CF195F361F4A8ADF0064FDF0 /* SetInfoTableViewControler.m */,
+				CF18A55A1F6285D7003547DB /* SetUserInfoTableViewControler.h */,
+				CF18A55B1F6285D7003547DB /* SetUserInfoTableViewControler.m */,
 			);
 			name = AboutMeViewController;
 			path = ..;
@@ -848,6 +853,7 @@
 				CF5A8D321F2EF7C400E0FEA6 /* WriteMailViewController.m in Sources */,
 				CF5A8D2C1F2DEAF800E0FEA6 /* AchievementViewController.m in Sources */,
 				CFC6DB621F2ACF8600669187 /* FutureMailViewController.m in Sources */,
+				CF18A55C1F6285D7003547DB /* SetUserInfoTableViewControler.m in Sources */,
 				CF195F341F48A1050064FDF0 /* UpdateDataView.m in Sources */,
 				CF1B654A1F3C0CEF00673520 /* SliderMenuLeftTableViewCell.m in Sources */,
 				CF1B65441F3A321E00673520 /* ColorTabBarView.m in Sources */,

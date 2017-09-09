@@ -33,10 +33,6 @@
     NSMutableArray *putChildSexArray;
     //準備放置與孩子關係陣列
     NSMutableArray *putWithChildRelationShipArray;
-    //準備放置孩子信箱陣列
-    NSMutableArray *putDateArray;
-    //準備放置孩子信箱內容陣列
-    NSMutableArray *putTextViewArray;
     //準備放置孩子大頭貼陣列
     NSMutableArray *putChildBigStickerArray;
     //準備讀取孩子背景圖
@@ -123,20 +119,7 @@
     } else {
         putWithChildRelationShipArray = [NSMutableArray new];
     }
-    //讀取孩子信件陣列.
-    NSArray *readDateArray = [defaults objectForKey:@"Mailibformation"];
-    if(readDateArray) {
-        putDateArray  = [readDateArray mutableCopy];
-    } else {
-        putDateArray = [NSMutableArray new];
-    }
-    //準備讀取使用者信件的內容，用來連動當要刪除信件時，內容也跟著刪除。
-    NSArray *readTextViewArray = [defaults objectForKey:@"textViewcontent"];
-    if(readTextViewArray) {
-        putTextViewArray = [readTextViewArray mutableCopy];
-    } else {
-        putTextViewArray = [NSMutableArray new];
-    }
+
     //準備讀取孩子的大頭貼
     if([[UseDownloadDataClass object] ReadChildBigStickerArray].count != 0) {
         NSArray  *readChildBigStickerArray = [[UseDownloadDataClass object] ReadChildBigStickerArray];
@@ -273,12 +256,6 @@
     //刪除目前所選取的與小孩的關係
     [putWithChildRelationShipArray removeObjectAtIndex:ChildID];
     [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];
-    //刪除目前所選取的小孩信件
-    [putDateArray removeObjectAtIndex:ChildID];
-    [defaults setObject:putDateArray forKey:@"Mailibformation"];
-    //刪除目前所選取的小孩信件內容
-    [putTextViewArray removeObjectAtIndex:ChildID];
-    [defaults setObject:putTextViewArray forKey:@"textViewcontent"];
     //刪除目前所選取的小孩背景圖片
     [putMyChildBackImageArray removeObjectAtIndex:ChildID];
     [defaults setObject:putMyChildBackImageArray forKey:@"readMyChildBackImageArray"];

@@ -62,33 +62,56 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="fG9-E5-RWH">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="rX1-B6-3DM">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="856-sN-GJ2">
-                                <rect key="frame" x="16" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="返回"/>
-                                <connections>
-                                    <action selector="backLatPage:" destination="lNp-2j-eIP" eventType="touchUpInside" id="a9Q-YX-XV9"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="leftBarButtonItem" title="返回" style="plain" id="rX1-B6-3DM">
+                            <connections>
+                                <action selector="backLatPage:" destination="lNp-2j-eIP" id="eFf-8I-p2h"/>
+                            </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="z8D-yI-q7m">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dCz-AM-8OL">
-                                <rect key="frame" x="276" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="完成"/>
-                                <connections>
-                                    <action selector="Finished:" destination="lNp-2j-eIP" eventType="touchUpInside" id="M9k-xj-4cC"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" title="完成" style="plain" id="z8D-yI-q7m">
+                            <connections>
+                                <action selector="Finished:" destination="lNp-2j-eIP" id="pK2-Jj-Dfa"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ksr-Oa-Gup" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4142" y="-520"/>
+        </scene>
+        <!--Set User Info Table View Controler-->
+        <scene sceneID="QSi-70-ggh">
+            <objects>
+                <tableViewController storyboardIdentifier="SetUserInfoTableViewControler" id="ZrN-Qc-P5c" customClass="SetUserInfoTableViewControler" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="quA-Vt-qd0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wM2-uf-6pj">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wM2-uf-6pj" id="kVV-bI-3Vk">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZrN-Qc-P5c" id="dlb-5G-dCE"/>
+                            <outlet property="delegate" destination="ZrN-Qc-P5c" id="w8o-GG-Qyd"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="QC8-Pg-yhi">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="aRT-H3-MFc">
+                            <connections>
+                                <action selector="backToLastPage:" destination="ZrN-Qc-P5c" id="pV5-1K-VhJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oXa-II-7jU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4142" y="257"/>
         </scene>
         <!--我-->
         <scene sceneID="T8y-sP-JPQ">
@@ -127,6 +150,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0bW-RC-moS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3222" y="-520"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fOr-yS-jq9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1kL-T5-8hL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bAl-Tt-xKx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZrN-Qc-P5c" kind="relationship" relationship="rootViewController" id="Qrp-Zn-nd4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5SF-um-BS4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3222" y="257"/>
         </scene>
     </scenes>
     <resources>

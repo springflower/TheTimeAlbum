@@ -11,6 +11,7 @@
 #import "WriteMailViewController.h"
 #import "FutureMaliViewControllerCellTableViewCell.h"
 #import "UseDownloadDataClass.h"
+#import "UpdateDataView.h"
 @interface FutureMailViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
@@ -32,96 +33,85 @@
     UIImageView *MyChildBackgroundImageView;
     //準備讀取所創造的信件數量，來產生信件圖片
     NSMutableArray *putImageArray;
-    //準備讀取信件的內容，當信件刪除時，內容也跟著刪除
-    NSMutableArray *putTextViewArray;
-    //準備讀取信件內容陣列的資料，依照所選的孩子ID
-    NSMutableArray *putTextViewAddArray;
     //準備讀取孩子的名字陣列，用來顯示在信件圖片上
     NSMutableArray *putChildTextFieldnameArray;
     //準備如果沒有任何信件的話，顯示這個 View.
     UIView *DescriptionView;
     //準備讀取目前選擇的小孩ID.
     NSInteger ChildID;
-    //準備讀取信件的創造日期，用來顯示在信件圖片上
-    NSMutableArray *putDateArray;
     //準備讀取信件陣列，依所選擇的小孩ID來決定
     NSMutableArray *putDateAddArray;
+    //準備讀取信件內容
+    NSMutableArray *mailDateContentArray;
+    //準備上傳資料到雲端
+    UpdateDataView *updatedMailContent;
+    //準備讀取孩子背景圖片資料
+    NSData* ChildBackgroundImageData;
+    
+    UIImage *BackgroundImage;
+    
+    NSArray *readMyChildBackImageArray;
 }
 
--(void)viewDidAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated  {
     
     [self updateDate];
     
 }
+
 //準備更新資料
 -(void)updateDate {
-        
+    
+        mailDateContentArray = [[defaults objectForKey:@"mailDateContentArray"] mutableCopy];
         //讀取目前所選擇的小孩ID
         ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
-        
-        // Prepare the MyBigSticker Image. 準備讀取孩子的大頭貼
-        if([[UseDownloadDataClass object] ReadChildBigStickerArray].count != 0) {
-            NSArray *readChildBigStickerArray = [[UseDownloadDataClass object] ReadChildBigStickerArray];
-            NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
-            if(readChildBigStickerArray.count != 0) {
-                ChidlBigStickerImageView.image = [UIImage imageWithData:ChildBigStickerImageData];
-                
-            }
-        }
-        //讀取孩子背景圖片陣列
-        NSArray *readMyChildBackImageArray = [defaults objectForKey:@"readMyChildBackImageArray"];
-        if(![readMyChildBackImageArray[ChildID] isKindOfClass:[NSString class]]) {
-            NSData* ChildBackgroundImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
-            MyChildBackgroundImageView.image = [UIImage imageWithData:ChildBackgroundImageData];
-        } else {
-            MyChildBackgroundImageView.image = [UIImage imageNamed:readMyChildBackImageArray[ChildID]];
-        }
-
-        // Prepare the WriteDateArray. 準備讀取使用者信件的創建日期.
-        NSArray *readDateArray = [defaults objectForKey:@"Mailibformation"];
-        if(readDateArray) {
-            putDateArray  = [readDateArray mutableCopy];
-            putDateAddArray = [[putDateArray objectAtIndex:ChildID] mutableCopy];
-        } else {
-            putDateArray = [NSMutableArray new];
-            putDateAddArray = [NSMutableArray new];
-        }
-        
-        // Prepare the judgt the putDateArray is empty or have value. 準備讀取使用者使否有創建信件，如果沒有就顯示有就不顯示.
-        if(putDateAddArray.count == 0) {
-            DescriptionView.hidden = NO;
-        } else
-            DescriptionView.hidden = YES;
-        
-        // Prepare the readTextViewArray. 準備讀取使用者信件的內容，用來連動當要刪除信件時，內容也跟著刪除。
-        NSArray *readTextViewArray = [defaults objectForKey:@"textViewcontent"];
-        if(readTextViewArray) {
-            putTextViewArray = [readTextViewArray mutableCopy];
-            putTextViewAddArray = [[putTextViewArray objectAtIndex:ChildID] mutableCopy];
-        } else {
-            putTextViewArray = [NSMutableArray new];
-            putTextViewAddArray = [NSMutableArray new];
-        }
-        
-        // Prepare the putImageArray. 準備讀取日期陣列是否有存值，來產生信件圖片的數量。
-        putImageArray = [NSMutableArray new];
-        for (int i=0; i<putDateAddArray.count; i++) {
-            [putImageArray addObject:[UIImage imageNamed:@"PostCardVer4@2x.png"]];
-        }
-        
         // Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子名稱來決定信件上孩子的名字。
         NSArray *readChildTextFieldnameArray = [defaults objectForKey:@"ChildName"];
+    
         if(readChildTextFieldnameArray) {
             putChildTextFieldnameArray = [readChildTextFieldnameArray mutableCopy];
         } else {
             putChildTextFieldnameArray = [NSMutableArray new];
         }
         
+        //讀取孩子背景圖片陣列
+        readMyChildBackImageArray = [defaults objectForKey:@"readMyChildBackImageArray"];
+        
+            // Prepare the MyBigSticker Image. 準備讀取孩子的大頭貼
+            if([[UseDownloadDataClass object] ReadChildBigStickerArray].count != 0) {
+                NSArray *readChildBigStickerArray = [[UseDownloadDataClass object] ReadChildBigStickerArray];
+                NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
+                if(readChildBigStickerArray.count != 0) {
+                    ChidlBigStickerImageView.image = [UIImage imageWithData:ChildBigStickerImageData];
+                    
+                }
+            }
+            
+            // Prepare the judgt the putDateArray is empty or have value. 準備讀取使用者使否有創建信件，如果沒有就顯示有就不顯示.
+            if(mailDateContentArray.count == 0) {
+                DescriptionView.hidden = NO;
+                NSLog(@"mailDateContentArray的數量為 %lu",(unsigned long)mailDateContentArray.count);
+            } else
+                DescriptionView.hidden = YES;
+            
+            // Prepare the putImageArray. 準備讀取日期陣列是否有存值，來產生信件圖片的數量。
+            putImageArray = [NSMutableArray new];
+            for (int i=0; i<mailDateContentArray.count; i++) {
+                [putImageArray addObject:[UIImage imageNamed:@"PostCardVer4@2x.png"]];
+            }
+            
+            if(![readMyChildBackImageArray[ChildID] isKindOfClass:[NSString class]]) {
+                ChildBackgroundImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
+                BackgroundImage = [UIImage imageWithData:ChildBackgroundImageData];
+            } else {
+                BackgroundImage = [UIImage imageNamed:readMyChildBackImageArray[ChildID]];
+            }
+            MyChildBackgroundImageView.image =  BackgroundImage;
+            
+            //當要顯示時，進行 tableView 的更新
+            [_myTableView reloadData];
+            //  [refreshControl endRefreshing];
 
-    
-    //當要顯示時，進行 tableView 的更新
-    [_myTableView reloadData];
-    //  [refreshControl endRefreshing];
 }
 
 - (void)viewDidLoad {
@@ -138,7 +128,8 @@
     //To clean the tableView line Between. 去除 tableView cell 與 cell 之間的分隔線.
     _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    
+    _myTableView.backgroundColor = [UIColor flatSandColor];
+    //準備設定 _myTableView
     [self prepareHeaderView];
     
     //設定當通知發生時，執行 FutureMailViewController 來更新資料
@@ -160,9 +151,8 @@
 {
     CGFloat offsetY = scrollView.contentOffset.y;
     UIView *headerContentView = self.myTableView.tableHeaderView.subviews[0];
-    
     headerContentView.transform = CGAffineTransformMakeTranslation(0,MIN(offsetY,0));
- 
+
 }
 
 #pragma mark -Prepare TableViewSection and Cell 準備 tableView 的 Section 與 Cell
@@ -173,7 +163,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
  
-        return putDateAddArray.count;
+        return mailDateContentArray.count;
 
 }
 
@@ -181,8 +171,9 @@
     
     FutureMaliViewControllerCellTableViewCell *Cell = [tableView dequeueReusableCellWithIdentifier:@"mycell"];
     
-    if(putImageArray.count !=0 || putDateArray.count !=0 ) {
-        Cell.MyCell.backgroundColor = [UIColor whiteColor];
+    if(putImageArray.count !=0) {
+        //設定 TableCell 背景顏色
+        Cell.MyCell.backgroundColor = [UIColor flatSandColor];
         
         Cell.UserName.text = [defaults objectForKey:@"userName"];
         Cell.ChildName.text = [putChildTextFieldnameArray objectAtIndex:ChildID];
@@ -200,7 +191,8 @@
         Cell.MyImageView.layer.masksToBounds = false;
         
         Cell.MyImageView.image = [putImageArray objectAtIndex:indexPath.row];
-        Cell.DateAndTime.text = [putDateAddArray objectAtIndex:indexPath.row];
+        
+        Cell.DateAndTime.text = mailDateContentArray[indexPath.row][@"mailDate"];
         [Cell.DateAndTime sizeToFit];
         return Cell;
     }
@@ -226,31 +218,30 @@
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if(editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        updatedMailContent = [UpdateDataView new];
+        
+        [updatedMailContent DeleteFutureMailContentAndUpdate:mailDateContentArray[indexPath.row][@"mailDate"]];
  
-        [putDateAddArray removeObjectAtIndex:indexPath.row];
-        [putTextViewAddArray removeObjectAtIndex:indexPath.row];
+        [mailDateContentArray removeObjectAtIndex:indexPath.row];
         
-        putDateArray[ChildID] = putDateAddArray;
-        putTextViewArray[ChildID] = putTextViewAddArray;
+        [defaults setValue:mailDateContentArray forKey:@"mailDateContentArray"];
         
-        [defaults setValue:putDateArray forKey:@"Mailibformation"];
-        [defaults setValue:putTextViewArray forKey:@"textViewcontent"];
         [defaults synchronize];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
         CATransition *transition = [CATransition animation];
         [transition setDuration:0.2];
         [transition setType:kCATransitionFade];
         [DescriptionView.layer addAnimation:transition forKey:nil];
-            if(putDateAddArray.count == 0) {
+            if(mailDateContentArray.count == 0) {
                 DescriptionView.hidden = NO;
             } else {
                 DescriptionView.hidden = YES;
             }
     }
 }
-
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:
 (NSIndexPath *)indexPath {

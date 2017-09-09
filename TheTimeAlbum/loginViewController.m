@@ -14,6 +14,7 @@
 #import <AFNetworking.h>
 #import "MyCommunicator.h"
 #import "timeLineVC.h"
+#import "UpdateDataView.h"
 
 @interface loginViewController () <FBSDKLoginButtonDelegate, GIDSignInDelegate,GIDSignInUIDelegate>
 {
@@ -27,6 +28,7 @@
     
     MyAccountData *currentuser;
     MyCommunicator *comm;
+    
 }
 @property (weak, nonatomic) IBOutlet UIImageView *userPic;
 @property (weak, nonatomic) IBOutlet UIWebView *webViewBG;
@@ -114,6 +116,11 @@
          // get uid from SQL server         用fb登入資訊從SQL資料庫抓uid
          [comm getUIDFromSQLByFBID:currentuser.userFBId completion:^(NSError *error, id result1) {
              
+             
+          //準備下載信件資料
+          //UpdateDataView *downloadMailContent = [UpdateDataView new];
+          //[downloadMailContent DownloadFutureMailContent];
+        
              
              //currentuser.userId = [self htmlEntityDecode:currentuser.userId];
              //NSLog(@"currentuser.uid: %@",currentuser.userId);

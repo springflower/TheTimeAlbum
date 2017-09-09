@@ -185,9 +185,6 @@
     // 監聽重整事件
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doReloadJob) name:@"doReloadJob" object:nil];
     
-    
-    
-    
     // 載入貼文
     lastPostID = 1;
     incomingPosts = [NSMutableArray new];
@@ -211,15 +208,9 @@
                                                          error:&error]) {
         NSLog(@"Creating 'download' directory failed. Error: [%@]", error);
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }
+    
+
 
 
 
@@ -304,6 +295,7 @@
 //        MyChildBackgroundImage  = [UIImage imageWithData:readMyChildBackImageData];
 //        NSLog(@"照片為： %@",MyChildBackgroundImage);
 //    }
+
 //    // Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子ID來決定孩子的名字。
 //    readChildTextFieldnameArray = [localUserData objectForKey:@"ChildName"];
     //-- Boen
@@ -669,7 +661,6 @@
         
     }
 }
-
 
 
 -(void) viewWillAppear:(BOOL)animated{

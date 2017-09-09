@@ -6,11 +6,12 @@
 //  Copyright © 2017年 Greathard. All rights reserved.
 //
 #import "SelectedRow.h"
+#import "UpdateDataView.h"
 #import "AboutMeViewcontroller.h"
 #import "AboutMeViewcontrollerCell.h"
 #import "SetInfoTableViewControler.h"
 #import "AddChildSettingViewController.h"
-
+#import "SetUserInfoTableViewControler.h"
 #define PERSONALINFORMATION @"個人帳號資料"
 
 @interface AboutMeViewcontroller ()
@@ -22,6 +23,8 @@
     NSMutableArray *packegUserArray;
     NSMutableArray *putinformationArray;
     UILabel *label;
+    
+    UpdateDataView *downloadMailContent;
 }
 
 @end
@@ -36,17 +39,15 @@
     NSData *localUserImage = [defaults dataForKey:@"userImage"];
     UIImage *userImage = [[UIImage alloc] initWithData:localUserImage];
     userArray = [[NSMutableArray alloc]
-                 initWithObjects:[UIImage imageNamed:@"BabyUser@2x.png"],
+                 initWithObjects:userImage,
                  [defaults objectForKey:@"userName"],
                  [defaults objectForKey:@"userMail"], nil];
     packegUserArray = [[NSMutableArray alloc] initWithObjects:userArray, nil];
-    information = @[@"孩子設定",@"個人資料",@"關於我們"];
+    information = @[@"孩子設定",@"關於我們",@"清除緩存"];
     
     putinformationArray = [[NSMutableArray alloc] initWithObjects:packegUserArray,information, nil];
     
-    
     self.navigationItem.title = PERSONALINFORMATION;
-    
     
 }
 
@@ -56,6 +57,9 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    
+    [self getSize];
+    
     //讀取是否已有建立第一個孩子.
     NSUserDefaults *readChildNameDefaults;
     readChildNameDefaults = [NSUserDefaults standardUserDefaults];
@@ -88,15 +92,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    UITableViewCell *myCell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Menu"];
-//    myCell.imageView.image = [UIImage imageNamed:@"BabyUser@2x.png"];
-//    NSMutableArray * array = [[NSMutableArray alloc] initWithObjects:myCell, nil];
-    
-    
-    
-//    AboutMeViewcontrollerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myTextView" forIndexPath:indexPath];
-    //cell.myTextView.text = [information objectAtIndex:[indexPath row]];
-    
     AboutMeViewcontrollerCell *myCell=[[AboutMeViewcontrollerCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Menu"];
     if(indexPath.section == 0) {
         myCell.imageView.layer.cornerRadius = 32;
@@ -108,11 +103,15 @@
         myCell.textLabel.text = [userArray objectAtIndex:1];
         myCell.detailTextLabel.text = [userArray objectAtIndex:2];
         return myCell;
+    } else if(indexPath.row == 2){
+        myCell.textLabel.text = [[putinformationArray objectAtIndex:1] objectAtIndex:indexPath.row];
+        myCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        myCell.detailTextLabel.text = [NSString stringWithFormat:@"目前暫存容量為：%ld MB",(long)[self getSize]];
+        return  myCell;
     } else {
         myCell.textLabel.text = [[putinformationArray objectAtIndex:1] objectAtIndex:indexPath.row];
         myCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         return myCell;
-
     }
 
 }
@@ -141,14 +140,67 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES]; //為table Cell 加上選取後的動畫。
-    
-    if(indexPath.section == 1) {
+    if(indexPath.section == 0) {
+        SetUserInfoTableViewControler *editUserControler = [self.storyboard instantiateViewControllerWithIdentifier:@"SetUserInfoTableViewControler"];
+        [self.navigationController pushViewController:editUserControler animated:YES];
+        
+    } else if(indexPath.section == 1) {
         if(indexPath.row == 0) {
             SetInfoTableViewControler *editController = [self.storyboard instantiateViewControllerWithIdentifier:@"SetInfoTableViewControler"];
             [self.navigationController pushViewController:editController animated:YES];
+        }else if(indexPath.row == 2) {
+            [self showAlert];
         }
     }
 }
+
+
+-(void) showAlert {
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:@"確定清除暫存檔嗎？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * OK = [UIAlertAction actionWithTitle:@"確定" style:UIAlertActionStyleDefault handler:^
+                          (UIAlertAction * _Nonnull action) {
+                              [self clearDisk];
+                              [self.tableView reloadData];
+                            
+                          }];
+    UIAlertAction * Cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:Cancel];
+    [alert addAction:OK];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
+#pragma mark - Prepare to clean Temp fil
+
+- (void)clearDisk {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString * tmpDirectory = NSTemporaryDirectory();
+    NSError *error;
+    NSArray *cacheFiles = [fileManager contentsOfDirectoryAtPath:tmpDirectory error:&error];
+    for (NSString *file in cacheFiles)
+    {
+        error = nil;
+        [fileManager removeItemAtPath:[tmpDirectory stringByAppendingPathComponent:file] error:&error];
+    }
+}
+
+#pragma mark - Prepare to count temp file Memory 準備計算 Temp 資料夾裏檔案 的容量
+
+- (NSInteger)getSize {
+    NSUInteger size = 0;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *tmpDirectory = NSTemporaryDirectory();
+    NSDirectoryEnumerator *fileEnumerator = [fileManager enumeratorAtPath:tmpDirectory];
+    for (NSString *fileName in fileEnumerator) {
+        NSString *filePath = [tmpDirectory stringByAppendingPathComponent:fileName];
+        NSDictionary *attrs = [fileManager attributesOfItemAtPath:filePath error:nil];
+        size += [attrs fileSize];
+    }
+    NSLog(@"temp的容量為 ：%lu MB",(unsigned long)size/1000000);
+    return size/1000000;
+}
+
+
 
 /*
 // Override to support conditional editing of the table view.
