@@ -29,6 +29,7 @@
     MyCommunicator *comm;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *userPic;
+@property (weak, nonatomic) IBOutlet UIWebView *webViewBG;
 
 @end
 
@@ -37,6 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self initialBG];
     // user default
     localUserData = [NSUserDefaults standardUserDefaults];
     NSString *localUID = [localUserData objectForKey:@"uid"];
@@ -104,8 +106,11 @@
          [localUserData setObject:currentuser.userName forKey:@"userName"];
          [localUserData setObject:currentuser.userMail forKey:@"userMail"];
          [localUserData setObject:data forKey:@"userImage"];
-         //--
+         [localUserData synchronize];
+
          
+         
+         //--
          // get uid from SQL server         用fb登入資訊從SQL資料庫抓uid
          [comm getUIDFromSQLByFBID:currentuser.userFBId completion:^(NSError *error, id result1) {
              
@@ -144,14 +149,45 @@
          }];
          
         
-         
+
          //[self goNextPage];
-         
+         [localUserData synchronize];
+
      }];
 }
 //--
 
+- (void) initialBG {
+    NSString *htmlPath = [[NSBundle mainBundle] pathForResource:@"WebViewContent" ofType:@"html"];
+    NSURL *htmlURL = [[NSURL alloc] initFileURLWithPath:htmlPath];
+    NSData *htmlData = [[NSData alloc] initWithContentsOfURL:htmlURL];
+    
+    [self.webViewBG loadData:htmlData MIMEType:@"text/html" textEncodingName:@"UTF-8" baseURL:[htmlURL URLByDeletingLastPathComponent]];
+    
 
+    
+    
+    UIView *filter = [[UIView alloc] initWithFrame:self.view.frame];
+    //filter.backgroundColor = [UIColor blackColor];
+    //filter.alpha = 0.4;
+    filter.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    CAGradientLayer *layer = [CAGradientLayer layer];;
+    layer.frame = filter.bounds;
+    
+    NSArray *colors = [NSArray arrayWithObjects: (id)[[UIColor colorWithRed:0 green:0 blue:0 alpha:0.0] CGColor], (id)[[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8] CGColor],nil];
+    [layer setColors:colors];
+    [filter.layer insertSublayer:layer atIndex:0];
+    
+    
+    
+    
+    [self.view insertSubview:filter aboveSubview:_webViewBG];
+    
+    
+    
+    
+}
 
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -245,6 +281,10 @@
 }
 //--
 
+
+-(void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
+
+}
 
 /*
 #pragma mark - Navigation

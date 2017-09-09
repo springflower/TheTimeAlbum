@@ -9,6 +9,7 @@
 #import "SliderMenuLeftTableViewCell.h"
 #import <ChameleonFramework/Chameleon.h>
 
+
 @implementation SliderMenuLeftTableViewCell
 
 - (void)awakeFromNib {

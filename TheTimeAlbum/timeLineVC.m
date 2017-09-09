@@ -28,6 +28,9 @@
 #import "AddChildSettingViewController.h"
 #import "PostItem.h"
 #import "EditTextPostViewController.h"
+#import "UseDownloadDataClass.h"
+#import "UpdateDataView.h"
+#import "StartCreateFirstChildViewController.h"
 #import <AWSS3.h>
 #import <LGPlusButtonsView.h>
 #import <TZImagePickerController.h>
@@ -61,11 +64,17 @@
     //準備讀取儲存的孩子大頭貼陣列
     NSArray *readChildBigStickerArray;
     //準備放置讀取儲存的孩子大頭貼圖片
-    UIImage *ChildStickerImage;
-    //準備放置讀取儲存的孩子背景圖片
-    UIImage *MyChildBackgroundImage;
+    //UIImage *ChildStickerImage;
+
     //準備讀取所選取的孩子ID來讀取孩子名字陣列
-    NSArray *readChildTextFieldnameArray;
+    //NSArray *readChildTextFieldnameArray;
+    
+    //NSArray *readMyChildBackImageArray;
+    
+    //UIImage *MyChildBackgroundImage;
+    
+    //HeadView * vc;
+    //NSArray *readChildTextFieldnameArray;
     //-- Boen
     
 }
@@ -107,10 +116,17 @@
     NSLog(@" tap tap");
 }
 
-
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+
     // 加入觸控事件 : 任意點擊縮回側邊選單
     putWayMenu = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(putWayMenu)];
     putWayMenu.cancelsTouchesInView = NO;
@@ -180,6 +196,11 @@
     //改在viewwill appear
     [self doReloadJob];
     
+    //準備接收通知如果下載失敗通知重新下載資料
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(downloadDataFromServe) name:@"downloadDataFromServe" object:nil];
+    
+    
     
     //FIXME: 可能還有問題的下載
     // 創建本地暫存資料夾
@@ -241,22 +262,21 @@
 - (void) initHeadView {
     HeadView * vc;
     //if (MyChildBackgroundImage!= nil && ChildStickerImage !=nil) {
-        vc = [[HeadView alloc]initWithFrameByBryan:headRect backgroundView:MyChildBackgroundImage
-                                                 headView:ChildStickerImage
-                                            headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
+    
+    UIImage * head = [UIImage imageWithData:[localUserData objectForKey:@"currentBabyImage"]];
+    vc = [[HeadView alloc]initWithFrameByBryan:headRect backgroundView:@"background4.jpg"
+                                      headView:head
+                                 headViewWidth:(CGFloat)(VCWidth / 4)
+                                     signLabel:[localUserData objectForKey:@"currentBabyName"]];
     //} else {
     
-       // vc = [[HeadView alloc]initWithFrame:headRect backgroundView:@"Fox.jpg"
-       //                                       headView:@"head.png"
-       //                                  headViewWidth:(CGFloat)(VCWidth / 4) signLabel:@"王小明"];
+        //vc = [[HeadView alloc]initWithFrame:headRect backgroundView:@"Fox.jpg"
+        //                                      headView:@"head.png"
+         //                                headViewWidth:(CGFloat)(VCWidth / 4) signLabel:[localUserData objectForKey:@"currentBabyName"]];
     
     //}
     
     
-    
-//    HeadView * vc = [[HeadView alloc]initWithFrameByBryan:headRect backgroundView:MyChildBackgroundImage
-//                                          headView:ChildStickerImage
-//                                     headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
     
     _myView = vc;
     _myView.backgroundColor = [UIColor clearColor];
@@ -269,23 +289,23 @@
 - (void) initChildrenPicBoen {
     // Boen
     //準備讀取所選取的孩子ID來讀取孩子大頭貼陣列
-    NSLog(@" ??????? ???? ??");
-    readChildBigStickerArray = [localUserData objectForKey:@"MyBigSticker"];
-    ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
-    NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
-    if(ChildBigStickerImageData){
-        ChildStickerImage = [UIImage imageWithData:ChildBigStickerImageData];
-        NSLog(@"照片為： %@",ChildStickerImage);
-    }
-    //讀取孩子背景圖片陣列
-    NSArray *readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
-    NSData *readMyChildBackImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
-    if(readMyChildBackImageData) {
-        MyChildBackgroundImage  = [UIImage imageWithData:readMyChildBackImageData];
-        NSLog(@"照片為： %@",MyChildBackgroundImage);
-    }
-    // Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子ID來決定孩子的名字。
-    readChildTextFieldnameArray = [localUserData objectForKey:@"ChildName"];
+//    NSLog(@" ??????? ???? ??");
+//    readChildBigStickerArray = [localUserData objectForKey:@"MyBigSticker"];
+//    ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
+//    NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
+//    if(ChildBigStickerImageData){
+//        ChildStickerImage = [UIImage imageWithData:ChildBigStickerImageData];
+//        NSLog(@"照片為： %@",ChildStickerImage);
+//    }
+//    //讀取孩子背景圖片陣列
+//    NSArray *readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
+//    NSData *readMyChildBackImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
+//    if(readMyChildBackImageData) {
+//        MyChildBackgroundImage  = [UIImage imageWithData:readMyChildBackImageData];
+//        NSLog(@"照片為： %@",MyChildBackgroundImage);
+//    }
+//    // Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子ID來決定孩子的名字。
+//    readChildTextFieldnameArray = [localUserData objectForKey:@"ChildName"];
     //-- Boen
     
 
@@ -622,8 +642,40 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)downloadDataFromServe {
+
+    if([[UseDownloadDataClass object] ReadSuccessUpdateBool]) {
+        NSLog(@"下載資料開始");
+        //        downloadChildBigSticker.hidden = false;
+        //開始下載網路上儲存的資料
+        UpdateDataView *downloadChildBigSticker = [UpdateDataView new];
+        [downloadChildBigSticker DowloadChildBigSticker:^(NSArray *array) {
+            readChildBigStickerArray  = array;
+            NSLog(@"Block 所讀取到的資料為： %@",readChildBigStickerArray);
+            //將成功下載的孩子大頭貼陣列資料傳到全域變數來使用
+            [[UseDownloadDataClass object] PutChildBigStickerArray:readChildBigStickerArray];
+            //設定通知結束 SetInfoTableViewControler 進行更新
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"SetInfoTableViewControler" object:nil];
+            //通知執行 SliderMenuViewLeft 進行更新
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"updateTableViewContrler" object:nil];
+            //設定通知結束 FutureMailViewController 進行更新
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"FutureMailViewController" object:nil];
+            //下載成功後傳送 BOOL 值結束結束重複下載，如果要在執行下載必須有更新資料才會執行下載。
+            [[UseDownloadDataClass object] PutSuccessUpdateBool:false];
+        }];
+        
+    }
+}
+
+
 
 -(void) viewWillAppear:(BOOL)animated{
+    
+    [self downloadDataFromServe];
+
     
     //[self initBtn2];
     
@@ -716,7 +768,7 @@
     NSString *theDateFormatStr1 = pp.finalDisplayDateStr;
     NSString *theDateFormatStr2 = pp.postDateString;
     NSString *theDateFormatStr3 = [NSString stringWithFormat:@"(%@)", pp.postDateString];
-    NSString *role = [localUserData objectForKey:@"WithRelationShip"];
+    NSString *role = [localUserData objectForKey:@"WithRelationship"];
     
     // 根據載入postitem決定cell
     if ( pp.postType == PostTypeText ) {            // postype = 1
@@ -1477,7 +1529,6 @@
 // 暫時
 - (IBAction)reload:(id)sender {
     [self doReloadJob];
-    //[self initHeadView];
 }
 
 /*
@@ -1525,7 +1576,7 @@
     UIBarButtonItem *messageButton = [UIBarButtonItem new];
     [messageButton setImage:[UIImage imageNamed:@"icon_message48x48.png"]];
     messageButton.tintColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItems =[NSArray arrayWithObjects:searchButton,messageButton, nil];
+    //self.navigationItem.rightBarButtonItems =[NSArray arrayWithObjects:searchButton,messageButton, nil];
     
     UIBarButtonItem *listButton = [UIBarButtonItem new];
     [listButton setAction:@selector(callMenuLeft)];

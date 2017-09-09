@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheTimeAlbum/timeLineVC.m"
-            timestampString = "526185195.354372"
+            timestampString = "526316834.044669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "508"
-            endingLineNumber = "508"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
             landmarkName = "-btnAddNewPhotosPressed"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheTimeAlbum/timeLineVC.m"
-            timestampString = "526185195.354372"
+            timestampString = "526316834.044669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1135"
-            endingLineNumber = "1135"
+            startingLineNumber = "1109"
+            endingLineNumber = "1109"
             landmarkName = "-handleIncomingMessages:"
             landmarkType = "7">
          </BreakpointContent>

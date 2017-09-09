@@ -93,10 +93,6 @@
         scaleFrame = CGRectMake(CGRectGetMinX(self.colorfulMaskView.frame) - extraWidth, 0, itemWidth + extraWidth, SELF_HEIGHT);
     }
     
-    // 动画分为两部分
-    // 第一部分：遮罩先展开一部分
-    // 第二部分：位移并缩小回原来的大小
-    // 第一部分淡入，第二部分淡出
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         
         self.colorfulMaskView.frame = scaleFrame;
@@ -116,14 +112,23 @@
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     
+    //準備發送通知收起左側選單
     [[NSNotificationCenter defaultCenter] postNotificationName:@"putAWayLeftMenu" object:nil];
+    //準備發送通知收起右側選單
     [[NSNotificationCenter defaultCenter] postNotificationName:@"putAwayRightMenu" object:nil];
+    //準備發送通知執行切換 TabBarControler 動畫
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TabBarControlerAnimated" object:nil];
+    //準備發送通知 PopSetInfoTableViewControler 結束
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PopSetInfoTableViewControler" object:nil];
+    //當 item 被選擇時，改變點選的 item 顏色
+    self.tintColor = [UIColor flatWhiteColor];
     
     NSInteger index = [self.items indexOfObject:item];
     self.fromeIndex = self.toIndex;
     self.toIndex = index;
     [self animation];
+    
+    
     
 }
 

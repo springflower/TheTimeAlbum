@@ -5,10 +5,13 @@
 //  Created by 黃柏恩 on 2017/7/18.
 //  Copyright © 2017年 Greathard. All rights reserved.
 //
-
+#import <AFNetworking.h>
+#import "SliderMenuViewLeft.h"
 #import "AddChildSettingViewController.h"
 #import "BigStickerSettingViewController.h"
-#import "SliderMenuViewLeft.h"
+#import "UseDownloadDataClass.h"
+#import <ChameleonFramework/Chameleon.h>
+
 
 @interface AddChildSettingViewController ()<UITableViewDelegate,
                                             UITableViewDataSource,
@@ -25,23 +28,39 @@
 
 @implementation AddChildSettingViewController
 {
+    //準備讀取孩子名字陣列
     NSMutableArray *putChildTextFieldnameArray;
+    //準備讀取孩子生日陣列
     NSMutableArray *putChildBirthdayFieldArray;
-
-    NSInteger ChildSex;
-    NSInteger WithRelationship;
-    NSUserDefaults *defaults;
-    CGRect fullScreenBounds;
-    UIDatePicker *datePicker;
-    UITableView * testtable;
-    BOOL Dismiss;
-    
-    UIBarButtonItem *CancelBtn;
     //準備讀取儲存的個人信件數量
     NSMutableArray *putDateArray;
     //準備讀取儲存的個人信件內容數量
     NSMutableArray *putTextViewArray;
+    //準備讀取孩子性別陣列
+    NSMutableArray *putChildSexArray;
+    //準備讀取與孩子的關係陣列
+    NSMutableArray *putWithChildRelationShipArray;
+    //準備讀取孩子的背景陣列
+    NSMutableArray *putMyChildBackImageArray;
+    //準備讀取孩子的性別選項
+    NSInteger ChildSex;
+    //準備讀取與孩子的關係選項
+    NSInteger WithRelationship;
+    //準備讀取儲存的資料
+    NSUserDefaults *defaults;
+    //準備 Frame
+    CGRect fullScreenBounds;
+    //準備 datePicker
+    UIDatePicker *datePicker;
     
+    UITableView * testtable;
+    //準備結束 AddChildSettingViewController
+    BOOL Dismiss;
+    //準備取消按鈕
+    UIBarButtonItem *CancelBtn;
+    
+    NSInteger ChildID;
+
 }
 @synthesize ChildNameTextField = ChildNameTextField;
 @synthesize BirthdayTextField = BirthdayTextField;
@@ -51,7 +70,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     
-    //讀取是否已有建立第一個孩子 ID.
+    //讀取是否已有建立第一個孩子 Name.
     NSUserDefaults *readChildIdDefaults;
     readChildIdDefaults = [NSUserDefaults standardUserDefaults];
     //如果讀出的陣列數量為零的話，就執行 AddChildSettingViewController 來創造第一個孩子。
@@ -63,14 +82,14 @@
     }
     //讀取孩子的名稱陣列
     NSArray *readChildTextFieldnameArray = [defaults objectForKey:@"ChildName"];
-    if(readChildTextFieldnameArray) {
+    if(readChildTextFieldnameArray.count != 0) {
         putChildTextFieldnameArray  = [readChildTextFieldnameArray mutableCopy];
     } else {
         putChildTextFieldnameArray = [NSMutableArray new];
     }
     //讀取孩子的生日陣列
     NSArray *readChildBirthdayFieldArray = [defaults objectForKey:@"ChildBirthday"];
-    if(readChildBirthdayFieldArray) {
+    if(readChildBirthdayFieldArray.count != 0) {
         putChildBirthdayFieldArray  = [readChildBirthdayFieldArray mutableCopy];
     } else {
         putChildBirthdayFieldArray = [NSMutableArray new];
@@ -89,7 +108,29 @@
     } else {
         putTextViewArray = [NSMutableArray new];
     }
+    //讀取孩子的性別陣列
+    NSArray *readChildSexArray = [defaults objectForKey:@"readChildSexArray"];
+    if(readChildSexArray.count != 0) {
+        putChildSexArray = [readChildSexArray mutableCopy];
+    } else {
+        putChildSexArray = [NSMutableArray new];
+    }
+    //讀取與孩子的關係陣列
+    NSArray *readWithChildRelationShipArray = [defaults objectForKey:@"readWithChildRelationShipArray"];
+    if(readWithChildRelationShipArray.count != 0) {
+        putWithChildRelationShipArray = [readWithChildRelationShipArray mutableCopy];
+    } else {
+        putWithChildRelationShipArray = [NSMutableArray new];
+    }
+    //準備讀取儲存的孩子背景圖片陣列
+    NSArray *readMyChildBackImageArray = [defaults objectForKey:@"readMyChildBackImageArray"];
+    if(readMyChildBackImageArray) {
+        putMyChildBackImageArray  = [readMyChildBackImageArray mutableCopy];
+    } else {
+        putMyChildBackImageArray = [NSMutableArray new];
+    }
     
+    //判斷當 BigStickerSettingViewControler 按下完成後，就結束 AddChildSettingViewControler.
     if (Dismiss == true) {
         Dismiss = false;
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -152,15 +193,25 @@
 //    yourpicker.showsSelectionIndicator = YES;
 //    self.yourtextfield.inputView = yourpicker;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dissMissViewController) name:@"dimssAddChildSettingViewController" object:nil];
-    
+    //通知接收執行 dissMissViewController  View
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dissMissViewController)
+                                                 name:@"dimssAddChildSettingViewController" object:nil];
+    //通知執行 saveChildNameAndBirthday 儲存資料
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveChildNameAndBirthday) name:@"saveChildInformation" object:nil];
+    
+    //通知執行上傳孩子資訊資料
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveUpdateChildInformation) name:@"saveUpdateChildInformation" object:nil];
+    
 
 }
+
+
 
 -(void)dissMissViewController {
-    Dismiss = true;
+      Dismiss = true;
 }
+
+#pragma mark  - Setting ChildSexSelected 設定孩子性別選項
 
 - (IBAction)BoySelected:(id)sender {
     ChildSex = 1;
@@ -206,6 +257,8 @@
     GirlSelected.tintColor = [UIColor grayColor];
     [GirlSelected setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
 }
+
+#pragma mark - Setting With ChildRelationship 設定與孩子的關係選項
 
 - (IBAction)FatherSelected:(id)sender {
     WithRelationship = 1;
@@ -260,6 +313,8 @@
     
 }
 
+#pragma mark - Setting With ChildRelationship AnotherSelected 設定 actionSheet 與孩子關係其他選項
+
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:
                    (NSInteger)buttonIndex {
     switch (buttonIndex) {
@@ -282,6 +337,8 @@
             break;
     }
 }
+
+#pragma mark - Setting ChildBirthday add DatePicker. 設定 DatePicker 加入到設定孩子生日 TextField 裡面
 
 -(void)chooseDate:(UIDatePicker*)datePickerView {
     NSDate *date = datePickerView.date;
@@ -325,8 +382,7 @@
     
     // Prepare Toolbar to add BirthdayTextField.
     UIToolbar *toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,0,fullScreenBounds.size.width,40)];
-    [toolBar setBarStyle:UIBarStyleBlackTranslucent];
-    
+    toolBar.backgroundColor = [UIColor flatSkyBlueColor];
     // Prepare Button to add Toolbar.
     UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     
@@ -336,6 +392,8 @@
     [toolBar setItems:buttons animated:YES];
     BirthdayTextField.inputAccessoryView = toolBar;
 }
+
+#pragma  mark - Setting ChildSex Selected Button Frame. 準備設定孩子性別按鍵設定
 
 -(void)SettingChildGender {
     
@@ -375,33 +433,31 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Setting to DimissViewControler 設定退出 AddChildSettingViewController
+
 -(void)CancelAddChildSettingViewController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - Setting to next page 設定執行到下一頁
 
 -(void)NextStepToSettingBigStickers {
     if(!(ChildNameTextField.text.length == 0) &&
        !(BirthdayTextField.text.length == 0) &&
        !(ChildSex == 0) &&
        !(WithRelationship == 0)){
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"hiddenLeftMenu" object:nil];
         
-//        CATransition* transition = [CATransition animation];
-//        transition.duration = 3;
-//        transition.type = kCATransitionPush;
-//        transition.subtype = kCATransitionFromRight;
+        //設定通知來隱藏左側選單
+        //[[NSNotificationCenter defaultCenter] postNotificationName:@"hiddenLeftMenu" object:nil];
+        //準備上傳全部資料的陣列
+        NSMutableArray *updateAlldataArray = [NSMutableArray new];
+        [updateAlldataArray addObject:ChildNameTextField.text];
+        [updateAlldataArray addObject:BirthdayTextField.text];
         
-        CATransition *transition = [[CATransition alloc] init];
-        transition.duration = 0.5;
-        transition.type = kCATransitionPush;
-        transition.subtype = kCATransitionFromRight;
-        [self.view.window.layer addAnimation:transition forKey:kCATransition];
-
-       BigStickerSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"BigStickerSettingViewController"];
-        [self presentViewController:nextPage animated:false completion:nil];
-
-        //[self.navigationController presentViewController:nextPage animated:NO completion:nil];
+        
+        
+        BigStickerSettingViewController *editController = [self.storyboard instantiateViewControllerWithIdentifier:@"BigStickerSettingViewController"];
+        [self.navigationController pushViewController:editController animated:YES];
 
     } else {
         if([ChildNameTextField.text isEqualToString:@""]) {
@@ -416,12 +472,17 @@
     }
 }
 
+#pragma mark - Setting showAlert add View 設定 showAlert 當設定有空白時提醒使用者
+
 -(void) showAlert:(NSString*) messsage {
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:messsage preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * OK = [UIAlertAction actionWithTitle:@"確定" style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:OK];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+#pragma mark - Setting showAnotherRelationship add AntherRelationShip 設定 UIAlertController 加入其他關係選項
+
 -(void) showAnotherRelationship {
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
@@ -437,7 +498,38 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
--(void) saveChildNameAndBirthday {
+
+-(void)saveUpdateChildInformation {
+    
+    NSString *putChildSex;
+    NSString *WithChildRelationShip;
+    //儲存小孩性別陣列
+    if(ChildSex == 1) {
+        putChildSex = BoySelected.titleLabel.text;
+    } else if(ChildSex == 2) {
+        putChildSex = GirlSelected.titleLabel.text;
+    } else {
+        putChildSex = AnotherSelected.titleLabel.text;
+    }
+    //儲存你與孩子的關係
+    if(WithRelationship == 1) {
+        WithChildRelationShip = _FatherSelected.titleLabel.text;
+    } else if(WithRelationship == 2) {
+        WithChildRelationShip = _MotherSelected.titleLabel.text;
+    } else {
+        WithChildRelationShip = _AnotherRelationship.titleLabel.text;
+    }
+
+    [[UseDownloadDataClass object] PutChildInformation:ChildNameTextField.text
+                                   ChildBirthday:BirthdayTextField.text
+                                   ChildSex:putChildSex
+                                   WithChildRelationShip:WithChildRelationShip];
+}
+
+#pragma mark - Prepare Save Data 準備儲存所選擇的資料
+
+-(void)saveChildNameAndBirthday {
+
     //增加小孩名字到陣列中
     [putChildTextFieldnameArray addObject:ChildNameTextField.text];
     //增加小孩生日到陣列中
@@ -447,36 +539,59 @@
     [putDateArray addObject:emptyArray];
     //增加信件內容數量給存放孩子個人信件內容陣列
     [putTextViewArray addObject:emptyArray];
-    //記錄當下所增加的小孩ID
-    NSInteger ChildID = putChildTextFieldnameArray.count-1;
-    NSLog(@"小孩的ID為： %ld",(long)ChildID);
+    
+    //儲存當下的小孩ID
+    //[defaults setInteger:ChildID forKey:@"ChildID"];
+    //儲存小孩名字陣列
+    [defaults setObject:putChildTextFieldnameArray forKey:@"ChildName"];
+    //儲存小孩生日陣列
+    [defaults setObject:putChildBirthdayFieldArray forKey:@"ChildBirthday"];
     //儲存信件陣列給存放孩子個人信件的陣列
     [defaults setObject:putDateArray forKey:@"Mailibformation"];
     //儲存信件內容陣列給存放孩子個人信件內容的陣列
     [defaults setObject:putTextViewArray forKey:@"textViewcontent"];
-    //儲存當下的小孩ID
-    [defaults setInteger:ChildID forKey:@"ChildID"];
-    //儲存小孩名字
-    [defaults setObject:putChildTextFieldnameArray forKey:@"ChildName"];
-    //儲存小孩生日
-    [defaults setObject:putChildBirthdayFieldArray forKey:@"ChildBirthday"];
-    //儲存小孩性別
+    //儲存小孩性別陣列
     if(ChildSex == 1) {
-        [defaults setObject:BoySelected.titleLabel.text forKey:@"ChildSex"];
+        [putChildSexArray addObject:BoySelected.titleLabel.text];
+        [defaults setObject:putChildSexArray forKey:@"readChildSexArray"];
     } else if(ChildSex == 2) {
-        [defaults setObject:GirlSelected.titleLabel.text forKey:@"ChildSex"];
+        [putChildSexArray addObject:GirlSelected.titleLabel.text];
+        [defaults setObject:putChildSexArray forKey:@"readChildSexArray"];
     } else {
-        [defaults setObject:AnotherSelected.titleLabel.text forKey:@"ChildSex"];
+        [putChildSexArray addObject:AnotherSelected.titleLabel.text];
+        [defaults setObject:putChildSexArray forKey:@"readChildSexArray"];
     }
     //儲存你與孩子的關係
     if(WithRelationship == 1) {
-        [defaults setObject:_FatherSelected.titleLabel.text forKey:@"WithRelationShip"];
+        [putWithChildRelationShipArray addObject:_FatherSelected.titleLabel.text];
+        [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];
+        [defaults setObject:_FatherSelected.titleLabel.text forKey:@"WithRelationship"];
     } else if(WithRelationship == 2) {
-        [defaults setObject:_MotherSelected.titleLabel.text forKey:@"WithRelationShip"];
+        [putWithChildRelationShipArray addObject:_MotherSelected.titleLabel.text];
+        [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];
     } else {
-        [defaults setObject:_AnotherRelationship.titleLabel.text forKey:@"WithRelationShip"];
+        [putWithChildRelationShipArray addObject:_AnotherRelationship.titleLabel.text];
+        [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];
     }
+    //將孩子的背景圖片隨機產生，儲存在孩子的背景陣列中
+    int x = arc4random() % 5;
+    NSArray *randomBackgroundImageArray = @[@"background1@2x.jpg",
+                                            @"background2@2x.jpg",
+                                            @"background3@2x.jpg",
+                                            @"background4@2x.jpg",
+                                            @"background5@2x.jpg"];
+    NSString *MyChildBackImage = [[NSString alloc]initWithString:randomBackgroundImageArray[x]];
+    [putMyChildBackImageArray addObject:MyChildBackImage];
+    [defaults setObject:putMyChildBackImageArray forKey:@"readMyChildBackImageArray"];
+    NSLog(@"  數量為： %lu ",
+          (unsigned long)putMyChildBackImageArray.count);
+    //設定如果孩子的名字只有一個，將孩子 ID 設為 0
+    if(putChildTextFieldnameArray.count == 1) {
+        [defaults setInteger:0 forKey:@"ChildID"];
+    }
+    
     [defaults synchronize];
+    
 
 }
 

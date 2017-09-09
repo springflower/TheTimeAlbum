@@ -10,6 +10,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "SliderMenuViewLeft.h"
 #import "MyAccountData.h"
+#import "UseDownloadDataClass.h"
+#import "UpdateDataView.h"
 #import <AWSS3.h>
 #import <Chameleon.h>
 
@@ -56,11 +58,6 @@
     [self.window makeKeyAndVisible];
     
     
-    
-    
-    
-    
-    
     // FB Signin
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
@@ -100,6 +97,36 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    //開始下載網路賶的資料
+    if([[UseDownloadDataClass object] ReadSuccessUpdateBool]) {
+        //        downloadChildBigSticker.hidden = false;
+        //開始下載網路上儲存的資料
+        UpdateDataView *downloadChildBigSticker = [UpdateDataView new];
+        [downloadChildBigSticker DowloadChildBigSticker:^(NSArray *array) {
+            //將成功下載的孩子大頭貼陣列資料傳到全域變數來使用
+            [[UseDownloadDataClass object] PutChildBigStickerArray:array];
+            //設定通知結束 SetInfoTableViewControler 進行更新
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"SetInfoTableViewControler" object:nil];
+            //通知執行 SliderMenuViewLeft 進行更新
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"updateTableViewContrler" object:nil];
+            //設定通知結束 FutureMailViewController 進行更新
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"FutureMailViewController" object:nil];
+            //下載成功後傳送 BOOL 值結束結束重複下載，如果要在執行下載必須有更新資料才會執行下載。
+            [[UseDownloadDataClass object] PutSuccessUpdateBool:false];
+        }];
+        
+    }
+    
+    
+    
+    
+    
+    
+
+    
 }
 
 

@@ -97,6 +97,10 @@
 	<string>啟用麥克風</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>從相簿中存取相片</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
