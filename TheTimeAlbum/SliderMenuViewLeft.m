@@ -199,11 +199,12 @@
     
     //準備讀取存取的孩子姓名陣列
     readChildTextFieldnameArray = [defaults objectForKey:@"ChildName"];
+    NSLog(@"  childnames: %@", readChildTextFieldnameArray);
     //準備讀取存取的孩子生日陣列
     readChildBirthdayFieldArray = [defaults objectForKey:@"ChildBirthday"];
-
+    NSLog(@"  childnames: %@", readChildBirthdayFieldArray);
         readChildBigStickerArray = [[UseDownloadDataClass object] ReadChildBigStickerArray];
-        NSLog(@"已經更新 TableView 了: %@",readChildBigStickerArray);
+        NSLog(@"已經更新 左邊 TableView 了: %@",readChildBigStickerArray);
 //    dispatch_async(dispatch_get_main_queue(), ^{
         [MenuTableView reloadData];
 //    });

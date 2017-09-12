@@ -1,4 +1,3 @@
-//
 //  loginViewController.m
 //  TheTimeAlbum
 //
@@ -15,6 +14,7 @@
 #import "MyCommunicator.h"
 #import "timeLineVC.h"
 #import "UpdateDataView.h"
+#import <KVNProgress.h>
 
 @interface loginViewController () <FBSDKLoginButtonDelegate, GIDSignInDelegate,GIDSignInUIDelegate>
 {
@@ -25,9 +25,48 @@
     NSString    *theurl;        // Url to write or get user data from sql server.  更新或寫入帳號資訊的網址
     NSString    *userId;        // Will get it from server by sql. 從SQL資料庫以fb或google id取得
     NSUserDefaults *localUserData;
+    NSMutableArray *incomingPosts;
     
     MyAccountData *currentuser;
     MyCommunicator *comm;
+    
+    
+    
+    
+    //FIXME: temp
+    //準備讀取孩子名字陣列
+    NSMutableArray *putChildTextFieldnameArray;
+    //準備讀取孩子生日陣列
+    NSMutableArray *putChildBirthdayFieldArray;
+    //準備讀取儲存的個人信件數量
+    NSMutableArray *putDateArray;
+    //準備讀取儲存的個人信件內容數量
+    NSMutableArray *putTextViewArray;
+    //準備讀取孩子性別陣列
+    NSMutableArray *putChildSexArray;
+    //準備讀取與孩子的關係陣列
+    NSMutableArray *putWithChildRelationShipArray;
+    //準備讀取孩子的背景陣列
+    NSMutableArray *putMyChildBackImageArray;
+    //準備讀取孩子的性別選項
+    NSInteger ChildSex;
+    //準備讀取與孩子的關係選項
+    NSInteger WithRelationship;
+    //準備讀取儲存的資料
+    NSUserDefaults *defaults;
+    //準備 Frame
+    CGRect fullScreenBounds;
+    //準備 datePicker
+    UIDatePicker *datePicker;
+    
+    UITableView * testtable;
+    //準備結束 AddChildSettingViewController
+    BOOL Dismiss;
+    //準備取消按鈕
+    UIBarButtonItem *CancelBtn;
+    
+    NSInteger ChildID;
+    // end of temp
     
 }
 @property (weak, nonatomic) IBOutlet UIImageView *userPic;
@@ -37,10 +76,151 @@
 
 @implementation loginViewController
 
+- (void) someSettings {
+    //讀取是否已有建立第一個孩子 Name.
+    NSUserDefaults *readChildIdDefaults;
+    readChildIdDefaults = [NSUserDefaults standardUserDefaults];
+    //如果讀出的陣列數量為零的話，就執行 AddChildSettingViewController 來創造第一個孩子。
+    NSArray *readChildNameArray = [readChildIdDefaults objectForKey:@"ChildName"];
+    if(readChildNameArray.count == 0) {
+        CancelBtn.enabled = false;
+    } else {
+        CancelBtn.enabled = true;
+    }
+    //讀取孩子的名稱陣列
+    NSArray *readChildTextFieldnameArray = [defaults objectForKey:@"ChildName"];
+    if(readChildTextFieldnameArray.count != 0) {
+        putChildTextFieldnameArray  = [readChildTextFieldnameArray mutableCopy];
+    } else {
+        putChildTextFieldnameArray = [NSMutableArray new];
+    }
+    //讀取孩子的生日陣列
+    NSArray *readChildBirthdayFieldArray = [defaults objectForKey:@"ChildBirthday"];
+    if(readChildBirthdayFieldArray.count != 0) {
+        putChildBirthdayFieldArray  = [readChildBirthdayFieldArray mutableCopy];
+    } else {
+        putChildBirthdayFieldArray = [NSMutableArray new];
+    }
+    //讀取孩子的個人信件陣列
+    NSArray *readDateArray = [defaults objectForKey:@"Mailibformation"];
+    if(readDateArray.count != 0) {
+        putDateArray  = [readDateArray mutableCopy];
+    } else {
+        putDateArray = [NSMutableArray new];
+    }
+    //讀取孩子的個人信件內容陣列
+    NSArray *readTextViewArray = [defaults objectForKey:@"textViewcontent"];
+    if(readTextViewArray.count != 0) {
+        putTextViewArray  = [readTextViewArray mutableCopy];
+    } else {
+        putTextViewArray = [NSMutableArray new];
+    }
+    //讀取孩子的性別陣列
+    NSArray *readChildSexArray = [defaults objectForKey:@"readChildSexArray"];
+    if(readChildSexArray.count != 0) {
+        putChildSexArray = [readChildSexArray mutableCopy];
+    } else {
+        putChildSexArray = [NSMutableArray new];
+    }
+    //讀取與孩子的關係陣列
+    NSArray *readWithChildRelationShipArray = [defaults objectForKey:@"readWithChildRelationShipArray"];
+    if(readWithChildRelationShipArray.count != 0) {
+        putWithChildRelationShipArray = [readWithChildRelationShipArray mutableCopy];
+    } else {
+        putWithChildRelationShipArray = [NSMutableArray new];
+    }
+    //準備讀取儲存的孩子背景圖片陣列
+    NSArray *readMyChildBackImageArray = [defaults objectForKey:@"readMyChildBackImageArray"];
+    if(readMyChildBackImageArray) {
+        putMyChildBackImageArray  = [readMyChildBackImageArray mutableCopy];
+    } else {
+        putMyChildBackImageArray = [NSMutableArray new];
+    }
+    
+    //判斷當 BigStickerSettingViewControler 按下完成後，就結束 AddChildSettingViewControler.
+    if (Dismiss == true) {
+        Dismiss = false;
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
+
+    
+    
+    //////
+    //增加小孩名字到陣列中
+ //   [putChildTextFieldnameArray addObject:ChildNameTextField.text];
+    //增加小孩生日到陣列中
+ //   [putChildBirthdayFieldArray addObject:BirthdayTextField.text];
+    //增加信件陣列數量給存放孩子個人信件的陣列
+ //   NSArray *emptyArray = [NSArray new];
+ //   [putDateArray addObject:emptyArray];
+    //增加信件內容數量給存放孩子個人信件內容陣列
+ //   [putTextViewArray addObject:emptyArray];
+    
+    //儲存當下的小孩ID
+    //[defaults setInteger:ChildID forKey:@"ChildID"];
+    //儲存小孩名字陣列
+//    [defaults setObject:putChildTextFieldnameArray forKey:@"ChildName"];
+//    //儲存小孩生日陣列
+//    [defaults setObject:putChildBirthdayFieldArray forKey:@"ChildBirthday"];
+//    //儲存信件陣列給存放孩子個人信件的陣列
+//    [defaults setObject:putDateArray forKey:@"Mailibformation"];
+//    //儲存信件內容陣列給存放孩子個人信件內容的陣列
+//    [defaults setObject:putTextViewArray forKey:@"textViewcontent"];
+//    //儲存小孩性別陣列
+//    if(ChildSex == 1) {
+//        [putChildSexArray addObject:BoySelected.titleLabel.text];
+//        [defaults setObject:putChildSexArray forKey:@"readChildSexArray"];
+//    } else if(ChildSex == 2) {
+//        [putChildSexArray addObject:GirlSelected.titleLabel.text];
+//        [defaults setObject:putChildSexArray forKey:@"readChildSexArray"];
+//    } else {
+//        [putChildSexArray addObject:AnotherSelected.titleLabel.text];
+//        [defaults setObject:putChildSexArray forKey:@"readChildSexArray"];
+//    }
+//    //儲存你與孩子的關係
+//    if(WithRelationship == 1) {
+//        [putWithChildRelationShipArray addObject:_FatherSelected.titleLabel.text];
+//        [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];
+//        [defaults setObject:_FatherSelected.titleLabel.text forKey:@"WithRelationship"];
+//    } else if(WithRelationship == 2) {
+//        [putWithChildRelationShipArray addObject:_MotherSelected.titleLabel.text];
+//        [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];
+//    } else {
+//        [putWithChildRelationShipArray addObject:_AnotherRelationship.titleLabel.text];
+//        [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];
+//    }
+//    //將孩子的背景圖片隨機產生，儲存在孩子的背景陣列中
+//    int x = arc4random() % 5;
+//    NSArray *randomBackgroundImageArray = @[@"background1@2x.jpg",
+//                                            @"background2@2x.jpg",
+//                                            @"background3@2x.jpg",
+//                                            @"background4@2x.jpg",
+//                                            @"background5@2x.jpg"];
+//    NSString *MyChildBackImage = [[NSString alloc]initWithString:randomBackgroundImageArray[x]];
+//    [putMyChildBackImageArray addObject:MyChildBackImage];
+//    [defaults setObject:putMyChildBackImageArray forKey:@"readMyChildBackImageArray"];
+//    NSLog(@"  數量為： %lu ",
+//          (unsigned long)putMyChildBackImageArray.count);
+//    //設定如果孩子的名字只有一個，將孩子 ID 設為 0
+//    if(putChildTextFieldnameArray.count == 1) {
+//        [defaults setInteger:0 forKey:@"ChildID"];
+//    }
+//    
+//    [defaults synchronize];
+    
+
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     [self initialBG];
+    
+    [self someSettings];
+    
+    [self configKVNProgress];
+    
     // user default
     localUserData = [NSUserDefaults standardUserDefaults];
     NSString *localUID = [localUserData objectForKey:@"uid"];
@@ -55,19 +235,20 @@
     currentuser = [MyAccountData sharedCurrentUserData];
     comm = [MyCommunicator sharedInstance];
     //--
-    
+    incomingPosts = [NSMutableArray new];
     
     
     _loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends", @"user_photos"];
     _loginButton.delegate = self;
     
     
-    
     // Google login delegate                            Google 登入
     [GIDSignIn sharedInstance].uiDelegate = self;
     //--
     
+    
 }
+//FIXME: 要做成先跑動畫 等UID抓到 再抓babydata 抓完後 當所有東西都好了 才去下一頁
 // Get user data form  facebook         取得ＦＢ使用者的資料
 - (void) getFBUserData {
     
@@ -109,18 +290,11 @@
          [localUserData setObject:currentuser.userMail forKey:@"userMail"];
          [localUserData setObject:data forKey:@"userImage"];
          [localUserData synchronize];
-
-         
-         
          //--
+         
+         
          // get uid from SQL server         用fb登入資訊從SQL資料庫抓uid
          [comm getUIDFromSQLByFBID:currentuser.userFBId completion:^(NSError *error, id result1) {
-             
-             
-          //準備下載信件資料
-          //UpdateDataView *downloadMailContent = [UpdateDataView new];
-          //[downloadMailContent DownloadFutureMailContent];
-        
              
              //currentuser.userId = [self htmlEntityDecode:currentuser.userId];
              //NSLog(@"currentuser.uid: %@",currentuser.userId);
@@ -139,8 +313,13 @@
                  [localUserData setObject:currentuser.userId forKey:@"uid"];
                  
                  
-                 // 取得uid後 才去下一頁
-                 [self goNextPage];
+                 
+                 // 用UID抓取 小孩們
+                 [self getBabyData];
+                 
+                 //FIXME: 要做成先跑動畫 當所有東西都好了 才去下一頁
+                 // 取得uid後  才去下一頁
+                 //[self goNextPage];
              }
              
              if(error){
@@ -263,6 +442,155 @@
     // Dispose of any resources that can be recreated.
 }
 //--
+
+#pragma mark - 取得寶寶資料
+
+//FIXME: 尚未實作從SQL撈babydata 存入Userdefaults
+- (void) getBabyData {
+    NSString *localUID = [localUserData objectForKey:@"uid"];
+    
+    
+    [comm getBabyDataByUID:localUID
+                completion:^(NSError *error, id result) {
+                    // AFN 連線是否成功
+                    if(error){
+                        NSLog(@"** getBabyDataByUID Fail: %@", error);
+                        //[self doReloadJob];
+                        return;
+                    }
+                    // 伺服器php指令是否成功
+                    if([result[RESULT_KEY] boolValue] == false){
+                        NSLog(@"** getBabyDataByUID Fail: %@", result[ERROR_CODE_KEY]);
+                        //[self doReloadJob];
+                        return;
+                    }
+                    //取回來的 成就們的 陣列
+                    NSArray *items = result[@"BabysArr"];
+                    NSLog(@"Receive babys number: %lu", items.count);
+                    
+                    // 如果名下都沒有寶寶
+                    if(items.count == 0){
+                        NSLog(@"No baby , do nothing and return.");
+                        return;
+                    }
+                    //[getAchievementItems removeAllObjects];
+                    
+                    
+                    // Handle new messages
+                    [incomingPosts addObjectsFromArray:items];
+                    NSLog(@"** do before getBabyData");
+                    [self handleIncomingBabys:items.count];
+                    NSLog(@"** done with getBabyData");
+                    
+                    
+                    
+                    //準備下載信件資料
+                    UpdateDataView *downloadMailContent = [UpdateDataView new];
+                    [downloadMailContent DownloadFutureMailContent];
+                    
+                    
+                    [KVNProgress dismiss];
+                    [self goNextPage];
+                    
+                }];
+}
+
+-(void) handleIncomingBabys: (NSInteger) howManyPosts{
+    //Exit when there is no more message need to be handled.
+    if(incomingPosts.count == 0){
+        return;
+    }
+    // 暫存的 總共有幾個post 用來幫助postitem存indexpath
+    NSInteger postNumTotal = howManyPosts;
+    NSInteger reducingPostsNum = incomingPosts.count;
+    NSInteger itemIndex = postNumTotal-reducingPostsNum;
+    NSLog(@"= = = the indexpath : %ld", itemIndex);
+    
+    
+    NSDictionary *tmp = incomingPosts.firstObject;
+    
+    
+    
+    // Parse all fields of each message.
+    //將NSDictionary中的NSNumber 轉成 NSInteger
+    // 如果是一開始登入時 取回的是寶寶資料
+    NSInteger babyID = [tmp[@"babyID"] integerValue];
+    NSString *babyName = tmp[@"babyName"];
+    NSString *dateString = tmp[@"birthday"];
+    
+    NSLog(@" got babyID: %ld, babyName: %@, dateString: %@", babyID, babyName, dateString);
+    
+    
+    //將取回的日期轉成NSDate
+    NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
+    gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    gmtDateFormatter.dateFormat = @"yyyy-MM-dd";
+    NSDate  *date = [gmtDateFormatter dateFromString:dateString];
+    NSLog(@"-- date :%@", date);
+    
+    
+    if (howManyPosts == incomingPosts.count) {
+        //  暫存第一個baby的資料作為預設寶寶
+        [localUserData setInteger:babyID forKey:@"ChildID"];  //要給下載資料讀的
+        [localUserData setObject: [NSString stringWithFormat:@"%ld",babyID] forKey:@"babyid"];
+        [localUserData setObject:babyName forKey:@"currentBabyName"];
+        [localUserData setObject:date forKey:@"currentBabyBirthday"];
+    }
+    
+    NSLog(@" 存default的 ChildID: %ld babyID: %@, 寶名: %@, 生日: %@", (long)[localUserData integerForKey:@"ChildID"], [localUserData objectForKey:@"babyid"], [localUserData objectForKey:@"currentBabyName"] , [localUserData objectForKey:@"currentBabyBirthday" ]);
+    
+//    // 將每個baby 存到本地user default 陣列裡
+//    //增加小孩名字到陣列中
+//    [putChildTextFieldnameArray addObject:babyName];
+//    //增加小孩生日到陣列中
+//    [putChildBirthdayFieldArray addObject:[localUserData objectForKey:@"currentBabyBirthday" ]];
+//    
+//    //增加信件陣列數量給存放孩子個人信件的陣列
+//    NSArray *emptyArray = [NSArray new];
+//    [putDateArray addObject:emptyArray];
+//    //增加信件內容數量給存放孩子個人信件內容陣列
+//    [putTextViewArray addObject:emptyArray];
+//    
+//    //儲存小孩名字陣列
+//    [defaults setObject:putChildTextFieldnameArray forKey:@"ChildName"];
+//    //儲存小孩生日陣列
+//    [defaults setObject:putChildBirthdayFieldArray forKey:@"ChildBirthday"];
+//    //儲存信件陣列給存放孩子個人信件的陣列
+//    [defaults setObject:putDateArray forKey:@"Mailibformation"];
+//    //儲存信件內容陣列給存放孩子個人信件內容的陣列
+//    [defaults setObject:putTextViewArray forKey:@"textViewcontent"];
+//
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateTableViewContrler" object:nil];
+    
+    [incomingPosts removeObjectAtIndex:0];
+    [self handleIncomingBabys: howManyPosts];
+}
+
+
+- (void) configKVNProgress {
+    KVNProgressConfiguration *configuration = [[KVNProgressConfiguration alloc] init];
+    
+    //configuration.statusColor = [UIColor whiteColor];
+    configuration.statusFont = [UIFont fontWithName:@"HelveticaNeue-Thin" size:15.0f];
+    //    configuration.circleStrokeForegroundColor = [UIColor whiteColor];
+    //    configuration.circleStrokeBackgroundColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
+    //    configuration.circleFillBackgroundColor = [UIColor colorWithWhite:1.0f alpha:0.1f];
+    //    configuration.errorColor = [UIColor whiteColor];
+    //    configuration.stopColor = [UIColor whiteColor];
+    configuration.circleSize = 110.0f;
+    configuration.lineWidth = 1.0f;
+    configuration.fullScreen = YES;
+    configuration.showStop = NO;
+    configuration.stopRelativeHeight = 0.4f;
+    
+    configuration.tapBlock = ^(KVNProgress *progressView) {
+        [self.navigationController popViewControllerAnimated:YES];
+    };
+    configuration.allowUserInteraction = NO;
+    [KVNProgress setConfiguration:configuration];
+}
+
+
 //      FB login button delegate.               臉書登入按鈕委派的功能
 #pragma mark - FBLoginButton Delegate method
 -(void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
@@ -275,6 +603,7 @@
         NSLog(@"===== uid:%@", [localUserData objectForKey:@"uid"]);
         if([localUserData objectForKey:@"uid"]==nil){
             NSLog(@"****** FB did complete with Login 1 ******");
+            [KVNProgress show];
             [self getFBUserData];
         }
         NSLog(@"****** FB did complete with Login 2 ******");
@@ -285,6 +614,12 @@
 
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
     //... clean userdefaults
+    
+    NSDictionary *dictionary = [localUserData dictionaryRepresentation];
+    for(NSString *key in [dictionary allKeys]){
+        [localUserData removeObjectForKey:key];
+        [localUserData synchronize];
+    }
 }
 //--
 

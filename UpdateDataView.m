@@ -503,6 +503,7 @@
         //準備目前所新增的孩子最新 ID
         NSInteger ChildIDIInteger = [defaults integerForKey:@"ChildID"];
         NSString  *ChildID = [NSString stringWithFormat:@"%ld",(long)ChildIDIInteger];
+        NSLog(@"要下載資料: %@, %@", [NSString stringWithFormat:@"%ld",(long)ChildIDIInteger], [defaults objectForKey:@"userMail"]);
         NSDictionary *parmas;
         parmas = @{
                    @"userAccount" :[defaults objectForKey:@"userMail"],
@@ -516,7 +517,7 @@
             //..
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
-            NSLog(@"  成功下載資料 ");
+            NSLog(@"  成功下載資料 (future mail) ");
             NSArray *array = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
             [defaults setValue:array forKey:@"mailDateContentArray"];
@@ -524,7 +525,7 @@
             [defaults synchronize];
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"  下載資料失敗 ");
+            NSLog(@"  下載資料失敗 (future mail) ");
             NSLog(@"原因： %@",error);
         }];
         

@@ -357,7 +357,12 @@
                                 if(index == 1){
                                     
 //  測試區
-                                    //[self getBabyData];
+                                    [self getBabyData];
+                                    
+                                    //準備下載信件資料
+                                    UpdateDataView *downloadMailContent = [UpdateDataView new];
+                                    [downloadMailContent DownloadFutureMailContent];
+                                    
                                     [_plusButtonsViewMain hideButtonsAnimated:YES completionHandler:nil];
                                     [self btnAddNewPostPressed];
                                 } else if (index == 2) {
@@ -666,6 +671,12 @@
 -(void) viewWillAppear:(BOOL)animated{
     
     [self downloadDataFromServe];
+    
+    
+    // 看需不需要撈孩子的資料
+    if([localUserData objectForKey:@"babyid"] == nil){
+        [self getBabyData];
+    }
 
     
     //[self initBtn2];
@@ -681,10 +692,10 @@
     readChildNameDefaults = [NSUserDefaults standardUserDefaults];
     //如果讀出的陣列數量為零的話，就執行 AddChildSettingViewController 來創造第一個孩子。
     NSArray *readChildTextFieldnameArray = [readChildNameDefaults objectForKey:@"ChildName"];
-    if(readChildTextFieldnameArray.count == 0) {
-        AddChildSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"AddChildSettingViewController"];
-        [self presentViewController:nextPage animated:YES completion:nil];
-    }
+//    if(readChildTextFieldnameArray.count == 0) {
+//        AddChildSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"AddChildSettingViewController"];
+//        [self presentViewController:nextPage animated:YES completion:nil];
+//    }
     //-- Boen
 
     //[self.navigationController setNavigationBarHidden:YES animated:animated];
@@ -722,10 +733,7 @@
     }
     //--
     
-    // 看需不需要撈孩子的資料
-    if([localUserData objectForKey:@"babyid"] == nil){
-        [self getBabyData];
-    }
+    
 }
 
 #pragma mark: collectionview delegate       collectionview 相關
