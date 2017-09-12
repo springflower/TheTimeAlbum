@@ -17,6 +17,7 @@
         //將COUNT初始化為0
         SelectRow = 0;
         Value = false;
+        ImageArray = [NSMutableArray new];
     }
     
     return self;
@@ -45,6 +46,15 @@
 - (BOOL)didSelectedNewOrOldAboutMail {
     
     return Value;
+}
+
+-(void)SendTextViewImage:(NSMutableArray*)MutableArray {
+    
+    ImageArray = MutableArray;
+}
+
+-(NSMutableArray*)getImageArray {
+    return ImageArray;
 }
 
 

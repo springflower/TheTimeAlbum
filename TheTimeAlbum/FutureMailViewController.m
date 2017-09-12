@@ -55,6 +55,8 @@
 
 -(void)viewWillAppear:(BOOL)animated  {
     
+    self.tabBarController.tabBar.hidden = NO;
+    
     [self updateDate];
     
 }
@@ -93,14 +95,18 @@
                 NSLog(@"mailDateContentArray的數量為 %lu",(unsigned long)mailDateContentArray.count);
             } else
                 DescriptionView.hidden = YES;
+    
+    
+            
             
             // Prepare the putImageArray. 準備讀取日期陣列是否有存值，來產生信件圖片的數量。
             putImageArray = [NSMutableArray new];
             for (int i=0; i<mailDateContentArray.count; i++) {
-                [putImageArray addObject:[UIImage imageNamed:@"PostCardVer4@2x.png"]];
+                [putImageArray addObject:[UIImage imageNamed:mailDateContentArray[i][@"postCardImageName"]]];
             }
             
-            if(![readMyChildBackImageArray[ChildID] isKindOfClass:[NSString class]]) {
+            if(![readMyChildBackImageArray[ChildID] isKindOfClass:[NSString class]]
+               && readMyChildBackImageArray.count != 0) {
                 ChildBackgroundImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
                 BackgroundImage = [UIImage imageWithData:ChildBackgroundImageData];
             } else {
@@ -123,12 +129,12 @@
     //準備讀取儲存的資料
     defaults = [NSUserDefaults standardUserDefaults];
     //設定背景顏色
-    self.view.backgroundColor = [UIColor flatSkyBlueColor];
+    //self.view.backgroundColor = [UIColor flatSkyBlueColor];
     
     //To clean the tableView line Between. 去除 tableView cell 與 cell 之間的分隔線.
     _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    _myTableView.backgroundColor = [UIColor flatSandColor];
+    _myTableView.backgroundColor = [UIColor flatWhiteColor];
     //準備設定 _myTableView
     [self prepareHeaderView];
     
@@ -173,7 +179,7 @@
     
     if(putImageArray.count !=0) {
         //設定 TableCell 背景顏色
-        Cell.MyCell.backgroundColor = [UIColor flatSandColor];
+        Cell.MyCell.backgroundColor = [UIColor flatWhiteColor];
         
         Cell.UserName.text = [defaults objectForKey:@"userName"];
         Cell.ChildName.text = [putChildTextFieldnameArray objectAtIndex:ChildID];
@@ -211,7 +217,7 @@
         
     WriteMailViewController *editController = [self.storyboard instantiateViewControllerWithIdentifier:@"WriteMailViewController2"];
         [self.navigationController pushViewController:editController animated:YES];
-        
+        self.tabBarController.tabBar.hidden = YES;
     }
 }
 
@@ -232,7 +238,7 @@
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
         CATransition *transition = [CATransition animation];
-        [transition setDuration:0.2];
+        [transition setDuration:0.5];
         [transition setType:kCATransitionFade];
         [DescriptionView.layer addAnimation:transition forKey:nil];
             if(mailDateContentArray.count == 0) {
@@ -267,7 +273,6 @@
     [headerView addSubview:MyChildBackgroundImageView];
         
 
-    
     //設定一個 Buttton 給 headerView
     UIButton *WriteMailBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 225,self.view.frame.size.width, 50)];
     WriteMailBtn.backgroundColor = [UIColor flatGrayColor];

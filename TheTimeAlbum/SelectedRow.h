@@ -14,6 +14,7 @@
 
     int SelectRow;
     BOOL Value;
+    NSMutableArray *ImageArray;
 }
 
 +(instancetype) object;
@@ -24,6 +25,8 @@
 
 - (BOOL)didSelectedNewOrOldAboutMail;
 
+-(void)SendTextViewImage:(NSMutableArray*)MutableArray;
 
+-(NSMutableArray*)getImageArray;
 
 @end

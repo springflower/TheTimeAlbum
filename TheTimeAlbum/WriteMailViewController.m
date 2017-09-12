@@ -12,11 +12,10 @@
 #import "MyTextAttachment.h"
 #import <QuartzCore/QuartzCore.h>
 #import "WriteMailViewController.h"
+#import "ImagePhotoViewController.h"
 #import <ChameleonFramework/Chameleon.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "UpdateDataView.h"
-
-@interface WriteMailViewController ()<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface WriteMailViewController ()<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *BackBtn;
 @property (weak, nonatomic) IBOutlet UIButton *KeepMessage;
@@ -50,17 +49,26 @@
     //準備讀取所儲存的內容，因為是儲存成Data，所以要先用 NSData
     NSData *content;
     UpdateDataView *updateFutureMailContent;
+    
     NSMutableArray *mailDateContentArray;
     //準備變數讀取決定是使用 popViewControler 還是 dimissViewControler
     int popViewOrdimissViewfunc;
+    //準備觸控事件
+    UITapGestureRecognizer *tapImageAnfVideo;
+    //準備將 objectsToShare 給 UIActivityViewController 值
+    NSMutableArray *objectsToShare;
     
+    NSMutableArray *ImageArray;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    //準備放置 TextView 上的圖片
+    ImageArray = [NSMutableArray new];
     
     //讀取目前所選擇的小孩ID
     ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
     
+    mailDateContentArray = [NSMutableArray new];
     mailDateContentArray = [[defaults objectForKey:@"mailDateContentArray"] mutableCopy];
     
     [self MyWriteMailTableViewPrepare];
@@ -71,63 +79,19 @@
         
         NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:mailDateContentArray[[[SelectedRow object]didSelectedRowAboutMail]][@"mailContent"] options:0];
         
-        
-        NSLog(@"decodedData 的內容為： %@",decodedData);
-        
         NSMutableAttributedString *textViewcontent = [NSMutableAttributedString new];
         textViewcontent = (NSMutableAttributedString*)[NSKeyedUnarchiver
                                                        unarchiveObjectWithData:decodedData];
         _TextView.attributedText = textViewcontent;
         
-        
         dateLabel.text = mailDateContentArray[[[SelectedRow object] didSelectedRowAboutMail]][@"mailDate"];
 
-//        //準備將讀取的文章內容取出
-//        content = [NSData new];
-//        content = putTextViewAddArray[[[SelectedRow object] didSelectedRowAboutMail]];
-//        //準備將讀取的文章日期給文章內容
-//        dateLabel.text = putDateAddArray[[[SelectedRow object] didSelectedRowAboutMail]];
-//        //準備將文章內容放置 TextView
-//        NSMutableAttributedString *textViewcontent = [NSMutableAttributedString new];
-//        textViewcontent = (NSMutableAttributedString*)[NSKeyedUnarchiver unarchiveObjectWithData:content];
-//        _TextView.attributedText = textViewcontent;
-//        //準備將設定的文章內容 BOOL 值 設定成 True
+        //準備將設定的文章內容 BOOL 值 設定成 True
           [[SelectedRow object]SendSelectedRowAboutMail:[[SelectedRow object] didSelectedRowAboutMail] Bool:false];
         
         popViewOrdimissViewfunc = 1;
     }
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
     
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    
-    // Setting the NaviagtionBar BackGroundColor to CleanColor. 設定NaviagtionBar 為透明.
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
-    //準備讀取儲存的資料
-    defaults = [NSUserDefaults standardUserDefaults];
-    //準備設定 Frame
-    fullScreenBounds=[[UIScreen mainScreen] bounds];
-    //準備設定 View 的背景顏色
-    self.view.backgroundColor =[UIColor flatWhiteColorDark];
-    //準備設定鍵盤位置通知
-    [self registerForKeyboardNotifications];
-    //準備設定日期給 TextView
-    [self MyWriteMailTableViewPrepare];
-    //準備設定鍵盤上的 ToolBar
-    [self SetToolbarToAboveKeyboard];
-    //準備設定 TextView 設定
-    [self TextViewPrepare];
-    
-}
-
-#pragma mark - Prepare set SendContent by mail 準備傳送內容分享上傳
-
-- (IBAction)SendByMail:(id)sender {
     //準備讀取 _TextView.attributedText 裏的照片
     NSMutableArray *catchImage;
     NSRange range = NSMakeRange(0,_TextView.text.length);
@@ -141,11 +105,80 @@
                                              }
                                          }];
     //準備將 objectsToShare 給 UIActivityViewController 值
-    NSMutableArray *objectsToShare = [NSMutableArray arrayWithObjects:_TextView.text,nil];
+    objectsToShare = [NSMutableArray arrayWithObjects:_TextView.text,nil];
     for (UIImage *image in catchImage) {
         [objectsToShare addObject:image];
+        [ImageArray addObject:image];
     }
+    [[SelectedRow object] SendTextViewImage:ImageArray];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
+    //設定手指觸控事件加入到 View 上
+//    tapImageAnfVideo= [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(detectTap:)];
+//    tapImageAnfVideo.delegate = self;
+//    tapImageAnfVideo.numberOfTapsRequired = 1;
+//    tapImageAnfVideo.numberOfTouchesRequired = 1;
+//    [_TextView addGestureRecognizer:tapImageAnfVideo];
+    
+//    _TextView.delegate = self;
+//    _TextView.selectable = YES;
+    //_TextView.editable = false;
+    
+    //準備設定 Frame
+    fullScreenBounds=[[UIScreen mainScreen] bounds];
+    //準備讀取儲存的資料
+    defaults = [NSUserDefaults standardUserDefaults];
+    //準備設定 View 的背景顏色
+    self.view.backgroundColor =[UIColor flatWhiteColorDark];
+    //準備設定鍵盤位置通知
+    [self registerForKeyboardNotifications];
+    //準備設定日期給 TextView
+    [self MyWriteMailTableViewPrepare];
+    //準備設定鍵盤上的 ToolBar
+    [self SetToolbarToAboveKeyboard];
+    //準備設定 TextView 設定
+    [self TextViewPrepare];
+    //準備設定將 Navigationbar 隱藏解除
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    // Setting the NaviagtionBar BackGroundColor to CleanColor. 設定NaviagtionBar 為透明.
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    
+}
+
+-(BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange {
+    
+    return YES;
+}
+
+// Set fingerTouch event. 設定手指觸發事件來移動清單.
+-(void)detectTap:(UITapGestureRecognizer*)recognizer {
+    
+    ImagePhotoViewController *imageView = [self.storyboard instantiateViewControllerWithIdentifier:@"ImagePhotoViewController"];
+    [self presentViewController:imageView animated:NO completion:nil];
+}
+
+
+//-(BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+//    NSLog(@"有網址！！！！");
+//
+//        return false;
+//    
+//    
+//}
+//-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+//    
+//    return YES;
+//}
+
+#pragma mark - Prepare set SendContent by mail 準備傳送內容分享上傳
+
+- (IBAction)SendByMail:(id)sender {
     UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
     [self presentViewController:controller animated:YES completion:nil];
 }
@@ -167,6 +200,8 @@
     //準備上傳資料方法
     updateFutureMailContent = [UpdateDataView new];
     
+    
+    
     // If didSeletedRow is bigger 0 or equal 0, save the content to specify putTextViewArray position. 選擇的如果選擇舊信箱的話，修改信箱內容並儲存。
     if([[SelectedRow object] didSelectedRowAboutMail] >=0) {
     
@@ -175,27 +210,39 @@
         [updateFutureMailContent UpdataFutureMailContentChanged:array];
         
         NSDictionary *addArray = @{@"mailDate":dateString,
-                                   @"mailContent":Covert64String};
+                                   @"mailContent":Covert64String,
+                                   @"postCardImageName":mailDateContentArray[[[SelectedRow object] didSelectedRowAboutMail]][@"postCardImageName"]};
         
         mailDateContentArray[[[SelectedRow object] didSelectedRowAboutMail]]
         = addArray;
         
         [defaults setValue:mailDateContentArray forKey:@"mailDateContentArray"];
+        NSLog(@"addArray 的內容為： %@",addArray);
+        NSLog(@"mailDateContentArray 的內容為： %@",mailDateContentArray);
         
         [defaults synchronize];
         
     // if didSelectedRow is smaller 0, create a new Mail and save. 如果是選擇新信箱的話，創造一個新的資料並儲存。
     } else if([[SelectedRow object] didSelectedRowAboutMail] ==-1){
         
+        int x = arc4random() % 5;
+        NSArray *randomPostCardImageArray = @[@"PostCard1@2x.png",
+                                                @"PostCard2@2x.png",
+                                                @"PostCard3@2x.png",
+                                                @"PostCard4@2x.png",
+                                                @"PostCard5@2x.png"];
+        NSString *PostCardImageName = [[NSString alloc]initWithString:randomPostCardImageArray[x]];
+        
         //準備上傳信件日期與信件內容資料
-        array = @[dateString,Covert64String];
+        array = @[dateString,Covert64String,PostCardImageName];
         [updateFutureMailContent UpdataFutureMailContent:array];
         NSDictionary *addArray = @{@"mailDate":dateString,
-                                   @"mailContent":Covert64String};
+                                   @"mailContent":Covert64String,
+                                   @"postCardImageName":PostCardImageName};
         [mailDateContentArray addObject:addArray];
-        
+        NSLog(@"addArray 的內容為： %@",addArray);
+        NSLog(@"mailDateContentArray 的內容為： %@",mailDateContentArray);
         [defaults setValue:mailDateContentArray forKey:@"mailDateContentArray"];
-        
         [defaults synchronize];
     }
     
@@ -293,64 +340,70 @@
 
 
 -(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    NSLog(@"Info: %@",info);
+    
     NSString *type = info[UIImagePickerControllerMediaType];
+    //準備 MyTextAttachment 放置選取的照片
+    MyTextAttachment *attachment = [MyTextAttachment new];
+    
+    NSURL *fileURL = info[UIImagePickerControllerMediaURL];
     
     if([type isEqualToString:(NSString*)kUTTypeImage]) {
         UIImage *origineImage = info[UIImagePickerControllerOriginalImage];
         UIImage *editImage = info[UIImagePickerControllerEditedImage];
         UIImage *inputImage = editImage != nil ? editImage  : origineImage ;
-        
-        NSLog(@"originalImage: %fx%f",inputImage.size.width,inputImage.size.height);
-        
         UIImage *resizeImage = [self resizeFromImage:inputImage];
-        
-        NSLog(@"originalImage: %fx%f",origineImage.size.width,origineImage.size.height);
-        NSLog(@"resizeImage: %fx%f",resizeImage.size.width,resizeImage.size.height);
-        
-        NSData *jpgData = UIImageJPEGRepresentation(resizeImage, 0.8);
-        NSData *pngData = UIImagePNGRepresentation(resizeImage);
-        
-        NSLog(@"JPG Data: %lu",jpgData.length);
-        NSLog(@"PNG Data: %lu",pngData.length);
-        
-        //準備 MyTextAttachment 放置選取的照片
-        MyTextAttachment *attachment = [MyTextAttachment new];
-        
+        //NSData *jpgData = UIImageJPEGRepresentation(resizeImage, 0.8);
+        //NSData *pngData = UIImagePNGRepresentation(resizeImage);
+        //NSLog(@"JPG Data: %lu",jpgData.length);
+        //NSLog(@"PNG Data: %lu",pngData.length);
         if(editImage) {
             attachment.image = editImage;
         } else {
             attachment.image = resizeImage;
 
         }
-        NSAttributedString *attStr = [NSAttributedString new];
-        attStr = (NSAttributedString*)[NSAttributedString attributedStringWithAttachment:attachment];
-        
-        NSMutableAttributedString *textViewcontent = [[NSMutableAttributedString alloc]
-                                                      initWithAttributedString:_TextView.attributedText];
-        NSRange selectedRange =  _TextView.selectedRange;
-        
-        [textViewcontent insertAttributedString:attStr atIndex:selectedRange.location];
-        
-        [textViewcontent addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(0,textViewcontent.length)];
-        
-        NSRange newSelctedRange = NSMakeRange(selectedRange.location+10,0);
-
-        _TextView.attributedText = textViewcontent;
-        _TextView.selectedRange = newSelctedRange;
         
     } else if([type isEqualToString:(NSString*)kUTTypeMovie]) {
         
-        NSURL *fileURL = info[UIImagePickerControllerMediaURL];
-        
-        NSLog(@"Movie is placed at: %@",fileURL);
-        
-        //Using the movie...
-        
+        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:fileURL options:nil];
+        AVAssetImageGenerator *generate = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+        NSError *err = NULL;
+        CMTime time = CMTimeMake(1,1);
+        CGImageRef imgRef = [generate copyCGImageAtTime:time actualTime:NULL error:&err];
+        NSLog(@"err==%@, imageRef==%@", err, imgRef);
+        NSLog(@"影片的路徑為： %@",fileURL);
+        attachment.image = [[UIImage alloc] initWithCGImage:imgRef];
+        CGImageRelease(imgRef);
         //Remove it if it is no longed needed.
         [[NSFileManager defaultManager] removeItemAtURL:fileURL error:nil];
         
     }
+    
+    NSMutableAttributedString *attStr = [NSMutableAttributedString new];
+    attStr = (NSMutableAttributedString*)[NSMutableAttributedString attributedStringWithAttachment:attachment];
+
+    if(fileURL != nil) {
+        [attStr addAttribute: NSLinkAttributeName value:fileURL range: NSMakeRange(0, attStr.length)];
+    }
+    
+    NSRange selectedRange =  _TextView.selectedRange;
+
+    [attStr addAttribute:NSLinkAttributeName value:@"Image://" range:selectedRange];
+    
+    NSMutableAttributedString *textViewcontent = [[NSMutableAttributedString alloc]
+                                                  initWithAttributedString:_TextView.attributedText];
+    
+    
+    [textViewcontent insertAttributedString:attStr atIndex:selectedRange.location];
+    
+    [textViewcontent addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(0,textViewcontent.length)];
+    
+    NSRange newSelctedRange = NSMakeRange(selectedRange.location+20,0);
+    
+    _TextView.attributedText = textViewcontent;
+    _TextView.selectedRange = newSelctedRange;
+    
+    NSLog(@"_TextView.attributedText 的內容為： %@",_TextView.attributedText);
     
     // Important!!!
     [picker dismissViewControllerAnimated:true completion:nil];
@@ -401,6 +454,7 @@
 
 -(void)resgisterKeyborad {
     [_TextView resignFirstResponder];
+    [_TextView addGestureRecognizer:tapImageAnfVideo];
 }
 
 #pragma mark - Prepare to set Toobar and PhotoImage add Keyboard. 準備 Toobar 和 照相圖片加入鍵盤
@@ -416,8 +470,8 @@
     UIBarButtonItem *Done = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(resgisterKeyborad)];
     UIBarButtonItem *Camera = [[UIBarButtonItem alloc]
                                initWithImage:[UIImage imageNamed:@"Camera65x65@2x.png"] style:UIBarButtonItemStyleDone target:self action:@selector(photoselect:)];
-    UIBarButtonItem *Video = [[UIBarButtonItem alloc]
-                              initWithImage:[UIImage imageNamed:@"Video75x50@2x.png"] style:UIBarButtonItemStyleDone target:self action:@selector(photoselect:)];
+//    UIBarButtonItem *Video = [[UIBarButtonItem alloc]
+//                              initWithImage:[UIImage imageNamed:@"Video75x50@2x.png"] style:UIBarButtonItemStyleDone target:self action:@selector(photoselect:)];
     UIBarButtonItem *flexibleSpaceBarButton1 = [[UIBarButtonItem alloc]
                                                 initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                 target:nil
@@ -496,10 +550,8 @@
 }
 
 
--(BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
-    return YES;
+-(void)textViewDidEndEditing:(UITextView *)textView {
 }
-
 
 #pragma mark - Prepare set KeyBoard position 準備設定鍵盤位置根據浮標移動
 

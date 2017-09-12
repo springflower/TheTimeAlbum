@@ -87,19 +87,7 @@
     [AddChild setTitle:@"添加" forState:UIControlStateNormal];
     [AddChild addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:AddChild];
-    
-    //設定準備下載網路上的資料，並設定更新動畫效果
-//    UILabel *updatedescription =
-//    [[UILabel alloc] initWithFrame:CGRectMake(65,35,
-//    MenuTableView.frame.size.width, MenuTableView.frame.size.height)];
-//    [updatedescription setText:@"更新中..."];
-//    [updatedescription setTextColor:[UIColor flatSkyBlueColor]];
-//    downloadChildBigSticker = [[UpdateDataView alloc] initWithFrame:CGRectMake(0, 0, MenuTableView.frame.size.width, MenuTableView.frame.size.height)];
-//    [downloadChildBigSticker addSubview:updatedescription];
-//    [MenuTableView addSubview:downloadChildBigSticker];
-    
-
-    
+        
     return self;
 }
 

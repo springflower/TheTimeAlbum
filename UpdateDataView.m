@@ -429,6 +429,7 @@
                        @"childID"     :ChildID,
                        @"mailDate"    :Array[0],
                        @"mailContent" :Array[1],
+                       @"postCardImageName":Array[2]
                        };
             
         

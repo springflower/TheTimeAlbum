@@ -185,13 +185,6 @@
     testtable = [[UITableView alloc] initWithFrame:CGRectMake(0,50,100,150)];
     [testtable setDataSource:self];
     [testtable setDelegate:self];
-//  _AnotherRelationship.inputAccessoryView= testtable;
-    
-//    yourpicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 50, 100, 150)];
-//    [yourpicker setDataSource: self];
-//    [yourpicker setDelegate: self];
-//    yourpicker.showsSelectionIndicator = YES;
-//    self.yourtextfield.inputView = yourpicker;
     
     //通知接收執行 dissMissViewController  View
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dissMissViewController)
