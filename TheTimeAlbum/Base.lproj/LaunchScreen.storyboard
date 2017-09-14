@@ -27,12 +27,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TimeAlbum.png" translatesAutoresizingMaskIntoConstraints="NO" id="bj0-JM-xeI">
-                                <rect key="frame" x="116" y="196" width="143" height="142"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="bj0-JM-xeI" secondAttribute="height" multiplier="143:142" id="Vu1-5i-0oW"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TheTimeAlbum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8x-rq-0g1">
                                 <rect key="frame" x="100.5" y="428.5" width="175.5" height="32"/>
                                 <constraints>
@@ -51,16 +45,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="時光相簿.png" translatesAutoresizingMaskIntoConstraints="NO" id="Iiq-h5-XGD">
+                                <rect key="frame" x="125.5" y="173" width="125" height="187.5"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="bj0-JM-xeI" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="4/5" id="2tB-rp-5iB"/>
+                            <constraint firstItem="Iiq-h5-XGD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6Z2-pn-oOO"/>
                             <constraint firstItem="X8x-rq-0g1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8Nv-v5-eqO"/>
                             <constraint firstItem="IAu-v2-GBq" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Ikg-Qf-fSt"/>
                             <constraint firstItem="dQR-tK-WhS" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="LXt-4v-sDd"/>
                             <constraint firstAttribute="trailing" secondItem="IAu-v2-GBq" secondAttribute="trailing" id="MjX-rn-W3c"/>
                             <constraint firstItem="IAu-v2-GBq" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="epv-kH-onb"/>
-                            <constraint firstItem="bj0-JM-xeI" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="fjT-O0-Rk2"/>
+                            <constraint firstItem="Iiq-h5-XGD" firstAttribute="width" secondItem="IAu-v2-GBq" secondAttribute="width" multiplier="1/3" id="fHc-Gi-Lyo"/>
+                            <constraint firstItem="Iiq-h5-XGD" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="4/5" id="n7e-ce-UwU"/>
+                            <constraint firstItem="Iiq-h5-XGD" firstAttribute="height" secondItem="IAu-v2-GBq" secondAttribute="width" multiplier="1/2" id="r5S-ul-DMm"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="IAu-v2-GBq" secondAttribute="bottom" id="rJt-gi-bsL"/>
                             <constraint firstItem="dQR-tK-WhS" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="11/9" id="v9J-cq-Jkl"/>
                             <constraint firstItem="X8x-rq-0g1" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="4/3" id="xCA-st-r8C"/>
@@ -73,6 +72,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="TimeAlbum.png" width="143" height="142"/>
+        <image name="時光相簿.png" width="286" height="285"/>
     </resources>
 </document>

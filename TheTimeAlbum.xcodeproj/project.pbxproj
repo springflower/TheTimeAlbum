@@ -17,15 +17,17 @@
 		540267531F256A78005967DE /* addNewMessage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 540267521F256A78005967DE /* addNewMessage.storyboard */; };
 		5402675B1F26BCD1005967DE /* messageBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 5402675A1F26BCD1005967DE /* messageBG.png */; };
 		540829721F2F2D8800109930 /* JLNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 540829711F2F2D8800109930 /* JLNavigationViewController.m */; };
+		540B8B4F1F5F2F080088E064 /* railway.gif in Resources */ = {isa = PBXBuildFile; fileRef = 540B8B4E1F5F2F080088E064 /* railway.gif */; };
+		540B8B511F5F2F890088E064 /* WebViewContent.html in Resources */ = {isa = PBXBuildFile; fileRef = 540B8B501F5F2F890088E064 /* WebViewContent.html */; };
+		540B8B541F5F3CFF0088E064 /* loginPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 540B8B521F5F3CFF0088E064 /* loginPage.storyboard */; };
+		540B8B561F5F3E760088E064 /* flash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 540B8B551F5F3E760088E064 /* flash.gif */; };
 		5422336F1F26E7CD000933BD /* ThisBabyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5422336E1F26E7CD000933BD /* ThisBabyData.m */; };
 		542233721F2738E8000933BD /* MyCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 542233711F2738E8000933BD /* MyCommunicator.m */; };
-		5428BD731F160494003361AC /* loginPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5428BD711F160494003361AC /* loginPage.storyboard */; };
 		54296C9E1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.m in Sources */ = {isa = PBXBuildFile; fileRef = 54296C9C1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.m */; };
 		54296C9F1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54296C9D1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.xib */; };
 		54296CA21F36B1C9000C06C4 /* PostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 54296CA11F36B1C9000C06C4 /* PostItem.m */; };
 		542ABDFB1F13793500F5F161 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABDFA1F13793500F5F161 /* main.m */; };
 		542ABDFE1F13793500F5F161 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABDFD1F13793500F5F161 /* AppDelegate.m */; };
-		542ABE011F13793500F5F161 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542ABE001F13793500F5F161 /* ViewController.m */; };
 		542ABE041F13793500F5F161 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE021F13793500F5F161 /* Main.storyboard */; };
 		542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 542ABE071F13793500F5F161 /* LaunchScreen.storyboard */; };
 		5430715A1F52185500DC2536 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 543071591F52185500DC2536 /* Constants.m */; };
@@ -36,7 +38,10 @@
 		543071701F54253200DC2536 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5430716F1F54253200DC2536 /* ImageViewController.m */; };
 		543071721F54256900DC2536 /* ImageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 543071711F54256900DC2536 /* ImageViewController.storyboard */; };
 		543071751F542E6000DC2536 /* ImagePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 543071741F542E6000DC2536 /* ImagePageViewController.m */; };
+		543071771F542E7200DC2536 /* ImagePageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 543071761F542E7200DC2536 /* ImagePageViewController.storyboard */; };
 		5430717A1F54526B00DC2536 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 543071791F54526B00DC2536 /* ContentViewController.m */; };
+		5430717E1F55AE6000DC2536 /* AddAchievementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5430717D1F55AE6000DC2536 /* AddAchievementViewController.m */; };
+		543071801F55AE9100DC2536 /* AddAchievement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5430717F1F55AE9100DC2536 /* AddAchievement.storyboard */; };
 		544EFFF21F5B53620078F143 /* MyCollectionViewCellWithImage2.m in Sources */ = {isa = PBXBuildFile; fileRef = 544EFFF01F5B53620078F143 /* MyCollectionViewCellWithImage2.m */; };
 		544EFFF31F5B53620078F143 /* MyCollectionViewCellWithImage2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 544EFFF11F5B53620078F143 /* MyCollectionViewCellWithImage2.xib */; };
 		5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5452CC871F1C7A54008F5C25 /* loginViewController.m */; };
@@ -89,6 +94,7 @@
 		CF18A5CB1F654014003547DB /* Message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF18A5C61F654014003547DB /* Message@2x.png */; };
 		CF18A5D21F671CFD003547DB /* ImagePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF18A5D11F671CFD003547DB /* ImagePhotoViewController.m */; };
 		CF18A5D81F67CECB003547DB /* TimeAlbum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF18A5D71F67CECB003547DB /* TimeAlbum@2x.png */; };
+		CF18A5DA1F67E154003547DB /* 時光相簿.png in Resources */ = {isa = PBXBuildFile; fileRef = CF18A5D91F67E154003547DB /* 時光相簿.png */; };
 		CF195F2E1F4725840064FDF0 /* UseDownloadDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CF195F2D1F4725840064FDF0 /* UseDownloadDataClass.m */; };
 		CF195F341F48A1050064FDF0 /* UpdateDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF195F331F48A1050064FDF0 /* UpdateDataView.m */; };
 		CF195F371F4A8ADF0064FDF0 /* SetInfoTableViewControler.m in Sources */ = {isa = PBXBuildFile; fileRef = CF195F361F4A8ADF0064FDF0 /* SetInfoTableViewControler.m */; };
@@ -100,8 +106,6 @@
 		CF26410B1F4351BF005EBFBC /* background3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF2641061F4351BF005EBFBC /* background3@2x.jpg */; };
 		CF26410C1F4351BF005EBFBC /* background4@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF2641071F4351BF005EBFBC /* background4@2x.jpg */; };
 		CF26410D1F4351BF005EBFBC /* background5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF2641081F4351BF005EBFBC /* background5@2x.jpg */; };
-		CF43ADDE1F62745400827F26 /* AddAchievementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF43ADDD1F62745400827F26 /* AddAchievementViewController.m */; };
-		CF43ADE01F6274B000827F26 /* AddAchievement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF43ADDF1F6274B000827F26 /* AddAchievement.storyboard */; };
 		CF5A8D2C1F2DEAF800E0FEA6 /* AchievementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8D2B1F2DEAF800E0FEA6 /* AchievementViewController.m */; };
 		CF5A8D321F2EF7C400E0FEA6 /* WriteMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8D311F2EF7C400E0FEA6 /* WriteMailViewController.m */; };
 		CF6150781F3075B50090433A /* MyTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6150771F3075B50090433A /* MyTextAttachment.m */; };
@@ -145,11 +149,14 @@
 		5402675A1F26BCD1005967DE /* messageBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messageBG.png; sourceTree = "<group>"; };
 		540829701F2F2D8800109930 /* JLNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLNavigationViewController.h; sourceTree = "<group>"; };
 		540829711F2F2D8800109930 /* JLNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLNavigationViewController.m; sourceTree = "<group>"; };
+		540B8B4E1F5F2F080088E064 /* railway.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = railway.gif; sourceTree = "<group>"; };
+		540B8B501F5F2F890088E064 /* WebViewContent.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = WebViewContent.html; sourceTree = "<group>"; };
+		540B8B531F5F3CFF0088E064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/loginPage.storyboard; sourceTree = "<group>"; };
+		540B8B551F5F3E760088E064 /* flash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = flash.gif; sourceTree = "<group>"; };
 		5422336D1F26E7CD000933BD /* ThisBabyData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThisBabyData.h; sourceTree = "<group>"; };
 		5422336E1F26E7CD000933BD /* ThisBabyData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThisBabyData.m; sourceTree = "<group>"; };
 		542233701F2738E8000933BD /* MyCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommunicator.h; sourceTree = "<group>"; };
 		542233711F2738E8000933BD /* MyCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommunicator.m; sourceTree = "<group>"; };
-		5428BD721F160494003361AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/loginPage.storyboard; sourceTree = "<group>"; };
 		54296C9B1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewCellWithImage1.h; sourceTree = "<group>"; };
 		54296C9C1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewCellWithImage1.m; sourceTree = "<group>"; };
 		54296C9D1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewCellWithImage1.xib; sourceTree = "<group>"; };
@@ -159,8 +166,6 @@
 		542ABDFA1F13793500F5F161 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		542ABDFC1F13793500F5F161 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		542ABDFD1F13793500F5F161 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		542ABDFF1F13793500F5F161 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		542ABE001F13793500F5F161 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		542ABE031F13793500F5F161 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		542ABE081F13793500F5F161 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		542ABE0A1F13793500F5F161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -180,6 +185,9 @@
 		543071761F542E7200DC2536 /* ImagePageViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ImagePageViewController.storyboard; sourceTree = "<group>"; };
 		543071781F54526B00DC2536 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		543071791F54526B00DC2536 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		5430717C1F55AE6000DC2536 /* AddAchievementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAchievementViewController.h; sourceTree = "<group>"; };
+		5430717D1F55AE6000DC2536 /* AddAchievementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAchievementViewController.m; sourceTree = "<group>"; };
+		5430717F1F55AE9100DC2536 /* AddAchievement.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddAchievement.storyboard; sourceTree = "<group>"; };
 		544EFFEF1F5B53620078F143 /* MyCollectionViewCellWithImage2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewCellWithImage2.h; sourceTree = "<group>"; };
 		544EFFF01F5B53620078F143 /* MyCollectionViewCellWithImage2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewCellWithImage2.m; sourceTree = "<group>"; };
 		544EFFF11F5B53620078F143 /* MyCollectionViewCellWithImage2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewCellWithImage2.xib; sourceTree = "<group>"; };
@@ -232,7 +240,6 @@
 		CF1395931F3030DC00D3C0FD /* Camera150x150@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera150x150@2x.png"; sourceTree = "<group>"; };
 		CF16BA221F51C77200C0A216 /* StartCreateFirstChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartCreateFirstChildViewController.h; sourceTree = "<group>"; };
 		CF16BA231F51C77200C0A216 /* StartCreateFirstChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartCreateFirstChildViewController.m; sourceTree = "<group>"; };
-		CF18A5591F6276AA003547DB /* AddAchievementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddAchievementViewController.h; sourceTree = "<group>"; };
 		CF18A55A1F6285D7003547DB /* SetUserInfoTableViewControler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetUserInfoTableViewControler.h; sourceTree = "<group>"; };
 		CF18A55B1F6285D7003547DB /* SetUserInfoTableViewControler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetUserInfoTableViewControler.m; sourceTree = "<group>"; };
 		CF18A5AC1F651A68003547DB /* PostCard1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PostCard1@2x.png"; sourceTree = "<group>"; };
@@ -249,6 +256,7 @@
 		CF18A5D01F671CFD003547DB /* ImagePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePhotoViewController.h; sourceTree = "<group>"; };
 		CF18A5D11F671CFD003547DB /* ImagePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePhotoViewController.m; sourceTree = "<group>"; };
 		CF18A5D71F67CECB003547DB /* TimeAlbum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimeAlbum@2x.png"; sourceTree = "<group>"; };
+		CF18A5D91F67E154003547DB /* 時光相簿.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "時光相簿.png"; sourceTree = "<group>"; };
 		CF195F2C1F4725840064FDF0 /* UseDownloadDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseDownloadDataClass.h; sourceTree = "<group>"; };
 		CF195F2D1F4725840064FDF0 /* UseDownloadDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseDownloadDataClass.m; sourceTree = "<group>"; };
 		CF195F321F48A1050064FDF0 /* UpdateDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateDataView.h; sourceTree = "<group>"; };
@@ -266,8 +274,6 @@
 		CF2641061F4351BF005EBFBC /* background3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background3@2x.jpg"; sourceTree = "<group>"; };
 		CF2641071F4351BF005EBFBC /* background4@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background4@2x.jpg"; sourceTree = "<group>"; };
 		CF2641081F4351BF005EBFBC /* background5@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background5@2x.jpg"; sourceTree = "<group>"; };
-		CF43ADDD1F62745400827F26 /* AddAchievementViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddAchievementViewController.m; sourceTree = "<group>"; };
-		CF43ADDF1F6274B000827F26 /* AddAchievement.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddAchievement.storyboard; sourceTree = "<group>"; };
 		CF5A8D2A1F2DEAF800E0FEA6 /* AchievementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementViewController.h; sourceTree = "<group>"; };
 		CF5A8D2B1F2DEAF800E0FEA6 /* AchievementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchievementViewController.m; sourceTree = "<group>"; };
 		CF5A8D301F2EF7C400E0FEA6 /* WriteMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteMailViewController.h; sourceTree = "<group>"; };
@@ -414,6 +420,9 @@
 		540267591F25D94C005967DE /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				540B8B501F5F2F890088E064 /* WebViewContent.html */,
+				540B8B4E1F5F2F080088E064 /* railway.gif */,
+				540B8B551F5F3E760088E064 /* flash.gif */,
 				CFB3FAD91F40AB6A00DF842C /* WriteMailImage@2x.png */,
 				CFB3FADF1F40AF8600DF842C /* WriteMailImage75x75@2x.png */,
 				54A82D4A1F37CE510032996D /* cup01.jpg */,
@@ -463,6 +472,7 @@
 				CF18A5C51F654014003547DB /* Inject@2x.png */,
 				CF18A5C61F654014003547DB /* Message@2x.png */,
 				CF18A5D71F67CECB003547DB /* TimeAlbum@2x.png */,
+				CF18A5D91F67E154003547DB /* 時光相簿.png */,
 			);
 			name = Pictures;
 			sourceTree = "<group>";
@@ -470,9 +480,6 @@
 		54296CA31F378911000C06C4 /* AchievementPage */ = {
 			isa = PBXGroup;
 			children = (
-				CF43ADDF1F6274B000827F26 /* AddAchievement.storyboard */,
-				CF18A5591F6276AA003547DB /* AddAchievementViewController.h */,
-				CF43ADDD1F62745400827F26 /* AddAchievementViewController.m */,
 				CF0B78411F1DAD780067229D /* achievement.storyboard */,
 				CF5A8D2A1F2DEAF800E0FEA6 /* AchievementViewController.h */,
 				CF5A8D2B1F2DEAF800E0FEA6 /* AchievementViewController.m */,
@@ -509,8 +516,6 @@
 				5452CC901F1D8D43008F5C25 /* TheTimeAlbum.entitlements */,
 				542ABDFC1F13793500F5F161 /* AppDelegate.h */,
 				542ABDFD1F13793500F5F161 /* AppDelegate.m */,
-				542ABDFF1F13793500F5F161 /* ViewController.h */,
-				542ABE001F13793500F5F161 /* ViewController.m */,
 				542ABE021F13793500F5F161 /* Main.storyboard */,
 				CF1B653F1F39645A00673520 /* TabBarController.h */,
 				CF1B65401F39645A00673520 /* TabBarController.m */,
@@ -524,6 +529,7 @@
 				CF0B784C1F1DD90C0067229D /* AboutMeViewController */,
 				540267581F25D800005967DE /* AddChild+BigStrckerViewController */,
 				CF5A8D331F2EFA4D00E0FEA6 /* FutureMailViewController */,
+				5430717B1F55AE1900DC2536 /* AddAchievementByPhoto */,
 				542ABE071F13793500F5F161 /* LaunchScreen.storyboard */,
 				542ABE0A1F13793500F5F161 /* Info.plist */,
 				5452CC8E1F1D41AE008F5C25 /* GoogleService-Info.plist */,
@@ -560,12 +566,22 @@
 			name = ImageViewer;
 			sourceTree = "<group>";
 		};
+		5430717B1F55AE1900DC2536 /* AddAchievementByPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				5430717C1F55AE6000DC2536 /* AddAchievementViewController.h */,
+				5430717D1F55AE6000DC2536 /* AddAchievementViewController.m */,
+				5430717F1F55AE9100DC2536 /* AddAchievement.storyboard */,
+			);
+			name = AddAchievementByPhoto;
+			sourceTree = "<group>";
+		};
 		5452CC931F1DE92C008F5C25 /* LoginViewController */ = {
 			isa = PBXGroup;
 			children = (
 				5452CC861F1C7A54008F5C25 /* loginViewController.h */,
 				5452CC871F1C7A54008F5C25 /* loginViewController.m */,
-				5428BD711F160494003361AC /* loginPage.storyboard */,
+				540B8B521F5F3CFF0088E064 /* loginPage.storyboard */,
 			);
 			name = LoginViewController;
 			sourceTree = "<group>";
@@ -716,7 +732,7 @@
 				CF18A5B31F651A68003547DB /* PostCard3@2x.png in Resources */,
 				CF18A5B11F651A68003547DB /* PostCard1@2x.png in Resources */,
 				CF18A5C71F654014003547DB /* Cake@2x.png in Resources */,
-				CF43ADE01F6274B000827F26 /* AddAchievement.storyboard in Resources */,
+				540B8B4F1F5F2F080088E064 /* railway.gif in Resources */,
 				5430715F1F52383F00DC2536 /* MyCollectionViewCellWithImage3.xib in Resources */,
 				CF18A5B51F651A68003547DB /* PostCard5@2x.png in Resources */,
 				CF18A5C11F653FD0003547DB /* AddFirstAlbum@2x.png in Resources */,
@@ -724,17 +740,18 @@
 				CF0B78581F1DE4DA0067229D /* 信箱75x75@2x.png in Resources */,
 				CF0B78431F1DAD780067229D /* achievement.storyboard in Resources */,
 				CFB3FAE01F40AF8600DF842C /* WriteMailImage75x75@2x.png in Resources */,
+				540B8B541F5F3CFF0088E064 /* loginPage.storyboard in Resources */,
 				CFC6DB671F2AFB9000669187 /* Man@2x.png in Resources */,
 				54A82D4D1F37E2150032996D /* EditTextPost.storyboard in Resources */,
 				CF1395941F3030DC00D3C0FD /* Camera150x150@2x.png in Resources */,
 				CF0B78351F1C9DB60067229D /* icon_message48x48.png in Resources */,
+				CF18A5DA1F67E154003547DB /* 時光相簿.png in Resources */,
 				543071641F53DB1000DC2536 /* MyCollectionViewCellUploading.xib in Resources */,
 				CF18A5D81F67CECB003547DB /* TimeAlbum@2x.png in Resources */,
 				CF1395881F2F533500D3C0FD /* Arrow38x38@2x.png in Resources */,
 				542ABE091F13793500F5F161 /* LaunchScreen.storyboard in Resources */,
 				5402674A1F2537E9005967DE /* MyCollectionViewCellWithText.xib in Resources */,
 				CFFFC7911F24D10C0097284F /* Female38x38@2x.png in Resources */,
-				5428BD731F160494003361AC /* loginPage.storyboard in Resources */,
 				CF26410A1F4351BF005EBFBC /* background2@2x.jpg in Resources */,
 				54296C9F1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.xib in Resources */,
 				CF0B785C1F1DE8F80067229D /* icon_menu20x20@2x.png in Resources */,
@@ -743,10 +760,12 @@
 				CF18A5B21F651A68003547DB /* PostCard2@2x.png in Resources */,
 				5402675B1F26BCD1005967DE /* messageBG.png in Resources */,
 				CF0B78521F1DE2990067229D /* 成就75x75@2x.png in Resources */,
+				540B8B511F5F2F890088E064 /* WebViewContent.html in Resources */,
 				CFFFC7971F24DFE30097284F /* Another48x48@2x.png in Resources */,
 				CF18A5C91F654014003547DB /* Heart@2x.png in Resources */,
 				54A82D4B1F37CE510032996D /* cup01.jpg in Resources */,
 				CFFFC78D1F24CADD0097284F /* Male30x30@2x.png in Resources */,
+				543071771F542E7200DC2536 /* ImagePageViewController.storyboard in Resources */,
 				CF0B78561F1DE40D0067229D /* 相簿75x75@2x.png in Resources */,
 				CF18A5CA1F654014003547DB /* Inject@2x.png in Resources */,
 				CF9F66C61F5846FE0099CF0A /* Assets.xcassets in Resources */,
@@ -756,9 +775,11 @@
 				CF13958E1F2F6F7600D3C0FD /* Camera65x65@2x.png in Resources */,
 				CF26410B1F4351BF005EBFBC /* background3@2x.jpg in Resources */,
 				540267451F24A652005967DE /* c.png in Resources */,
+				540B8B561F5F3E760088E064 /* flash.gif in Resources */,
 				CF26410C1F4351BF005EBFBC /* background4@2x.jpg in Resources */,
 				CF18A5B41F651A68003547DB /* PostCard4@2x.png in Resources */,
 				CFFFC7991F24E1110097284F /* Another32x38@2x.png in Resources */,
+				543071801F55AE9100DC2536 /* AddAchievement.storyboard in Resources */,
 				CFFFC78F1F24CBFA0097284F /* Female30x30@2x.png in Resources */,
 				CFFFC7A11F259C690097284F /* BabyUser100x100@2x.png in Resources */,
 				CF1395921F30300800D3C0FD /* Camera200x200@2x.png in Resources */,
@@ -838,8 +859,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF43ADDE1F62745400827F26 /* AddAchievementViewController.m in Sources */,
-				CF5A8D2C1F2DEAF800E0FEA6 /* AchievementViewController.m in Sources */,
 				540267511F256A11005967DE /* addNewMessageVC.m in Sources */,
 				5422336F1F26E7CD000933BD /* ThisBabyData.m in Sources */,
 				54296CA21F36B1C9000C06C4 /* PostItem.m in Sources */,
@@ -850,7 +869,6 @@
 				544EFFF21F5B53620078F143 /* MyCollectionViewCellWithImage2.m in Sources */,
 				542233721F2738E8000933BD /* MyCommunicator.m in Sources */,
 				CF195F2E1F4725840064FDF0 /* UseDownloadDataClass.m in Sources */,
-				542ABE011F13793500F5F161 /* ViewController.m in Sources */,
 				CF783CF51F35DB7F0083948D /* SelectedRow.m in Sources */,
 				5402674E1F2544FF005967DE /* textLayout.m in Sources */,
 				CF0B784B1F1DBAF60067229D /* AboutMeViewcontrollerCell.m in Sources */,
@@ -879,7 +897,9 @@
 				CF0B782D1F1C88150067229D /* SliderMenuViewLeft.m in Sources */,
 				542ABDFB1F13793500F5F161 /* main.m in Sources */,
 				CF0B78661F1E3D290067229D /* AddChildSettingViewController.m in Sources */,
+				5430717E1F55AE6000DC2536 /* AddAchievementViewController.m in Sources */,
 				CF5A8D321F2EF7C400E0FEA6 /* WriteMailViewController.m in Sources */,
+				CF5A8D2C1F2DEAF800E0FEA6 /* AchievementViewController.m in Sources */,
 				CFC6DB621F2ACF8600669187 /* FutureMailViewController.m in Sources */,
 				CF18A55C1F6285D7003547DB /* SetUserInfoTableViewControler.m in Sources */,
 				CF195F341F48A1050064FDF0 /* UpdateDataView.m in Sources */,
@@ -891,10 +911,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5428BD711F160494003361AC /* loginPage.storyboard */ = {
+		540B8B521F5F3CFF0088E064 /* loginPage.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				5428BD721F160494003361AC /* Base */,
+				540B8B531F5F3CFF0088E064 /* Base */,
 			);
 			name = loginPage.storyboard;
 			sourceTree = "<group>";
@@ -1040,6 +1060,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Greathard.TheTimeAlbum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1056,6 +1077,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Greathard.TheTimeAlbum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

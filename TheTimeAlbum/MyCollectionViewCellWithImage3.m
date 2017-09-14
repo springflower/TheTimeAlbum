@@ -27,7 +27,7 @@
     
     self.backGroundImage.layer.borderWidth = 1;
     //self.backGroundImage.layer.borderColor = [UIColor flatGrayColor].CGColor;
-    self.backGroundImage.layer.borderColor = [UIColor flatCoffeeColor].CGColor;
+    self.layer.borderColor = [UIColor flatCoffeeColor].CGColor;
     self.backGroundImage.layer.cornerRadius = 5;
     self.backGroundImage.clipsToBounds = YES;
     

@@ -114,9 +114,10 @@
     [self.view addSubview:myTableView];
     
 //    HeadView * vc = [[HeadView alloc]initWithFrame:headRect backgroundView:@"Fox.jpg" headView:@"head.png" headViewWidth:(CGFloat)(VCWidth / 4) signLabel:@"紀錄寶寶成長的每個重要時刻"];
-    
-    HeadView * vc = [[HeadView alloc]initWithFrameByBryan:headRect backgroundView:readMyChildBackImageArray[ChildID]
-                                                 headView:ChildStickerImage
+    UIImage * head = [UIImage imageWithData:[localUserData objectForKey:@"currentBabyImage"]];
+    HeadView * vc = [[HeadView alloc]initWithFrameByBryan:headRect
+                                           backgroundView:@"background4.jpg"
+                                                 headView:head
                                             headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
     
     _myView = vc;
@@ -164,7 +165,7 @@
         cell.howManyDays.text = thisHowManyDays;
         NSLog(@"the date: %@", thisCreateDate);
         cell.creatDate.text = thisCreateDate;
-        cell.achievementPic.image = [UIImage imageNamed:@"cup01.jpg"];
+        cell.achievementPic.image = [UIImage imageNamed:@"AC01.png"];
         return cell;
     }
     

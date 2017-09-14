@@ -162,9 +162,9 @@
     
     //開始上傳資料並設定更新動畫執行
     
-    updateChildBigstickerArray = [[UpdateDataView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [[UIApplication sharedApplication].delegate.window addSubview:updateChildBigstickerArray];
-    updateChildBigstickerArray.hidden = true;
+//    updateChildBigstickerArray = [[UpdateDataView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//    [[UIApplication sharedApplication].delegate.window addSubview:updateChildBigstickerArray];
+//    updateChildBigstickerArray.hidden = true;
     
     //準備接收通知更新 SetInfoTableViewControler
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:@"SetInfoTableViewControler" object:nil];
@@ -185,19 +185,19 @@
 
 - (IBAction)Finished:(id)sender {
     
-    [[UseDownloadDataClass object] PutChangeChildInformation:ChildName ChangeChildBirthday:ChildBirthday];
+//    [[UseDownloadDataClass object] PutChangeChildInformation:ChildName ChangeChildBirthday:ChildBirthday];
     
 //    application = [UIApplication sharedApplication];
     
 //    bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
         //將更新動畫顯示
-        updateChildBigstickerArray.hidden = false;
-        //將更改後的孩子大頭貼放到目前選取的孩子大頭貼陣列
-        NSData *ChildBigStickerImageData = [NSData dataWithData:UIImagePNGRepresentation(ChildBigStickerImage)];
-        putChildBigStickerArray[ChildID] = ChildBigStickerImageData;
-        
-        //上傳更改後的孩子大頭貼陣列
-        [updateChildBigstickerArray UpdataChildBigstickerIfUseChangeunction:putChildBigStickerArray];
+//        updateChildBigstickerArray.hidden = false;
+//        //將更改後的孩子大頭貼放到目前選取的孩子大頭貼陣列
+//        NSData *ChildBigStickerImageData = [NSData dataWithData:UIImagePNGRepresentation(ChildBigStickerImage)];
+//        putChildBigStickerArray[ChildID] = ChildBigStickerImageData;
+//        
+//        //上傳更改後的孩子大頭貼陣列
+//        [updateChildBigstickerArray UpdataChildBigstickerIfUseChangeunction:putChildBigStickerArray];
 
 //        [application endBackgroundTask:bgTask];
 //        bgTask = UIBackgroundTaskInvalid;

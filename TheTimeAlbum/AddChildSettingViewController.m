@@ -558,6 +558,7 @@
     if(WithRelationship == 1) {
         [putWithChildRelationShipArray addObject:_FatherSelected.titleLabel.text];
         [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];
+        [defaults setObject:_FatherSelected.titleLabel.text forKey:@"WithRelationship"];
     } else if(WithRelationship == 2) {
         [putWithChildRelationShipArray addObject:_MotherSelected.titleLabel.text];
         [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];

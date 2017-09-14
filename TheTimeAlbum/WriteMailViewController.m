@@ -53,8 +53,6 @@
     NSMutableArray *mailDateContentArray;
     //準備變數讀取決定是使用 popViewControler 還是 dimissViewControler
     int popViewOrdimissViewfunc;
-    //準備觸控事件
-    UITapGestureRecognizer *tapImageAnfVideo;
     //準備將 objectsToShare 給 UIActivityViewController 值
     NSMutableArray *objectsToShare;
     
@@ -70,8 +68,14 @@
     
     mailDateContentArray = [NSMutableArray new];
     mailDateContentArray = [[defaults objectForKey:@"mailDateContentArray"] mutableCopy];
+    if(mailDateContentArray.count == 0) {
+        mailDateContentArray = [NSMutableArray new];
+        
+    }
     
     [self MyWriteMailTableViewPrepare];
+    
+    
     
     // Read is new Mail or Old Mail. 讀取是否為新郵件或舊郵件.
     if([[SelectedRow object] didSelectedRowAboutMail] >=0 && [[SelectedRow object] didSelectedNewOrOldAboutMail]) {
@@ -116,16 +120,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //設定手指觸控事件加入到 View 上
-//    tapImageAnfVideo= [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(detectTap:)];
-//    tapImageAnfVideo.delegate = self;
-//    tapImageAnfVideo.numberOfTapsRequired = 1;
-//    tapImageAnfVideo.numberOfTouchesRequired = 1;
-//    [_TextView addGestureRecognizer:tapImageAnfVideo];
-    
-//    _TextView.delegate = self;
-//    _TextView.selectable = YES;
-    //_TextView.editable = false;
+    _TextView.delegate = self;
     
     //準備設定 Frame
     fullScreenBounds=[[UIScreen mainScreen] bounds];
@@ -153,28 +148,30 @@
 
 -(BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange {
     
-    return YES;
+    NSLog(@"shouldInteractWithTextAttachment: %@",textAttachment);
+    
+    return false;
+}
+
+
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    _TextView.selectable = false;
+    _TextView.editable = true;
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView {
+    _TextView.selectable = true;
+    _TextView.editable = false;
+}
+-(void)textViewDidChangeSelection:(UITextView *)textView {
+    
 }
 
 // Set fingerTouch event. 設定手指觸發事件來移動清單.
 -(void)detectTap:(UITapGestureRecognizer*)recognizer {
-    
     ImagePhotoViewController *imageView = [self.storyboard instantiateViewControllerWithIdentifier:@"ImagePhotoViewController"];
     [self presentViewController:imageView animated:NO completion:nil];
 }
-
-
-//-(BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
-//    NSLog(@"有網址！！！！");
-//
-//        return false;
-//    
-//    
-//}
-//-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-//    
-//    return YES;
-//}
 
 #pragma mark - Prepare set SendContent by mail 準備傳送內容分享上傳
 
@@ -383,12 +380,12 @@
     attStr = (NSMutableAttributedString*)[NSMutableAttributedString attributedStringWithAttachment:attachment];
 
     if(fileURL != nil) {
-        [attStr addAttribute: NSLinkAttributeName value:fileURL range: NSMakeRange(0, attStr.length)];
+        [attStr addAttribute: NSURLLinkCountKey value:fileURL range: NSMakeRange(0, attStr.length)];
     }
     
     NSRange selectedRange =  _TextView.selectedRange;
 
-    [attStr addAttribute:NSLinkAttributeName value:@"Image://" range:selectedRange];
+    [attStr addAttribute:NSLinkAttributeName value:@"Image://tap" range:selectedRange];
     
     NSMutableAttributedString *textViewcontent = [[NSMutableAttributedString alloc]
                                                   initWithAttributedString:_TextView.attributedText];
@@ -454,7 +451,6 @@
 
 -(void)resgisterKeyborad {
     [_TextView resignFirstResponder];
-    [_TextView addGestureRecognizer:tapImageAnfVideo];
 }
 
 #pragma mark - Prepare to set Toobar and PhotoImage add Keyboard. 準備 Toobar 和 照相圖片加入鍵盤
@@ -550,8 +546,7 @@
 }
 
 
--(void)textViewDidEndEditing:(UITextView *)textView {
-}
+
 
 #pragma mark - Prepare set KeyBoard position 準備設定鍵盤位置根據浮標移動
 

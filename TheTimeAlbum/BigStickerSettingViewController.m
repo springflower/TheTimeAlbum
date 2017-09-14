@@ -26,8 +26,8 @@
     NSUserDefaults *defaults;
     //準備讀取儲存的孩子大頭貼陣列
     NSMutableArray *putMyBigStickerArray;
-    //準備上傳資料使用
-    UpdateDataView *updateChildBigstickerArray;
+//    //準備上傳資料使用
+//    UpdateDataView *updateChildBigstickerArray;
 }
 
 @synthesize MyBigSticker = MyBigSticker;
@@ -35,9 +35,9 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     
-    updateChildBigstickerArray = [[UpdateDataView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [[UIApplication sharedApplication].delegate.window addSubview:updateChildBigstickerArray];
-    updateChildBigstickerArray.hidden = true;
+//    updateChildBigstickerArray = [[UpdateDataView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//    [[UIApplication sharedApplication].delegate.window addSubview:updateChildBigstickerArray];
+//    updateChildBigstickerArray.hidden = true;
     
 }
 
@@ -122,6 +122,9 @@
         
          MyBigSticker.image = editImage;
         
+        NSData *saveImage = UIImageJPEGRepresentation(editImage, 100);
+        [defaults setObject:saveImage forKey:@"currentBabyImage"];
+        
         
     } else if([type isEqualToString:(NSString*)kUTTypeMovie]) {
         
@@ -201,12 +204,13 @@
         putMyBigStickerArray = [NSMutableArray new];
     }
     
-    updateChildBigstickerArray.hidden = false;
-    //將孩子的大頭貼照片轉成 Data 後，再進行儲存資料的動作
-    NSData* MyChildBigStickerData = [NSData dataWithData:UIImagePNGRepresentation(MyBigSticker.image)];
-    [putMyBigStickerArray addObject:MyChildBigStickerData];
-    //將儲存的的孩子大頭貼陣列資料上傳進行更新
-    [updateChildBigstickerArray UpdataChildBigsticker:putMyBigStickerArray];
+    [self EndingThisPageAndLastPage];
+//    updateChildBigstickerArray.hidden = false;
+//    //將孩子的大頭貼照片轉成 Data 後，再進行儲存資料的動作
+//    NSData* MyChildBigStickerData = [NSData dataWithData:UIImagePNGRepresentation(MyBigSticker.image)];
+//    [putMyBigStickerArray addObject:MyChildBigStickerData];
+//    //將儲存的的孩子大頭貼陣列資料上傳進行更新
+//    [updateChildBigstickerArray UpdataChildBigsticker:putMyBigStickerArray];
     
 }
 

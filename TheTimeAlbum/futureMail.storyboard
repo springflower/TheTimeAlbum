@@ -33,7 +33,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="233"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MND-tN-6p1" id="saj-xp-W9f">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="232.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="233"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kaL-w5-BxQ">
@@ -177,6 +177,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="Kah-8D-GT7">
                         <barButtonItem key="backBarButtonItem" title="Back" id="KBg-wO-v7C"/>
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="Jmp-5c-eol">
+                            <connections>
+                                <action selector="backLastPage:" destination="9y0-48-QcI" id="mz7-aA-M3s"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem style="plain" systemItem="done" id="bX0-Op-Mrq">
                                 <connections>

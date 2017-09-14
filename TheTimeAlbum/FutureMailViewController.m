@@ -84,8 +84,7 @@
                 NSArray *readChildBigStickerArray = [[UseDownloadDataClass object] ReadChildBigStickerArray];
                 NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
                 if(readChildBigStickerArray.count != 0) {
-                    ChidlBigStickerImageView.image = [UIImage imageWithData:ChildBigStickerImageData];
-                    
+                    ChidlBigStickerImageView.image = [UIImage imageWithData:ChildBigStickerImageData];                    
                 }
             }
             
