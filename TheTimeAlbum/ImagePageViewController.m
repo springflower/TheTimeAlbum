@@ -342,6 +342,10 @@
     NSLog(@"%@,,,,,,", tt);
     goAddAchievementPage.thisPicName = tt;
     goAddAchievementPage.thisImage = thisIVC.thisImage;
+    
+    if ( optionMenuIsUp ){
+        [self closeMenu];
+    }
     //goAddAchievementPage.achievementImage.image = thisIVC.thisImage;
     //[self presentViewController:goAddAchievementPage animated:YES completion:nil];
     [self.navigationController pushViewController:goAddAchievementPage animated:YES];

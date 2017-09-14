@@ -76,11 +76,13 @@ static MyCommunicator *_singletonCommunicator = nil;
                           title:(NSString*) title
                         picName:(NSString*) picName
                      createDate:(NSString*) createDate
+                createDateStamp:(NSTimeInterval) createDateStamp
                      completion:(DoneHandler) done {
     
     NSDictionary *parameters = @{@"babyId": babyID,
                                  @"title": title,
                                  @"picName": picName,
+                                 @"createDateStamp": @(createDateStamp),
                                  @"createDate": createDate};
     NSLog(@"parameters: %@", parameters);
     
@@ -91,13 +93,28 @@ static MyCommunicator *_singletonCommunicator = nil;
                    completion:done];
     
 }
-//FIXME: 未完成
+// 新增新的小孩
 - (void) addChildToServerWithBabyName:(NSString*) babyName
                          babyBirthday:(NSString*) babyBirthday
-                            fatherUID:(NSInteger) fuid
-                            motheruid:(NSInteger) muid {
+                           babyGender:(NSString*) babyGender
+                   senderRelationShip:(NSString*) senderRelationship
+                            senderUID:(NSString*) senderUID
+                          babyPicName:(NSString*) babyPicName
+                           completion:(DoneHandler) done {
 
-
+    NSDictionary *parameters = @{@"babyName": babyName,
+                                 @"babyBirthday": babyBirthday,
+                                 @"babyGender": babyGender,
+                                 @"senderRelationship": senderRelationship,
+                                 @"senderUID": senderUID,
+                                 @"babyPicName": babyPicName };
+    NSLog(@"parameters: %@", parameters);
+    
+    // 通用API(自製) 向server送出post指令
+    [self doPostWithURLString:ADD_BABY_URL
+                   parameters:parameters
+                         data:nil
+                   completion:done];
 
 }
 
@@ -193,6 +210,38 @@ static MyCommunicator *_singletonCommunicator = nil;
     
 }
 
+// 修改寶寶的圖片
+- (void) updateBabyDataToSQLWithPicName:(NSString*) babyPicName
+                               babyName:(NSString*) babyName
+                           babyBirthday:(NSString*) babyBirthday
+                                 babyID:(NSInteger) babyID
+                             completion:(DoneHandler)done {
+    NSMutableDictionary *temp;
+    temp = [NSMutableDictionary new];
+    NSDictionary *params;
+    NSLog(@"奇怪了上傳資料: %@, %@, %@, %ld", babyPicName,babyName,babyBirthday,babyID);
+    if (babyPicName != nil){
+    
+        [temp setObject:babyPicName forKey:@"babyPicName"];
+    }
+    if (babyName != nil) {
+        //NSLog(@"??");
+        [temp setObject:babyName  forKey:@"babyName"];
+    }
+    if (babyBirthday != nil){
+    
+        [temp setObject:babyBirthday forKey:@"babyBirthday"];
+    }
+    NSString *tempID = [NSString stringWithFormat:@"%ld",babyID];
+    [temp setObject:tempID forKey:@"babyID"];
+    //NSLog(@" temp : %@", temp);
+    //NSLog(@" ???: %@", [temp objectForKey:@"babyName"]);
+    params = temp;
+    [self doPostWithURLString:UPDATE_BABY_DATA
+                   parameters:params
+                         data:nil
+                   completion:done];
+}
 
 // 刪除貼文
 - (void) deletePostByPostID:(NSInteger) postID
@@ -202,6 +251,31 @@ static MyCommunicator *_singletonCommunicator = nil;
     NSDictionary *params = @{ @"postId": @(postID)};
     
     [self doPostWithURLString:DELETE_POST_URL
+                   parameters:params
+                         data:nil
+                   completion:done];
+}
+
+// 刪除成就
+- (void) deleteAchievementByID:(NSInteger) achievementID
+                 completion:(DoneHandler) done{
+    
+    //...
+    NSDictionary *params = @{ @"achievementID": @(achievementID)};
+    
+    [self doPostWithURLString:DELETE_ACHIEVEMENT_URL
+                   parameters:params
+                         data:nil
+                   completion:done];
+}
+// 刪除寶寶
+- (void) deleteBabyByBabyID:(NSInteger) babyID
+                 completion:(DoneHandler) done{
+    
+    //...
+    NSDictionary *params = @{ @"babyID": @(babyID)};
+    
+    [self doPostWithURLString:DELETE_BABY_URL
                    parameters:params
                          data:nil
                    completion:done];

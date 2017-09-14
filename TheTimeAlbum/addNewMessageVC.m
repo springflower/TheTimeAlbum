@@ -11,12 +11,14 @@
 #import "myDefines.h"
 #import "MyCommunicator.h"
 #import <KVNProgress.h>
+#import "UITextView+YLTextView.h"
 
-
-@interface addNewMessageVC ()
+@interface addNewMessageVC () <UITextViewDelegate>
 {
     MyCommunicator *comm;
+    NSUserDefaults *localUserData;
 }
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end
 
@@ -27,9 +29,62 @@
     // Do any additional setup after loading the view.
     
     comm = [MyCommunicator sharedInstance];
+    localUserData = [NSUserDefaults standardUserDefaults];
     
+    
+    [self initKeyboard];
     
 }
+
+
+- (void) initKeyboard {
+    
+    //NSString *date = [NSString stringWithFormat:@"%@", [NSDate date]];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy年M月d日";
+    NSString *dateString = [formatter stringFromDate:[NSDate date]];
+    self.titleLabel.text = dateString;
+    
+    //[self.contentText setFont:[UIFont systemFontOfSize:19.0]];
+    self.contentText.tag = 1001;
+    self.contentText.returnKeyType = UIReturnKeyDefault; // 下一行
+    self.contentText.delegate = self;
+    
+    
+    self.contentText.text = @"";
+    self.contentText.placeholder = @"記錄下今天的心情吧...";
+    self.contentText.limitLength = @200;
+    self.contentText.limitLines = @14;//行数限制优先级低于字数限制
+   // [self.view addSubview:textView];
+    
+    
+    
+    // 2、键盘上方附加一个toolbar，toolbar上有个完成按钮
+    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+    keyboardDoneButtonView.barStyle = UIBarStyleBlack;
+    keyboardDoneButtonView.translucent = YES;
+    keyboardDoneButtonView.tintColor = nil;
+    [keyboardDoneButtonView sizeToFit];
+    // toolbar上的2个按钮
+    UIBarButtonItem *SpaceButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                               target:nil  action:nil]; // 让完成按钮显示在右侧
+    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完成"
+                                                                   style:UIBarButtonItemStylePlain target:self
+                                                                  action:@selector(pickerDoneClicked)];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:SpaceButton, doneButton, nil]];
+    self.contentText.inputAccessoryView = keyboardDoneButtonView;
+    
+    
+    //[self.view addSubview:tv];
+}
+
+-(void)pickerDoneClicked
+{
+    UITextView* view = (UITextView*)[self.view viewWithTag:1001];
+    [view resignFirstResponder];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -37,8 +92,7 @@
 }
 // FIXME: add uid to post
 - (IBAction)saveBtnPressed:(id)sender {
-    //FIXME: fake babyID
-    NSString *babyID = @"1";
+    NSString *babyID = [localUserData objectForKey:@"babyid"];
     NSString *content = self.contentText.text;
     NSString *postType = @"1";
     

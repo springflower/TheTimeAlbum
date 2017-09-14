@@ -14,41 +14,41 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - AWSAutoScaling (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSCloudWatch (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSCognito (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSCognitoIdentityProvider (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSCore (2.5.8)
-  - AWSDynamoDB (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSEC2 (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSElasticLoadBalancing (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSIoT (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSKinesis (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSLambda (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSMachineLearning (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSMobileAnalytics (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSS3 (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSSES (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSSimpleDB (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSSNS (2.5.8):
-    - AWSCore (= 2.5.8)
-  - AWSSQS (2.5.8):
-    - AWSCore (= 2.5.8)
+  - AWSAutoScaling (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSCloudWatch (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSCognito (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSCognitoIdentityProvider (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSCore (2.6.1)
+  - AWSDynamoDB (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSEC2 (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSElasticLoadBalancing (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSIoT (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSKinesis (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSLambda (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSMachineLearning (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSMobileAnalytics (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSS3 (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSSES (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSSimpleDB (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSSNS (2.6.1):
+    - AWSCore (= 2.6.1)
+  - AWSSQS (2.6.1):
+    - AWSCore (= 2.6.1)
   - BFPaperButton (2.1.2)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
@@ -90,7 +90,7 @@ PODS:
   - Google/SignIn (3.1.0):
     - Google/Core
     - GoogleSignIn (~> 4.0)
-  - GoogleSignIn (4.0.2):
+  - GoogleSignIn (4.1.0):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
     - GTMOAuth2 (~> 1.0)
@@ -105,17 +105,17 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
-  - GTMOAuth2 (1.1.4):
+  - GTMOAuth2 (1.1.5):
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.1.10):
-    - GTMSessionFetcher/Full (= 1.1.10)
-  - GTMSessionFetcher/Core (1.1.10)
-  - GTMSessionFetcher/Full (1.1.10):
-    - GTMSessionFetcher/Core (= 1.1.10)
+  - GTMSessionFetcher (1.1.11):
+    - GTMSessionFetcher/Full (= 1.1.11)
+  - GTMSessionFetcher/Core (1.1.11)
+  - GTMSessionFetcher/Full (1.1.11):
+    - GTMSessionFetcher/Core (= 1.1.11)
   - JTSImageViewController (1.5.1)
   - KVNProgress (2.3.1)
   - LGPlusButtonsView (1.1.1)
-  - TZImagePickerController (1.8.1)
+  - TZImagePickerController (1.9.3)
 
 DEPENDENCIES:
   - AFNetworking
@@ -149,24 +149,24 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AWSAutoScaling: b0ca14740f9f26282d6ccd00a7b2f5a499506c28
-  AWSCloudWatch: 9813ebc6104bc61599b12fa448047c69d4a0115c
-  AWSCognito: 8eb74039f4dc5f2d929999c4f531eeb4bd83e6cb
-  AWSCognitoIdentityProvider: 6c0c276a16b622914563350c64d723bcecaa9e75
-  AWSCore: cf101c44d2cc5da32abc27d5529cddc63c010415
-  AWSDynamoDB: 53ead656801e1a40b415fc0bebd85f1dc0dc0ead
-  AWSEC2: d2817357186d4cc18c23ec0b9deb136bfea88b3a
-  AWSElasticLoadBalancing: 9fd9f162b87bded22a5d0406173d8b128eabc379
-  AWSIoT: 209ae36ea1e48a9b8bcb65a94e8267265b4ff2b3
-  AWSKinesis: d4badcaa538424fad79aa86bc35626aa0b7019c9
-  AWSLambda: d83a31bca72ce8e6a6b81a5a3a03e7ea2a44ec3d
-  AWSMachineLearning: bc8860ad5c2651616f6482e7d70842ba89eaf7a8
-  AWSMobileAnalytics: d0eefb1dbcab87cb97f78961bb847f61396380bb
-  AWSS3: addf558f9cf2368e7fb520440867fea5596db0fb
-  AWSSES: 4b81522e24a8e4095d8d6c0511397ab1d51fc06f
-  AWSSimpleDB: d25964f8ec8e5d20af3755667fe0c2924e28925c
-  AWSSNS: 812baa3f5dd5e53da69c37fb8b451e52d0735821
-  AWSSQS: bea4c7b93c011c7765a071b01ad74949d62c1d76
+  AWSAutoScaling: 69870fc0dc0417adba08aacbacfe1c4cbe1aa7b6
+  AWSCloudWatch: 48ffd6cc1610c4113d5dc079f51534b85df7e26e
+  AWSCognito: 9aad635e11de0febf026e8a8acbbd345b2016801
+  AWSCognitoIdentityProvider: a335678a0024fa2b44213bc4e86b46b21773e567
+  AWSCore: e7d37fa0715def975acf1b0d75556576780088b8
+  AWSDynamoDB: e873d66ccd547efad9a7e266b8803659a53e0ac9
+  AWSEC2: 5cf1ec29b12711baebe33ef9349bc413f623a7d1
+  AWSElasticLoadBalancing: 48028580b69ffd136ec1e94bfe2026c2e607bb26
+  AWSIoT: b070b7f3967314f58e5c349f383b9f533f63c67a
+  AWSKinesis: c63805f4fe943515e0291532cf6ff7f4269002ef
+  AWSLambda: 044446e6a9310379a10939fb4e151b2b4a9fe5e6
+  AWSMachineLearning: 3f2c50f631cad10431e5dade434adf400fa05834
+  AWSMobileAnalytics: e787c0a07a2a428ac27cc4a13be087b4bc667322
+  AWSS3: 2e18ede28199a5530955dc1a65434da43dcc4d2c
+  AWSSES: aba21100f333fbe5b187ad763da18d5946079be3
+  AWSSimpleDB: 6060ddb066ca25b28853a453471c926764c484e4
+  AWSSNS: c92b66ebd6f434ae106d3ba49f9432436daba37e
+  AWSSQS: 8e55f609a5be369ec5c7348285c75d91cae9f3fe
   BFPaperButton: a25fdd3ff6898bdbd5cc9b1334ca36adb0296b9f
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
@@ -175,14 +175,14 @@ SPEC CHECKSUMS:
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   Google: 98da4b1a60ed0beb80a290387a28333406a1eb90
-  GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
+  GoogleSignIn: 8c599fc10d25b2af86a3f82fd9631e863f2b1400
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
-  GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
+  GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   JTSImageViewController: 1f8ce1cc93dab0d0af8e53badeea7528560cfec9
   KVNProgress: 8167b1f19e2758290c0b6143020ed9dcbb0477a1
   LGPlusButtonsView: 57878cd3d461d0ee2042f5b7b25d1c017e22a084
-  TZImagePickerController: 086034156913375cb19c8e4103562f15322c3b36
+  TZImagePickerController: 079ab986018c22793462e531045a75e366b18252
 
 PODFILE CHECKSUM: 4fe9fdcbf7caf197abb9ae62f114ec250b8170e0
 

@@ -15,6 +15,7 @@
 #import "timeLineVC.h"
 #import "UpdateDataView.h"
 #import <KVNProgress.h>
+#import <AWSS3.h>
 
 @interface loginViewController () <FBSDKLoginButtonDelegate, GIDSignInDelegate,GIDSignInUIDelegate>
 {
@@ -31,6 +32,10 @@
     MyCommunicator *comm;
     
     
+    NSMutableArray *incomingBabyNames;
+    NSMutableArray *incomingBabyDateStrings;
+    NSMutableArray *incomingBabyPics;
+    NSMutableArray *incomingBabyIDs;
     
     
     //FIXME: temp
@@ -143,71 +148,11 @@
         [self dismissViewControllerAnimated:YES completion:nil];
         return;
     }
-
-    
-    
-    //////
-    //增加小孩名字到陣列中
- //   [putChildTextFieldnameArray addObject:ChildNameTextField.text];
-    //增加小孩生日到陣列中
- //   [putChildBirthdayFieldArray addObject:BirthdayTextField.text];
-    //增加信件陣列數量給存放孩子個人信件的陣列
- //   NSArray *emptyArray = [NSArray new];
- //   [putDateArray addObject:emptyArray];
-    //增加信件內容數量給存放孩子個人信件內容陣列
- //   [putTextViewArray addObject:emptyArray];
-    
-    //儲存當下的小孩ID
-    //[defaults setInteger:ChildID forKey:@"ChildID"];
-    //儲存小孩名字陣列
-//    [defaults setObject:putChildTextFieldnameArray forKey:@"ChildName"];
-//    //儲存小孩生日陣列
-//    [defaults setObject:putChildBirthdayFieldArray forKey:@"ChildBirthday"];
-//    //儲存信件陣列給存放孩子個人信件的陣列
-//    [defaults setObject:putDateArray forKey:@"Mailibformation"];
-//    //儲存信件內容陣列給存放孩子個人信件內容的陣列
-//    [defaults setObject:putTextViewArray forKey:@"textViewcontent"];
-//    //儲存小孩性別陣列
-//    if(ChildSex == 1) {
-//        [putChildSexArray addObject:BoySelected.titleLabel.text];
-//        [defaults setObject:putChildSexArray forKey:@"readChildSexArray"];
-//    } else if(ChildSex == 2) {
-//        [putChildSexArray addObject:GirlSelected.titleLabel.text];
-//        [defaults setObject:putChildSexArray forKey:@"readChildSexArray"];
-//    } else {
-//        [putChildSexArray addObject:AnotherSelected.titleLabel.text];
-//        [defaults setObject:putChildSexArray forKey:@"readChildSexArray"];
-//    }
-//    //儲存你與孩子的關係
-//    if(WithRelationship == 1) {
-//        [putWithChildRelationShipArray addObject:_FatherSelected.titleLabel.text];
-//        [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];
-//        [defaults setObject:_FatherSelected.titleLabel.text forKey:@"WithRelationship"];
-//    } else if(WithRelationship == 2) {
-//        [putWithChildRelationShipArray addObject:_MotherSelected.titleLabel.text];
-//        [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];
-//    } else {
-//        [putWithChildRelationShipArray addObject:_AnotherRelationship.titleLabel.text];
-//        [defaults setObject:putWithChildRelationShipArray forKey:@"readWithChildRelationShipArray"];
-//    }
-//    //將孩子的背景圖片隨機產生，儲存在孩子的背景陣列中
-//    int x = arc4random() % 5;
-//    NSArray *randomBackgroundImageArray = @[@"background1@2x.jpg",
-//                                            @"background2@2x.jpg",
-//                                            @"background3@2x.jpg",
-//                                            @"background4@2x.jpg",
-//                                            @"background5@2x.jpg"];
-//    NSString *MyChildBackImage = [[NSString alloc]initWithString:randomBackgroundImageArray[x]];
-//    [putMyChildBackImageArray addObject:MyChildBackImage];
-//    [defaults setObject:putMyChildBackImageArray forKey:@"readMyChildBackImageArray"];
-//    NSLog(@"  數量為： %lu ",
-//          (unsigned long)putMyChildBackImageArray.count);
-//    //設定如果孩子的名字只有一個，將孩子 ID 設為 0
-//    if(putChildTextFieldnameArray.count == 1) {
-//        [defaults setInteger:0 forKey:@"ChildID"];
-//    }
-//    
-//    [defaults synchronize];
+    incomingBabyIDs = [NSMutableArray new];
+    incomingBabyNames = [NSMutableArray new];
+    incomingBabyDateStrings = [NSMutableArray new];
+    incomingBabyPics = [NSMutableArray new];
+    [defaults synchronize];
     
 
 
@@ -304,7 +249,8 @@
              if([result1[@"uid"] isEqualToString:@""]) {
                  NSLog(@"** GO Register **");
                  [self registerToSQL: currentuser];
-                 return;
+                 
+                 //return;
              }else {
                  NSLog(@"** No need to Register **");
                  NSLog(@"currentuser.uid: %@",currentuser.userId);
@@ -422,11 +368,13 @@
                      NSLog(@"===== register user to sql:%@", result[RESULT_KEY]);
                      
                      if([result[RESULT_KEY] boolValue] == true){
-                         [comm getUIDFromSQLByFBID:currentuser.userFBId completion:^(NSError *error, id result) {
-                             currentuser.userId = result[@"uid"];
-                             [localUserData setObject:result[@"uid"] forKey:@"uid"];
-                             NSLog(@"註冊後找回的uid: %@",currentuser.userId);
-                         }];
+                         [comm getUIDFromSQLByFBID:currentuser.userFBId
+                                        completion:^(NSError *error, id result) {
+                                            currentuser.userId = result[@"uid"];
+                                            [localUserData setObject:result[@"uid"] forKey:@"uid"];
+                                            NSLog(@"註冊後找回的uid: %@",currentuser.userId);
+                                            [self getBabyData];
+                                        }];
                      }
                      // 伺服器php指令是否成功
                      if([result[RESULT_KEY] boolValue] == false){
@@ -464,13 +412,16 @@
                         //[self doReloadJob];
                         return;
                     }
-                    //取回來的 成就們的 陣列
+                    //取回來的 寶寶們的 陣列
                     NSArray *items = result[@"BabysArr"];
                     NSLog(@"Receive babys number: %lu", items.count);
                     
                     // 如果名下都沒有寶寶
                     if(items.count == 0){
                         NSLog(@"No baby , do nothing and return.");
+                        // 做些什麼
+                        [KVNProgress dismiss];
+                        [self goNextPage];
                         return;
                     }
                     //[getAchievementItems removeAllObjects];
@@ -517,10 +468,11 @@
     NSInteger babyID = [tmp[@"babyID"] integerValue];
     NSString *babyName = tmp[@"babyName"];
     NSString *dateString = tmp[@"birthday"];
+    NSString *babyPic = tmp[@"babyPic"];
     
-    NSLog(@" got babyID: %ld, babyName: %@, dateString: %@", babyID, babyName, dateString);
+    NSLog(@" got babyID: %ld, babyName: %@, dateString: %@, babyPic: %@", babyID, babyName, dateString, babyPic);
     
-    
+    [self downloadBabyPicifNeeded:babyPic];
     //將取回的日期轉成NSDate
     NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
     gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
@@ -528,44 +480,110 @@
     NSDate  *date = [gmtDateFormatter dateFromString:dateString];
     NSLog(@"-- date :%@", date);
     
+    [incomingBabyNames addObject:babyName];
+    [incomingBabyDateStrings addObject:dateString];
+    [incomingBabyPics addObject:babyPic];
+    [incomingBabyIDs addObject:@(babyID)];
     
     if (howManyPosts == incomingPosts.count) {
         //  暫存第一個baby的資料作為預設寶寶
-        [localUserData setInteger:babyID forKey:@"ChildID"];  //要給下載資料讀的
         [localUserData setObject: [NSString stringWithFormat:@"%ld",babyID] forKey:@"babyid"];
         [localUserData setObject:babyName forKey:@"currentBabyName"];
         [localUserData setObject:date forKey:@"currentBabyBirthday"];
+        [localUserData setObject:babyPic forKey:@"currentBabyPic"];
+        [localUserData setInteger:0 forKey:@"currentBabyIndex"];
+        
+        
+        //"childNames"];
+        //childBirthdays = [localUserData objectForKey:@"childBirthdays"];
+        //childPics = [localUserData objectForKey:@"childPics"];
+        // 寶寶資料
+        
+        
+    }
+    NSLog(@" incoming posts...: %ld", incomingPosts.count);
+    if (incomingPosts.count == 1 ) {
+        
+        [localUserData setObject:incomingBabyNames forKey:@"childNames"];
+        [localUserData setObject:incomingBabyDateStrings forKey:@"childBirthdays"];
+        [localUserData setObject:incomingBabyPics forKey:@"childPics"];
+        [localUserData setObject:incomingBabyIDs forKey:@"childIDs"];
+        
+        NSLog(@" (handle baby) names: %@, bir: %@, pics: %@, ids: %@",
+              [localUserData objectForKey:@"childNames"],
+              [localUserData objectForKey:@"childBirthdays"],
+              [localUserData objectForKey:@"childPics"],
+              [localUserData objectForKey:@"childIDs"] );
+        [incomingBabyNames removeAllObjects];
+        [incomingBabyDateStrings removeAllObjects];
+        [incomingBabyPics removeAllObjects];
+        [incomingBabyIDs removeAllObjects];
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"reloadLeftMenu" object:nil];
     }
     
-    NSLog(@" 存default的 ChildID: %ld babyID: %@, 寶名: %@, 生日: %@", (long)[localUserData integerForKey:@"ChildID"], [localUserData objectForKey:@"babyid"], [localUserData objectForKey:@"currentBabyName"] , [localUserData objectForKey:@"currentBabyBirthday" ]);
-    
-//    // 將每個baby 存到本地user default 陣列裡
-//    //增加小孩名字到陣列中
-//    [putChildTextFieldnameArray addObject:babyName];
-//    //增加小孩生日到陣列中
-//    [putChildBirthdayFieldArray addObject:[localUserData objectForKey:@"currentBabyBirthday" ]];
-//    
-//    //增加信件陣列數量給存放孩子個人信件的陣列
-//    NSArray *emptyArray = [NSArray new];
-//    [putDateArray addObject:emptyArray];
-//    //增加信件內容數量給存放孩子個人信件內容陣列
-//    [putTextViewArray addObject:emptyArray];
-//    
-//    //儲存小孩名字陣列
-//    [defaults setObject:putChildTextFieldnameArray forKey:@"ChildName"];
-//    //儲存小孩生日陣列
-//    [defaults setObject:putChildBirthdayFieldArray forKey:@"ChildBirthday"];
-//    //儲存信件陣列給存放孩子個人信件的陣列
-//    [defaults setObject:putDateArray forKey:@"Mailibformation"];
-//    //儲存信件內容陣列給存放孩子個人信件內容的陣列
-//    [defaults setObject:putTextViewArray forKey:@"textViewcontent"];
-//
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateTableViewContrler" object:nil];
+    NSLog(@" 存default的 babyID: %@, 寶名: %@, 生日: %@, 圖: %@", [localUserData objectForKey:@"babyid"], [localUserData objectForKey:@"currentBabyName"] , [localUserData objectForKey:@"currentBabyBirthday" ], [localUserData objectForKey:@"currentBabyPic"]);
     
     [incomingPosts removeObjectAtIndex:0];
     [self handleIncomingBabys: howManyPosts];
 }
 
+///==============
+- (void) downloadBabyPicifNeeded:(NSString*) babyPic {
+    
+    NSString *downloadingFilePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"] stringByAppendingPathComponent:babyPic];
+    NSURL *downloadingFileURL = [NSURL fileURLWithPath:downloadingFilePath];
+    
+    
+    
+    // 檢查圖片是否已暫存 是的話就不下載
+    NSString *directory = [NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"];
+    NSFileManager *fileM = [NSFileManager defaultManager];
+    NSArray * a = [fileM contentsOfDirectoryAtPath:directory error:nil];
+    for(NSString *temp in a){
+        
+        NSLog(@"......  : %@", temp);
+        if([babyPic isEqualToString: temp]){
+            NSLog(@"- - 用戶大頭已存在: %@", temp);
+            NSData *currentUserPic = [NSData dataWithContentsOfURL:downloadingFileURL];
+            [localUserData setObject:currentUserPic forKey:@"CurrentUserPic"];
+            return;
+        }
+    }
+    
+    
+    
+    AWSS3TransferManagerDownloadRequest *downloadRequest = [AWSS3TransferManagerDownloadRequest new ];
+    downloadRequest.bucket = @"the.timealbum";
+    downloadRequest.key = babyPic;
+    downloadRequest.downloadingFileURL = downloadingFileURL;
+    
+    AWSS3TransferManager *transferManager = [AWSS3TransferManager defaultS3TransferManager];
+    [[transferManager download:downloadRequest] continueWithExecutor:[AWSExecutor mainThreadExecutor] withBlock:^id _Nullable(AWSTask * _Nonnull task) {
+        if(task.error){
+            
+            NSLog(@" 使用者大頭下載錯誤");
+        }
+        
+        if (task.result) {
+            // 印出本地下載暫存路徑中的檔案名稱
+            NSString *directory = [NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"];
+            NSFileManager *fileM = [NSFileManager defaultManager];
+            NSArray * a = [fileM contentsOfDirectoryAtPath:directory error:nil];
+            for(NSString *temp in a){
+                NSLog(@"- - temp in userPic: %@", temp);
+            }
+            //NSLog(@"%@", task.result);
+            
+            //AWSS3TransferManagerDownloadOutput *downloadOutput = task.result;
+            NSLog(@" - - - - 使用者大頭 download success....");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadBabyPicNamePost" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLeftMenu" object:nil];
+            
+        }
+        return nil;
+    }];
+}
 
 - (void) configKVNProgress {
     KVNProgressConfiguration *configuration = [[KVNProgressConfiguration alloc] init];

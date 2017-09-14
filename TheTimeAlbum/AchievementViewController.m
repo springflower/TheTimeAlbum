@@ -13,6 +13,7 @@
 #import "MyCommunicator.h"
 #import "achievementItem.h"
 #import "AchievementTableViewCell.h"
+#import "AchievementDetailViewController.h"
 
 @interface AchievementViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 {
@@ -40,6 +41,8 @@
 @property (weak, nonatomic) UITableView *myTableView;
 @property (weak, nonatomic) HeadView * myView;
 
+@property (weak, nonatomic) IBOutlet UIView *myWelcomeView;
+
 @property (nonatomic, assign) CGFloat alphaMemory;
 @property (nonatomic, assign) BOOL statusBarStyleControl;
 @end
@@ -58,6 +61,11 @@
                                              selector:@selector(doReloadJob)
                                                  name:@"NewAchievementAdded"
                                                object:nil];
+    // 換寶寶惹
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(doReloadJob)
+                                                 name:@"reloadBabyPicNamePost"
+                                               object:nil];
     
     // communicator
     comm = [MyCommunicator sharedInstance];
@@ -70,20 +78,7 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
-    //準備讀取所選取的孩子ID來讀取孩子大頭貼陣列
-    //準備讀取儲存的孩子大頭貼陣列
-    NSArray *readChildBigStickerArray = [localUserData objectForKey:@"MyBigSticker"];
-    ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
-    NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
-    if(ChildBigStickerImageData){
-        ChildStickerImage = [UIImage imageWithData:ChildBigStickerImageData];
-        NSLog(@"照片為： %@",ChildStickerImage);
-    }
-    //讀取孩子背景圖片陣列
-    readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
     
-    //Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子ID來決定孩子的名字。
-    readChildTextFieldnameArray = [localUserData objectForKey:@"ChildName"];
     
     
     
@@ -96,17 +91,44 @@
     [self doReloadJob];
     
 }
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    [self initialBabyPicName];
+    self.tabBarController.tabBar.hidden = NO;
+    
+    //FIXME: 暫時隱藏
+    self.navigationItem.rightBarButtonItems = nil;
+
+}
+
+- (void) initialBabyPicName {
+
+    //大頭與背景
+    //MyChildBackgroundImageView.image =  [UIImage imageNamed:@"background4.jpg"];
+    // 設定頭貼的路徑
+    NSString *babyPicfilePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"] stringByAppendingPathComponent:[localUserData objectForKey:@"currentBabyPic"]];
+    NSURL *babyPicFileURL = [NSURL fileURLWithPath:babyPicfilePath];
+    
+    NSData *babyPicData = [NSData dataWithContentsOfURL:babyPicFileURL];
+    UIImage *babyPicImage = [UIImage imageWithData:babyPicData];
+    
+    self.myView.headView.image = babyPicImage;
+    self.myView.signLabel.text = [localUserData objectForKey:@"currentBabyName"];
+}
 - (void)initUI {
     
     UITableView * myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, navHeight, VCWidth, VCHeight - navHeight)];
     myTableView.delegate = self;
     myTableView.dataSource = self;
-    myTableView.contentInset = UIEdgeInsetsMake(headRect.size.height-navHeight-navHeight + 12, 0, 45, 0);
+    myTableView.contentInset = UIEdgeInsetsMake(headRect.size.height-navHeight-navHeight + 4, 0, 45, 0);
     _myTableView = myTableView;
     
+    // 取消預設分隔線
+    self.myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //myTableView.backgroundColor = [UIColor redColor];
     // 註冊nib
-    self.myTableView.rowHeight = 160;
+    self.myTableView.rowHeight = 90;
     //self.myTableView.tableHeaderView.hei
     [myTableView registerNib:[UINib nibWithNibName:@"AchievementTableViewCell" bundle:nil] forCellReuseIdentifier:@"achievementCell"];
 
@@ -119,6 +141,7 @@
                                            backgroundView:@"background4.jpg"
                                                  headView:head
                                             headViewWidth:(CGFloat)(VCWidth / 4) signLabel:readChildTextFieldnameArray[ChildID]];
+    vc.signLabel.text = [localUserData objectForKey:@"currentBabyName"];
     
     _myView = vc;
     _myView.backgroundColor = [UIColor clearColor];
@@ -133,19 +156,52 @@
 
 #pragma mark - tableview dataSource & delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    
+    NSInteger numOfSections = 0;
+    if (getAchievementItems.count > 0)
+    {
+        self.myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        numOfSections                 = 1;
+        //yourTableView.backgroundView   = nil;
+        self.myTableView.backgroundView = nil;
+    }
+    else
+    {
+        self.myTableView.backgroundView = _myWelcomeView;
+        self.myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    return numOfSections;
+    
+    
+    
+    
+    
+    
+    
+    
+    //return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return getAchievementItems.count;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    achievementItem *tempitem = [getAchievementItems objectAtIndex:indexPath.item];
+    [self goToAchievementDetailPage:tempitem];
+
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     achievementItem * tempitem = [getAchievementItems objectAtIndex:indexPath.item];
     //init xib
     AchievementTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"achievementCell" forIndexPath:indexPath];
     //cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    
     
     
     //NSLog(@" count :%lu" , (unsigned long)getAchievementItems.count);
@@ -158,7 +214,7 @@
     } else {
         
         NSString *thisTitle = tempitem.achievementTitle;
-        NSString *thisHowManyDays = [NSString stringWithFormat:@"第: %lu 天", getAchievementItems.count-indexPath.item ];
+        NSString *thisHowManyDays = tempitem.achievementFinalDateString;
         NSString *thisCreateDate = tempitem.achievementCreatDate;
         
         cell.titleText.text = thisTitle;
@@ -180,7 +236,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    CGFloat offset_Y = scrollView.contentOffset.y + headRect.size.height+12;
+    CGFloat offset_Y = scrollView.contentOffset.y + headRect.size.height+4;
     if  (offset_Y < 0) {
         
         _myView.backgroundView.contentMode = UIViewContentModeScaleToFill;
@@ -229,8 +285,8 @@
         
     }
     CGFloat offsetYofheader = headRect.size.height-navHeight-navHeight - 64;
-    NSLog(@"off: %f", offsetYofheader);
-    NSLog(@"offsetY : %f", offset_Y);
+    //NSLog(@"off: %f", offsetYofheader);
+    //NSLog(@"offsetY : %f", offset_Y);
     // 控制navigation bar
     if (offset_Y > offsetYofheader && offset_Y <= offsetYofheader *3) {
         
@@ -267,6 +323,26 @@
         _alphaMemory = 1;
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     }
+    
+    
+    
+}
+
+
+#pragma mark - 到下一頁的
+-(void)goToAchievementDetailPage:(achievementItem*) thisItem {
+    // 顯示下一頁
+    // 準備下一頁
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"AchievementDetailViewController" bundle:[NSBundle mainBundle]];
+    AchievementDetailViewController * detailVC =[storyboard instantiateViewControllerWithIdentifier:@"AchievementDetailViewController"];
+    self.tabBarController.tabBar.hidden = YES;
+    
+    /*    將此頁的物件位址傳入下一頁面的新物件       */
+    detailVC.thisAchievementItem = thisItem;
+    // 顯示
+    [self.navigationController pushViewController:detailVC animated:YES];
+    //[self presentViewController:detailVC animated:YES completion:nil];
+    
     
     
     
@@ -311,6 +387,8 @@
         // Return if there is no new message.
         if(items.count == 0){
             NSLog(@"No new achievement, do nothing and return.");
+            [getAchievementItems removeAllObjects];
+            [self.myTableView reloadData];
             return;
         }
         [getAchievementItems removeAllObjects];
@@ -361,12 +439,60 @@
     NSInteger ofBabyID = [tmp[@"ofBabyId"] integerValue];
     NSString *title = tmp[@"title"];
     NSString *picName = tmp[@"picName"];
-    NSString *creatDate = tmp[@"creatDate"];
+    NSString *dateString = tmp[@"creatDate"];
     //NSDate  *date = [NSDate dateWithTimeIntervalSince1970:tmp[@"creattime"]];
     
-    NSLog(@"---got achievement item: %ld, %ld, %@, %@, %@", (long)achievementID, (long)ofBabyID, title, picName, creatDate);
+    NSLog(@"---got achievement item: %ld, %ld, %@, %@, %@", (long)achievementID, (long)ofBabyID, title, picName, dateString);
     
-    //NSString *displayMessage = [NSString stringWithFormat:@"%@", message];
+    // 準備日期
+    NSDate *babyBirthday = [localUserData objectForKey:@"currentBabyBirthday"];
+    // 這邊是要讀取MySQL傳來的格式
+    NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
+    gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    gmtDateFormatter.dateFormat = @"yyyy年M月d日";
+    
+    
+    NSDate  *postDate = [gmtDateFormatter dateFromString:dateString];
+    NSLog(@"-- postDate :%@", postDate);
+    
+    //NSLog(@"----- %@, %@", message ,dateString);
+    
+    // 計算post的日期是出生地幾天
+    
+    NSDateFormatter *displayDateFormat = [[NSDateFormatter alloc] init];
+    [displayDateFormat setDateFormat:@"yyyy年M月d日"];
+    NSDate *date1 = babyBirthday;
+    NSDate *date2 = postDate;
+    NSDateComponents *components;
+    
+    NSInteger numberOfDaysBetween;
+    components = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date1 toDate:date2 options:0];
+    NSLog(@"%@" , components);
+    numberOfDaysBetween = [components day];
+    NSLog(@" 第 %ld 天", numberOfDaysBetween);
+    
+    
+    NSInteger yy = [components year];
+    NSInteger mm = [components month];
+    NSInteger dd = [components day];
+    NSString *finalStr;
+    if( yy==0 ){    //未滿一年
+        if(mm==0) {     //未滿一年 未滿一個月
+            finalStr = [NSString stringWithFormat:@"第%ld天", dd];
+        } else {        //未滿一年 滿月
+            finalStr = [NSString stringWithFormat:@"%ld個月%ld天", mm, dd];
+        }
+        
+    } else {                // 滿年
+        if( mm == 0 ){      // 滿年0個月
+            finalStr = [NSString stringWithFormat:@"%ld歲%ld天", yy, dd];
+        } else {            // 滿年X月X天
+            finalStr = [NSString stringWithFormat:@"%ld歲%ld個月%ld天", yy, mm, dd];
+        }
+    }
+
+    
+    // end of 準備日期
     
     // Prepare each achievement item
     achievementItem *item = [achievementItem new];
@@ -374,7 +500,8 @@
     item.achievementId = achievementID;
     item.achievementTitle = title;
     item.achievementPicName = picName;
-    item.achievementCreatDate = creatDate;
+    item.achievementCreatDate = dateString;
+    item.achievementFinalDateString = finalStr;
     
     
     

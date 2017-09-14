@@ -36,10 +36,26 @@
     NSArray *readChildBirthdayFieldArray;
     //下載的方法來取得資料
     UpdateDataView *downloadChildBigSticker;
+    
+    NSArray *childNames;
+    NSArray *childBirthdays;
+    NSArray *childPics;
+    NSArray *childIDs;
+    //準備準備取得的資料
+    NSUserDefaults *localUserData;
+    
 }
 -(id)init{
     
     self=[super init];
+    
+    localUserData = [NSUserDefaults standardUserDefaults];
+    // 通知更新
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadLeftMenu) name:@"reloadLeftMenu" object:nil];
+    
+    
+    
     
     //設定一個值取得螢幕本身的寬與高
     fullScreenBounds=[[UIScreen mainScreen] bounds];
@@ -210,10 +226,23 @@
 //    });
 }
 
+
+
+-(void) reloadLeftMenu {
+
+    childNames = [localUserData objectForKey:@"childNames"];
+    childBirthdays = [localUserData objectForKey:@"childBirthdays"];
+    childPics = [localUserData objectForKey:@"childPics"];
+    childIDs = [localUserData objectForKey:@"childIDs"];
+    
+    [MenuTableView reloadData];
+    NSLog(@" 左側選單重載.... ");
+}
 #pragma mark - Set TableView Section and Row 設定 TableView 的 Section 和 Row
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return readChildTextFieldnameArray.count;
+    //return readChildTextFieldnameArray.count;
+    return childNames.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -228,17 +257,31 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        myCell.textLabel.text=[readChildTextFieldnameArray objectAtIndex:indexPath.section];
-        myCell.detailTextLabel.text =
-        [NSString stringWithFormat:@"生日:%@",[readChildBirthdayFieldArray objectAtIndex:indexPath.section]];
+//        myCell.textLabel.text=[readChildTextFieldnameArray objectAtIndex:indexPath.section];
+//        myCell.detailTextLabel.text =
+//        [NSString stringWithFormat:@"生日:%@",[readChildBirthdayFieldArray objectAtIndex:indexPath.section]];
+//        
+//        if(readChildBigStickerArray.count != 0 ) {
+//            NSData *readMyBigStickerData = [readChildBigStickerArray objectAtIndex:indexPath.section];
+//            UIImage*BigStickerImage = [UIImage imageWithData:readMyBigStickerData];
+//            NSLog(@"在Row裡面的圖片為 ：%@",BigStickerImage);
+//            myCell.imageView.image = BigStickerImage;
+//            NSLog(@"下載的圖片解碼為： %@",readChildBigStickerArray);
+//        }
         
-        if(readChildBigStickerArray.count != 0 ) {
-            NSData *readMyBigStickerData = [readChildBigStickerArray objectAtIndex:indexPath.section];
-            UIImage*BigStickerImage = [UIImage imageWithData:readMyBigStickerData];
-            NSLog(@"在Row裡面的圖片為 ：%@",BigStickerImage);
-            myCell.imageView.image = BigStickerImage;
-            NSLog(@"下載的圖片解碼為： %@",readChildBigStickerArray);
-        }
+        myCell.textLabel.text = [childNames objectAtIndex:indexPath.section];
+        myCell.detailTextLabel.text = [NSString stringWithFormat:@"生日:%@",[childBirthdays objectAtIndex:indexPath.section]];
+        NSString *babyPicfilePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"] stringByAppendingPathComponent:[childPics objectAtIndex:indexPath.section]];
+        NSURL *babyPicFileURL = [NSURL fileURLWithPath:babyPicfilePath];
+        
+        NSData *babyPicData = [NSData dataWithContentsOfURL:babyPicFileURL];
+        UIImage *babyPicImage = [UIImage imageWithData:babyPicData];
+        
+        myCell.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        myCell.imageView.image = babyPicImage;
+        
+        
+        //12343
     });
     
     return myCell;
@@ -253,8 +296,37 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES]; //為table Cell 加上選取後的動畫。
     
     NSInteger ChildID = indexPath.section;
-    [defaults setInteger:ChildID forKey:@"ChildID"];
-    [defaults synchronize];
+    [localUserData setInteger:ChildID forKey:@"currentBabyIndex"];
+    //[defaults synchronize];
+    
+    
+    
+    // jerry 點擊左側選單修改預設寶貝資料
+    NSInteger babyid = [[[localUserData objectForKey:@"childIDs"] objectAtIndex:indexPath.section] integerValue];
+    NSString *babyName = [[localUserData objectForKey:@"childNames"] objectAtIndex:indexPath.section];
+    NSString *babyBirth = [[localUserData objectForKey:@"childBirthdays"] objectAtIndex:indexPath.section];
+    NSString *babyID = [NSString stringWithFormat:@"%ld", babyid];
+    NSString *babyPic = [[localUserData objectForKey:@"childPics"] objectAtIndex:indexPath.section];
+    
+    //日期
+    NSString *dateString = babyBirth;
+    //將取回的日期轉成NSDate
+    NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
+    gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    gmtDateFormatter.dateFormat = @"yyyy-MM-dd";
+    NSDate *date = [gmtDateFormatter dateFromString:dateString];
+    
+    
+    [localUserData setObject:babyID forKey:@"babyid"];
+    [localUserData setObject:babyName forKey:@"currentBabyName"];
+    [localUserData setObject:date forKey:@"currentBabyBirthday"];
+    [localUserData setObject:babyPic forKey:@"currentBabyPic"];
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"reloadBabyPicNamePost" object:nil];
+    
+    //--
+    
     
     [UIView beginAnimations:@"inMenu" context:nil];
     [UIView setAnimationDelegate:self];

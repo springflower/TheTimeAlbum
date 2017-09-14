@@ -491,7 +491,7 @@
 
 -(void)DownloadFutureMailContent{
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    //dispatch_async(dispatch_get_main_queue(), ^{
         
         AFHTTPSessionManager *manager  = [AFHTTPSessionManager manager];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -529,7 +529,7 @@
             NSLog(@"原因： %@",error);
         }];
         
-    });
+    //});
     
 }
 

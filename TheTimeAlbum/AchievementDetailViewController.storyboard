@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Title-->
+        <scene sceneID="cF0-uy-G3x">
+            <objects>
+                <viewController storyboardIdentifier="AchievementDetailViewController" id="pf7-sa-aZf" customClass="AchievementDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7Bi-iI-7M3"/>
+                        <viewControllerLayoutGuide type="bottom" id="YgR-tC-m9T"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UqV-XD-WQr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AC01" translatesAutoresizingMaskIntoConstraints="NO" id="vg2-zR-aVM">
+                                <rect key="frame" x="127" y="64" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="7hZ-2S-Cz5"/>
+                                    <constraint firstAttribute="width" constant="120" id="hY8-mQ-qfp"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iiK-zI-Utc">
+                                <rect key="frame" x="0.0" y="189" width="375" height="32"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="成就">
+                                        <attributes>
+                                            <color key="NSColor" red="0.97670525312423706" green="0.60546392202377319" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="32" name=".PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXU-Ie-N9a">
+                                <rect key="frame" x="0.0" y="246" width="375" height="19"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="2017年喔喔月喔喔日">
+                                        <attributes>
+                                            <color key="NSColor" red="0.51784205436706543" green="0.58159953355789185" blue="0.58617168664932251" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="19" name=".PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GT9-ZZ-1t8">
+                                <rect key="frame" x="10" y="295" width="355" height="357"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YgR-tC-m9T" firstAttribute="top" secondItem="GT9-ZZ-1t8" secondAttribute="bottom" constant="15" id="6Kr-Oz-k8I"/>
+                            <constraint firstItem="GT9-ZZ-1t8" firstAttribute="top" secondItem="OXU-Ie-N9a" secondAttribute="bottom" constant="30" id="VYj-2K-Vtp"/>
+                            <constraint firstItem="iiK-zI-Utc" firstAttribute="top" secondItem="vg2-zR-aVM" secondAttribute="bottom" constant="5" id="a2R-e2-gfT"/>
+                            <constraint firstItem="vg2-zR-aVM" firstAttribute="top" secondItem="7Bi-iI-7M3" secondAttribute="bottom" id="axd-OE-2DM"/>
+                            <constraint firstAttribute="trailing" secondItem="GT9-ZZ-1t8" secondAttribute="trailing" constant="10" id="c3g-iy-HCF"/>
+                            <constraint firstAttribute="trailing" secondItem="OXU-Ie-N9a" secondAttribute="trailing" id="eOw-EA-bBi"/>
+                            <constraint firstAttribute="trailing" secondItem="iiK-zI-Utc" secondAttribute="trailing" id="fom-uG-UW0"/>
+                            <constraint firstItem="vg2-zR-aVM" firstAttribute="centerX" secondItem="UqV-XD-WQr" secondAttribute="centerX" id="gPL-jX-C5c"/>
+                            <constraint firstItem="iiK-zI-Utc" firstAttribute="leading" secondItem="UqV-XD-WQr" secondAttribute="leading" id="m51-Ex-Wdl"/>
+                            <constraint firstItem="GT9-ZZ-1t8" firstAttribute="leading" secondItem="UqV-XD-WQr" secondAttribute="leading" constant="10" id="nQq-ly-Mt4"/>
+                            <constraint firstItem="OXU-Ie-N9a" firstAttribute="leading" secondItem="UqV-XD-WQr" secondAttribute="leading" id="pZf-4M-mzv"/>
+                            <constraint firstItem="OXU-Ie-N9a" firstAttribute="top" secondItem="iiK-zI-Utc" secondAttribute="bottom" constant="25" id="uJ1-sJ-qaG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="ZTv-wu-uYq">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="uzV-TG-1fe"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="achievementIconIV" destination="vg2-zR-aVM" id="pxK-hW-6H1"/>
+                        <outlet property="dateLabel" destination="OXU-Ie-N9a" id="7q4-1v-AI3"/>
+                        <outlet property="picImageView" destination="GT9-ZZ-1t8" id="7VS-df-qg6"/>
+                        <outlet property="titleLabel" destination="iiK-zI-Utc" id="oHZ-3f-fXO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ync-H1-kWk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1018" y="72"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Nyg-QZ-Y8d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="R2J-Kt-vYx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HRm-TS-l5X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="pf7-sa-aZf" kind="relationship" relationship="rootViewController" id="hzt-dw-Vyg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W8b-gc-dQ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="85.599999999999994" y="81.409295352323838"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="AC01" width="180" height="180"/>
+    </resources>
+</document>

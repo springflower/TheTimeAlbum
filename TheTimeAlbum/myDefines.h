@@ -51,6 +51,7 @@
 
 
 #define ADD_ACHIEVEMENT_URL @"https://jerrygood9999.000webhostapp.com/thetimealbum/addAchievement.php"
+#define ADD_BABY_URL @"https://jerrygood9999.000webhostapp.com/thetimealbum/addChildToServer.php"
 
 #define GET_UID_URL     @"https://jerrygood9999.000webhostapp.com/thetimealbum/get_uid.php"
 #define REGISTER_URL     @"https://jerrygood9999.000webhostapp.com/thetimealbum/new_register.php"
@@ -58,7 +59,11 @@
 #define RETRIVE_ACHIEVEMENTS_URL     @"https://jerrygood9999.000webhostapp.com/thetimealbum/retriveAchievements.php"
 #define UPDATE_POST_URL     @"https://jerrygood9999.000webhostapp.com/thetimealbum/updatePost.php"
 #define UPDATE_POST_URL2     @"https://jerrygood9999.000webhostapp.com/thetimealbum/updatePost2.php"
+#define UPDATE_BABY_DATA     @"https://jerrygood9999.000webhostapp.com/thetimealbum/updateBabyData.php"
+
 #define DELETE_POST_URL     @"https://jerrygood9999.000webhostapp.com/thetimealbum/deletePost.php"
+#define DELETE_ACHIEVEMENT_URL     @"https://jerrygood9999.000webhostapp.com/thetimealbum/deleteAchievement.php"
+#define DELETE_BABY_URL     @"https://jerrygood9999.000webhostapp.com/thetimealbum/deleteBaby.php"
 
 #define GET_BABY_DATA_BY_UID_URL @"https://jerrygood9999.000webhostapp.com/thetimealbum/getBabyDataByUID.php"
 

@@ -21,6 +21,11 @@
 		540B8B511F5F2F890088E064 /* WebViewContent.html in Resources */ = {isa = PBXBuildFile; fileRef = 540B8B501F5F2F890088E064 /* WebViewContent.html */; };
 		540B8B541F5F3CFF0088E064 /* loginPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 540B8B521F5F3CFF0088E064 /* loginPage.storyboard */; };
 		540B8B561F5F3E760088E064 /* flash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 540B8B551F5F3E760088E064 /* flash.gif */; };
+		541E452D1F68977A002B932E /* diaryBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 541E452C1F68977A002B932E /* diaryBG.png */; };
+		541E45311F689EE8002B932E /* UITextView+YLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 541E45301F689EE8002B932E /* UITextView+YLTextView.m */; };
+		541E45331F68AAC3002B932E /* diaryBG2.png in Resources */ = {isa = PBXBuildFile; fileRef = 541E45321F68AAC3002B932E /* diaryBG2.png */; };
+		541E45361F69DC7E002B932E /* AchievementDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 541E45351F69DC7E002B932E /* AchievementDetailViewController.m */; };
+		541E45381F69DCC7002B932E /* AchievementDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 541E45371F69DCC7002B932E /* AchievementDetailViewController.storyboard */; };
 		5422336F1F26E7CD000933BD /* ThisBabyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5422336E1F26E7CD000933BD /* ThisBabyData.m */; };
 		542233721F2738E8000933BD /* MyCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 542233711F2738E8000933BD /* MyCommunicator.m */; };
 		54296C9E1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.m in Sources */ = {isa = PBXBuildFile; fileRef = 54296C9C1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.m */; };
@@ -141,6 +146,13 @@
 		540B8B501F5F2F890088E064 /* WebViewContent.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = WebViewContent.html; sourceTree = "<group>"; };
 		540B8B531F5F3CFF0088E064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/loginPage.storyboard; sourceTree = "<group>"; };
 		540B8B551F5F3E760088E064 /* flash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = flash.gif; sourceTree = "<group>"; };
+		541E452C1F68977A002B932E /* diaryBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diaryBG.png; sourceTree = "<group>"; };
+		541E452F1F689EE8002B932E /* UITextView+YLTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+YLTextView.h"; sourceTree = "<group>"; };
+		541E45301F689EE8002B932E /* UITextView+YLTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+YLTextView.m"; sourceTree = "<group>"; };
+		541E45321F68AAC3002B932E /* diaryBG2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diaryBG2.png; sourceTree = "<group>"; };
+		541E45341F69DC7E002B932E /* AchievementDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementDetailViewController.h; sourceTree = "<group>"; };
+		541E45351F69DC7E002B932E /* AchievementDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchievementDetailViewController.m; sourceTree = "<group>"; };
+		541E45371F69DCC7002B932E /* AchievementDetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AchievementDetailViewController.storyboard; sourceTree = "<group>"; };
 		5422336D1F26E7CD000933BD /* ThisBabyData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThisBabyData.h; sourceTree = "<group>"; };
 		5422336E1F26E7CD000933BD /* ThisBabyData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThisBabyData.m; sourceTree = "<group>"; };
 		542233701F2738E8000933BD /* MyCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommunicator.h; sourceTree = "<group>"; };
@@ -368,6 +380,7 @@
 		540267571F25D4E4005967DE /* Common Model */ = {
 			isa = PBXGroup;
 			children = (
+				541E452E1F689EE8002B932E /* YLTextView */,
 				CF0B78631F1E3B7A0067229D /* SliderMenuViewLeft */,
 				CF7DA4D41F1F86B500E282C9 /* SliderMenuViewRight */,
 				5452CC891F1C9AC2008F5C25 /* MyAccountData.h */,
@@ -396,6 +409,8 @@
 		540267591F25D94C005967DE /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				541E45321F68AAC3002B932E /* diaryBG2.png */,
+				541E452C1F68977A002B932E /* diaryBG.png */,
 				540B8B501F5F2F890088E064 /* WebViewContent.html */,
 				540B8B4E1F5F2F080088E064 /* railway.gif */,
 				540B8B551F5F3E760088E064 /* flash.gif */,
@@ -441,6 +456,15 @@
 			name = Pictures;
 			sourceTree = "<group>";
 		};
+		541E452E1F689EE8002B932E /* YLTextView */ = {
+			isa = PBXGroup;
+			children = (
+				541E452F1F689EE8002B932E /* UITextView+YLTextView.h */,
+				541E45301F689EE8002B932E /* UITextView+YLTextView.m */,
+			);
+			path = YLTextView;
+			sourceTree = "<group>";
+		};
 		54296CA31F378911000C06C4 /* AchievementPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,6 +476,9 @@
 				54A82D471F37C91E0032996D /* AchievementTableViewCell.xib */,
 				54A82D421F37BABA0032996D /* achievementItem.h */,
 				54A82D431F37BABA0032996D /* achievementItem.m */,
+				541E45341F69DC7E002B932E /* AchievementDetailViewController.h */,
+				541E45351F69DC7E002B932E /* AchievementDetailViewController.m */,
+				541E45371F69DCC7002B932E /* AchievementDetailViewController.storyboard */,
 			);
 			name = AchievementPage;
 			sourceTree = "<group>";
@@ -693,6 +720,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				540B8B4F1F5F2F080088E064 /* railway.gif in Resources */,
+				541E452D1F68977A002B932E /* diaryBG.png in Resources */,
 				5430715F1F52383F00DC2536 /* MyCollectionViewCellWithImage3.xib in Resources */,
 				CFFFC7951F24DF630097284F /* Another30x30@2x.png in Resources */,
 				CF0B78581F1DE4DA0067229D /* 信箱75x75@2x.png in Resources */,
@@ -719,6 +747,7 @@
 				CFFFC7971F24DFE30097284F /* Another48x48@2x.png in Resources */,
 				54A82D4B1F37CE510032996D /* cup01.jpg in Resources */,
 				CFFFC78D1F24CADD0097284F /* Male30x30@2x.png in Resources */,
+				541E45381F69DCC7002B932E /* AchievementDetailViewController.storyboard in Resources */,
 				543071771F542E7200DC2536 /* ImagePageViewController.storyboard in Resources */,
 				CF0B78561F1DE40D0067229D /* 相簿75x75@2x.png in Resources */,
 				CF9F66C61F5846FE0099CF0A /* Assets.xcassets in Resources */,
@@ -726,6 +755,7 @@
 				CF26410D1F4351BF005EBFBC /* background5@2x.jpg in Resources */,
 				CF0B78401F1DAD5B0067229D /* futureMail.storyboard in Resources */,
 				CF13958E1F2F6F7600D3C0FD /* Camera65x65@2x.png in Resources */,
+				541E45331F68AAC3002B932E /* diaryBG2.png in Resources */,
 				CF26410B1F4351BF005EBFBC /* background3@2x.jpg in Resources */,
 				540267451F24A652005967DE /* c.png in Resources */,
 				540B8B561F5F3E760088E064 /* flash.gif in Resources */,
@@ -816,6 +846,7 @@
 				54296CA21F36B1C9000C06C4 /* PostItem.m in Sources */,
 				5452CC881F1C7A54008F5C25 /* loginViewController.m in Sources */,
 				540267421F24A3DE005967DE /* HeadView.m in Sources */,
+				541E45361F69DC7E002B932E /* AchievementDetailViewController.m in Sources */,
 				54A82D481F37C91E0032996D /* AchievementTableViewCell.m in Sources */,
 				54296C9E1F3069BA000C06C4 /* MyCollectionViewCellWithImage1.m in Sources */,
 				544EFFF21F5B53620078F143 /* MyCollectionViewCellWithImage2.m in Sources */,
@@ -825,6 +856,7 @@
 				CF783CF51F35DB7F0083948D /* SelectedRow.m in Sources */,
 				5402674E1F2544FF005967DE /* textLayout.m in Sources */,
 				CF0B784B1F1DBAF60067229D /* AboutMeViewcontrollerCell.m in Sources */,
+				541E45311F689EE8002B932E /* UITextView+YLTextView.m in Sources */,
 				54A82D501F37E25D0032996D /* EditTextPostViewController.m in Sources */,
 				540829721F2F2D8800109930 /* JLNavigationViewController.m in Sources */,
 				543071631F53DB1000DC2536 /* MyCollectionViewCellUploading.m in Sources */,

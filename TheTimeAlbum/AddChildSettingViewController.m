@@ -11,6 +11,9 @@
 #import "BigStickerSettingViewController.h"
 #import "UseDownloadDataClass.h"
 #import <ChameleonFramework/Chameleon.h>
+#import "MyCommunicator.h"
+#import <KVNProgress.h>
+#import <AWSS3.h>
 
 
 @interface AddChildSettingViewController ()<UITableViewDelegate,
@@ -60,6 +63,25 @@
     UIBarButtonItem *CancelBtn;
     
     NSInteger ChildID;
+    
+    
+    
+    
+    // j
+    NSUserDefaults *localUserData;
+    NSArray *childNames;
+    NSArray *childBirthdays;
+    NSArray *childPics;
+    NSArray *childIDs;
+    
+    NSString *babyName;
+    NSString *babyBirthday;
+    NSString *babyGender;
+    NSString *senderRelationship;
+    NSString *senderUID;
+    NSString *babyPicName;
+    
+    MyCommunicator *comm;
 
 }
 @synthesize ChildNameTextField = ChildNameTextField;
@@ -68,66 +90,28 @@
 @synthesize GirlSelected = GirlSelected;
 @synthesize AnotherSelected = AnotherSelected;
 
+
+- (void) initArrays {
+    
+    comm = [MyCommunicator sharedInstance];
+    senderUID = [localUserData objectForKey:@"uid"];
+    childNames = [localUserData objectForKey:@"childNames"];
+    childBirthdays = [localUserData objectForKey:@"childBirthdays"];
+    childPics = [localUserData objectForKey:@"childPics"];
+    childIDs = [localUserData objectForKey:@"childIDs"];
+    NSLog(@" (addChildSetting)names: %@, birthdays: %@, pics: %@, ids: %@ ", childNames, childBirthdays, childPics,childIDs);
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"reloadLeftMenu" object:nil];
+}
 -(void)viewWillAppear:(BOOL)animated {
     
-    //讀取是否已有建立第一個孩子 Name.
-    NSUserDefaults *readChildIdDefaults;
-    readChildIdDefaults = [NSUserDefaults standardUserDefaults];
-    //如果讀出的陣列數量為零的話，就執行 AddChildSettingViewController 來創造第一個孩子。
-    NSArray *readChildNameArray = [readChildIdDefaults objectForKey:@"ChildName"];
-    if(readChildNameArray.count == 0) {
+    localUserData = [NSUserDefaults standardUserDefaults];
+    [self initArrays];
+    
+    if(childNames.count == 0) {
         CancelBtn.enabled = false;
     } else {
         CancelBtn.enabled = true;
-    }
-    //讀取孩子的名稱陣列
-    NSArray *readChildTextFieldnameArray = [defaults objectForKey:@"ChildName"];
-    if(readChildTextFieldnameArray.count != 0) {
-        putChildTextFieldnameArray  = [readChildTextFieldnameArray mutableCopy];
-    } else {
-        putChildTextFieldnameArray = [NSMutableArray new];
-    }
-    //讀取孩子的生日陣列
-    NSArray *readChildBirthdayFieldArray = [defaults objectForKey:@"ChildBirthday"];
-    if(readChildBirthdayFieldArray.count != 0) {
-        putChildBirthdayFieldArray  = [readChildBirthdayFieldArray mutableCopy];
-    } else {
-        putChildBirthdayFieldArray = [NSMutableArray new];
-    }
-    //讀取孩子的個人信件陣列
-    NSArray *readDateArray = [defaults objectForKey:@"Mailibformation"];
-    if(readDateArray.count != 0) {
-        putDateArray  = [readDateArray mutableCopy];
-    } else {
-        putDateArray = [NSMutableArray new];
-    }
-    //讀取孩子的個人信件內容陣列
-    NSArray *readTextViewArray = [defaults objectForKey:@"textViewcontent"];
-    if(readTextViewArray.count != 0) {
-        putTextViewArray  = [readTextViewArray mutableCopy];
-    } else {
-        putTextViewArray = [NSMutableArray new];
-    }
-    //讀取孩子的性別陣列
-    NSArray *readChildSexArray = [defaults objectForKey:@"readChildSexArray"];
-    if(readChildSexArray.count != 0) {
-        putChildSexArray = [readChildSexArray mutableCopy];
-    } else {
-        putChildSexArray = [NSMutableArray new];
-    }
-    //讀取與孩子的關係陣列
-    NSArray *readWithChildRelationShipArray = [defaults objectForKey:@"readWithChildRelationShipArray"];
-    if(readWithChildRelationShipArray.count != 0) {
-        putWithChildRelationShipArray = [readWithChildRelationShipArray mutableCopy];
-    } else {
-        putWithChildRelationShipArray = [NSMutableArray new];
-    }
-    //準備讀取儲存的孩子背景圖片陣列
-    NSArray *readMyChildBackImageArray = [defaults objectForKey:@"readMyChildBackImageArray"];
-    if(readMyChildBackImageArray) {
-        putMyChildBackImageArray  = [readMyChildBackImageArray mutableCopy];
-    } else {
-        putMyChildBackImageArray = [NSMutableArray new];
     }
     
     //判斷當 BigStickerSettingViewControler 按下完成後，就結束 AddChildSettingViewControler.
@@ -136,6 +120,13 @@
         [self dismissViewControllerAnimated:YES completion:nil];
         return;
     }
+    
+}
+
+- (void) prepareAddChild {
+    babyName = ChildNameTextField.text;
+    NSLog(@" prepareAddChild  name: %@, birthday: %@, gender: %@, relation: %@, sender: %@",
+          babyName, babyBirthday, babyGender, senderRelationship, senderUID);
 }
 
 - (void)viewDidLoad {
@@ -177,7 +168,6 @@
     _AnotherRelationship.layer.cornerRadius=15.0;
     _AnotherRelationship.layer.borderWidth = 1.0;
     _AnotherRelationship.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    //_BoySelected.backgroundColor = [UIColor lightGrayColor];
     [_AnotherRelationship setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     _AnotherRelationship.tintColor = [UIColor grayColor];
     
@@ -185,27 +175,121 @@
     testtable = [[UITableView alloc] initWithFrame:CGRectMake(0,50,100,150)];
     [testtable setDataSource:self];
     [testtable setDelegate:self];
-//  _AnotherRelationship.inputAccessoryView= testtable;
-    
-//    yourpicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 50, 100, 150)];
-//    [yourpicker setDataSource: self];
-//    [yourpicker setDelegate: self];
-//    yourpicker.showsSelectionIndicator = YES;
-//    self.yourtextfield.inputView = yourpicker;
+
     
     //通知接收執行 dissMissViewController  View
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dissMissViewController)
                                                  name:@"dimssAddChildSettingViewController" object:nil];
+    
+    //執行上傳
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addNewBabyToSQL:)
+                                                 name:@"addNewBaby" object:nil];
     //通知執行 saveChildNameAndBirthday 儲存資料
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveChildNameAndBirthday) name:@"saveChildInformation" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveChildNameAndBirthday) name:@"saveChildInformation" object:nil];
     
     //通知執行上傳孩子資訊資料
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveUpdateChildInformation) name:@"saveUpdateChildInformation" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveUpdateChildInformation) name:@"saveUpdateChildInformation" object:nil];
     
 
 }
 
+- (void) addNewBabyToSQL: (NSNotification*) dict {
+    babyName = ChildNameTextField.text;
+    NSLog(@" prepareAddChild  name: %@, birthday: %@, gender: %@, relation: %@, sender: %@",
+          babyName, babyBirthday, babyGender, senderRelationship, senderUID);
+    babyPicName = dict.userInfo[@"babyPicName"];
+    NSLog(@"get dict picname : %@", babyPicName);
+    
+    
+    // 創建本地資料夾
+    NSError *error2 = nil;
+    if (![[NSFileManager defaultManager] createDirectoryAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"]
+                                   withIntermediateDirectories:YES
+                                                    attributes:nil
+                                                         error:&error2]) {
+        NSLog(@"Creating 'userPic' directory failed. Error: [%@]", error2);
+    }
+    NSString *uploadingFilePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"] stringByAppendingPathComponent:babyPicName];
+    //end of 本地資料夾
+    
+    // AWSS3
+    // 上傳管理員
+    AWSS3TransferManager *transferManager = [AWSS3TransferManager defaultS3TransferManager];
+    // 上傳request
+    AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
+    uploadRequest.body = [NSURL fileURLWithPath:uploadingFilePath];
+    uploadRequest.key = babyPicName;
+    uploadRequest.bucket = @"the.timealbum";
+    
+    uploadRequest.uploadProgress = ^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend){
+        NSLog(@" 小孩大頭上傳中: %lld / %lld", totalBytesSent,totalBytesExpectedToSend);
+    };
+    
+    
+    // end of AWSS3
+    
+    [KVNProgress show];
+    [comm addChildToServerWithBabyName:babyName
+                          babyBirthday:babyBirthday
+                            babyGender:babyGender
+                    senderRelationShip:senderRelationship
+                             senderUID:senderUID
+                           babyPicName:babyPicName
+                            completion:^(NSError *error, id result) {
+                                if(error){
+                                    NSLog(@" 新增小孩 fail: %@", error);
+                                    return;
+                                }
+                                // NSLog(@"==--%@", result);
+                                // 伺服器php指令是否成功
+                                if([result[RESULT_KEY] boolValue] == false){
+                                    NSLog(@" 新增小孩 to sql failed: %@", result[ERROR_CODE_KEY]);
+                                    return;
+                                }
+                                
+                                
+                                NSLog(@" 新增小孩成功！");
+                                
+                                // 送出通知 在timeline 重新抓babydata 並重整左邊
+                                [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadBabyData" object:nil];
+                                [KVNProgress dismiss];
+                                // 上傳大頭圖
+                                [[transferManager upload:uploadRequest] continueWithBlock:^id(AWSTask *task) {
+                                    if (task.error) {
+                                        if ([task.error.domain isEqualToString:AWSS3TransferManagerErrorDomain]) {
+                                            switch (task.error.code) {
+                                                case AWSS3TransferManagerErrorCancelled:
+                                                case AWSS3TransferManagerErrorPaused:
+                                                {
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        //上傳失敗暫停
+                                                        NSLog(@" 小孩大頭上傳暫停");
+                                                    });
+                                                }
+                                                    break;
+                                                    
+                                                default:
+                                                    NSLog(@" 小孩大頭上傳失敗1: [%@]", task.error);
+                                                    break;
+                                            }
+                                        } else {
+                                            NSLog(@" 小孩大頭上傳失敗2: [%@]", task.error);
+                                        }
+                                    }
+                                    
+                                    if (task.result) {
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            // 圖片上傳成功喔
+                                            NSLog(@" 小孩大頭上傳成功");
+                                            //[KVNProgress dismiss];
+                                        });
+                                    }
+                                    return nil;
+                                }];
 
+                                
+                            }];
+}
 
 -(void)dissMissViewController {
       Dismiss = true;
@@ -226,6 +310,8 @@
     AnotherSelected.layer.borderColor = [UIColor lightGrayColor].CGColor;
     AnotherSelected.tintColor = [UIColor grayColor];
     [AnotherSelected setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    
+    babyGender = @"男孩";
 }
 
 - (IBAction)GirlSelected:(id)sender {
@@ -241,6 +327,8 @@
     AnotherSelected.layer.borderColor = [UIColor lightGrayColor].CGColor;
     AnotherSelected.tintColor = [UIColor grayColor];
     [AnotherSelected setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    
+    babyGender = @"女孩";
 }
 
 - (IBAction)AnotherSelected:(id)sender {
@@ -256,6 +344,8 @@
     GirlSelected.layer.borderColor = [UIColor lightGrayColor].CGColor;
     GirlSelected.tintColor = [UIColor grayColor];
     [GirlSelected setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    
+    babyGender = @"其他";
 }
 
 #pragma mark - Setting With ChildRelationship 設定與孩子的關係選項
@@ -273,6 +363,8 @@
     _AnotherRelationship.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _AnotherRelationship.tintColor = [UIColor grayColor];
     [_AnotherRelationship setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    
+    senderRelationship = @"爸爸";
 }
 - (IBAction)MotherSelected:(id)sender {
     WithRelationship = 2;
@@ -287,6 +379,8 @@
     _AnotherRelationship.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _AnotherRelationship.tintColor = [UIColor grayColor];
     [_AnotherRelationship setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    
+    senderRelationship = @"媽媽";
 }
 - (IBAction)AnotherRelationship:(id)sender {
     WithRelationship = 3;
@@ -311,6 +405,8 @@
     _MotherSelected.tintColor = [UIColor grayColor];
     [_MotherSelected setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
+    //senderRelationship = @"其他..";
+    
 }
 
 #pragma mark - Setting With ChildRelationship AnotherSelected 設定 actionSheet 與孩子關係其他選項
@@ -320,15 +416,19 @@
     switch (buttonIndex) {
         case 0:
             [_AnotherRelationship setTitle:@"爺爺" forState:UIControlStateNormal];
+            senderRelationship = @"爺爺";
             break;
         case 1:
             [_AnotherRelationship setTitle:@"奶奶" forState:UIControlStateNormal];
+            senderRelationship = @"奶奶";
             break;
         case 2:
             [_AnotherRelationship setTitle:@"外公" forState:UIControlStateNormal];
+            senderRelationship = @"外公";
             break;
         case 3:
             [_AnotherRelationship setTitle:@"外婆" forState:UIControlStateNormal];
+            senderRelationship = @"外婆";
             break;
         case 4:
             [self showAnotherRelationship];
@@ -345,6 +445,12 @@
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"YYYY/MM/dd"];
     BirthdayTextField.text = [df stringFromDate:date];
+    
+    // j
+    //NSDate *date2 = datePickerView.date;
+    NSDateFormatter *df2 = [[NSDateFormatter alloc] init];
+    [df2 setDateFormat:@"YYYY-MM-dd"];
+    babyBirthday = [df2 stringFromDate:date];
 }
 
 -(void)BirthdayDateConformButton {
@@ -457,6 +563,7 @@
         
         
         BigStickerSettingViewController *editController = [self.storyboard instantiateViewControllerWithIdentifier:@"BigStickerSettingViewController"];
+        [self prepareAddChild];
         [self.navigationController pushViewController:editController animated:YES];
 
     } else {

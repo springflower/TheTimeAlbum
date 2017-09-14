@@ -28,8 +28,17 @@ typedef void (^DoneHandler)(NSError *error, id result);
                           title:(NSString*) title
                         picName:(NSString*) picName
                      createDate:(NSString*) createDate
+                createDateStamp:(NSTimeInterval) createDateStamp
                      completion:(DoneHandler) done;
 
+// 加入新寶寶
+- (void) addChildToServerWithBabyName:(NSString*) babyName
+                         babyBirthday:(NSString*) babyBirthday
+                           babyGender:(NSString*) babyGender
+                   senderRelationShip:(NSString*) senderRelationship
+                            senderUID:(NSString*) senderUID
+                          babyPicName:(NSString*) babyPicName
+                           completion:(DoneHandler) done;
 
 // 從SQL 撈uid 的功能
 -(void) getUIDFromSQLByFBID:(NSString*) fbid
@@ -56,7 +65,19 @@ typedef void (^DoneHandler)(NSError *error, id result);
                              postType:(NSInteger)postType
                               content:(NSString*)content
                            completion:(DoneHandler)done;
+
+- (void) updateBabyDataToSQLWithPicName:(NSString*) babyPicName
+                               babyName:(NSString*) babyName
+                           babyBirthday:(NSString*) babyBirthday
+                                 babyID:(NSInteger) babyID
+                             completion:(DoneHandler)done;
+
+
 - (void) deletePostByPostID:(NSInteger) postID
+                 completion:(DoneHandler) done;
+- (void) deleteAchievementByID:(NSInteger) achievementID
+                    completion:(DoneHandler) done;
+- (void) deleteBabyByBabyID:(NSInteger) babyID
                  completion:(DoneHandler) done;
 
 // 用uid取得這uid所擁有的寶寶們

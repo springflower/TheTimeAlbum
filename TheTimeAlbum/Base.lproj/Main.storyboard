@@ -65,8 +65,35 @@
                             </connections>
                         </button>
                     </navigationItem>
+                    <connections>
+                        <outlet property="myWelcomeView" destination="ggd-6s-00J" id="zy1-HL-1KR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOW-0I-e8o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="ggd-6s-00J">
+                    <rect key="frame" x="0.0" y="0.0" width="340" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0B-2V-Gwt">
+                            <rect key="frame" x="8" y="53.5" width="324.5" height="22"/>
+                            <attributedString key="attributedText">
+                                <fragment content="還沒有紀錄..開始記錄些什麼吧！">
+                                    <attributes>
+                                        <color key="NSColor" red="0.85262101888656616" green="0.42218321561813354" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="22" name=".PingFangTC-Regular"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="o0B-2V-Gwt" firstAttribute="centerY" secondItem="ggd-6s-00J" secondAttribute="centerY" id="Fix-dS-aVd"/>
+                        <constraint firstItem="o0B-2V-Gwt" firstAttribute="centerX" secondItem="ggd-6s-00J" secondAttribute="centerX" id="JUc-hl-11e"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="-1087.2" y="-520.38980509745136"/>
         </scene>
@@ -110,43 +137,43 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="孩子性別" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXN-Rn-fmM">
-                                <rect key="frame" x="28" y="256.5" width="69.5" height="21"/>
+                                <rect key="frame" x="28" y="257" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您與孩子的關係" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVc-Cv-bFS">
-                                <rect key="frame" x="22.5" y="389.5" width="121.5" height="21"/>
+                                <rect key="frame" x="22" y="390" width="122" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jYh-Gw-Blv">
-                                <rect key="frame" x="21.5" y="193.5" width="313" height="30"/>
+                                <rect key="frame" x="22" y="194" width="313" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="krK-bG-aFj">
-                                <rect key="frame" x="22" y="128" width="312.5" height="30"/>
+                                <rect key="frame" x="22" y="128" width="313" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="稱號" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPD-zv-0hD">
-                                <rect key="frame" x="30.5" y="133" width="33" height="20"/>
+                                <rect key="frame" x="31" y="133" width="33" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生日" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l40-Yi-ZA7">
-                                <rect key="frame" x="30.5" y="198.5" width="33" height="20"/>
+                                <rect key="frame" x="31" y="199" width="33" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahr-dP-x1j">
-                                <rect key="frame" x="25" y="316.5" width="75" height="34"/>
+                                <rect key="frame" x="25" y="317" width="75" height="34"/>
                                 <state key="normal" title="男孩"/>
                                 <connections>
                                     <action selector="BoySelected:" destination="JI5-eo-3jw" eventType="touchUpInside" id="YZo-Sy-njW"/>
@@ -268,14 +295,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BabyUser.png" translatesAutoresizingMaskIntoConstraints="NO" id="LQ4-XL-ox7">
-                                <rect key="frame" x="125" y="137.5" width="125" height="125"/>
+                                <rect key="frame" x="125" y="138" width="125" height="125"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LQ4-XL-ox7" secondAttribute="height" multiplier="1:1" id="84d-uB-ZE2"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhd-YM-hVi">
-                                <rect key="frame" x="219" y="231.5" width="31" height="31"/>
+                                <rect key="frame" x="219" y="232" width="31" height="31"/>
                                 <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xhd-YM-hVi" secondAttribute="height" multiplier="1:1" id="Svz-O3-5cT"/>

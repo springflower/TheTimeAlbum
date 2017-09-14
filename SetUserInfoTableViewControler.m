@@ -8,6 +8,8 @@
 
 #import "SetUserInfoTableViewControler.h"
 #import "AboutMeViewcontrollerCell.h"
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "loginViewController.h"
 
 @interface SetUserInfoTableViewControler ()
 
@@ -119,6 +121,22 @@ AboutMeViewcontrollerCell *cell;
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:@"確定要登出帳號嗎？" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * OK = [UIAlertAction actionWithTitle:@"確定" style:UIAlertActionStyleDefault handler:^
                           (UIAlertAction * _Nonnull action) {
+                              
+                              // 登出ＦＢ
+                              FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+                              [loginManager logOut];
+                              
+                              
+                              // 清除所有userdefaults
+                              NSUserDefaults *localUserData = [NSUserDefaults standardUserDefaults];
+                              NSDictionary *dictionary = [localUserData dictionaryRepresentation];
+                              for(NSString *key in [dictionary allKeys]){
+                                  [localUserData removeObjectForKey:key];
+                                  [localUserData synchronize];
+                              }
+                              
+                              [self goLoginPage];
+                              
                           }];
     UIAlertAction * Cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:Cancel];
@@ -126,7 +144,20 @@ AboutMeViewcontrollerCell *cell;
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-
+- (void) goLoginPage {
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"loginPage" bundle:nil];
+    loginViewController *lgvc = [storyBoard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers removeLastObject];
+    //[viewControllers addObject:lgvc];
+    //[self.navigationController pushViewController:tlvc animated:YES];
+    [self presentViewController:lgvc animated:YES completion:nil];
+    //[self presentViewController:[viewControllers firstObject] animated:YES completion:nil];
+    
+    
+}
 
 /*
 // Override to support conditional editing of the table view.

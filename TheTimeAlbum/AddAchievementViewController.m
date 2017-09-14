@@ -22,6 +22,7 @@
     NSString *title;
     NSString *picName;
     NSString *createDate;
+    NSTimeInterval createDateStamp;
 }
 @property (strong, nonatomic) IBOutlet UIView *myUIView;
 @property (strong, nonatomic) IBOutlet UIDatePicker *myDatePicker;
@@ -119,6 +120,12 @@
     formatter.dateFormat = @"yyyy年M月d日";
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     self.dateLabel.text = dateString;
+    
+    
+    //存下選擇的日期的timeinterval
+    NSTimeInterval temp = [[NSDate date] timeIntervalSince1970];
+    createDateStamp = temp;
+    NSLog(@"timeintev : %f", temp);
     
     // 讓日期label點下去可以叫選單
     self.dateLabel.userInteractionEnabled = YES;
@@ -226,13 +233,19 @@
 
 #pragma mark - 選日期
 - (IBAction)onDatePickComfirmed:(UIButton *)sender {
-    
-    //创建一个日期格式
+    NSLog(@"???");
+    //建立日期格式
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-    //设置日期的显示格式
+    //設置日期顯示格式
     fmt.dateFormat = @"yyyy年M月d日";
-    //将日期转为指定格式显示
+    //將日期轉換成顯示格式
     NSString *dateStr = [fmt stringFromDate:self.myDatePicker.date];
+    
+    //存下選擇的日期的timeinterval
+    NSTimeInterval temp = [self.myDatePicker.date timeIntervalSince1970];
+    createDateStamp = temp;
+    NSLog(@"timeintev : %f", temp);
+    
     _dateLabel.text = dateStr;
     //optionMenuIsUp = NO;
     [self closeMenu];
@@ -267,6 +280,7 @@
                             title:title
                           picName:picName
                        createDate:createDate
+                  createDateStamp:createDateStamp
                        completion:^(NSError *error, id result) {
                            
                            // AFN 連線是否成功

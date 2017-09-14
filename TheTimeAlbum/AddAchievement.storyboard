@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cup01.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="SE5-6b-XjG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AC01" translatesAutoresizingMaskIntoConstraints="NO" id="SE5-6b-XjG">
                                 <rect key="frame" x="157" y="94" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="bGP-Yq-dxU"/>
@@ -60,7 +60,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNw-hs-kXK">
-                                <rect key="frame" x="360" y="220" width="10" height="20.5"/>
+                                <rect key="frame" x="360" y="220" width="10" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="Lca-96-OVW"/>
                                 </constraints>
@@ -159,6 +159,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cup01.jpg" width="260" height="308"/>
+        <image name="AC01" width="180" height="180"/>
     </resources>
 </document>

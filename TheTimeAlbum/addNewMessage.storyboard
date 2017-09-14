@@ -22,41 +22,95 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="diaryBG.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uvw-eW-MpB">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發送日記" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="akX-fF-WGD">
-                                <rect key="frame" x="36" y="94" width="303" height="21"/>
+                                <rect key="frame" x="36" y="84" width="303" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.67455112934112549" green="0.15692374110221863" blue="0.10914970934391022" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WB4-dM-JHf">
-                                <rect key="frame" x="16" y="130" width="343" height="537"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WB4-dM-JHf" customClass="UIText">
+                                <rect key="frame" x="26" y="117" width="323" height="550"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">12345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.76090000000000002" green="0.25650000000000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="18" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="84">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="112">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="140">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="168">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="196">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="224">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="252">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="280">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="308">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="336">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Uvw-eW-MpB" firstAttribute="leading" secondItem="ReA-zx-yww" secondAttribute="leading" id="5L7-W3-eMC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="akX-fF-WGD" secondAttribute="trailing" constant="20" id="8qA-ty-n9W"/>
-                            <constraint firstItem="akX-fF-WGD" firstAttribute="top" secondItem="vOb-o9-NxU" secondAttribute="bottom" constant="30" id="Ss8-ld-DFp"/>
-                            <constraint firstItem="WB4-dM-JHf" firstAttribute="leading" secondItem="ReA-zx-yww" secondAttribute="leadingMargin" id="TS3-Nz-x8J"/>
+                            <constraint firstItem="Uvw-eW-MpB" firstAttribute="top" secondItem="vOb-o9-NxU" secondAttribute="bottom" id="GGJ-dx-BsN"/>
+                            <constraint firstItem="kuZ-JJ-btY" firstAttribute="top" secondItem="Uvw-eW-MpB" secondAttribute="bottom" id="SN8-ht-B0f"/>
+                            <constraint firstItem="akX-fF-WGD" firstAttribute="top" secondItem="vOb-o9-NxU" secondAttribute="bottom" constant="20" id="Ss8-ld-DFp"/>
+                            <constraint firstItem="WB4-dM-JHf" firstAttribute="leading" secondItem="ReA-zx-yww" secondAttribute="leadingMargin" constant="10" id="TS3-Nz-x8J"/>
                             <constraint firstItem="kuZ-JJ-btY" firstAttribute="top" secondItem="WB4-dM-JHf" secondAttribute="bottom" id="ZJW-Sx-Sqb"/>
                             <constraint firstItem="akX-fF-WGD" firstAttribute="leading" secondItem="ReA-zx-yww" secondAttribute="leadingMargin" constant="20" id="gDC-mM-jWU"/>
-                            <constraint firstItem="WB4-dM-JHf" firstAttribute="top" secondItem="akX-fF-WGD" secondAttribute="bottom" constant="15" id="gFM-E9-eAF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="WB4-dM-JHf" secondAttribute="trailing" id="qPN-xZ-Q2O"/>
+                            <constraint firstItem="WB4-dM-JHf" firstAttribute="top" secondItem="akX-fF-WGD" secondAttribute="bottom" constant="12" id="gFM-E9-eAF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WB4-dM-JHf" secondAttribute="trailing" constant="10" id="qPN-xZ-Q2O"/>
+                            <constraint firstAttribute="trailing" secondItem="Uvw-eW-MpB" secondAttribute="trailing" id="wXf-0H-IUO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="新增日記" id="xQq-vx-xVf">
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="nqo-BN-5l1">
+                    <navigationItem key="navigationItem" title="新增日記" id="HxH-4K-zLE">
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="EKG-Rx-qDn">
                             <connections>
-                                <action selector="saveBtnPressed:" destination="drb-x9-LRM" id="nwe-lE-N8P"/>
+                                <action selector="saveBtnPressed:" destination="drb-x9-LRM" id="lCu-FK-Qht"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="contentText" destination="WB4-dM-JHf" id="kNT-ca-gfh"/>
-                        <outlet property="saveMessage" destination="nqo-BN-5l1" id="0zn-Pf-GCv"/>
+                        <outlet property="titleLabel" destination="akX-fF-WGD" id="YHi-uf-i72"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qHg-Vu-Ds6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -80,4 +134,7 @@
             <point key="canvasLocation" x="-746" y="-126"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="diaryBG.png" width="375" height="667"/>
+    </resources>
 </document>

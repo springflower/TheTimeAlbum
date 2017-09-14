@@ -38,6 +38,7 @@
     updateChildBigstickerArray = [[UpdateDataView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [[UIApplication sharedApplication].delegate.window addSubview:updateChildBigstickerArray];
     updateChildBigstickerArray.hidden = true;
+   
     
 }
 
@@ -45,6 +46,7 @@
     [super viewDidLoad];
     //設定 NavigationBar 的標題
     self.navigationItem.title = @"大頭貼";
+    MyBigSticker.contentMode = UIViewContentModeScaleAspectFit;
     //準備讀取已儲存的資料
     defaults = [NSUserDefaults standardUserDefaults];
     //設定 View 本身的背景顏色
@@ -120,7 +122,7 @@
         NSLog(@"JPG Data: %lu",jpgData.length);
         NSLog(@"PNG Data: %lu",pngData.length);
         
-         MyBigSticker.image = editImage;
+        MyBigSticker.image = editImage;
         
         NSData *saveImage = UIImageJPEGRepresentation(editImage, 100);
         [defaults setObject:saveImage forKey:@"currentBabyImage"];
@@ -151,16 +153,30 @@
     //Check it is necessary to resiz.
     if(input.size.width <= maxLength && input.size.height <=maxLength) {
         finalImage = input;
-        targetSize = input.size;
+        //targetSize = input.size;
+        
+        if(input.size.width >= input.size.height) {
+            //CGFloat ratio = input.size.width / maxLength;
+            //targetSize = CGSizeMake(maxLength, input.size.height / ratio);
+            targetSize = CGSizeMake(input.size.width, input.size.width);
+        } else {
+            // Height > Width
+            //CGFloat ratio = input.size.height / maxLength;
+            //targetSize = CGSizeMake(input.size.width / ratio,maxLength);
+            targetSize = CGSizeMake(input.size.height, input.size.height);
+        }
+        
     } else {
         //We Will resize the input image.
         if(input.size.width >= input.size.height) {
-            CGFloat ratio = input.size.width / maxLength;
-            targetSize = CGSizeMake(maxLength, input.size.height / ratio);
+            //CGFloat ratio = input.size.width / maxLength;
+            //targetSize = CGSizeMake(maxLength, input.size.height / ratio);
+            targetSize = CGSizeMake(maxLength, maxLength);
         } else {
             // Height > Width
-            CGFloat ratio = input.size.height / maxLength;
-            targetSize = CGSizeMake(input.size.width / ratio,maxLength);
+            //CGFloat ratio = input.size.height / maxLength;
+            //targetSize = CGSizeMake(input.size.width / ratio,maxLength);
+            targetSize = CGSizeMake(maxLength, maxLength);
         }
     }
     
@@ -194,22 +210,64 @@
 #pragma mark - Setting if findished save data and update 設定完成後儲存資料並上傳
 
 -(void)FinishButton {
-    //通知儲存要上傳的孩子資訊資料
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"saveUpdateChildInformation" object:nil];
-    //準備讀取下載的孩子大頭貼陣列
-    if([[UseDownloadDataClass object] ReadChildBigStickerArray].count != 0) {
-        putMyBigStickerArray  = [[NSMutableArray alloc]
-                                 initWithArray:[[UseDownloadDataClass object] ReadChildBigStickerArray]];
-    } else {
-        putMyBigStickerArray = [NSMutableArray new];
-    }
+    //通知上個viewcontroller要上傳
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"addNewBaby" object:nil];
+
     
-    updateChildBigstickerArray.hidden = false;
+    
+
+
+    
     //將孩子的大頭貼照片轉成 Data 後，再進行儲存資料的動作
     NSData* MyChildBigStickerData = [NSData dataWithData:UIImagePNGRepresentation(MyBigSticker.image)];
-    [putMyBigStickerArray addObject:MyChildBigStickerData];
-    //將儲存的的孩子大頭貼陣列資料上傳進行更新
-    [updateChildBigstickerArray UpdataChildBigsticker:putMyBigStickerArray];
+    
+    // 創建本地資料夾
+    NSError *error2 = nil;
+    if (![[NSFileManager defaultManager] createDirectoryAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"]
+                                   withIntermediateDirectories:YES
+                                                    attributes:nil
+                                                         error:&error2]) {
+        NSLog(@"Creating 'userPic' directory failed. Error: [%@]", error2);
+    }
+    // 隨機檔名
+    NSString *randomName = [[[NSProcessInfo processInfo] globallyUniqueString] stringByAppendingString:@".png"];
+    NSString *babyPicName = [NSString stringWithFormat:@"baby%@", randomName];
+    NSString *downloadingFilePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"] stringByAppendingPathComponent:babyPicName];
+    NSLog(@" 存小孩頭貼到: %@", downloadingFilePath);
+    
+    [MyChildBigStickerData writeToFile:downloadingFilePath atomically:YES];
+    
+    
+    NSData *resultData = [NSData dataWithContentsOfFile:downloadingFilePath];
+    UIImage *resultImage = [UIImage imageWithData:resultData];
+    
+    NSLog(@" image: %@", resultImage);
+    
+    NSDictionary *dict =[[NSDictionary alloc]initWithObjectsAndKeys: babyPicName,@"babyPicName",nil];
+
+    NSNotification *notification =[NSNotification notificationWithName:@"addNewBaby" object:nil userInfo:dict];
+    // 發送通知
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+//    //準備讀取下載的孩子大頭貼陣列
+//    if([[UseDownloadDataClass object] ReadChildBigStickerArray].count != 0) {
+//        putMyBigStickerArray  = [[NSMutableArray alloc]
+//                                 initWithArray:[[UseDownloadDataClass object] ReadChildBigStickerArray]];
+//    } else {
+//        putMyBigStickerArray = [NSMutableArray new];
+//    }
+//    
+//    updateChildBigstickerArray.hidden = false;
+//    //將孩子的大頭貼照片轉成 Data 後，再進行儲存資料的動作
+//    NSData* MyChildBigStickerData = [NSData dataWithData:UIImagePNGRepresentation(MyBigSticker.image)];
+//    [putMyBigStickerArray addObject:MyChildBigStickerData];
+//    //將儲存的的孩子大頭貼陣列資料上傳進行更新
+//    [updateChildBigstickerArray UpdataChildBigsticker:putMyBigStickerArray];
+    
+    
     
 }
 

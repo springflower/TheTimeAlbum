@@ -22,33 +22,115 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Title" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bya-ih-N4W">
-                                <rect key="frame" x="46" y="64" width="283" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="messageBG.png" translatesAutoresizingMaskIntoConstraints="NO" id="hW3-uz-yLD">
+                                <rect key="frame" x="0.0" y="64" width="375" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="wXp-Dm-t5e"/>
+                                    <constraint firstAttribute="height" constant="250" id="hwP-1z-wg8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="23"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bya-ih-N4W">
+                                <rect key="frame" x="16" y="74" width="343" height="35"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="wXp-Dm-t5e"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Title">
+                                        <attributes>
+                                            <color key="NSColor" red="0.85043728351593018" green="0.21816034615039825" blue="0.15920260548591614" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="23" name=".SFNSDisplay"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="10" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vay-d3-Gj4">
-                                <rect key="frame" x="36" y="164" width="303" height="483"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vay-d3-Gj4">
+                                <rect key="frame" x="0.0" y="129" width="375" height="538"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Lorem ipsum dolor sit er elit lamet">
+                                        <attributes>
+                                            <color key="NSColor" red="0.76089900732040405" green="0.25649610161781311" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="22.300000000000001" paragraphSpacingBefore="30" firstLineHeadIndent="30" headIndent="30" tailIndent="340" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <color key="NSColor" red="0.76089900732040405" green="0.25649610161781311" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name=".PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="22.300000000000001" paragraphSpacingBefore="30" firstLineHeadIndent="30" headIndent="30" tailIndent="340" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" consectetaur cillium adipisicing pecu">
+                                        <attributes>
+                                            <color key="NSColor" red="0.76089900732040405" green="0.25649610161781311" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="22.300000000000001" paragraphSpacingBefore="30" firstLineHeadIndent="30" headIndent="30" tailIndent="340" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <color key="NSColor" red="0.76089900732040405" green="0.25649610161781311" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name=".PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="22.300000000000001" paragraphSpacingBefore="30" firstLineHeadIndent="30" headIndent="30" tailIndent="340" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam">
+                                        <attributes>
+                                            <color key="NSColor" red="0.76089900732040405" green="0.25649610161781311" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="22.300000000000001" paragraphSpacingBefore="30" firstLineHeadIndent="30" headIndent="30" tailIndent="340" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <color key="NSColor" red="0.76089900732040405" green="0.25649610161781311" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name=".PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="22.300000000000001" paragraphSpacingBefore="30" firstLineHeadIndent="30" headIndent="30" tailIndent="340" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.76089900732040405" green="0.25649610161781311" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="22.300000000000001" paragraphSpacingBefore="30" firstLineHeadIndent="30" headIndent="30" tailIndent="340" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <color key="NSColor" red="0.76089900732040405" green="0.25649610161781311" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name=".PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="22.300000000000001" paragraphSpacingBefore="30" firstLineHeadIndent="30" headIndent="30" tailIndent="340" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.76089900732040405" green="0.25649610161781311" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="22.300000000000001" paragraphSpacingBefore="30" firstLineHeadIndent="30" headIndent="30" tailIndent="340" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bya-ih-N4W" firstAttribute="top" secondItem="9ZA-ky-6y1" secondAttribute="bottom" id="3Hl-cv-PkH"/>
-                            <constraint firstItem="pRN-Ox-hQo" firstAttribute="top" secondItem="Vay-d3-Gj4" secondAttribute="bottom" constant="20" id="3p8-69-2v5"/>
+                            <constraint firstItem="bya-ih-N4W" firstAttribute="top" secondItem="9ZA-ky-6y1" secondAttribute="bottom" constant="10" id="3Hl-cv-PkH"/>
+                            <constraint firstItem="pRN-Ox-hQo" firstAttribute="top" secondItem="Vay-d3-Gj4" secondAttribute="bottom" id="3p8-69-2v5"/>
                             <constraint firstItem="Vay-d3-Gj4" firstAttribute="top" secondItem="bya-ih-N4W" secondAttribute="bottom" constant="20" id="E7T-Nh-q7W"/>
+                            <constraint firstItem="Vay-d3-Gj4" firstAttribute="leading" secondItem="Xjx-7T-1ka" secondAttribute="leading" id="Loi-3D-YMW"/>
                             <constraint firstItem="bya-ih-N4W" firstAttribute="centerX" secondItem="Xjx-7T-1ka" secondAttribute="centerX" id="RNc-BE-VM9"/>
-                            <constraint firstItem="bya-ih-N4W" firstAttribute="leading" secondItem="Xjx-7T-1ka" secondAttribute="leadingMargin" constant="30" id="jHT-Yc-IPC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bya-ih-N4W" secondAttribute="trailing" constant="30" id="m9E-Cy-Eob"/>
-                            <constraint firstItem="Vay-d3-Gj4" firstAttribute="leading" secondItem="Xjx-7T-1ka" secondAttribute="leadingMargin" constant="20" id="s95-Bl-2h9"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Vay-d3-Gj4" secondAttribute="trailing" constant="20" id="tPY-h9-8f9"/>
+                            <constraint firstItem="hW3-uz-yLD" firstAttribute="top" secondItem="9ZA-ky-6y1" secondAttribute="bottom" id="V9i-qf-AjD"/>
+                            <constraint firstItem="hW3-uz-yLD" firstAttribute="leading" secondItem="Xjx-7T-1ka" secondAttribute="leading" id="avx-Kg-3z9"/>
+                            <constraint firstAttribute="trailing" secondItem="hW3-uz-yLD" secondAttribute="trailing" id="fvZ-Fx-2kd"/>
+                            <constraint firstItem="bya-ih-N4W" firstAttribute="leading" secondItem="Xjx-7T-1ka" secondAttribute="leadingMargin" id="jHT-Yc-IPC"/>
+                            <constraint firstAttribute="trailing" secondItem="Vay-d3-Gj4" secondAttribute="trailing" id="m7f-pA-WrG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bya-ih-N4W" secondAttribute="trailing" id="m9E-Cy-Eob"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jbH-z1-TXP"/>
@@ -80,4 +162,7 @@
             <point key="canvasLocation" x="21.600000000000001" y="-73.313343328335833"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="messageBG.png" width="349" height="250"/>
+    </resources>
 </document>

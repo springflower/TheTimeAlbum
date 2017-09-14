@@ -10,6 +10,7 @@
 #import <AFNetworking.h>
 #import "MyCommunicator.h"
 #import  <KVNProgress.h>
+#import <Chameleon.h>
 
 @interface EditTextPostViewController ()
 {
@@ -38,6 +39,15 @@
 #pragma mark - 調整navigation bar item
 - (void) initUI {
     
+//    self.navigationController?.navigationBar.barStyle = .Black
+//    
+//    self.navigationController?.navigationBar.barTintColor = UIColor.blackColor()
+//    
+//    self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+    //self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    self.navigationController.navigationBar.tintColor = [UIColor flatOrangeColorDark];
+    //self.navigationController.navigationBar.backgroundColor = [UIColor colorWithRed:247 green:217 blue:173 alpha:1];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed: (247/255.0) green:217/255.0 blue:173/255.0 alpha:0.54];
     UIBarButtonItem *rightOptionsBtn = [[UIBarButtonItem alloc] initWithTitle:@"選項"
                                                                      style:UIBarButtonItemStyleDone
                                                                     target:self
@@ -48,6 +58,11 @@
                                                                    action:@selector(goEditModeUI)];
     NSArray *arrayOfItems = [[NSArray alloc] initWithObjects:rightOptionsBtn,rightEditBtn, nil];
     self.navigationItem.rightBarButtonItems = arrayOfItems;
+    
+    
+    
+    
+    self.contentTextView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"diaryBG2"]];
 }
 
 - (void) goEditModeUI {

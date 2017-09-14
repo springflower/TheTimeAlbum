@@ -54,7 +54,7 @@
     
     NSInteger uploadPhotosCount;        // 總共要上傳幾張
     NSInteger uploadedPhotosCount;        // 已完成上傳幾張
-    NSMutableString *upFileNames;       //上傳圖片訊息的檔名
+    NSMutableString *upFileNames;       // 上傳圖片訊息的檔名
     int64_t totalBit;
     int64_t nowBit;
     
@@ -65,23 +65,24 @@
     NSArray *readChildBigStickerArray;
     //準備放置讀取儲存的孩子大頭貼圖片
     //UIImage *ChildStickerImage;
-
-    //準備讀取所選取的孩子ID來讀取孩子名字陣列
-    //NSArray *readChildTextFieldnameArray;
     
-    //NSArray *readMyChildBackImageArray;
+    NSMutableArray *temp01;
+    NSMutableArray *temp02;
+    NSMutableArray *temp03;
+    NSMutableArray *temp04;
     
-    //UIImage *MyChildBackgroundImage;
     
-    //HeadView * vc;
-    //NSArray *readChildTextFieldnameArray;
-    //-- Boen
+    NSArray *childNames;            //本地儲存所有名下小孩名字的陣列
+    NSArray *childBirthdays;        //本地儲存所有名下小孩生日的陣列
+    NSArray *childPics;             //本地儲存所有名下小孩照片的陣列
+    NSArray *childIDs;              //本地儲存所有名下小孩id的陣列
     
 }
 -(NSMutableArray*) myStaticArray;
 @property (weak, nonatomic) UITableView *myTableView;
 @property (weak, nonatomic) UICollectionView *myCollectionView;
 @property (weak, nonatomic) HeadView * myView;
+@property (weak, nonatomic) IBOutlet UIView *myWelcomeView;
 
 //上傳狀態
 @property (weak, nonatomic) UIVisualEffectView * myEffectView;
@@ -140,6 +141,11 @@
     //--
     
     
+    temp01 = [NSMutableArray new];
+    temp02 = [NSMutableArray new];
+    temp03 = [NSMutableArray new];
+    temp04 = [NSMutableArray new];
+    [self initBabyArrays];
     
     countingPos = 0;
     //isSuccess = false;
@@ -160,10 +166,6 @@
     // 初始化collection view
     [self initCollectionView];
     
-    // 初始化孩子大頭
-    [self initChildrenPicBoen];
-    
-    
     // 初始化標頭view
     [self initHeadView];
     
@@ -174,7 +176,8 @@
     // 初始化上傳狀態的view
     [self initBlurUploadingStatus];
 
-    
+    // 載入寶貝圖名
+    [self reloadBabyPicNamePost];
     
     // navi drawer
     [self SettingSilderMenuViewAndButtonItemToNavigationBar];
@@ -184,6 +187,8 @@
     
     // 監聽重整事件
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doReloadJob) name:@"doReloadJob" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadBabyPicNamePost) name:@"reloadBabyPicNamePost" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBabyData) name:@"reloadBabyData" object:nil];
     
     // 載入貼文
     lastPostID = 1;
@@ -192,11 +197,6 @@
     
     //改在viewwill appear
     [self doReloadJob];
-    
-    //準備接收通知如果下載失敗通知重新下載資料
-    [[NSNotificationCenter defaultCenter]addObserver:self
-                                            selector:@selector(downloadDataFromServe) name:@"downloadDataFromServe" object:nil];
-    
     
     
     //FIXME: 可能還有問題的下載
@@ -207,6 +207,13 @@
                                                     attributes:nil
                                                          error:&error]) {
         NSLog(@"Creating 'download' directory failed. Error: [%@]", error);
+    }
+    NSError *error2 = nil;
+    if (![[NSFileManager defaultManager] createDirectoryAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"]
+                                   withIntermediateDirectories:YES
+                                                    attributes:nil
+                                                         error:&error2]) {
+        NSLog(@"Creating 'userPic' directory failed. Error: [%@]", error2);
     }
 }
     
@@ -242,11 +249,6 @@
     _myCollectionView = myCollectionView;
     [self.view addSubview:myCollectionView];
     
-    
-    // refresh control      重新整理的套件
-//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-//    [refreshControl addTarget:self action:@selector(doReloadJob) forControlEvents:UIControlEventValueChanged];
-//    [self.myCollectionView addSubview:refreshControl];
 }
 
 // Initial HeadView      初始化標頭view元件
@@ -272,38 +274,28 @@
     _myView = vc;
     _myView.backgroundColor = [UIColor clearColor];
     _myView.userInteractionEnabled = NO;
+    
+    //head view 陰影
+//    _myView.layer.shadowColor = [[UIColor blackColor] CGColor];
+//    _myView.layer.shadowOffset = CGSizeMake(3.0f, 5.0f); // [水平偏移, 垂直偏移]
+//    _myView.layer.shadowOpacity = 1.0f; // 0.0 ~ 1.0 的值
+//    _myView.layer.shadowRadius = 3.0f; // 陰影發散的程度
+    //end of head view 陰影
     [self.view addSubview:vc];
     
 }
 //--
-// 初始化孩子的圖片
-- (void) initChildrenPicBoen {
-    // Boen
-    //準備讀取所選取的孩子ID來讀取孩子大頭貼陣列
-//    NSLog(@" ??????? ???? ??");
-//    readChildBigStickerArray = [localUserData objectForKey:@"MyBigSticker"];
-//    ChildID = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChildID"];
-//    NSData* ChildBigStickerImageData = [readChildBigStickerArray objectAtIndex:ChildID];
-//    if(ChildBigStickerImageData){
-//        ChildStickerImage = [UIImage imageWithData:ChildBigStickerImageData];
-//        NSLog(@"照片為： %@",ChildStickerImage);
-//    }
-//    //讀取孩子背景圖片陣列
-//    NSArray *readMyChildBackImageArray = [localUserData objectForKey:@"readMyChildBackImageArray"];
-//    NSData *readMyChildBackImageData = [readMyChildBackImageArray objectAtIndex:ChildID];
-//    if(readMyChildBackImageData) {
-//        MyChildBackgroundImage  = [UIImage imageWithData:readMyChildBackImageData];
-//        NSLog(@"照片為： %@",MyChildBackgroundImage);
-//    }
 
-//    // Prepare the readChildTextFieldnameArray. 準備讀取所創建的孩子名字，根據所選取的孩子ID來決定孩子的名字。
-//    readChildTextFieldnameArray = [localUserData objectForKey:@"ChildName"];
-    //-- Boen
-    
-
-    
-    
+-(void) initBabyArrays {
+    childNames = [localUserData objectForKey:@"childNames"];
+    childBirthdays = [localUserData objectForKey:@"childBirthdays"];
+    childPics = [localUserData objectForKey:@"childPics"];
+    childIDs = [localUserData objectForKey:@"childIDs"];
+    NSLog(@" names: %@, birthdays: %@, pics: %@, ids: %@ ", childNames, childBirthdays, childPics,childIDs);
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"reloadLeftMenu" object:nil];
 }
+
 // Initialize  UIEffectView   初始化模糊的上傳狀態view
 - (void) initBlurUploadingStatus {
     // 模糊的 上傳狀態的View
@@ -357,11 +349,11 @@
                                 if(index == 1){
                                     
 //  測試區
-                                    [self getBabyData];
-                                    
-                                    //準備下載信件資料
-                                    UpdateDataView *downloadMailContent = [UpdateDataView new];
-                                    [downloadMailContent DownloadFutureMailContent];
+                                    //[self getBabyData];
+                                    NSLog(@" %ld", countingPos);
+//                                    //準備下載信件資料
+//                                    UpdateDataView *downloadMailContent = [UpdateDataView new];
+//                                    [downloadMailContent DownloadFutureMailContent];
                                     
                                     [_plusButtonsViewMain hideButtonsAnimated:YES completionHandler:nil];
                                     [self btnAddNewPostPressed];
@@ -466,12 +458,13 @@
     
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"addNewMessage" bundle:[NSBundle mainBundle]];
     addNewMessageVC *addNewMessageController = [storyboard instantiateViewControllerWithIdentifier:@"addNewMessageVC"];
+    self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:addNewMessageController animated:YES];
 }
 
 - (void) btnAddNewPhotosPressed {
     [self.collection removeAllObjects];
-    
+    //uploadedPhotosCount = 0;
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
     
     // You can get the photos by block, the same as by delegate.
@@ -568,6 +561,7 @@
                     // 如果全都上傳完了 寫入資料庫 重置東西
                     if ( uploadedPhotosCount == uploadPhotosCount) {
                         // 寫入資料庫
+                        //uploadedPhotosCount =0;
                         NSLog(@" %@" , upFileNames);
                         [comm sendTextMessage:upFileNames
                                     forbabyID:[localUserData objectForKey:@"babyid"]
@@ -597,6 +591,7 @@
                                    }]; // end of comm sendTextMessage
                         // 上傳要結束時 讓顯示上傳狀態的東西隱藏
                         _myEffectView.hidden = YES;
+                        _myStatusLabel.text = @"上傳中...";
                         uploadPhotosCount = 0;
                         uploadedPhotosCount = 0;
                         totalBit = 0;
@@ -639,45 +634,18 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)downloadDataFromServe {
-
-    if([[UseDownloadDataClass object] ReadSuccessUpdateBool]) {
-        NSLog(@"下載資料開始");
-        //        downloadChildBigSticker.hidden = false;
-        //開始下載網路上儲存的資料
-        UpdateDataView *downloadChildBigSticker = [UpdateDataView new];
-        [downloadChildBigSticker DowloadChildBigSticker:^(NSArray *array) {
-            readChildBigStickerArray  = array;
-            NSLog(@"Block 所讀取到的資料為： %@",readChildBigStickerArray);
-            //將成功下載的孩子大頭貼陣列資料傳到全域變數來使用
-            [[UseDownloadDataClass object] PutChildBigStickerArray:readChildBigStickerArray];
-            //設定通知結束 SetInfoTableViewControler 進行更新
-            [[NSNotificationCenter defaultCenter]
-             postNotificationName:@"SetInfoTableViewControler" object:nil];
-            //通知執行 SliderMenuViewLeft 進行更新
-            [[NSNotificationCenter defaultCenter]
-             postNotificationName:@"updateTableViewContrler" object:nil];
-            //設定通知結束 FutureMailViewController 進行更新
-            [[NSNotificationCenter defaultCenter]
-             postNotificationName:@"FutureMailViewController" object:nil];
-            //下載成功後傳送 BOOL 值結束結束重複下載，如果要在執行下載必須有更新資料才會執行下載。
-            [[UseDownloadDataClass object] PutSuccessUpdateBool:false];
-        }];
-        
-    }
-}
-
-
 -(void) viewWillAppear:(BOOL)animated{
-    
-    [self downloadDataFromServe];
-    
     
     // 看需不需要撈孩子的資料
     if([localUserData objectForKey:@"babyid"] == nil){
         [self getBabyData];
     }
-
+    [self initBabyArrays];
+    
+    if([localUserData objectForKey:@"currentBabyName"] == nil) {
+        // 新創畫面
+        //StartCreateFirstChildViewController
+    }
     
     //[self initBtn2];
     
@@ -685,21 +653,6 @@
     //FIXME: tabbar隱藏
     self.tabBarController.tabBar.hidden = NO;
     
-    
-    // Boen
-    //讀取是否已有建立第一個孩子.
-    NSUserDefaults *readChildNameDefaults;
-    readChildNameDefaults = [NSUserDefaults standardUserDefaults];
-    //如果讀出的陣列數量為零的話，就執行 AddChildSettingViewController 來創造第一個孩子。
-    NSArray *readChildTextFieldnameArray = [readChildNameDefaults objectForKey:@"ChildName"];
-//    if(readChildTextFieldnameArray.count == 0) {
-//        AddChildSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"AddChildSettingViewController"];
-//        [self presentViewController:nextPage animated:YES completion:nil];
-//    }
-    //-- Boen
-
-    //[self.navigationController setNavigationBarHidden:YES animated:animated];
-    //[self doReloadJob];
     [super viewWillAppear:animated];
     _alphaMemory = 0;
     //毛玻璃
@@ -739,13 +692,31 @@
 #pragma mark: collectionview delegate       collectionview 相關
 // collection implement methods
 //------------------------------------------------------------------
+
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    NSInteger numOfSections = 0;
+    if (postItems.count > 0)
+    {
+        //self.myCollectionView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        numOfSections                 = 1;
+        //yourTableView.backgroundView   = nil;
+        self.myCollectionView.backgroundView = nil;
+    }
+    else
+    {
+        self.myCollectionView.backgroundView = _myWelcomeView;
+        //self.myCollectionView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    //return numOfSections;
+    
+    
+    return 1;
+}
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 
     return postItems.count;
-}
-
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     //static NSString *onePicID = @"onePicCell";
@@ -806,9 +777,9 @@
     
             } else {
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
+                //dispatch_async(dispatch_get_main_queue(), ^{
                     cell2.image01.image = pp.image1;
-                });
+                //});
             }
             cell2.labelNumOfPhotos.text = [NSString stringWithFormat:@"%ld", pp.photoNum2];
             cell2.labelDate.text = theDateFormatStr1;
@@ -821,10 +792,10 @@
                 
             } else {
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
+                //dispatch_async(dispatch_get_main_queue(), ^{
                     cell3.image01.image = pp.image1;
                     cell3.image02.image = pp.image2;
-                });
+                //});
             }
             cell3.labelNumOfPhotos.text = [NSString stringWithFormat:@"%ld", pp.photoNum2];
             cell3.labelDate.text = theDateFormatStr1;
@@ -837,13 +808,13 @@
             
             } else {
 
-                dispatch_async(dispatch_get_main_queue(), ^{
+                //dispatch_async(dispatch_get_main_queue(), ^{
                     //NSLog(@"index path at cell for item : % ld", indexPath.row);
                     cell4.image01.image = pp.image1;
                     cell4.image02.image = pp.image2;
                     cell4.image03.image = pp.image3;
                 
-                });
+                //});
             }
             cell4.labelNumOfPhotos.text = [NSString stringWithFormat:@"%ld", pp.photoNum2];
             cell4.labelDate.text = theDateFormatStr1;
@@ -943,7 +914,7 @@
         editController.titleString = tempItem.postDateString;
         editController.contentString = tempItem.content;
         editController.postID = tempItem.postID;
-        
+        self.tabBarController.tabBar.hidden = YES;
         [self.navigationController pushViewController:editController animated:YES];
     } else /*if(tempItem.postType == PostTypeThreePic)*/ {
         
@@ -1003,7 +974,7 @@
     
     //FIXME: Hard Code
     [comm retrivePostsWithLastPostID:@"1"
-                              babyid:@"1"
+                              babyid:[localUserData objectForKey:@"babyid"]
                                 completion:^(NSError *error, id result) {
                                     // AFN 連線是否成功
                                     if(error){
@@ -1023,6 +994,8 @@
                                     // Return if there is no new message.
                                     if(items.count == 0){
                                         NSLog(@"No new message, do nothing and return.");
+                                        [postItems removeAllObjects];
+                                        [self.myCollectionView reloadData];
                                         return;
                                     }
                                     //FIXME: static array 可能會有問題
@@ -1186,7 +1159,7 @@
         BOOL shouldDownload = YES;
         NSInteger countingPos2=0;
         for(int i=0; i<picNames.count; i++){
-            //NSLog(@"%@", picNames[i]);
+            
             NSString *picName = picNames[i];
             NSString *downloadingFilePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"download"] stringByAppendingPathComponent:picName];
             NSURL *downloadingFileURL = [NSURL fileURLWithPath:downloadingFilePath];
@@ -1262,18 +1235,19 @@
             
                 if (task.result) {
                     // 印出本地下載暫存路徑中的檔案名稱
+                    /*
                     NSString *directory = [NSTemporaryDirectory() stringByAppendingPathComponent:@"download"];
                     NSFileManager *fileM = [NSFileManager defaultManager];
                     NSArray * a = [fileM contentsOfDirectoryAtPath:directory error:nil];
                     for(NSString *temp in a){
                         NSLog(@"- - temp: %@", temp);
                     }
-                    //NSLog(@"%@", task.result);
-                
-                    //AWSS3TransferManagerDownloadOutput *downloadOutput = task.result;
+                    */
+                    
                     NSLog(@" - - - - pic download success....");
                     
                     // 將下載回來的圖片放入postitem以讓 collectionview 載入
+                    //根據countingPos決定圖要放在cell的哪個位置
                     PostItem *tempPP = [postItems objectAtIndex:itemIndex];
                     if(countingPos == 0){
                         tempPP.image1 = [UIImage imageWithData:[NSData dataWithContentsOfURL:downloadingFileURL]];
@@ -1283,6 +1257,7 @@
                         countingPos++;
                         if(countingPos == picNames.count){
                             countingPos = 0;
+                            [self doReloadJob];
                         }
                     } else if ( countingPos == 1 ){
                         tempPP.image2 = [UIImage imageWithData:[NSData dataWithContentsOfURL:downloadingFileURL]];
@@ -1290,6 +1265,7 @@
                         countingPos++;
                         if(countingPos == picNames.count){
                             countingPos = 0;
+                            [self doReloadJob];
                         }
                     } else if ( countingPos == 2 ){
                         tempPP.image3 = [UIImage imageWithData:[NSData dataWithContentsOfURL:downloadingFileURL]];
@@ -1297,9 +1273,10 @@
                         countingPos++;
                         if(countingPos == picNames.count){
                             countingPos = 0;
+                            [self doReloadJob];
                         }
                     }
-                    //[_myCollectionView reloadItemsAtIndexPaths:@[indexpath]];
+                    
                     [_myCollectionView reloadData];
                 }
                 return nil;
@@ -1334,10 +1311,11 @@
     NSInteger babyID = [tmp[@"babyID"] integerValue];
     NSString *babyName = tmp[@"babyName"];
     NSString *dateString = tmp[@"birthday"];
+    NSString *babyPic = tmp[@"babyPic"];
     
-    NSLog(@" got babyID: %ld, babyName: %@, dateString: %@", babyID, babyName, dateString);
+    NSLog(@" got babyID: %ld, babyName: %@, dateString: %@, babyPic: %@", babyID, babyName, dateString, babyPic);
     
-    
+    [self downloadBabyPicifNeeded:babyPic];
     //將取回的日期轉成NSDate
     NSDateFormatter *gmtDateFormatter = [[NSDateFormatter alloc] init];
     gmtDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
@@ -1345,20 +1323,110 @@
     NSDate  *date = [gmtDateFormatter dateFromString:dateString];
     NSLog(@"-- date :%@", date);
     
+    [temp01 addObject:babyName];
+    [temp02 addObject:dateString];
+    [temp03 addObject:babyPic];
+    [temp04 addObject:@(babyID)];
 
-    if (howManyPosts == incomingPosts.count) {
-        //  暫存第一個baby的資料作為預設寶寶
-        [localUserData setObject: [NSString stringWithFormat:@"%ld",babyID] forKey:@"babyid"];
-        [localUserData setObject:babyName forKey:@"currentBabyName"];
-        [localUserData setObject:date forKey:@"currentBabyBirthday"];
+    
+    // 判斷在主頁面的時候產生的重整不需要更改當前寶寶資訊
+    
+//    if (howManyPosts == incomingPosts.count) {
+//        //  暫存第一個baby的資料作為預設寶寶
+//        [localUserData setObject: [NSString stringWithFormat:@"%ld",babyID] forKey:@"babyid"];
+//        [localUserData setObject:babyName forKey:@"currentBabyName"];
+//        [localUserData setObject:date forKey:@"currentBabyBirthday"];
+//        [localUserData setObject:babyPic forKey:@"currentBabyPic"];
+//        
+//        
+//        //"childNames"];
+//        //childBirthdays = [localUserData objectForKey:@"childBirthdays"];
+//        //childPics = [localUserData objectForKey:@"childPics"];
+//        // 寶寶資料
+//        
+//        
+//    }
+    NSLog(@" incoming posts...: %ld", incomingPosts.count);
+    if (incomingPosts.count == 1 ) {
+    
+        [localUserData setObject:temp01 forKey:@"childNames"];
+        [localUserData setObject:temp02 forKey:@"childBirthdays"];
+        [localUserData setObject:temp03 forKey:@"childPics"];
+        [localUserData setObject:temp04 forKey:@"childIDs"];
+        
+        NSLog(@" (handle baby) names: %@, bir: %@, pics: %@, ids: %@",
+              [localUserData objectForKey:@"childNames"],
+              [localUserData objectForKey:@"childBirthdays"],
+              [localUserData objectForKey:@"childPics"],
+              [localUserData objectForKey:@"childIDs"] );
+        [temp01 removeAllObjects];
+        [temp02 removeAllObjects];
+        [temp03 removeAllObjects];
+        [temp04 removeAllObjects];
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"reloadLeftMenu" object:nil];
     }
         
-    NSLog(@" 存default的 babyID: %@, 寶名: %@, 生日: %@", [localUserData objectForKey:@"babyid"], [localUserData objectForKey:@"currentBabyName"] , [localUserData objectForKey:@"currentBabyBirthday" ]);
+    NSLog(@" 存default的 babyID: %@, 寶名: %@, 生日: %@, 圖: %@", [localUserData objectForKey:@"babyid"], [localUserData objectForKey:@"currentBabyName"] , [localUserData objectForKey:@"currentBabyBirthday" ], [localUserData objectForKey:@"currentBabyPic"]);
         
     [incomingPosts removeObjectAtIndex:0];
     [self handleIncomingBabys: howManyPosts];
 }
 
+///==============
+- (void) downloadBabyPicifNeeded:(NSString*) babyPic {
+    
+    NSString *downloadingFilePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"] stringByAppendingPathComponent:babyPic];
+    NSURL *downloadingFileURL = [NSURL fileURLWithPath:downloadingFilePath];
+    
+    
+    
+    // 檢查圖片是否已暫存 是的話就不下載
+    NSString *directory = [NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"];
+    NSFileManager *fileM = [NSFileManager defaultManager];
+    NSArray * a = [fileM contentsOfDirectoryAtPath:directory error:nil];
+    for(NSString *temp in a){
+        
+        NSLog(@"......  : %@", temp);
+        if([babyPic isEqualToString: temp]){
+            NSLog(@"- - 用戶大頭已存在: %@", temp);
+            NSData *currentUserPic = [NSData dataWithContentsOfURL:downloadingFileURL];
+            [localUserData setObject:currentUserPic forKey:@"CurrentUserPic"];
+            return;
+        }
+    }
+    
+    
+    
+    AWSS3TransferManagerDownloadRequest *downloadRequest = [AWSS3TransferManagerDownloadRequest new ];
+    downloadRequest.bucket = @"the.timealbum";
+    downloadRequest.key = babyPic;
+    downloadRequest.downloadingFileURL = downloadingFileURL;
+    
+    AWSS3TransferManager *transferManager = [AWSS3TransferManager defaultS3TransferManager];
+    [[transferManager download:downloadRequest] continueWithExecutor:[AWSExecutor mainThreadExecutor] withBlock:^id _Nullable(AWSTask * _Nonnull task) {
+        if(task.error){
+            
+            NSLog(@" 使用者大頭下載錯誤");
+        }
+        
+        if (task.result) {
+            // 印出本地下載暫存路徑中的檔案名稱
+            NSString *directory = [NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"];
+            NSFileManager *fileM = [NSFileManager defaultManager];
+            NSArray * a = [fileM contentsOfDirectoryAtPath:directory error:nil];
+            for(NSString *temp in a){
+                NSLog(@"- - temp in userPic: %@", temp);
+            }
+            //NSLog(@"%@", task.result);
+            
+            //AWSS3TransferManagerDownloadOutput *downloadOutput = task.result;
+            NSLog(@" - - - - 使用者大頭 download success....");
+            
+        }
+        return nil;
+    }];
+}
 
 //FIXME: 尚未實作從SQL撈babydata 存入Userdefaults
 - (void) getBabyData {
@@ -1528,8 +1596,31 @@
 // 暫時
 - (IBAction)reload:(id)sender {
     [self doReloadJob];
+    [self getBabyData];
 }
 
+
+- (void) reloadBabyPicNamePost {
+    [self doReloadJob];
+    
+    // 設定頭貼的路徑
+    NSString *babyPicfilePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"] stringByAppendingPathComponent:[localUserData objectForKey:@"currentBabyPic"]];
+    NSURL *babyPicFileURL = [NSURL fileURLWithPath:babyPicfilePath];
+    
+    NSData *babyPicData = [NSData dataWithContentsOfURL:babyPicFileURL];
+    UIImage *babyPicImage = [UIImage imageWithData:babyPicData];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // 重載頭貼和名字
+        self.myView.headView.image = babyPicImage;
+        self.myView.signLabel.text = [localUserData objectForKey:@"currentBabyName"];
+        NSLog(@"   重載寶貝圖片: %@, 名字:%@, 生日: %@, ID: %@",
+              [localUserData objectForKey: @"currentBabyPic"],
+              [localUserData objectForKey:@"currentBabyName"],
+              [localUserData objectForKey:@"currentBabyBirthday"],
+              [localUserData objectForKey:@"babyid"]);
+    });
+}
 /*
 #pragma mark - Navigation
 

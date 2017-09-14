@@ -60,21 +60,6 @@
     
     [self getSize];
     
-    //讀取是否已有建立第一個孩子.
-    NSUserDefaults *readChildNameDefaults;
-    readChildNameDefaults = [NSUserDefaults standardUserDefaults];
-    //如果讀出的陣列數量為零的話，就執行 AddChildSettingViewController 來創造第一個孩子。
-    NSArray *readChildTextFieldnameArray = [readChildNameDefaults objectForKey:@"ChildName"];
-    if(readChildTextFieldnameArray.count == 0) {
-//        AddChildSettingViewController *nextPage = [self.storyboard instantiateViewControllerWithIdentifier:@"AddChildSettingViewController"];
-//        [self presentViewController:nextPage animated:YES completion:nil];
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *vc =
-        [storyboard instantiateViewControllerWithIdentifier:@"StartCreateFirstChildViewController"];
-        //[self.navigationController pushViewController:vc animated:YES];
-        [self presentViewController:vc animated:YES completion:nil];
-    }
 }
 
 #pragma mark - Table view data source

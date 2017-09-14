@@ -30,8 +30,57 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="myWelcomeView" destination="hk8-4c-kXh" id="QOd-D8-uQK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mse-z8-kQH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="hk8-4c-kXh">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8Y-yB-AQ9">
+                            <rect key="frame" x="-15" y="54" width="270" height="21"/>
+                            <attributedString key="attributedText">
+                                <fragment content="還沒有任何成就">
+                                    <attributes>
+                                        <color key="NSColor" red="0.85262101888656616" green="0.42218321561813354" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="17" name=".PingFangTC-Regular"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="..">
+                                    <attributes>
+                                        <color key="NSColor" red="0.85262101888656616" green="0.42218321561813354" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" metaFont="system" size="17"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="新增一個新的吧！">
+                                    <attributes>
+                                        <color key="NSColor" red="0.85262101888656616" green="0.42218321561813354" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="17" name=".PingFangTC-Regular"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="瀏覽圖片並點選：新增成就" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3l-dn-sZE">
+                            <rect key="frame" x="22" y="94" width="196" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.51784205436706543" green="0.58159953355789185" blue="0.58617168664932251" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="C8Y-yB-AQ9" firstAttribute="centerY" secondItem="hk8-4c-kXh" secondAttribute="centerY" id="1fh-IM-IN7"/>
+                        <constraint firstItem="n3l-dn-sZE" firstAttribute="centerX" secondItem="hk8-4c-kXh" secondAttribute="centerX" id="AyK-BE-g6A"/>
+                        <constraint firstItem="C8Y-yB-AQ9" firstAttribute="centerX" secondItem="hk8-4c-kXh" secondAttribute="centerX" id="NNN-4c-Pk2"/>
+                        <constraint firstItem="n3l-dn-sZE" firstAttribute="top" secondItem="C8Y-yB-AQ9" secondAttribute="bottom" constant="19" id="tYF-GA-B31"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="708" y="-520.38980509745136"/>
         </scene>

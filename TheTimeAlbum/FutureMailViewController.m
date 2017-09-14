@@ -51,14 +51,65 @@
     UIImage *BackgroundImage;
     
     NSArray *readMyChildBackImageArray;
+    
+    
+    //
+    NSArray *childNames;
+    NSArray *childBirthdays;
+    NSArray *childPics;
+    NSArray *childIDs;
+    NSUserDefaults *localUserData;
 }
 
 -(void)viewWillAppear:(BOOL)animated  {
     
-    [self updateDate];
+    //[self updateDate];
+    
+    localUserData = [NSUserDefaults standardUserDefaults];
+    [self initBabyArrays];
     
 }
-
+-(void) initBabyArrays {
+    childNames = [localUserData objectForKey:@"childNames"];
+    childBirthdays = [localUserData objectForKey:@"childBirthdays"];
+    childPics = [localUserData objectForKey:@"childPics"];
+    childIDs = [localUserData objectForKey:@"childIDs"];
+    
+    NSLog(@" names: %@, birthdays: %@, pics: %@, ids: %@ ", childNames, childBirthdays, childPics,childIDs);
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"reloadLeftMenu" object:nil];
+    
+    // 移過來
+    mailDateContentArray = [[defaults objectForKey:@"mailDateContentArray"] mutableCopy];
+    NSLog(@" mail content: %@", mailDateContentArray);
+    
+    // Prepare the judgt the putDateArray is empty or have value. 準備讀取使用者使否有創建信件，如果沒有就顯示有就不顯示.
+    if(mailDateContentArray.count == 0) {
+        DescriptionView.hidden = NO;
+        NSLog(@"mailDateContentArray的數量為 %lu",(unsigned long)mailDateContentArray.count);
+    } else {
+        DescriptionView.hidden = YES;
+    }
+    
+    //大頭與背景
+    MyChildBackgroundImageView.image =  [UIImage imageNamed:@"background4.jpg"];
+    // 設定頭貼的路徑
+    NSString *babyPicfilePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:@"userPic"] stringByAppendingPathComponent:[localUserData objectForKey:@"currentBabyPic"]];
+    NSURL *babyPicFileURL = [NSURL fileURLWithPath:babyPicfilePath];
+    
+    NSData *babyPicData = [NSData dataWithContentsOfURL:babyPicFileURL];
+    UIImage *babyPicImage = [UIImage imageWithData:babyPicData];
+    
+    ChidlBigStickerImageView.image = babyPicImage;
+    
+    // Prepare the putImageArray. 準備讀取日期陣列是否有存值，來產生信件圖片的數量。
+    putImageArray = [NSMutableArray new];
+    for (int i=0; i<mailDateContentArray.count; i++) {
+        [putImageArray addObject:[UIImage imageNamed:@"PostCardVer4@2x.png"]];
+    }
+    
+    [self.myTableView reloadData];
+}
 //準備更新資料
 -(void)updateDate {
     
@@ -176,7 +227,7 @@
         Cell.MyCell.backgroundColor = [UIColor flatSandColor];
         
         Cell.UserName.text = [defaults objectForKey:@"userName"];
-        Cell.ChildName.text = [putChildTextFieldnameArray objectAtIndex:ChildID];
+        Cell.ChildName.text = [localUserData objectForKey:@"currentBabyName"];
         [Cell.UserName sizeToFit];
         [Cell.ChildName sizeToFit];
         

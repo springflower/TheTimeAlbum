@@ -93,6 +93,7 @@
         [self addSubview:signLabel];
         _signLabel = signLabel;
         
+
     }
     return self;
 }
@@ -144,6 +145,10 @@
         signLabel.textColor = [UIColor whiteColor];
         [self addSubview:signLabel];
         _signLabel = signLabel;
+        
+        
+        
+        
         
     }
     return self;

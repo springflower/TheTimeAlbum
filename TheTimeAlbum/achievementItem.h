@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString *achievementPicName;
 @property (nonatomic, strong) UIImage *image1;
 @property (nonatomic, strong) NSString *achievementCreatDate;
+@property (nonatomic, strong) NSString *achievementFinalDateString;
 @property NSInteger achievementId;
 
 @end
